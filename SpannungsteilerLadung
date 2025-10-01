@@ -1,0 +1,22 @@
+from machine import ADC, Pin
+import time
+
+# ADC-Pin auswählen (bei Nicla Vision ist A0 meist mit 'PA0' oder ähnlich gemappt)
+adc = ADC(Pin('A0'))
+
+# maximale Spannung (deine Referenz)
+VREF = 2.6
+
+while True:
+    # ADC-Rohwert lesen (12 Bit -> Wertebereich 0–4095)
+    raw = adc.read_u16()  # gibt 0–65535 zurück bei MicroPython
+
+    # Normieren auf 0–3.3 V (typischer STM32 ADC Reference)
+    # falls dein ADC mit 3.3 V Referenz arbeitet
+    voltage = (raw / 65535) * 3.3
+
+    # Prozent berechnen, skaliert auf 3.8 V = 100 %
+    percent = min((voltage / VREF) * 100, 100)
+
+    print("Rohwert:", raw, " | Spannung: {:.2f} V | Ladung: {:.1f}%".format(voltage, percent))
+    time.sleep(0.5)
