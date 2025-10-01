@@ -1,7 +1,7 @@
 # 🦾👓 Ascenta – Guiding your Vision  
 
 Welcome to **Ascenta** – a smart glasses project designed to **support blind and visually impaired people** in their daily lives.  
-This is my **diploma thesis** project, powered by the **Arduino Nicla Vision board** and connected to a mobile app for seamless interaction.  
+This is our **diploma thesis** project, powered by the **Arduino Nicla Vision board** and connected to a mobile app for seamless interaction.  
 
 ---
 
