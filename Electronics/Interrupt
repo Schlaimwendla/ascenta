@@ -1,0 +1,17 @@
+from machine import Pin
+import time
+
+# Funktion, die beim Interrupt ausgeführt wird
+def button_handler(pin):
+    print("Button wurde gedrückt!")
+    time.sleep(1)
+
+button = Pin('PA10', Pin.IN, Pin.PULL_UP)
+
+button.irq(trigger=Pin.IRQ_FALLING, handler=button_handler)
+
+print("Programm läuft. Drücke den Button...")
+
+while True:
+    time.sleep(0.1)
+
