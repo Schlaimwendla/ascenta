@@ -1,0 +1,25 @@
+from machine import Pin
+import time
+
+pressed = False        # Merkt sich, ob Taste gedrückt war
+last_press = 0         # Für Entprellung
+
+def button_handler(pin):
+    global pressed, last_press
+    now = time.ticks_ms()
+    # Entprellzeit 200 ms
+    if time.ticks_diff(now, last_press) > 200 and not pressed:
+        pressed = True
+        print("Button wurde gedrückt!")
+        last_press = now
+
+button = Pin('A1', Pin.IN, Pin.PULL_UP)
+button.irq(trigger=Pin.IRQ_FALLING, handler=button_handler)
+
+print("Programm läuft. Drücke den Button...")
+
+while True:
+    # Wenn Taste wieder losgelassen wird → Reset für den nächsten Druck
+    if pressed and button.value() == 1:
+        pressed = False
+    time.sleep(0.05)
