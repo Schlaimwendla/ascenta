@@ -1,0 +1,12 @@
+from machine import Pin
+import time
+
+# Taster an A1 (PF_13)
+button = Pin('A1', Pin.IN, Pin.PULL_UP)
+
+print("Taster an A1 initialisiert (1 = nicht gedrückt, 0 = gedrückt)")
+
+while True:
+    state = button.value()
+    print(state)
+    time.sleep(0.2)
