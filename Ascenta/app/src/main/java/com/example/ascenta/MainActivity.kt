@@ -1,15 +1,17 @@
 package com.example.ascenta
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.bluetooth.*
 import android.bluetooth.le.*
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.os.*
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -18,10 +20,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import java.io.File
+import java.io.FileOutputStream
 import java.nio.ByteBuffer
 import java.util.UUID
 
-private const val TAG = "BLE_STREAM_APP"
+private const val TAG = "Ascenta"
 
 // --- UUIDs (Must match Nicla) ---
 private val NICLA_SERVICE_UUID = UUID.fromString("12345678-1234-5678-1234-567890ABCDEF")
@@ -41,13 +45,24 @@ class MainActivity : ComponentActivity() {
     private var bluetoothGatt: BluetoothGatt? = null
     private var scanning = false
 
-    private var imageBitmap by mutableStateOf<android.graphics.Bitmap?>(null)
+    private var imageBitmap by mutableStateOf<Bitmap?>(null)
 
     private var imageByteBuffer = ByteBuffer.allocate(100 * 1024)
     private var isReceivingImage = false
 
+    // Permission launcher for saving image
+    private val requestWritePermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+        if (!granted) {
+            Toast.makeText(this, "Storage permission required to save image", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Request storage permission on app start
+        requestWritePermission.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
         bluetoothAdapter = (getSystemService(BLUETOOTH_SERVICE) as BluetoothManager).adapter
         bluetoothLeScanner = bluetoothAdapter?.bluetoothLeScanner
 
@@ -62,6 +77,15 @@ class MainActivity : ComponentActivity() {
                     }, modifier = Modifier.fillMaxWidth()) {
                         Text("Connect and Receive Image Stream (Nicla)")
                     }
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    Button(onClick = {
+                        imageBitmap?.let { saveImageToStorage(it) }
+                    }, modifier = Modifier.fillMaxWidth()) {
+                        Text("Download Last Image")
+                    }
+
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
                         text = "Last Received Image:",
@@ -77,7 +101,7 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun ImageDisplay(bitmap: android.graphics.Bitmap?) {
+    fun ImageDisplay(bitmap: Bitmap?) {
         if (bitmap != null) {
             Image(
                 bitmap = bitmap.asImageBitmap(),
@@ -96,7 +120,6 @@ class MainActivity : ComponentActivity() {
     private fun startScanForStreamingDevice() {
         if (scanning) return
         scanning = true
-        // Filter for "Nicla"
         val filter = ScanFilter.Builder().setDeviceName("Nicla").build()
         bluetoothLeScanner?.startScan(listOf(filter), ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).build(), leScanCallback)
         handler.postDelayed({ bluetoothLeScanner?.stopScan(leScanCallback); scanning = false; Log.d(TAG, "Scan stopped") }, 10000)
@@ -136,7 +159,6 @@ class MainActivity : ComponentActivity() {
         @SuppressLint("MissingPermission")
         override fun onServicesDiscovered(gatt: BluetoothGatt, status: Int) {
             if (status == BluetoothGatt.GATT_SUCCESS) {
-                // --- LOG ADDED ---
                 Log.d(TAG, "GATT Services Discovered Successfully.")
             } else {
                 Log.e(TAG, "GATT Service Discovery failed with status: $status")
@@ -144,7 +166,6 @@ class MainActivity : ComponentActivity() {
 
             val service = gatt.getService(NICLA_SERVICE_UUID)
             val dataChar = service?.getCharacteristic(DATA_CHAR_UUID)
-
             dataChar?.let { enableNotifications(gatt, it) }
         }
 
@@ -170,7 +191,6 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        // --- CORE LOGIC: IMAGE REASSEMBLY ---
         override fun onCharacteristicChanged(
             gatt: BluetoothGatt,
             characteristic: BluetoothGattCharacteristic
@@ -179,13 +199,11 @@ class MainActivity : ComponentActivity() {
                 val rawData = characteristic.value
                 val dataLength = rawData.size
 
-                // 1. Check for START sequence
                 if (!isReceivingImage) {
                     if (rawData.startsWith(START_SEQUENCE)) {
                         Log.i(TAG, "Image START sequence received.")
                         isReceivingImage = true
                         imageByteBuffer.clear()
-                        // Append remaining data after the 4-byte START sequence
                         if (dataLength > START_SEQUENCE.size) {
                             imageByteBuffer.put(rawData, START_SEQUENCE.size, dataLength - START_SEQUENCE.size)
                         }
@@ -193,47 +211,36 @@ class MainActivity : ComponentActivity() {
                     }
                 }
 
-                // 2. Process data chunks if receiving
                 if (isReceivingImage) {
                     val endCheckIndex = dataLength - END_SEQUENCE.size
 
-                    // Check for END sequence
                     if (dataLength >= END_SEQUENCE.size && rawData.endsWith(END_SEQUENCE)) {
-
-                        // Put data up to the END sequence
                         imageByteBuffer.put(rawData, 0, endCheckIndex)
-
                         isReceivingImage = false
                         Log.i(TAG, "Image END sequence received. Reassembling image...")
 
-                        // 3. Decode JPEG
                         val finalArray = ByteArray(imageByteBuffer.position())
                         imageByteBuffer.rewind()
                         imageByteBuffer.get(finalArray)
 
                         val bitmap = BitmapFactory.decodeByteArray(finalArray, 0, finalArray.size)
-
                         if (bitmap != null) {
-                            handler.post {
-                                imageBitmap = bitmap
-                                Log.i(TAG, "Image successfully decoded and displayed! Size: ${finalArray.size} bytes.")
-                            }
+                            handler.post { imageBitmap = bitmap }
                         } else {
-                            Log.e(TAG, "Failed to decode received image data (invalid JPEG). Buffer Size: ${finalArray.size}")
+                            Log.e(TAG, "Failed to decode image")
                         }
 
                         imageByteBuffer.clear()
                         return
                     }
 
-                    // No START/END, just append chunk
                     imageByteBuffer.put(rawData)
                 }
             }
         }
     }
 
-    // Helper extension function to check for byte array prefix/suffix
+    // Helper extension functions
     private fun ByteArray.startsWith(prefix: ByteArray): Boolean {
         if (size < prefix.size) return false
         return prefix.indices.all { this[it] == prefix[it] }
@@ -241,5 +248,22 @@ class MainActivity : ComponentActivity() {
     private fun ByteArray.endsWith(suffix: ByteArray): Boolean {
         if (size < suffix.size) return false
         return suffix.indices.all { this[size - suffix.size + it] == suffix[it] }
+    }
+
+    // --- Save image to storage ---
+    private fun saveImageToStorage(bitmap: Bitmap) {
+        try {
+            val fileName = "Nicla_Image_${System.currentTimeMillis()}.jpg"
+            val file = File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), fileName)
+            val fos = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos)
+            fos.flush()
+            fos.close()
+            Toast.makeText(this, "Image saved: ${file.absolutePath}", Toast.LENGTH_LONG).show()
+            Log.d(TAG, "Image saved to ${file.absolutePath}")
+        } catch (e: Exception) {
+            Toast.makeText(this, "Error saving image: ${e.message}", Toast.LENGTH_SHORT).show()
+            Log.e(TAG, "Error saving image", e)
+        }
     }
 }
