@@ -1,17 +1,17 @@
 package com.example.ascenta
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.bluetooth.*
 import android.bluetooth.le.*
+import android.content.ContentValues
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.*
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -20,19 +20,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import java.io.File
-import java.io.FileOutputStream
+import java.io.IOException
 import java.nio.ByteBuffer
 import java.util.UUID
 
 private const val TAG = "Ascenta"
 
-// --- UUIDs (Must match Nicla) ---
 private val NICLA_SERVICE_UUID = UUID.fromString("12345678-1234-5678-1234-567890ABCDEF")
 private val DATA_CHAR_UUID    = UUID.fromString("12345678-1234-5678-1234-567890ABCDE0")
 private val CLIENT_CONFIG_UUID = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb")
 
-// --- BINARY IMAGE SIGNALING (MUST MATCH MICROPYTHON) ---
 private val START_SEQUENCE = byteArrayOf(0xAA.toByte(), 0xBB.toByte(), 0xCC.toByte(), 0xDD.toByte())
 private val END_SEQUENCE   = byteArrayOf(0xDD.toByte(), 0xCC.toByte(), 0xBB.toByte(), 0xAA.toByte())
 
@@ -50,18 +47,8 @@ class MainActivity : ComponentActivity() {
     private var imageByteBuffer = ByteBuffer.allocate(100 * 1024)
     private var isReceivingImage = false
 
-    // Permission launcher for saving image
-    private val requestWritePermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
-        if (!granted) {
-            Toast.makeText(this, "Storage permission required to save image", Toast.LENGTH_SHORT).show()
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Request storage permission on app start
-        requestWritePermission.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
         bluetoothAdapter = (getSystemService(BLUETOOTH_SERVICE) as BluetoothManager).adapter
         bluetoothLeScanner = bluetoothAdapter?.bluetoothLeScanner
@@ -93,7 +80,6 @@ class MainActivity : ComponentActivity() {
                     )
                     Spacer(modifier = Modifier.height(8.dp))
 
-                    // --- IMAGE VIEWER UI ---
                     ImageDisplay(imageBitmap)
                 }
             }
@@ -120,10 +106,12 @@ class MainActivity : ComponentActivity() {
     private fun startScanForStreamingDevice() {
         if (scanning) return
         scanning = true
+
         val filter = ScanFilter.Builder().setDeviceName("Nicla").build()
+
         bluetoothLeScanner?.startScan(listOf(filter), ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).build(), leScanCallback)
         handler.postDelayed({ bluetoothLeScanner?.stopScan(leScanCallback); scanning = false; Log.d(TAG, "Scan stopped") }, 10000)
-        Log.d(TAG, "Scanning for Nicla...")
+        Log.d(TAG, "Scanning for Nicla (Short Name)...")
     }
 
     private val leScanCallback = object : ScanCallback() {
@@ -143,13 +131,13 @@ class MainActivity : ComponentActivity() {
         Log.d(TAG, "Connecting to device...")
     }
 
-    // --- GATT Callbacks ---
     private val gattCallback = object : BluetoothGattCallback() {
 
         @SuppressLint("MissingPermission")
         override fun onConnectionStateChange(gatt: BluetoothGatt, status: Int, newState: Int) {
             if (newState == BluetoothProfile.STATE_CONNECTED) {
                 Log.d(TAG, "Connected! Discovering services...")
+                gatt.requestMtu(517)
                 gatt.discoverServices()
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
                 Log.d(TAG, "Disconnected")
@@ -163,6 +151,8 @@ class MainActivity : ComponentActivity() {
             } else {
                 Log.e(TAG, "GATT Service Discovery failed with status: $status")
             }
+
+            gatt.requestConnectionPriority(BluetoothGatt.CONNECTION_PRIORITY_HIGH)
 
             val service = gatt.getService(NICLA_SERVICE_UUID)
             val dataChar = service?.getCharacteristic(DATA_CHAR_UUID)
@@ -188,6 +178,15 @@ class MainActivity : ComponentActivity() {
                 Log.d(TAG, "Notifications enabled. Image stream starting...")
             } else if (status != BluetoothGatt.GATT_SUCCESS) {
                 Log.e(TAG, "Failed to write descriptor! Status: $status")
+            }
+        }
+
+        override fun onMtuChanged(gatt: BluetoothGatt?, mtu: Int, status: Int) {
+            super.onMtuChanged(gatt, mtu, status)
+            if (status == BluetoothGatt.GATT_SUCCESS) {
+                Log.i(TAG, "MTU changed to: $mtu")
+            } else {
+                Log.e(TAG, "MTU change failed. Status: $status")
             }
         }
 
@@ -240,7 +239,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    // Helper extension functions
     private fun ByteArray.startsWith(prefix: ByteArray): Boolean {
         if (size < prefix.size) return false
         return prefix.indices.all { this[it] == prefix[it] }
@@ -250,17 +248,32 @@ class MainActivity : ComponentActivity() {
         return suffix.indices.all { this[size - suffix.size + it] == suffix[it] }
     }
 
-    // --- Save image to storage ---
     private fun saveImageToStorage(bitmap: Bitmap) {
         try {
             val fileName = "Nicla_Image_${System.currentTimeMillis()}.jpg"
-            val file = File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), fileName)
-            val fos = FileOutputStream(file)
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos)
-            fos.flush()
-            fos.close()
-            Toast.makeText(this, "Image saved: ${file.absolutePath}", Toast.LENGTH_LONG).show()
-            Log.d(TAG, "Image saved to ${file.absolutePath}")
+
+            val contentValues = ContentValues().apply {
+                put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
+                put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+                put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+            }
+
+            val resolver = contentResolver
+            val uri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+
+            if (uri != null) {
+                resolver.openOutputStream(uri).use { fos ->
+                    if (fos != null) {
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos)
+                        Toast.makeText(this, "Image saved to Pictures: $fileName", Toast.LENGTH_LONG).show()
+                        Log.d(TAG, "Image saved to MediaStore: $fileName")
+                    } else {
+                        throw IOException("Failed to get OutputStream.")
+                    }
+                }
+            } else {
+                throw IOException("Failed to create new MediaStore entry.")
+            }
         } catch (e: Exception) {
             Toast.makeText(this, "Error saving image: ${e.message}", Toast.LENGTH_SHORT).show()
             Log.e(TAG, "Error saving image", e)
