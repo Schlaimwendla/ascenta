@@ -2,15 +2,26 @@ package com.example.ascenta
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.bluetooth.*
-import android.bluetooth.le.*
-import android.content.Context
+import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothGatt
+import android.bluetooth.BluetoothGattCallback
+import android.bluetooth.BluetoothGattCharacteristic
+import android.bluetooth.BluetoothGattDescriptor
+import android.bluetooth.BluetoothManager
+import android.bluetooth.BluetoothProfile
+import android.bluetooth.le.BluetoothLeScanner
+import android.bluetooth.le.ScanCallback
+import android.bluetooth.le.ScanFilter
+import android.bluetooth.le.ScanResult
+import android.bluetooth.le.ScanSettings
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.speech.tts.TextToSpeech
+import android.util.Log
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -22,11 +33,27 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.io.BufferedReader
 import java.io.ByteArrayOutputStream
+import java.io.DataOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+import java.net.URL
 import java.nio.ByteBuffer
+import java.util.Locale
 import java.util.UUID
 
-class MainActivity : AppCompatActivity() {
+@Suppress("DEPRECATION")
+class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
+
+    companion object {
+        private const val TAG = "NiclaApp"
+    }
 
     private val PERMISSIONS = arrayOf(
         Manifest.permission.BLUETOOTH_SCAN,
@@ -37,8 +64,10 @@ class MainActivity : AppCompatActivity() {
     // --- BLE UUIDs ---
     private val IMAGE_DATA_CHAR = UUID.fromString("12345678-1234-5678-1234-567890ABCDE0")
     private val IMAGE_CMD_CHAR  = UUID.fromString("80000001-0000-1000-8000-00805f9b34fb")
-    private val AUDIO_RX_CHAR   = UUID.fromString("6E400002-B5A3-F393-E0A9-E50E24DCCA9E") // Phone -> Nicla
-    private val AUDIO_TX_CHAR   = UUID.fromString("6E400003-B5A3-F393-E0A9-E50E24DCCA9E") // Nicla -> Phone
+
+    private val UART_SERVICE_UUID = UUID.fromString("6E400001-B5A3-F393-E0A9-E50E24DCCA9E")
+    private val AUDIO_RX_CHAR   = UUID.fromString("6E400002-B5A3-F393-E0A9-E50E24DCCA9E")
+    private val AUDIO_TX_CHAR   = UUID.fromString("6E400003-B5A3-F393-E0A9-E50E24DCCA9E")
     private val CCCD            = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb")
 
     // --- BLE State ---
@@ -57,10 +86,13 @@ class MainActivity : AppCompatActivity() {
     private var audioBuffer: ByteArrayOutputStream? = null
     private var audioExpectedSize = 0
 
+    // --- AI / TTS ---
+    private val WIT_AI_TOKEN = BuildConfig.WIT_AI_TOKEN
+    private lateinit var tts: TextToSpeech
+
     // --- UI Elements ---
     lateinit var viewPager: ViewPager2
     lateinit var bottomNav: BottomNavigationView
-    var pendingAction: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,9 +105,11 @@ class MainActivity : AppCompatActivity() {
 
         if (!hasPermissions()) ActivityCompat.requestPermissions(this, PERMISSIONS, 1)
 
-        val manager = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
+        val manager = getSystemService(BLUETOOTH_SERVICE) as BluetoothManager
         bluetoothAdapter = manager.adapter
         scanner = bluetoothAdapter?.bluetoothLeScanner
+
+        tts = TextToSpeech(this, this)
 
         viewPager = findViewById(R.id.view_pager)
         bottomNav = findViewById(R.id.bottom_navigation)
@@ -112,6 +146,12 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
+    override fun onInit(status: Int) {
+        if (status == TextToSpeech.SUCCESS) tts.language = Locale.GERMAN
+    }
+
+    // --- BLE LOGIC ---
 
     @SuppressLint("MissingPermission")
     fun connectToNicla() {
@@ -150,7 +190,7 @@ class MainActivity : AppCompatActivity() {
         val char = service?.getCharacteristic(charUuid)
 
         if (char != null) {
-            char.value = command.toByteArray()
+            char.setValue(command.toByteArray()) // FIXED: Use setValue
             char.writeType = BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT
             bluetoothGatt?.writeCharacteristic(char)
         }
@@ -196,6 +236,18 @@ class MainActivity : AppCompatActivity() {
             runOnUiThread { updateHomeStatus("Ready! Select Vision or Voice.") }
         }
 
+        override fun onDescriptorWrite(gatt: BluetoothGatt, descriptor: BluetoothGattDescriptor, status: Int) {
+            // FIXED: Used correct UUID variables and setValue
+            val service = gatt.getService(UART_SERVICE_UUID)
+            val rxChar = service?.getCharacteristic(AUDIO_RX_CHAR)
+            rxChar?.let {
+                it.setValue("START".toByteArray(Charsets.UTF_8)) // FIXED
+                it.writeType = BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT
+                gatt.writeCharacteristic(it)
+                Log.i(TAG, "Sent START command") // FIXED: TAG is now accessible
+            }
+        }
+
         override fun onCharacteristicChanged(gatt: BluetoothGatt, characteristic: BluetoothGattCharacteristic) {
             val data = characteristic.value
             if (characteristic.uuid == IMAGE_DATA_CHAR) {
@@ -219,7 +271,7 @@ class MainActivity : AppCompatActivity() {
             isReceivingImg = true
             imageBuffer.clear()
             if (data.size > 4) imageBuffer.put(data, 4, data.size - 4)
-            runOnUiThread { notifyImageFragmentStatus("Receiving Image...") }
+            runOnUiThread { notifyImageFragmentStatus("Receiving...") }
         } else if (isReceivingImg) {
             if (endsWith(data, END_SEQ)) {
                 imageBuffer.put(data, 0, data.size - 4)
@@ -233,53 +285,110 @@ class MainActivity : AppCompatActivity() {
                 }
             } else {
                 imageBuffer.put(data)
-                // REMOVED: Continuous UI updates to stop byte count spam
             }
         }
     }
 
     private fun handleAudioData(data: ByteArray) {
-        val str = String(data)
-        if (str.startsWith("START:")) {
-            try {
-                audioExpectedSize = str.substringAfter(":").trim().toInt()
-                audioBuffer = ByteArrayOutputStream(audioExpectedSize)
-                runOnUiThread { notifyAudioFragmentStatus("Receiving Audio...") }
-            } catch (e: Exception) {}
-        } else if (str.startsWith("END")) {
-            val bytes = audioBuffer?.toByteArray()
-            if (bytes != null) {
-                runOnUiThread {
-                    val frag = findAudioFragment()
-                    frag?.processFinishedAudio(bytes)
+        if (data.size < 64) {
+            val str = String(data)
+            if (str.startsWith("START:")) {
+                try {
+                    audioExpectedSize = str.substringAfter(":").trim().toInt()
+                    audioBuffer = ByteArrayOutputStream(audioExpectedSize)
+                    runOnUiThread { notifyAudioFragmentStatus("Receiving Audio...") }
+                    return
+                } catch (_: Exception) {}
+            } else if (str.startsWith("END")) {
+                val bytes = audioBuffer?.toByteArray()
+                if (bytes != null) {
+                    processFinishedAudio(bytes)
                 }
+                audioBuffer = null
+                return
             }
-            audioBuffer = null
-        } else {
-            audioBuffer?.write(data)
+        }
+
+        audioBuffer?.write(data)
+    }
+
+    fun processFinishedAudio(bytes: ByteArray) {
+        try {
+            val file = File(cacheDir, "mic.wav")
+            FileOutputStream(file).use { it.write(bytes) }
+        } catch (_: Exception) {}
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val url = URL("https://api.wit.ai/speech?v=20230215")
+                val conn = url.openConnection() as HttpURLConnection
+                conn.doOutput = true
+                conn.setRequestProperty("Authorization", "Bearer $WIT_AI_TOKEN")
+                conn.setRequestProperty("Content-Type", "audio/raw;encoding=signed-integer;bits=16;rate=16000;endian=little")
+
+                DataOutputStream(conn.outputStream).use { dos ->
+                    if (bytes.size > 44) dos.write(bytes, 44, bytes.size - 44)
+                    else dos.write(bytes)
+                }
+
+                val resp = BufferedReader(InputStreamReader(conn.inputStream)).readText()
+                parseWitResponse(resp)
+            } catch (e: Exception) {
+                runOnUiThread { notifyAudioFragmentStatus("Error: ${e.message}") }
+            }
         }
     }
 
-    private fun findImageFragment(): ImageFragment? {
-        return supportFragmentManager.fragments.firstOrNull { it is ImageFragment } as? ImageFragment
+    private fun parseWitResponse(rawResponse: String) {
+        logLargeString(rawResponse)
+
+        try {
+            val regex = Regex("\"text\"\\s*:\\s*\"([^\"]+)\"")
+            val matches = regex.findAll(rawResponse)
+
+            var bestText = ""
+
+            for (match in matches) {
+                val text = match.groupValues[1]
+                if (text.length > bestText.length) {
+                    bestText = text
+                }
+            }
+
+            if (bestText.isNotEmpty()) {
+                runOnUiThread {
+                    val frag = findAudioFragment()
+                    frag?.updateTranscript(bestText)
+                    frag?.updateStatus("Done")
+                    speakText(bestText)
+                }
+            } else {
+                runOnUiThread {
+                    val frag = findAudioFragment()
+                    frag?.updateTranscript("No text found. Raw:\n$rawResponse")
+                }
+            }
+        } catch (_: Exception) {
+            runOnUiThread {
+                val frag = findAudioFragment()
+                frag?.updateTranscript("Parse Error. Raw:\n$rawResponse")
+            }
+        }
     }
 
-    private fun findAudioFragment(): AudioFragment? {
-        return supportFragmentManager.fragments.firstOrNull { it is AudioFragment } as? AudioFragment
+    fun speakText(text: String) {
+        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
     }
+
+    private fun findImageFragment(): ImageFragment? = supportFragmentManager.fragments.firstOrNull { it is ImageFragment } as? ImageFragment
+    private fun findAudioFragment(): AudioFragment? = supportFragmentManager.fragments.firstOrNull { it is AudioFragment } as? AudioFragment
 
     private fun updateHomeStatus(status: String) {
-        val frag = supportFragmentManager.fragments.firstOrNull { it is InfoFragment } as? InfoFragment
-        frag?.updateStatus(status)
+        (supportFragmentManager.fragments.firstOrNull { it is InfoFragment } as? InfoFragment)?.updateStatus(status)
     }
 
-    private fun notifyImageFragmentStatus(msg: String) {
-        findImageFragment()?.updateStatus(msg)
-    }
-
-    private fun notifyAudioFragmentStatus(msg: String) {
-        findAudioFragment()?.updateStatus(msg)
-    }
+    private fun notifyImageFragmentStatus(msg: String) { findImageFragment()?.updateStatus(msg) }
+    private fun notifyAudioFragmentStatus(msg: String) { findAudioFragment()?.updateStatus(msg) }
 
     private fun startsWith(data: ByteArray, prefix: ByteArray): Boolean {
         if (data.size < prefix.size) return false
@@ -292,8 +401,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun hasPermissions(): Boolean {
-        return PERMISSIONS.all {
-            ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
+        return PERMISSIONS.all { ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED }
+    }
+
+    private fun logLargeString(content: String) {
+        if (content.length > 4000) {
+            Log.d(TAG, content.substring(0, 4000))
+            logLargeString(content.substring(4000))
+        } else {
+            Log.d(TAG, content)
         }
     }
 
