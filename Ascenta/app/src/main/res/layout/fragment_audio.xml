@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_voice"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_marginBottom="30dp"/>
+
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btn_replay"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_replay"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/ascenta_dark_blue" />
+
+        <Button
+            android:id="@+id/btn_record"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_record"
+            android:layout_marginStart="10dp"
+            android:backgroundTint="@color/ascenta_cyan"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_audio_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/status_ready"
+        android:textColor="#DDDDDD"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
+        android:background="#80FFFFFF"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/tv_transcript"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/transcript_waiting"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+    </ScrollView>
+
+</LinearLayout>
