@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_image"
+        android:title="@string/nav_vision"
+        android:icon="@android:drawable/ic_menu_camera" />
+
+    <!-- FIXED: Icon is now transparent so nothing shows up under the FAB -->
+    <item
+        android:id="@+id/nav_placeholder"
+        android:title=""
+        android:icon="@android:color/transparent"
+        android:enabled="false" />
+
+    <item
+        android:id="@+id/nav_audio"
+        android:title="@string/nav_voice"
+        android:icon="@android:drawable/ic_btn_speak_now" />
+</menu>
