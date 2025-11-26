@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <!-- CRITICAL FIX: Parent must be Theme.MaterialComponents or Theme.AppCompat -->
+    <style name="Theme.Ascenta" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/ascenta_dark_blue</item>
+        <item name="colorPrimaryVariant">@color/ascenta_cyan</item>
+        <item name="colorOnPrimary">@color/white</item>
 
-    <style name="Theme.Ascenta" parent="android:Theme.Material.Light.NoActionBar" />
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/ascenta_cyan</item>
+        <item name="colorSecondaryVariant">@color/ascenta_light_blue</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/ascenta_dark_blue</item>
+
+        <!-- Customize your theme here. -->
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
 </resources>

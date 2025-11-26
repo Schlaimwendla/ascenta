@@ -1,156 +1,86 @@
 package com.example.ascenta
 
-import android.annotation.SuppressLint
-import android.bluetooth.*
-import android.bluetooth.le.*
-import android.content.Context
-import android.graphics.BitmapFactory
+import android.content.ContentValues
+import android.graphics.Bitmap
+import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.os.Environment
+import android.provider.MediaStore
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import java.nio.ByteBuffer
-import java.util.UUID
 
-@Suppress("DEPRECATION")
 class ImageFragment : Fragment(R.layout.fragment_image) {
-
-    private var bluetoothAdapter: BluetoothAdapter? = null
-    private var bluetoothLeScanner: BluetoothLeScanner? = null
-    private var bluetoothGatt: BluetoothGatt? = null
-    private val handler = Handler(Looper.getMainLooper())
-    private var scanning = false
 
     private lateinit var ivStream: ImageView
     private lateinit var tvStatus: TextView
-    private lateinit var btnConnect: Button
+    private lateinit var btnTakePic: Button
+    private lateinit var btnSave: Button
 
-    private val NICLA_SERVICE_UUID = UUID.fromString("12345678-1234-5678-1234-567890ABCDEF")
-    private val DATA_CHAR_UUID = UUID.fromString("12345678-1234-5678-1234-567890ABCDE0")
-    private val CLIENT_CONFIG_UUID = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb")
-
-    private val START_SEQ = byteArrayOf(0xAA.toByte(), 0xBB.toByte(), 0xCC.toByte(), 0xDD.toByte())
-    private val END_SEQ = byteArrayOf(0xDD.toByte(), 0xCC.toByte(), 0xBB.toByte(), 0xAA.toByte())
-
-    private val imageBuffer = ByteBuffer.allocate(100 * 1024)
-    private var isReceiving = false
+    private var currentBitmap: Bitmap? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         ivStream = view.findViewById(R.id.iv_stream)
         tvStatus = view.findViewById(R.id.tv_image_status)
-        btnConnect = view.findViewById(R.id.btn_connect_image)
+        btnTakePic = view.findViewById(R.id.btn_take_picture)
+        btnSave = view.findViewById(R.id.btn_save_img)
 
-        val manager = requireContext().getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
-        bluetoothAdapter = manager.adapter
-        bluetoothLeScanner = bluetoothAdapter?.bluetoothLeScanner
-
-        btnConnect.setOnClickListener { startScan() }
-    }
-
-    @SuppressLint("MissingPermission")
-    private fun startScan() {
-        if (scanning) return
-        scanning = true
-        tvStatus.text = getString(R.string.status_scanning)
-
-        val settings = ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).build()
-        val filters = listOf(ScanFilter.Builder().setDeviceName("Nicla").build())
-
-        bluetoothLeScanner?.startScan(filters, settings, scanCallback)
-
-        handler.postDelayed({
-            if (scanning) {
-                bluetoothLeScanner?.stopScan(scanCallback)
-                scanning = false
-                if (bluetoothGatt == null) tvStatus.text = getString(R.string.status_not_found)
-            }
-        }, 10000)
-    }
-
-    private val scanCallback = object : ScanCallback() {
-        @SuppressLint("MissingPermission")
-        override fun onScanResult(callbackType: Int, result: ScanResult) {
-            bluetoothLeScanner?.stopScan(this)
-            scanning = false
-            tvStatus.text = getString(R.string.status_found_connecting)
-            bluetoothGatt = result.device.connectGatt(requireContext(), false, gattCallback)
-        }
-    }
-
-    private val gattCallback = object : BluetoothGattCallback() {
-        @SuppressLint("MissingPermission")
-        override fun onConnectionStateChange(gatt: BluetoothGatt, status: Int, newState: Int) {
-            if (newState == BluetoothProfile.STATE_CONNECTED) {
-                activity?.runOnUiThread { tvStatus.text = getString(R.string.status_connected_stream) }
-                gatt.discoverServices()
-            } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
-                activity?.runOnUiThread { tvStatus.text = getString(R.string.status_disconnected) }
+        btnTakePic.setOnClickListener {
+            val act = activity as? MainActivity
+            if (act?.isConnected == true) {
+                resetUI()
+                act.sendCommand("take_picture")
+                tvStatus.text = "Requesting Picture..."
+            } else {
+                Toast.makeText(context, "Not Connected! Go to Home.", Toast.LENGTH_SHORT).show()
             }
         }
 
-        @SuppressLint("MissingPermission")
-        override fun onServicesDiscovered(gatt: BluetoothGatt, status: Int) {
-            val char = gatt.getService(NICLA_SERVICE_UUID)?.getCharacteristic(DATA_CHAR_UUID)
-            char?.let {
-                gatt.setCharacteristicNotification(it, true)
-                val desc = it.getDescriptor(CLIENT_CONFIG_UUID)
-                desc.value = BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE
-                gatt.writeDescriptor(desc)
-            }
-        }
-
-        override fun onCharacteristicChanged(gatt: BluetoothGatt, characteristic: BluetoothGattCharacteristic) {
-            val data = characteristic.value
-
-            if (!isReceiving && startsWith(data, START_SEQ)) {
-                isReceiving = true
-                imageBuffer.clear()
-                if (data.size > 4) imageBuffer.put(data, 4, data.size - 4)
-            } else if (isReceiving) {
-                if (endsWith(data, END_SEQ)) {
-                    imageBuffer.put(data, 0, data.size - 4)
-                    isReceiving = false
-                    decodeImage()
-                } else {
-                    imageBuffer.put(data)
-                }
-            }
+        btnSave.setOnClickListener {
+            currentBitmap?.let { saveToGallery(it) }
         }
     }
 
-    private fun decodeImage() {
-        val bytes = ByteArray(imageBuffer.position())
-        imageBuffer.rewind()
-        imageBuffer.get(bytes)
-        val bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-        activity?.runOnUiThread {
-            if (bmp != null) {
-                ivStream.setImageBitmap(bmp)
-                tvStatus.text = getString(R.string.status_live_format, bytes.size)
-            }
+    fun displayImage(bmp: Bitmap?) {
+        if (bmp != null) {
+            currentBitmap = bmp
+            ivStream.setImageBitmap(bmp)
+            btnSave.visibility = View.VISIBLE // Show save button ONLY when image exists
+            tvStatus.text = "Image Received"
         }
     }
 
-    private fun startsWith(data: ByteArray, prefix: ByteArray): Boolean {
-        if (data.size < prefix.size) return false
-        return prefix.indices.all { data[it] == prefix[it] }
+    fun updateStatus(msg: String) {
+        if (::tvStatus.isInitialized) tvStatus.text = msg
     }
 
-    private fun endsWith(data: ByteArray, suffix: ByteArray): Boolean {
-        if (data.size < suffix.size) return false
-        return suffix.indices.all { data[data.size - suffix.size + it] == suffix[it] }
+    private fun resetUI() {
+        ivStream.setImageDrawable(null)
+        btnSave.visibility = View.GONE
+        currentBitmap = null
     }
 
-    @SuppressLint("MissingPermission")
-    override fun onPause() {
-        super.onPause()
-        bluetoothGatt?.disconnect()
-        bluetoothGatt?.close()
+    private fun saveToGallery(bitmap: Bitmap) {
+        val filename = "Ascenta_${System.currentTimeMillis()}.jpg"
+        val resolver = requireContext().contentResolver
+        val contentValues = ContentValues().apply {
+            put(MediaStore.MediaColumns.DISPLAY_NAME, filename)
+            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES + "/Ascenta")
+            }
+        }
+        val uri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+        uri?.let {
+            resolver.openOutputStream(it)?.use { stream ->
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+                Toast.makeText(context, getString(R.string.msg_saved), Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

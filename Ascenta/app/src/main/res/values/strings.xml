@@ -1,35 +1,49 @@
 <resources>
     <string name="app_name">Ascenta</string>
+
     <string name="nav_vision">Vision</string>
     <string name="nav_voice">Voice</string>
     <string name="desc_home">Home</string>
 
-    <string name="btn_connect_vision">Connect to Nicla Vision</string>
+    <!-- Vision -->
+    <string name="btn_take_picture">Take Picture</string>
+    <string name="btn_save_img">Save Picture</string>
+    <string name="btn_new_img">New Capture</string>
     <string name="status_idle">Status: Idle</string>
     <string name="status_scanning">Status: Scanning...</string>
     <string name="status_not_found">Status: Not Found</string>
     <string name="status_found_connecting">Status: Found! Connecting...</string>
-    <string name="status_connected_stream">Status: Connected. Starting stream...</string>
+    <string name="status_connected_stream">Status: Connected. Stream Active.</string>
     <string name="status_disconnected">Status: Disconnected</string>
-    <string name="status_live_format">Status: Live (%d bytes)</string>
 
+    <!-- This was the missing line causing the error -->
+    <string name="status_live_format">Image Received (%d bytes)</string>
+
+    <string name="msg_saved">Saved to Pictures/Ascenta</string>
+
+    <!-- Voice -->
     <string name="title_voice">Ascenta Voice</string>
-    <string name="btn_replay">Replay</string>
+    <string name="btn_replay_audio">Replay Audio</string>
+    <string name="btn_replay_tts">Replay TTS</string>
     <string name="btn_record">Record New</string>
     <string name="status_ready">Status: Ready</string>
-    <string name="transcript_waiting">Waiting for speech...</string>
-    <string name="status_scan_audio">Status: Scanning for NiclaAudio...</string>
+    <string name="status_scan_audio">Status: Scanning...</string>
     <string name="status_connecting">Status: Connecting...</string>
-    <string name="status_negotiating">Status: Negotiating MTU...</string>
+    <string name="status_negotiating">Status: Optimizing...</string>
     <string name="status_recording">Status: Recording...</string>
-    <string name="status_downloading">Status: Downloading Audio...</string>
+    <string name="status_downloading">Status: Downloading...</string>
     <string name="status_transcribing">Status: Transcribing...</string>
     <string name="status_done">Status: Done</string>
+    <string name="transcript_waiting">Tap Record to start...</string>
     <string name="error_format">Error: %s</string>
     <string name="you_said_format">You said: %s</string>
     <string name="no_speech">No speech detected</string>
 
-    <string name="info_title">Ascenta Smart Glasses</string>
-    <string name="info_subtitle">Empowering vision through AI.</string>
-    <string name="info_impressum">Impressum:\nCreated by Ascenta Team\nUpper Austria\n2025</string>
+    <!-- Home / Info -->
+    <string name="info_title">Ascenta</string>
+    <string name="info_subtitle">Smart Glasses Control</string>
+    <string name="menu_connect_general">Connect to Nicla</string>
+    <string name="menu_disconnect">Disconnect</string>
+    <string name="info_features">Features:\n• Object Detection\n• Smart Transcription\n• Navigation</string>
+    <string name="info_impressum">Impressum:\nCreated by Ascenta Team\nBraunau am Inn, Austria\n2025</string>
 </resources>
