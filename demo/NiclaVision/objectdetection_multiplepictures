@@ -1,0 +1,33 @@
+import sensor
+import time
+import ml
+
+sensor.reset()
+sensor.set_pixformat(sensor.RGB565)
+sensor.set_framesize(sensor.QVGA)
+sensor.set_windowing((240, 240))
+sensor.skip_frames(time=2000)
+
+model = ml.Model("trained")
+
+THRESHOLD = 0.7
+
+clock = time.clock()
+while True:
+    clock.tick()
+
+    img = sensor.snapshot()
+    result = model.predict([img])[0].flatten().tolist()
+
+    # Beste Klasse bestimmen
+    best_index = max(range(len(result)), key=lambda i: result[i])
+    best_label = model.labels[best_index]
+    best_conf = result[best_index]
+
+    # Ausgabe abhängig von Genauigkeit
+    if best_conf >= THRESHOLD:
+        print("Detected:", best_label, "Confidence:", best_conf)
+    else:
+        print("uncertain")
+
+    time.sleep(0.1)
