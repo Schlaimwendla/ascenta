@@ -22,21 +22,26 @@ class InfoFragment : Fragment(R.layout.fragment_info) {
         btnConnect.setOnClickListener {
             if (act?.isConnected == true) {
                 act.disconnectNicla()
-                btnConnect.text = getString(R.string.menu_connect_general)
             } else {
                 act?.connectToNicla()
             }
         }
 
-        // Restore state if already connected
+        // Restore state if already connected when returning to this screen
         if (act?.isConnected == true) {
             updateStatus("Connected")
         }
     }
 
     fun updateStatus(msg: String) {
+        // Ensure Fragment is attached before updating UI
+        if (!isAdded || view == null) return
+
         tvStatus.text = "Status: $msg"
-        if (msg.contains("Connected")) {
+
+        val act = activity as? MainActivity
+        // FIX: Check the boolean state from MainActivity instead of the message text
+        if (act?.isConnected == true) {
             btnConnect.text = getString(R.string.menu_disconnect)
         } else {
             btnConnect.text = getString(R.string.menu_connect_general)

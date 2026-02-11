@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="20dp">
+    <!-- Removed android:background="#F5F5F5" to let gradient show -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_detection"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"/>
+
+    <!-- Image Preview Card -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="6dp"
+        app:cardBackgroundColor="#20000000"
+        android:layout_marginBottom="20dp">
+        <!-- Changed card bg to semi-transparent dark -->
+
+        <ImageView
+            android:id="@+id/iv_detect_preview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:contentDescription="Detection Preview"/>
+
+        <TextView
+            android:id="@+id/tv_detect_confidence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#CC000000"
+            android:textColor="#FFFFFF"
+            android:padding="8dp"
+            android:text="Conf: --%"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="10dp"
+            android:textStyle="bold"/>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Result Text Card (Added card for readability on gradient) -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp"
+        app:cardBackgroundColor="#E0FFFFFF"
+        app:cardElevation="4dp"
+        android:layout_marginBottom="30dp">
+
+        <TextView
+            android:id="@+id/tv_detect_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/detect_waiting"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:padding="15dp"/>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Trigger Button -->
+    <Button
+        android:id="@+id/btn_start_detect"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:text="@string/btn_detect_obj"
+        style="@style/Widget.MaterialComponents.Button"
+        android:backgroundTint="@color/ascenta_cyan"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:icon="@android:drawable/ic_menu_camera"
+        app:iconGravity="textStart"/>
+
+</LinearLayout>

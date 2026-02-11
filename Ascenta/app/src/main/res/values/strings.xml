@@ -3,22 +3,19 @@
 
     <string name="nav_vision">Vision</string>
     <string name="nav_voice">Voice</string>
+    <string name="nav_detection">Detect</string>
     <string name="desc_home">Home</string>
 
     <!-- Vision -->
     <string name="btn_take_picture">Take Picture</string>
     <string name="btn_save_img">Save Picture</string>
-    <string name="btn_new_img">New Capture</string>
     <string name="status_idle">Status: Idle</string>
     <string name="status_scanning">Status: Scanning...</string>
     <string name="status_not_found">Status: Not Found</string>
     <string name="status_found_connecting">Status: Found! Connecting...</string>
     <string name="status_connected_stream">Status: Connected. Stream Active.</string>
     <string name="status_disconnected">Status: Disconnected</string>
-
-    <!-- This was the missing line causing the error -->
     <string name="status_live_format">Image Received (%d bytes)</string>
-
     <string name="msg_saved">Saved to Pictures/Ascenta</string>
 
     <!-- Voice -->
@@ -39,11 +36,19 @@
     <string name="you_said_format">You said: %s</string>
     <string name="no_speech">No speech detected</string>
 
+    <!-- Object Detection -->
+    <string name="title_detection">Object Detection</string>
+    <string name="btn_detect_obj">Detect Object</string>
+    <string name="detect_waiting">No object detected.</string>
+    <string name="detect_hint">Take a picture to analyze.</string>
+    <string name="status_analyzing">Analyzing...</string>
+
     <!-- Home / Info -->
     <string name="info_title">Ascenta</string>
     <string name="info_subtitle">Smart Glasses Control</string>
     <string name="menu_connect_general">Connect to Nicla</string>
     <string name="menu_disconnect">Disconnect</string>
-    <string name="info_features">Features:\n• Object Detection\n• Smart Transcription\n• Navigation</string>
     <string name="info_impressum">Impressum:\nCreated by Ascenta Team\nBraunau am Inn, Austria\n2025</string>
+    <string name="nav_navigation">Navigation</string>
+    <string name="title_navigation">Navigation</string>
 </resources>
