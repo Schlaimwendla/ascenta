@@ -8,7 +8,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import java.io.File
-import java.util.*
+import java.util.Locale
 
 class AudioFragment : Fragment(R.layout.fragment_audio), TextToSpeech.OnInitListener {
 
@@ -45,10 +45,7 @@ class AudioFragment : Fragment(R.layout.fragment_audio), TextToSpeech.OnInitList
         if (status == TextToSpeech.SUCCESS) tts.language = Locale.GERMAN
     }
 
-    // --- Public Methods called by MainActivity ---
-
     fun updateStatus(msg: String) {
-        // Ensure UI update happens on main thread if called from bg
         activity?.runOnUiThread {
             if (isAdded) tvStatus.text = msg
         }

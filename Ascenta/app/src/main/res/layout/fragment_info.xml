@@ -5,7 +5,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@drawable/gradient_bg"
+    android:clickable="true"
+    android:focusable="true">
+
+    <!-- Added background and clickable=true to prevent clicks passing through -->
 
     <androidx.cardview.widget.CardView
         android:layout_width="140dp"

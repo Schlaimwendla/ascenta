@@ -2,26 +2,18 @@ package com.example.ascenta
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothGatt
-import android.bluetooth.BluetoothGattCallback
-import android.bluetooth.BluetoothGattCharacteristic
-import android.bluetooth.BluetoothGattDescriptor
-import android.bluetooth.BluetoothManager
-import android.bluetooth.BluetoothProfile
-import android.bluetooth.le.BluetoothLeScanner
-import android.bluetooth.le.ScanCallback
-import android.bluetooth.le.ScanFilter
-import android.bluetooth.le.ScanResult
-import android.bluetooth.le.ScanSettings
+import android.bluetooth.*
+import android.bluetooth.le.*
+import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.speech.tts.TextToSpeech
-import android.util.Log
+import android.view.View
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -33,51 +25,42 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.io.BufferedReader
 import java.io.ByteArrayOutputStream
-import java.io.DataOutputStream
 import java.io.File
 import java.io.FileOutputStream
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
-import java.net.URL
+import java.io.IOException
 import java.nio.ByteBuffer
 import java.util.Locale
 import java.util.UUID
+import kotlinx.coroutines.*
+import org.json.JSONObject
+import org.vosk.Model
+import org.vosk.Recognizer
+// import org.tensorflow.lite.task.vision.detector.Detection
 
-@Suppress("DEPRECATION")
-class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
-
-    companion object {
-        private const val TAG = "NiclaApp"
-    }
+@SuppressLint("MissingPermission")
+class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener { //, ObjectDetectorHelper.DetectorListener {
 
     private val PERMISSIONS = arrayOf(
         Manifest.permission.BLUETOOTH_SCAN,
         Manifest.permission.BLUETOOTH_CONNECT,
-        Manifest.permission.ACCESS_FINE_LOCATION
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.POST_NOTIFICATIONS
     )
 
-    // --- BLE UUIDs ---
     private val IMAGE_DATA_CHAR = UUID.fromString("12345678-1234-5678-1234-567890ABCDE0")
     private val IMAGE_CMD_CHAR  = UUID.fromString("80000001-0000-1000-8000-00805f9b34fb")
-
-    private val UART_SERVICE_UUID = UUID.fromString("6E400001-B5A3-F393-E0A9-E50E24DCCA9E")
     private val AUDIO_RX_CHAR   = UUID.fromString("6E400002-B5A3-F393-E0A9-E50E24DCCA9E")
     private val AUDIO_TX_CHAR   = UUID.fromString("6E400003-B5A3-F393-E0A9-E50E24DCCA9E")
     private val CCCD            = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb")
+    private val TARGET_DEVICE_NAME = "Nicla"
 
-    // --- BLE State ---
     private var bluetoothAdapter: BluetoothAdapter? = null
     private var scanner: BluetoothLeScanner? = null
     var bluetoothGatt: BluetoothGatt? = null
     var isConnected = false
     private val handler = Handler(Looper.getMainLooper())
 
-    // --- Data Buffers ---
     private val imageBuffer = ByteBuffer.allocate(200 * 1024)
     private var isReceivingImg = false
     private val START_SEQ = byteArrayOf(0xAA.toByte(), 0xBB.toByte(), 0xCC.toByte(), 0xDD.toByte())
@@ -86,11 +69,10 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var audioBuffer: ByteArrayOutputStream? = null
     private var audioExpectedSize = 0
 
-    // --- AI / TTS ---
-    private val WIT_AI_TOKEN = BuildConfig.WIT_AI_TOKEN
     private lateinit var tts: TextToSpeech
+    // private lateinit var objectDetectorHelper: ObjectDetectorHelper
+    private var voskModel: Model? = null
 
-    // --- UI Elements ---
     lateinit var viewPager: ViewPager2
     lateinit var bottomNav: BottomNavigationView
 
@@ -105,60 +87,107 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
         if (!hasPermissions()) ActivityCompat.requestPermissions(this, PERMISSIONS, 1)
 
-        val manager = getSystemService(BLUETOOTH_SERVICE) as BluetoothManager
+        val manager = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
         bluetoothAdapter = manager.adapter
         scanner = bluetoothAdapter?.bluetoothLeScanner
 
         tts = TextToSpeech(this, this)
+        // objectDetectorHelper = ObjectDetectorHelper(context = this, objectDetectorListener = this)
+
+        loadVoskModel()
 
         viewPager = findViewById(R.id.view_pager)
         bottomNav = findViewById(R.id.bottom_navigation)
         val fab = findViewById<FloatingActionButton>(R.id.fab_home)
 
         viewPager.adapter = ViewPagerAdapter(this)
-        viewPager.setCurrentItem(1, false) // Start at Home
-        viewPager.offscreenPageLimit = 2
+        viewPager.setCurrentItem(0, false)
+        viewPager.offscreenPageLimit = 4
+
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.fragment_container, InfoFragment(), "HOME")
+                .commit()
+        }
 
         bottomNav.setOnItemSelectedListener { item ->
+            hideHome()
             when (item.itemId) {
                 R.id.nav_image -> viewPager.currentItem = 0
-                R.id.nav_audio -> viewPager.currentItem = 2
+                R.id.nav_audio -> viewPager.currentItem = 1
+                R.id.nav_detection -> viewPager.currentItem = 2
+                R.id.nav_navigation -> viewPager.currentItem = 3
             }
             true
         }
 
-        fab.setOnClickListener {
-            viewPager.currentItem = 1
-            bottomNav.menu.findItem(R.id.nav_image).isChecked = false
-            bottomNav.menu.findItem(R.id.nav_audio).isChecked = false
-        }
+        fab.setOnClickListener { showHome() }
 
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
+                hideHome()
+                bottomNav.menu.findItem(R.id.nav_image).isChecked = false
+                bottomNav.menu.findItem(R.id.nav_audio).isChecked = false
+                bottomNav.menu.findItem(R.id.nav_detection).isChecked = false
+                val navItem = bottomNav.menu.findItem(R.id.nav_navigation)
+                if(navItem != null) navItem.isChecked = false
+
                 when (position) {
                     0 -> bottomNav.menu.findItem(R.id.nav_image).isChecked = true
-                    2 -> bottomNav.menu.findItem(R.id.nav_audio).isChecked = true
-                    1 -> {
-                        bottomNav.menu.findItem(R.id.nav_image).isChecked = false
-                        bottomNav.menu.findItem(R.id.nav_audio).isChecked = false
-                    }
+                    1 -> bottomNav.menu.findItem(R.id.nav_audio).isChecked = true
+                    2 -> bottomNav.menu.findItem(R.id.nav_detection).isChecked = true
+                    3 -> { if(navItem != null) navItem.isChecked = true }
                 }
             }
         })
+    }
+
+    private fun loadVoskModel() {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val outputPath = File(filesDir, "model")
+                if (!outputPath.exists()) {
+                    copyAssets("model", outputPath.absolutePath)
+                }
+                voskModel = Model(outputPath.absolutePath)
+                runOnUiThread {
+                    Toast.makeText(this@MainActivity, "Voice AI Loaded", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                runOnUiThread {
+                    Toast.makeText(this@MainActivity, "Model Load Failed: ${e.message}", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
+    private fun copyAssets(assetPath: String, outPath: String) {
+        val assetsList = assets.list(assetPath) ?: return
+        if (assetsList.isNotEmpty()) {
+            val dir = File(outPath)
+            if (!dir.exists()) dir.mkdirs()
+            for (asset in assetsList) {
+                copyAssets("$assetPath/$asset", "$outPath/$asset")
+            }
+        } else {
+            val inputStream = assets.open(assetPath)
+            val outputStream = FileOutputStream(outPath)
+            inputStream.copyTo(outputStream)
+            inputStream.close()
+            outputStream.flush()
+            outputStream.close()
+        }
     }
 
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) tts.language = Locale.GERMAN
     }
 
-    // --- BLE LOGIC ---
-
-    @SuppressLint("MissingPermission")
     fun connectToNicla() {
         if (isConnected || scanner == null) return
         updateHomeStatus("Scanning for Nicla...")
         val settings = ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).build()
-        val filters = listOf(ScanFilter.Builder().setDeviceName("Nicla").build())
+        val filters = listOf(ScanFilter.Builder().setDeviceName(TARGET_DEVICE_NAME).build())
         scanner?.startScan(filters, settings, scanCallback)
 
         handler.postDelayed({
@@ -167,7 +196,6 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }, 10000)
     }
 
-    @SuppressLint("MissingPermission")
     fun disconnectNicla() {
         bluetoothGatt?.disconnect()
         bluetoothGatt?.close()
@@ -176,7 +204,6 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         updateHomeStatus("Disconnected")
     }
 
-    @SuppressLint("MissingPermission")
     fun sendCommand(type: String) {
         if (bluetoothGatt == null) {
             Toast.makeText(this, "Not connected!", Toast.LENGTH_SHORT).show()
@@ -184,20 +211,26 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
         val serviceUuid = if (type == "take_picture") UUID.fromString("80000000-0000-1000-8000-00805f9b34fb") else UUID.fromString("6E400001-B5A3-F393-E0A9-E50E24DCCA9E")
         val charUuid = if (type == "take_picture") IMAGE_CMD_CHAR else AUDIO_RX_CHAR
-        val command = if (type == "take_picture") "take_picture" else "RECORD"
+
+        val command = when(type) {
+            "take_picture" -> "take_picture"
+            "RECORD" -> "RECORD"
+            // "START_DETECT" -> "take_picture"
+            // "STOP_DETECT" -> "STOP_DETECT"
+            else -> "RECORD"
+        }
 
         val service = bluetoothGatt?.getService(serviceUuid)
         val char = service?.getCharacteristic(charUuid)
 
         if (char != null) {
-            char.setValue(command.toByteArray()) // FIXED: Use setValue
+            char.setValue(command.toByteArray())
             char.writeType = BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT
             bluetoothGatt?.writeCharacteristic(char)
         }
     }
 
     private val scanCallback = object : ScanCallback() {
-        @SuppressLint("MissingPermission")
         override fun onScanResult(callbackType: Int, result: ScanResult) {
             scanner?.stopScan(this)
             updateHomeStatus("Found! Connecting...")
@@ -206,7 +239,6 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     private val gattCallback = object : BluetoothGattCallback() {
-        @SuppressLint("MissingPermission")
         override fun onConnectionStateChange(gatt: BluetoothGatt, status: Int, newState: Int) {
             if (newState == BluetoothProfile.STATE_CONNECTED) {
                 isConnected = true
@@ -218,12 +250,10 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             }
         }
 
-        @SuppressLint("MissingPermission")
         override fun onMtuChanged(gatt: BluetoothGatt, mtu: Int, status: Int) {
             gatt.discoverServices()
         }
 
-        @SuppressLint("MissingPermission")
         override fun onServicesDiscovered(gatt: BluetoothGatt, status: Int) {
             val imgService = gatt.getService(UUID.fromString("12345678-1234-5678-1234-567890ABCDEF"))
             val imgChar = imgService?.getCharacteristic(IMAGE_DATA_CHAR)
@@ -233,19 +263,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             val audioChar = audioService?.getCharacteristic(AUDIO_TX_CHAR)
             if (audioChar != null) enableNotification(gatt, audioChar)
 
-            runOnUiThread { updateHomeStatus("Ready! Select Vision or Voice.") }
-        }
-
-        override fun onDescriptorWrite(gatt: BluetoothGatt, descriptor: BluetoothGattDescriptor, status: Int) {
-            // FIXED: Used correct UUID variables and setValue
-            val service = gatt.getService(UART_SERVICE_UUID)
-            val rxChar = service?.getCharacteristic(AUDIO_RX_CHAR)
-            rxChar?.let {
-                it.setValue("START".toByteArray(Charsets.UTF_8)) // FIXED
-                it.writeType = BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT
-                gatt.writeCharacteristic(it)
-                Log.i(TAG, "Sent START command") // FIXED: TAG is now accessible
-            }
+            runOnUiThread { updateHomeStatus("Ready! Select Vision, Voice or Detect.") }
         }
 
         override fun onCharacteristicChanged(gatt: BluetoothGatt, characteristic: BluetoothGattCharacteristic) {
@@ -258,7 +276,6 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
     }
 
-    @SuppressLint("MissingPermission")
     private fun enableNotification(gatt: BluetoothGatt, char: BluetoothGattCharacteristic) {
         gatt.setCharacteristicNotification(char, true)
         val desc = char.getDescriptor(CCCD)
@@ -280,8 +297,14 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 imageBuffer.rewind(); imageBuffer.get(bytes)
                 val bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
                 runOnUiThread {
-                    val frag = findImageFragment()
-                    frag?.displayImage(bmp)
+                    if (viewPager.currentItem == 0) {
+                        findImageFragment()?.displayImage(bmp)
+                    }
+                    // else if (viewPager.currentItem == 2) {
+                    //     findDetectionFragment()?.displayImage(bmp)
+                    //     findDetectionFragment()?.updateResult("Scanning...", "...")
+                    //     objectDetectorHelper.detect(bmp, 0)
+                    // }
                 }
             } else {
                 imageBuffer.put(data)
@@ -290,15 +313,15 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     private fun handleAudioData(data: ByteArray) {
+        val str = String(data)
         if (data.size < 64) {
-            val str = String(data)
             if (str.startsWith("START:")) {
                 try {
                     audioExpectedSize = str.substringAfter(":").trim().toInt()
                     audioBuffer = ByteArrayOutputStream(audioExpectedSize)
                     runOnUiThread { notifyAudioFragmentStatus("Receiving Audio...") }
                     return
-                } catch (_: Exception) {}
+                } catch (e: Exception) {}
             } else if (str.startsWith("END")) {
                 val bytes = audioBuffer?.toByteArray()
                 if (bytes != null) {
@@ -308,7 +331,6 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 return
             }
         }
-
         audioBuffer?.write(data)
     }
 
@@ -316,63 +338,54 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         try {
             val file = File(cacheDir, "mic.wav")
             FileOutputStream(file).use { it.write(bytes) }
-        } catch (_: Exception) {}
+        } catch (e: Exception) {}
+
+        if (voskModel == null) {
+            runOnUiThread { notifyAudioFragmentStatus("Voice Model not ready.") }
+            return
+        }
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val url = URL("https://api.wit.ai/speech?v=20230215")
-                val conn = url.openConnection() as HttpURLConnection
-                conn.doOutput = true
-                conn.setRequestProperty("Authorization", "Bearer $WIT_AI_TOKEN")
-                conn.setRequestProperty("Content-Type", "audio/raw;encoding=signed-integer;bits=16;rate=16000;endian=little")
+                val recognizer = Recognizer(voskModel, 16000.0f)
+                val offset = if (bytes.size > 44 && bytes[0] == 'R'.code.toByte() && bytes[1] == 'I'.code.toByte()) 44 else 0
+                val audioData = if (offset > 0) bytes.copyOfRange(offset, bytes.size) else bytes
 
-                DataOutputStream(conn.outputStream).use { dos ->
-                    if (bytes.size > 44) dos.write(bytes, 44, bytes.size - 44)
-                    else dos.write(bytes)
-                }
+                recognizer.acceptWaveForm(audioData, audioData.size)
+                val resultJson = recognizer.finalResult
+                val jsonObject = JSONObject(resultJson)
+                val text = jsonObject.optString("text", "")
 
-                val resp = BufferedReader(InputStreamReader(conn.inputStream)).readText()
-                parseWitResponse(resp)
+                runOnUiThread { handleVoskResult(text) }
+
             } catch (e: Exception) {
-                runOnUiThread { notifyAudioFragmentStatus("Error: ${e.message}") }
+                runOnUiThread { notifyAudioFragmentStatus("Local STT Error: ${e.message}") }
             }
         }
     }
 
-    private fun parseWitResponse(rawResponse: String) {
-        logLargeString(rawResponse)
+    private fun handleVoskResult(text: String) {
+        if (text.isNotEmpty()) {
+            val frag = findAudioFragment()
+            frag?.updateTranscript("You said: $text")
+            frag?.updateStatus("Done")
 
-        try {
-            val regex = Regex("\"text\"\\s*:\\s*\"([^\"]+)\"")
-            val matches = regex.findAll(rawResponse)
-
-            var bestText = ""
-
-            for (match in matches) {
-                val text = match.groupValues[1]
-                if (text.length > bestText.length) {
-                    bestText = text
-                }
+            val lower = text.lowercase()
+            if (lower.contains("where am i") || lower.contains("location") || lower.contains("wo bin ich")) {
+                speakText("Checking location")
+                switchToTab(3)
+                handler.postDelayed({ findNavigationFragment()?.getCurrentLocation() }, 500)
             }
-
-            if (bestText.isNotEmpty()) {
-                runOnUiThread {
-                    val frag = findAudioFragment()
-                    frag?.updateTranscript(bestText)
-                    frag?.updateStatus("Done")
-                    speakText(bestText)
-                }
-            } else {
-                runOnUiThread {
-                    val frag = findAudioFragment()
-                    frag?.updateTranscript("No text found. Raw:\n$rawResponse")
-                }
+            // else if (lower.contains("detect") || lower.contains("was ist")) {
+            //     speakText("Analyzing")
+            //     switchToTab(2)
+            //     handler.postDelayed({ findDetectionFragment()?.triggerDetection() }, 500)
+            // }
+            else {
+                speakText(text)
             }
-        } catch (_: Exception) {
-            runOnUiThread {
-                val frag = findAudioFragment()
-                frag?.updateTranscript("Parse Error. Raw:\n$rawResponse")
-            }
+        } else {
+            findAudioFragment()?.updateTranscript("No speech detected.")
         }
     }
 
@@ -380,15 +393,61 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
     }
 
-    private fun findImageFragment(): ImageFragment? = supportFragmentManager.fragments.firstOrNull { it is ImageFragment } as? ImageFragment
-    private fun findAudioFragment(): AudioFragment? = supportFragmentManager.fragments.firstOrNull { it is AudioFragment } as? AudioFragment
+    /*
+    override fun onError(error: String) {
+        runOnUiThread { findDetectionFragment()?.updateResult("Error", error) }
+    }
+
+    override fun onResults(results: MutableList<Detection>?, time: Long, h: Int, w: Int) {
+        runOnUiThread {
+            if (!results.isNullOrEmpty()) {
+                val detection = results[0]
+                val label = detection.categories[0].label
+                val score = detection.categories[0].score
+                val conf = "%.0f%%".format(score * 100)
+                findDetectionFragment()?.updateResult(label, conf)
+            } else {
+                findDetectionFragment()?.updateResult("Nothing found", "0%")
+            }
+        }
+    }
+    */
+
+    private fun showHome() {
+        val homeFrag = supportFragmentManager.findFragmentByTag("HOME") ?: InfoFragment()
+        supportFragmentManager.beginTransaction().show(homeFrag).commit()
+        viewPager.visibility = View.INVISIBLE
+        bottomNav.menu.findItem(R.id.nav_image).isChecked = false
+        bottomNav.menu.findItem(R.id.nav_audio).isChecked = false
+        bottomNav.menu.findItem(R.id.nav_detection).isChecked = false
+        val navItem = bottomNav.menu.findItem(R.id.nav_navigation)
+        if(navItem != null) navItem.isChecked = false
+    }
+
+    fun hideHome() {
+        val homeFrag = supportFragmentManager.findFragmentByTag("HOME")
+        if (homeFrag != null && !homeFrag.isHidden) {
+            supportFragmentManager.beginTransaction().hide(homeFrag).commit()
+        }
+        viewPager.visibility = View.VISIBLE
+    }
+
+    fun switchToTab(index: Int) {
+        hideHome()
+        viewPager.currentItem = index
+    }
 
     private fun updateHomeStatus(status: String) {
-        (supportFragmentManager.fragments.firstOrNull { it is InfoFragment } as? InfoFragment)?.updateStatus(status)
+        (supportFragmentManager.findFragmentByTag("HOME") as? InfoFragment)?.updateStatus(status)
     }
 
     private fun notifyImageFragmentStatus(msg: String) { findImageFragment()?.updateStatus(msg) }
     private fun notifyAudioFragmentStatus(msg: String) { findAudioFragment()?.updateStatus(msg) }
+
+    private fun findImageFragment() = supportFragmentManager.findFragmentByTag("f0") as? ImageFragment
+    private fun findAudioFragment() = supportFragmentManager.findFragmentByTag("f1") as? AudioFragment
+    private fun findDetectionFragment() = supportFragmentManager.findFragmentByTag("f2") as? DetectionFragment
+    private fun findNavigationFragment() = supportFragmentManager.findFragmentByTag("f3") as? NavigationFragment
 
     private fun startsWith(data: ByteArray, prefix: ByteArray): Boolean {
         if (data.size < prefix.size) return false
@@ -404,22 +463,19 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         return PERMISSIONS.all { ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED }
     }
 
-    private fun logLargeString(content: String) {
-        if (content.length > 4000) {
-            Log.d(TAG, content.substring(0, 4000))
-            logLargeString(content.substring(4000))
-        } else {
-            Log.d(TAG, content)
-        }
+    override fun onDestroy() {
+        if (::tts.isInitialized) { tts.stop(); tts.shutdown() }
+        super.onDestroy()
     }
 
     class ViewPagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
-        override fun getItemCount(): Int = 3
+        override fun getItemCount(): Int = 4
         override fun createFragment(position: Int): Fragment {
             return when (position) {
                 0 -> ImageFragment()
-                1 -> InfoFragment()
-                2 -> AudioFragment()
+                1 -> AudioFragment()
+                2 -> DetectionFragment()
+                3 -> NavigationFragment()
                 else -> InfoFragment()
             }
         }
