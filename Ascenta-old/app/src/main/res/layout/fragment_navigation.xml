@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_navigation"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="6dp"
+        app:cardBackgroundColor="#FFFFFF"
+        android:layout_marginBottom="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Current Location"
+                android:textColor="#888888"
+                android:textSize="14sp"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:id="@+id/tv_location_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tap button to find location..."
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:lineSpacingExtra="4dp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btn_get_location"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:text="Where am I?"
+        style="@style/Widget.MaterialComponents.Button"
+        android:backgroundTint="@color/ascenta_dark_blue"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:icon="@android:drawable/ic_menu_mylocation"
+        app:iconGravity="textStart"
+        app:iconPadding="10dp"
+        android:layout_marginBottom="15dp"/>
+
+    <!-- NEW: Open Google Maps Button -->
+    <Button
+        android:id="@+id/btn_open_maps"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:text="Open in Maps"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:textColor="@color/white"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp"
+        android:textSize="18sp"
+        app:icon="@android:drawable/ic_menu_mapmode"
+        app:iconGravity="textStart"
+        app:iconPadding="10dp"/>
+
+</LinearLayout>

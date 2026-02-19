@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="iv_detect_preview" type="id" />
+    <item name="tv_detect_result" type="id" />
+    <item name="tv_detect_confidence" type="id" />
+    <item name="btn_start_detect" type="id" />
+</resources>
