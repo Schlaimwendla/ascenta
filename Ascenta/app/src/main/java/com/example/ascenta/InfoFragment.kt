@@ -20,6 +20,7 @@ class InfoFragment : Fragment(R.layout.fragment_info) {
         val act = activity as? MainActivity
 
         btnConnect.setOnClickListener {
+            // Logic: Connect if disconnected, Disconnect if connected
             if (act?.isConnected == true) {
                 act.disconnectNicla()
             } else {
@@ -27,20 +28,19 @@ class InfoFragment : Fragment(R.layout.fragment_info) {
             }
         }
 
-        // Restore state if already connected when returning to this screen
+        // Sync initial state
         if (act?.isConnected == true) {
             updateStatus("Connected")
         }
     }
 
     fun updateStatus(msg: String) {
-        // Ensure Fragment is attached before updating UI
         if (!isAdded || view == null) return
 
-        tvStatus.text = "Status: $msg"
+        tvStatus.text = msg
 
         val act = activity as? MainActivity
-        // FIX: Check the boolean state from MainActivity instead of the message text
+        // Update button text based on real connection state
         if (act?.isConnected == true) {
             btnConnect.text = getString(R.string.menu_disconnect)
         } else {
