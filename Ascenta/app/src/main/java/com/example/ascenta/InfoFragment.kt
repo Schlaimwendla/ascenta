@@ -20,15 +20,11 @@ class InfoFragment : Fragment(R.layout.fragment_info) {
         val act = activity as? MainActivity
 
         btnConnect.setOnClickListener {
-            // Logic: Connect if disconnected, Disconnect if connected
-            if (act?.isConnected == true) {
-                act.disconnectNicla()
-            } else {
-                act?.connectToNicla()
-            }
+            // Trigger Smart Connect
+            act?.connectToNicla()
         }
 
-        // Sync initial state
+        // Auto-update status
         if (act?.isConnected == true) {
             updateStatus("Connected")
         }
@@ -36,15 +32,16 @@ class InfoFragment : Fragment(R.layout.fragment_info) {
 
     fun updateStatus(msg: String) {
         if (!isAdded || view == null) return
-
         tvStatus.text = msg
-
         val act = activity as? MainActivity
-        // Update button text based on real connection state
+
         if (act?.isConnected == true) {
-            btnConnect.text = getString(R.string.menu_disconnect)
+            // If connected, this page is usually hidden, but just in case:
+            btnConnect.text = "Connected"
+            btnConnect.isEnabled = false // Disable button since we are done
         } else {
-            btnConnect.text = getString(R.string.menu_connect_general)
+            btnConnect.text = "Connect"
+            btnConnect.isEnabled = true
         }
     }
 }
