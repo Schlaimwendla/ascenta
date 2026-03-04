@@ -18,9 +18,8 @@ Ascenta aims to make the world more accessible by combining **computer vision**,
 ## 🛠️ Tech Stack
 - **Hardware:** Arduino Nicla Vision (Edge AI, camera, sensors)  
 - **Software:** MicroPython / Arduino IDE / Android App  
-- **Connectivity:** BLE (Bluetooth Low Energy) for glasses ↔ app communication  
+- **Connectivity:** WiFi - TCP for glasses ↔ app communication  
 - **Features in progress:**  
-  - Object detection & recognition  
   - Navigation hints  
   - Daily reminders & assistance via app  
 
@@ -41,8 +40,7 @@ The companion app serves as a **hub for communication** between the smart glasse
 ---
 
 ## 📌 Current Status  
-🔬 Early prototyping stage – hardware integration & first app features are under development.  
-Stay tuned for more updates!  
+Fully finished App and working functionality between
 
 ---
 
@@ -53,7 +51,7 @@ Together: **Ascenta – Guiding your Vision**.
 ---
 
 ## 🤝 Contributing  
-This is part of my diploma thesis, but feedback, ideas, and positive vibes are always welcome ✨  
+This is part of our diploma thesis, but feedback, ideas, and positive vibes are always welcome ✨  
 
 ---
 
