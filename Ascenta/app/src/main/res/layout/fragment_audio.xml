@@ -62,15 +62,6 @@
         android:backgroundTint="#00ACC1"
         android:textColor="@color/white"/>
 
-    <TextView
-        android:id="@+id/tv_audio_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="@string/status_ready"
-        android:textColor="#EEEEEE"
-        android:textSize="14sp"/>
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="160dp"

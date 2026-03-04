@@ -1,5 +1,3 @@
-import java.util.Properties
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -18,13 +16,6 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        val properties = Properties()
-        val localProperties = project.rootProject.file("local.properties")
-        if (localProperties.exists()) {
-            properties.load(localProperties.inputStream())
-        }
-        buildConfigField("String", "WIT_AI_TOKEN", properties.getProperty("WIT_AI_TOKEN", "\"\""))
     }
 
     buildTypes {
@@ -75,9 +66,7 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
-    implementation("org.tensorflow:tensorflow-lite-task-vision:0.4.4")
-    implementation("org.tensorflow:tensorflow-lite-gpu:2.14.0")
-
-    // Vosk Offline STT
     implementation("com.alphacephei:vosk-android:0.3.47")
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+
 }
