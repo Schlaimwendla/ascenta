@@ -1,0 +1,43 @@
+\documentclass[11pt, oneside, numbers=noenddot]{scrbook}  
+\input{./includes/htl_definintions.tex}	
+
+\def\htlArbeitsthema{Ascenta -- Guiding your Vision}	
+
+\usepackage{setspace}
+\onehalfspacing
+
+\begin{document}
+
+\pagenumbering{roman}	
+		
+\input{./chapters/00_deckblatt.tex}
+\input{./chapters/00_ee.tex}
+\input{./chapters/00_abstract.tex}
+	
+\tableofcontents
+
+\pagenumbering{arabic}	
+
+\input{./chapters/01_introduction.tex}
+\input{./chapters/02_use_cases.tex}
+\input{./chapters/03_Konzept.tex}       
+\input{./chapters/04_Umsetzung.tex}
+\input{./chapters/05_futurework.tex}
+\input{./chapters/06_relatedwork.tex}
+\input{./chapters/07_conclusion.tex}
+\input{./chapters/08_projectmanagement.tex}
+\input{./chapters/99_acknowledgements.tex}
+
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+
+\addcontentsline{toc}{chapter}{Listings}
+\lstlistoflistings
+
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{plain}
+\bibliography{literature}
+
+\input{./chapters/99_authors.tex}
+
+\end{document} % <--- DIESER BEFEHL BEENDET DIE ARBEIT

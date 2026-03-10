@@ -1,0 +1,34 @@
+% !TEX root = ../main.tex
+
+\chapter{Konzept}
+
+Dieses Kapitel beschreibt die abstrakte Architektur des Assistenzsystems \glqq Ascenta\grqq. Es liefert einen Gesamtüberblick über das funktionale Zusammenwirken der Teilsysteme, ohne dabei auf tiefergehende Implementierungsdetails einzugehen.
+
+\section{Gesamtüberblick}
+Das System basiert auf einer dezentralen \glqq Split-Brain\grqq-Architektur. Um die Hardware direkt am Kopf des Nutzers so leicht und unauffällig wie möglich zu gestalten, wird die ressourcenintensive Datenverarbeitung auf das Smartphone des Nutzers ausgelagert. Die Brille fungiert als reiner Sensor- und Kommunikationsknotenpunkt (Edge-Device), der Umgebungsdaten erfasst und Ergebnisse der lokalen Vorverarbeitung an das mobile Endgerät streamt. Das Smartphone übernimmt die Rolle des Hauptrechenzentrums, welches die Sensordaten fusioniert, Benutzereingaben interpretiert und das akustische Feedback generiert.
+
+\section{Komponenten}
+Das Gesamtsystem setzt sich aus drei wesentlichen logischen Bausteinen zusammen: der physischen Struktur (Gehäuse), der elektronischen Hardware (Sensorik und Energieversorgung) und dem Software-Ökosystem.
+
+\subsection{Mechanik und Gehäusedesign}
+% --- PLATZHALTER MANUEL (3D-DRUCK KONZEPT) ---
+[Hier fügt Manuel seine konzeptionellen Gedanken zum Gehäusedesign und den ergonomischen Anforderungen ein (Warum 3D-Druck, Gewichtsverteilung, etc.).]
+
+\subsection{Hardware und Elektronik}
+% --- PLATZHALTER FABIAN (ELEKTRONIK KONZEPT) ---
+[Hier fügt Fabian die konzeptionelle Begründung der Elektronik und Bauteilwahl ein (Warum Nicla Vision, warum LiPo-Akkus, grobes Energiekonzept).]
+
+\subsection{Software-Ökosystem}
+Die Softwarearchitektur teilt sich in die Firmware des Mikrocontrollers und die mobile Applikation. Die Firmware (MicroPython) ist für die hardwarenahe Sensorsteuerung und eine erste Datenreduktion (Edge AI mittels FOMO) verantwortlich. Die Android-Applikation (Kotlin) dient als unsichtbares Interface (Zero-UI) und integriert komplexe Algorithmen wie die Offline-Spracherkennung (Vosk) zur auditiven Interaktion.
+
+\section{Interaktionen}
+Die Interaktion zwischen den Systemkomponenten und dem Nutzer verläuft in einem kontinuierlichen Kreislauf:
+\begin{enumerate}
+    \item \textbf{Datenerfassung:} Kamera und Time-of-Flight-Sensor erfassen synchron die visuelle Umgebung und Distanzdaten. Parallel überwacht die Inertial Measurement Unit (IMU) physische Eingaben durch den Nutzer.
+    \item \textbf{Vorverarbeitung und Übertragung:} Der Mikrocontroller identifiziert relevante Objektkoordinaten und überträgt diese, bei Bedarf ergänzt durch Audio-Fragmente, asynchron über ein lokales WiFi-Netzwerk an das Smartphone.
+    \item \textbf{Fusion und Auswertung:} Das Smartphone verknüpft die visuellen Koordinaten mit den Distanzwerten und wertet eventuelle Sprachbefehle aus.
+    \item \textbf{Feedback:} Überschreitet ein Objekt einen kritischen Schwellenwert oder erfordert ein Sprachbefehl eine Antwort, generiert das Smartphone ein auditives Signal oder eine Sprachausgabe (TTS), die der Nutzer wahrnimmt.
+\end{enumerate}
+
+\section{Technisches Design}
+Das technische Design der Kommunikation stellt sicher, dass kritische Warnungen höchste Priorität erhalten. Die Wahl des User Datagram Protocols (UDP) für Discovery-Prozesse und TCP für den asynchronen Binärdaten-Stream ist eine bewusste Designentscheidung. Zudem garantiert die konsequente Offline-Ausführung aller Machine-Learning-Modelle den Schutz sensibler Nutzerdaten (Privacy-by-Design), da keine Umgebungsvideos oder Audiodaten an externe Cloud-Anbieter übermittelt werden.
