@@ -1,11 +1,10 @@
 % !TEX root = ../main.tex
-
 \chapter{Konzept}
 
-Dieses Kapitel beschreibt die abstrakte Architektur des Assistenzsystems \glqq Ascenta\grqq. Es liefert einen Gesamtüberblick über das funktionale Zusammenwirken der Teilsysteme, ohne dabei auf tiefergehende Implementierungsdetails einzugehen.
+Dieses Kapitel beschreibt die abstrakte Architektur des Assistenzsystems \glqq Ascenta\grqq. Es liefert einen Gesamtüberblick über das funktionale Zusammenwirken der Teilsysteme und erläutert die iterativen Designentscheidungen, welche zur finalen Netzwerktopologie führten.
 
 \section{Gesamtüberblick}
-Das System basiert auf einer dezentralen \glqq Split-Brain\grqq-Architektur. Um die Hardware direkt am Kopf des Nutzers so leicht und unauffällig wie möglich zu gestalten, wird die ressourcenintensive Datenverarbeitung auf das Smartphone des Nutzers ausgelagert. Die Brille fungiert als reiner Sensor- und Kommunikationsknotenpunkt (Edge-Device), der Umgebungsdaten erfasst und Ergebnisse der lokalen Vorverarbeitung an das mobile Endgerät streamt. Das Smartphone übernimmt die Rolle des Hauptrechenzentrums, welches die Sensordaten fusioniert, Benutzereingaben interpretiert und das akustische Feedback generiert.
+Das System basiert auf einer dezentralen \glqq Split-Brain\grqq-Architektur. Um die Hardware direkt am Kopf des Nutzers so leicht und unauffällig wie möglich zu gestalten, lagert die Architektur die ressourcenintensive Datenverarbeitung auf das Smartphone des Nutzers aus. Die Brille fungiert als reiner Sensor- und Kommunikationsknotenpunkt (Edge-Device). Sie erfasst Umgebungsdaten und streamt die Ergebnisse einer lokalen Vorverarbeitung an das mobile Endgerät. Das Smartphone übernimmt die Rolle des Hauptrechenzentrums. Es fusioniert die Sensordaten, interpretiert Benutzereingaben und generiert das akustische Feedback.
 
 \section{Komponenten}
 Das Gesamtsystem setzt sich aus drei wesentlichen logischen Bausteinen zusammen: der physischen Struktur (Gehäuse), der elektronischen Hardware (Sensorik und Energieversorgung) und dem Software-Ökosystem.
@@ -19,16 +18,104 @@ Das Gesamtsystem setzt sich aus drei wesentlichen logischen Bausteinen zusammen:
 [Hier fügt Fabian die konzeptionelle Begründung der Elektronik und Bauteilwahl ein (Warum Nicla Vision, warum LiPo-Akkus, grobes Energiekonzept).]
 
 \subsection{Software-Ökosystem}
-Die Softwarearchitektur teilt sich in die Firmware des Mikrocontrollers und die mobile Applikation. Die Firmware (MicroPython) ist für die hardwarenahe Sensorsteuerung und eine erste Datenreduktion (Edge AI mittels FOMO) verantwortlich. Die Android-Applikation (Kotlin) dient als unsichtbares Interface (Zero-UI) und integriert komplexe Algorithmen wie die Offline-Spracherkennung (Vosk) zur auditiven Interaktion.
+Die Softwarearchitektur teilt sich in die Firmware des Mikrocontrollers und die mobile Applikation. Die Firmware (MicroPython) verantwortet die hardwarenahe Sensorsteuerung und eine erste Datenreduktion (Edge AI mittels FOMO). Die Android-Applikation (Kotlin) dient als unsichtbares Interface (Zero-UI) und integriert komplexe Algorithmen wie die Offline-Spracherkennung (Vosk) zur auditiven Interaktion.
 
 \section{Interaktionen}
 Die Interaktion zwischen den Systemkomponenten und dem Nutzer verläuft in einem kontinuierlichen Kreislauf:
 \begin{enumerate}
     \item \textbf{Datenerfassung:} Kamera und Time-of-Flight-Sensor erfassen synchron die visuelle Umgebung und Distanzdaten. Parallel überwacht die Inertial Measurement Unit (IMU) physische Eingaben durch den Nutzer.
-    \item \textbf{Vorverarbeitung und Übertragung:} Der Mikrocontroller identifiziert relevante Objektkoordinaten und überträgt diese, bei Bedarf ergänzt durch Audio-Fragmente, asynchron über ein lokales WiFi-Netzwerk an das Smartphone.
+    \item \textbf{Vorverarbeitung und Übertragung:} Der Mikrocontroller identifiziert relevante Objektkoordinaten. Er überträgt diese asynchron über ein lokales WiFi-Netzwerk an das Smartphone und ergänzt den Stream bei Bedarf durch Audio-Fragmente.
     \item \textbf{Fusion und Auswertung:} Das Smartphone verknüpft die visuellen Koordinaten mit den Distanzwerten und wertet eventuelle Sprachbefehle aus.
-    \item \textbf{Feedback:} Überschreitet ein Objekt einen kritischen Schwellenwert oder erfordert ein Sprachbefehl eine Antwort, generiert das Smartphone ein auditives Signal oder eine Sprachausgabe (TTS), die der Nutzer wahrnimmt.
+    \item \textbf{Feedback:} Überschreitet ein Objekt einen kritischen Schwellenwert oder erfordert ein Sprachbefehl eine Antwort, generiert das Smartphone ein auditives Signal oder eine Sprachausgabe (TTS). Der Nutzer nimmt dieses Feedback unmittelbar über die Lautsprecher oder Kopfhörer wahr.
 \end{enumerate}
 
 \section{Technisches Design}
-Das technische Design der Kommunikation stellt sicher, dass kritische Warnungen höchste Priorität erhalten. Die Wahl des User Datagram Protocols (UDP) für Discovery-Prozesse und TCP für den asynchronen Binärdaten-Stream ist eine bewusste Designentscheidung. Zudem garantiert die konsequente Offline-Ausführung aller Machine-Learning-Modelle den Schutz sensibler Nutzerdaten (Privacy-by-Design), da keine Umgebungsvideos oder Audiodaten an externe Cloud-Anbieter übermittelt werden.
+Das technische Design der Kommunikation stellt sicher, dass kritische Warnungen höchste Priorität erhalten. Die Architektur nutzt das User Datagram Protocol (UDP) bewusst für Discovery-Prozesse und das verbindungsorientierte TCP für den asynchronen Binärdaten-Stream. Zudem garantiert die konsequente Offline-Ausführung aller Machine-Learning-Modelle den Schutz sensibler Nutzerdaten (Privacy-by-Design). Das System übermittelt zu keinem Zeitpunkt Umgebungsvideos oder Audiodaten an externe Cloud-Anbieter zur Verarbeitung.
+
+\section{Evolution der Netzwerkarchitektur (Vom BLE- zum WiFi-Protokoll)}
+Die finale Netzwerktopologie (UDP/TCP) resultiert aus einer iterativen Evaluierung und umfassenden Performancetests verschiedener Übertragungsstandards. Frühe Prototypen des Systems nutzten ein vollumfängliches Bluetooth Low Energy (BLE) Setup für den gesamten Datentransfer (Telemetrie, Bilder, Audio). Diese Architektur erwies sich in der Praxis jedoch als massiver Flaschenhals und erzwang einen Paradigmenwechsel. Die folgenden Abschnitte dokumentieren diese architektonische Evolution.
+
+\subsection{Initiale Konzeptionierung: Das BLE-GATT-Profil}
+Das ursprüngliche Konzept sah das Nicla Vision als eigenständiges BLE-Peripheral vor. Das System spannte einen dedizierten GATT-Server (Generic Attribute Profile) auf und definierte spezifische Services für die Kommunikation mit dem Smartphone. 
+
+Die Architektur gliederte den Datenaustausch in drei logische \textit{Services} mit jeweils eigenen 128-Bit-UUIDs (Universally Unique Identifiers): Einen Service für Bilddaten (\texttt{NICLA\_SERVICE}), einen für Steuerbefehle (\texttt{CMD\_SERVICE}) und eine UART-Emulation (\texttt{UART\_SERVICE}) für den bidirektionalen Transfer von Audiodaten. Das System verknüpfte diese Services mit \textit{Characteristics}, welche die Lese- und Schreibrechte (Notify, Read, Write) auf Hardware-Ebene definierten:
+
+\begin{lstlisting}[language=Python, caption={Auszug der initialen GATT-Service-Definitionen für die alte BLE-Architektur}]
+import bluetooth
+
+# Definition der Service- und Characteristic-UUIDs fuer die UART-Emulation
+UART_SERVICE_UUID = bluetooth.UUID("6E400001-B5A3-F393-E0A9-E50E24DCCA9E")
+UART_TX_UUID      = bluetooth.UUID("6E400003-B5A3-F393-E0A9-E50E24DCCA9E")
+UART_RX_UUID      = bluetooth.UUID("6E400002-B5A3-F393-E0A9-E50E24DCCA9E")
+
+# Registrierung der Services im BLE-Stack des Mikrocontrollers
+uart_svc = (UART_SERVICE_UUID, (
+    (UART_TX_UUID, bluetooth.FLAG_NOTIFY | bluetooth.FLAG_READ),
+    (UART_RX_UUID, bluetooth.FLAG_WRITE),
+))
+handles = self.ble.gatts_register_services((vision_svc, cmd_svc, uart_svc))
+\end{lstlisting}
+
+\subsection{Speichermanagement während der Audio-Aufnahme}
+Ein spezifisches Problem der BLE-Datenübertragung war die Notwendigkeit, Audiodaten vor dem Senden vollständig im Arbeitsspeicher (RAM) zwischenzuspeichern. Da das BLE-Protokoll asynchron arbeitet und keine konstante Datenrate garantiert, scheiterte ein direktes Live-Streaming des Mikrofons. 
+
+Die Firmware implementierte daher eine speicherintensive \textit{Record-to-RAM}-Logik. Das Skript berechnete den benötigten Speicherplatz anhand der Samplingrate ($16.000$\,Hz), der Auflösung (16-Bit) und der Kanäle (Mono). Eine viersekündige Aufnahme beanspruchte somit exakt $128.000$\,Bytes. Um \textit{Out-Of-Memory}-Abstürze zu verhindern, fragmentierte der Code den RAM in Arrays zu je 4096 Bytes (\texttt{CHUNK\_SIZE}) und deaktivierte den internen Garbage-Collector (\texttt{gc.disable()}) während der Aufnahme, um Audio-Aussetzer durch blockierende Interrupts zu vermeiden:
+
+\begin{lstlisting}[language=Python, caption={RAM-Allokation und Pufferung der Audiodaten in der initialen Firmware}]
+# Berechnung des Gesamtspeichers: 16000 Hz * 1 Channel * 2 Bytes * 4.0s
+TOTAL_BYTES = int(SAMPLE_RATE * CHANNELS * BYTES_PER_SAMPLE * RECORD_SECONDS)
+CHUNK_SIZE = 4096
+NUM_CHUNKS = (TOTAL_BYTES // CHUNK_SIZE) + 1
+
+def record_to_ram():
+    global g_chunks, g_is_recording
+    gc.collect()
+    g_chunks = []
+    
+    # Fragmentierte Allozierung zur Verhinderung von OOM
+    for i in range(NUM_CHUNKS):
+        g_chunks.append(bytearray(CHUNK_SIZE))
+        
+    g_is_recording = True
+    gc.disable() # Kritisch: GC deaktivieren, um Interrupt-Blockaden zu meiden
+    audio.start_streaming(audio_callback)
+    
+    while g_is_recording:
+        time.sleep_ms(50)
+        
+    audio.stop_streaming()
+    gc.enable()
+\end{lstlisting}
+
+\subsection{Analyse des Flaschenhalses: MTU-Limits und OSError 11}
+Die Übertragung der generierten $128$\,KB über den BLE-Stack offenbarte kritische Limitierungen. Das Bluetooth Low Energy Protokoll beschränkt die Payload-Größe pro Datenpaket (Maximum Transmission Unit, MTU) enorm. Selbst nach einer erfolgreichen MTU-Aushandlung mit dem Android-Smartphone (\texttt{MTU Exchange}) betrug die maximale Payload-Größe pro Paket meist unter 250 Bytes. Im Worst-Case-Szenario sank dieser Wert auf den BLE-Standard von 20 Bytes (\texttt{self.payload\_size = 20}).
+
+Das System zerlegte die Binärdaten mithilfe von \texttt{memoryview} in mikroskopische Chunks und schickte diese über die Methode \texttt{gatts\_notify} sequenziell an das mobile Endgerät. Dies führte unweigerlich zu einer Überlastung des internen Sende-Puffers auf dem Hardware-Chip des Nicla Vision, was der MicroPython-Interpreter mit einem \texttt{OSError 11} (EAGAIN / Buffer Full) quittierte. Um diesen Absturz zu verhindern, erzwang die Sende-Schleife einen \glqq künstlichen\grqq\ Delay von 15 Millisekunden nach jedem Sendevorgang:
+
+\begin{lstlisting}[language=Python, caption={Die BLE-Sendeschleife mit künstlicher Drosselung zur Puffer-Schonung}]
+def send(self, data):
+    mv = memoryview(data)
+    bytes_sent = 0
+    total_len = len(data)
+
+    while bytes_sent < total_len:
+        if not self.conn: break
+        # Limitierung auf die ausgehandelte MTU-Payload (z.B. 20 - 240 Bytes)
+        chunk_len = min(self.payload_size, total_len - bytes_sent)
+        
+        try:
+            self.ble.gatts_notify(self.conn, self.h_tx, mv[bytes_sent : bytes_sent + chunk_len])
+            bytes_sent += chunk_len
+        except OSError:
+            pass # Puffer voll: Ausnahme ignorieren und im naechsten Zyklus iterieren
+
+        # Zwangspause von 15ms zur Verhinderung eines Hardware-Overflows
+        time.sleep_ms(15) 
+\end{lstlisting}
+
+Diese mathematische Kombination aus winzigen Datenpaketen und künstlichen Verzögerungen machte ein Echtzeitsystem unmöglich. Geht man von einer Payload von 240 Bytes aus, zersplittert die $128$\,KB große Audiodatei in über 530 Einzelpakete. Allein die summierten Zwangspausen ($530 \times 15\,\text{ms}$) verursachen einen Sende-Overhead von knapp acht Sekunden – zuzüglich der eigentlichen Funkübertragungsdauer. Im Fall einer 20-Byte-MTU explodiert die Übertragungszeit auf weit über eine Minute. Für ein Assistenzsystem im Straßenverkehr, welches Blinde verzögerungsfrei vor Hindernissen warnen muss, verfehlt eine derart hohe Latenz die fundamentalen Sicherheitsanforderungen.
+
+\subsection{Architektonische Neuausrichtung (TCP/IP)}
+Die evaluierten Messwerte und Puffer-Überläufe erzwangen einen grundlegenden Paradigmenwechsel in der Systemarchitektur. Das aktuelle System limitiert die Nutzung von Bluetooth Low Energy strikt auf das initiale Verbindungs-Setup, da BLE für kleine Text-Credentials (SSID und Passwort) hervorragend geeignet ist. 
+
+Den eigentlichen Hauptdatenstrom (Audio-Chunks und JPEG-Bilder) verlagert die Brille jedoch auf ein lokales WiFi-Netzwerk unter Nutzung des Transmission Control Protocols (TCP). Dieser Wechsel erhöht die Bandbreite exponentiell, beseitigt die künstlichen Sende-Delays und drückt die Systemlatenz für komplexe Binärübertragungen von mehreren Sekunden auf den benötigten Bruchteil einer Sekunde.

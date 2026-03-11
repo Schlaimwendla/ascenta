@@ -1,7 +1,11 @@
-\documentclass[11pt, oneside, numbers=noenddot]{scrbook}  
+\documentclass[12pt, oneside, numbers=noenddot]{scrbook}  
 \input{./includes/htl_definintions.tex}	
 
 \def\htlArbeitsthema{Ascenta -- Guiding your Vision}	
+\RedeclareSectionCommand[
+  beforeskip=0pt,
+  afterskip=2\baselineskip
+]{chapter}
 
 \usepackage{setspace}
 \onehalfspacing
@@ -28,16 +32,20 @@
 \input{./chapters/08_projectmanagement.tex}
 \input{./chapters/99_acknowledgements.tex}
 
-\addcontentsline{toc}{chapter}{List of Figures}
+\clearpage
+
+\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
 \listoffigures
 
-\addcontentsline{toc}{chapter}{Listings}
+\renewcommand{\lstlistlistingname}{Quellcodeverzeichnis}
+\addcontentsline{toc}{chapter}{Quellcodeverzeichnis}
 \lstlistoflistings
 
-\addcontentsline{toc}{chapter}{Bibliography}
+\addcontentsline{toc}{chapter}{Literaturverzeichnis}
+\renewcommand{\bibname}{Literaturverzeichnis} 
+\nocite{*} 
 \bibliographystyle{plain}
-\bibliography{literature}
-
+\bibliography{literature} 
 \input{./chapters/99_authors.tex}
 
-\end{document} % <--- DIESER BEFEHL BEENDET DIE ARBEIT
+\end{document}
