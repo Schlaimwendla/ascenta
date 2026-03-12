@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2026.3.9)  11 MAR 2026 19:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2026.3.9)  12 MAR 2026 10:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -920,10 +920,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 11--2
 
 
 ]
-<./media/images/htl_c_cmyk_rein.pdf, id=156, 315.82591pt x 165.02654pt>
+<./media/images/htl_c_cmyk_rein.pdf, id=158, 315.82591pt x 165.02654pt>
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 81.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 84.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
  [6 <./media/images/htl_c_cmyk_rein.pdf>])
 \tf@toc=\write5
@@ -995,200 +995,221 @@ chapter 3.
 
 
 ]
-Overfull \hbox (2.5946pt too wide) in paragraph at lines 33--34
-\T1/cmr/m/n/12 Machine-Learning-Modelle den Schutz sen-si-bler Nutzer-daten (Privacy-by-Design). Das
- []
-
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 35.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-[7]
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 41.
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 26.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
-)
-Overfull \hbox (16.66327pt too wide) in paragraph at lines 41--42
-\T1/cmr/m/n/12 (\T1/pcr/m/n/12 NICLA_SERVICE\T1/cmr/m/n/12 ), einen für Steuer-be-fehle (\T1/pcr/m/n/12 CMD_SERVICE\T1/cmr/m/n/12 ) und eine UART-Emulation
- []
-
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 43.
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 28.
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 52.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 37.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
- [8{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}]
-Overfull \hbox (26.0238pt too wide) in paragraph at lines 62--63
-\T1/cmr/m/n/12 der Au-flö-sung (16-Bit) und der Kanäle (Mono). Eine viersekündige Auf-nahme beanspruchte
- []
-
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 81.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-[9]
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 108.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
- [10]
-Overfull \hbox (26.2061pt too wide) in paragraph at lines 116--117
-[]\T1/cmr/m/n/12 Diese math-e-ma-tis-che Kom-bi-na-tion aus winzi-gen Daten-paketen und kün-stlichen Verzögerun-
+ [7{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}]
+Overfull \hbox (0.34285pt too wide) in paragraph at lines 45--46
+[]\T1/cmr/bx/n/12 Datenerfassung: \T1/cmr/m/n/12 Kam-era und ToF-Sensor er-fassen syn-chron die vi-suelle Umge-
  []
 
 
-Overfull \hbox (12.85815pt too wide) in paragraph at lines 119--120
-\T1/cmr/m/n/12 Die evaluierten Mess-werte und Puffer-Überläufe erzwan-gen einen grundle-gen-den Paradig-
+Overfull \hbox (14.17844pt too wide) in paragraph at lines 46--47
+\T1/cmr/m/n/12 vante Ob-jek-tko-or-di-naten und überträgt diese asyn-chron über eine TCP-Verbindung
  []
 
-) (./chapters/04_Umsetzung.tex
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 6.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
- [11]
-chapter 4.
 
-Overfull \hbox (0.38501pt too wide) in paragraph at lines 28--29
-\T1/cmr/m/n/12 tion, die asyn-chrone Daten-ver-ar-beitung und das Spe-icher-man-age-ment de-tail-liert. 
- []
-
-[12
-
-
-] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2023/02/27 1.9 listings language file
-)
-Overfull \hbox (97.9051pt too wide) in paragraph at lines 47--48
-\T1/cmr/m/n/12 im-ple-men-tiert der Code eine kom-plexe State-Machine in-ner-halb eines \T1/pcr/m/n/12 BluetoothGattCallback\T1/cmr/m/n/12 . 
+Overfull \hbox (0.97188pt too wide) in paragraph at lines 48--49
+[]\T1/cmr/bx/n/12 Feedback: \T1/cmr/m/n/12 Das Sys-tem gener-iert akustis-che Sig-nale oder Sprachaus-gaben (TTS)
  []
 
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 58.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 56.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-[13]
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 90.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
- [14]
-Overfull \hbox (11.34442pt too wide) in paragraph at lines 92--93
-\T1/cmr/m/n/12 strom (\T1/cmr/m/it/12 Stream\T1/cmr/m/n/12 ) in-ter-leavt kon-tinuier-liche Textnachrichten (JSON-Telemetrie, Heartbeat-
- []
-
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 114.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-[15]
-Overfull \hbox (5.5055pt too wide) in paragraph at lines 138--139
-\T1/cmr/m/n/12 Die Android-Applikation führt net-zw-erk-basierte I/O-Operationen (TCP/UDP-Sockets)
- []
-
-
-Overfull \hbox (0.5716pt too wide) in paragraph at lines 138--139
-\T1/cmr/m/n/12 Sock-ets und block-ierende Le-sevorgänge operieren auss-chlieÿlich im \T1/pcr/m/n/12 Dispatchers.IO
- []
-
-
-Overfull \hbox (36.51491pt too wide) in paragraph at lines 138--139
-\T1/cmr/m/n/12 einen syn-chro-nisierten Kon-tex-twech-sel zurück auf den Main-Thread durch (\T1/pcr/m/n/12 handler.post\T1/cmr/m/n/12 ).
- []
-
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 150.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-[16]
-Overfull \hbox (227.10391pt too wide) in paragraph at lines 162--163
-\T1/cmr/m/n/12 restrik-tio-nen. Das Sys-tem re-serviert ini-tial einen Notfall-Puffer (\T1/pcr/m/n/12 micropython.alloc_emergency_exception_buf(100)\T1/cmr/m/n/12 ),
- []
-
-
-Overfull \hbox (27.67592pt too wide) in paragraph at lines 167--168
-[]\T1/cmr/m/n/12 In je-dem It-er-a-tionss-chritt er-fasst der Sen-sor ein neues Kam-er-abild (\T1/pcr/m/n/12 sensor.snapshot()\T1/cmr/m/n/12 )
- []
-
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 179.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-[17]
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 204.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
- [18]
-Overfull \hbox (19.97885pt too wide) in paragraph at lines 240--241
-\T1/cmr/m/n/12 Auf-nahme it-er-a-tiv in vorab al-lozierte 1024-Byte-Chunks. Die Nutzung eines \T1/pcr/m/n/12 memoryview
- []
-
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 241.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-[19]
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 276.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
- [20]
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 300.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
- [21]
-Overfull \hbox (18.58873pt too wide) in paragraph at lines 332--333
-\T1/cmr/m/n/12 terteilt die eigentlichen Bild-schirmin-halte in mod-u-lare \T1/pcr/m/n/12 Fragments\T1/cmr/m/n/12 . Das \T1/pcr/m/n/12 InfoFragment
- []
-
-
-Overfull \hbox (18.23401pt too wide) in paragraph at lines 332--333
-\T1/cmr/m/n/12 Funk-tion zur dauer-haften Spe-icherung von Umge-bungsauf-nah-men über die \T1/pcr/m/n/12 MediaStore\T1/cmr/m/n/12 -
- []
-
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 333.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-[22]
-Overfull \hbox (3.9183pt too wide) in paragraph at lines 340--341
-\T1/cmr/m/n/12 [Hier beschreibt Manuel seine Prob-leme beim 3D-Druck, Scharniere etc. sach-lich.] 
- []
-
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 350.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-[23]
-Overfull \hbox (0.59569pt too wide) in paragraph at lines 351--352
-[]\T1/cmr/m/n/12 Zweitens verur-sacht die \T1/cmr/m/it/12 Heap-Fragmentierung \T1/cmr/m/n/12 Ab-stürze während der Bild-ver-ar-beitung.
- []
-
-
-Overfull \hbox (27.32297pt too wide) in paragraph at lines 353--354
-\T1/cmr/m/n/12 ver-hin-dert den ^^RZero-Config^^P-Verbindungsaufbau. Die Im-ple-men-tierung eines \T1/pcr/m/n/12 Foreground
- []
-
-
-Overfull \hbox (27.37547pt too wide) in paragraph at lines 362--363
-\T1/cmr/m/n/12 von etwa [XX] Mil-lisekun-den für die Bilderken-nung und den reinen Telemetrie-Datentransfer
- []
-
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 363.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-[24]) (./chapters/05_futurework.tex
+[8]) (./chapters/04_Umsetzung.tex
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
 Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 2.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
- [25{/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+ [9]
+chapter 4.
+
+Overfull \hbox (0.38501pt too wide) in paragraph at lines 21--22
+\T1/cmr/m/n/12 tion, die asyn-chrone Daten-ver-ar-beitung und das Spe-icher-man-age-ment de-tail-liert. 
+ []
+
+[10
+
+
+]
+<media/images/openmv_ide.png, id=284, 414.54875pt x 122.4575pt>
+File: media/images/openmv_ide.png Graphic file (type png)
+<use media/images/openmv_ide.png>
+Package pdftex.def Info: media/images/openmv_ide.png  used on input line 31.
+(pdftex.def)             Requested size: 174.69688pt x 51.6037pt.
+
+Overfull \hbox (32.47304pt too wide) in paragraph at lines 36--38
+\T1/cmr/m/n/12 darunter den An-droid Pro-filer zur Echtzei-t-anal-yse der Netzwerk- und CPU-Auslastung. 
+ []
+
+<media/images/android_studio.png, id=286, 1204.5pt x 632.3625pt>
+File: media/images/android_studio.png Graphic file (type png)
+<use media/images/android_studio.png>
+Package pdftex.def Info: media/images/android_studio.png  used on input line 41.
+(pdftex.def)             Requested size: 174.69688pt x 91.71432pt.
+
+Overfull \hbox (20.44687pt too wide) in paragraph at lines 47--48
+\T1/cmr/m/n/12 tung der Android-Applikation wer-den über zwei zen-trale Steuerungs-dateien definiert. 
+ []
+
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 49.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[11 <./media/images/openmv_ide.png> <./media/images/android_studio.png>]
+Overfull \hbox (47.13393pt too wide) in paragraph at lines 52--55
+\T1/cmr/m/n/12 den TCP-Stream bei deak-tiviertem Bild-schirm aufrechtzuer-hal-ten, wird der \T1/pcr/m/n/12 AscentaService
+ []
+
+
+Overfull \hbox (1.98045pt too wide) in paragraph at lines 52--55
+\T1/cmr/m/n/12 ex-plizit mit dem At-tribut \T1/pcr/m/n/12 foregroundServiceType="connectedDevice" \T1/cmr/m/n/12 beim
+ []
+
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 60.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[12] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2023/02/27 1.9 listings language file
+)
+Overfull \hbox (43.80301pt too wide) in paragraph at lines 74--75
+\T1/cmr/m/n/12 men-tiert hi-er-für eine strikte State-Machine in-ner-halb eines \T1/pcr/m/n/12 BluetoothGattCallback\T1/cmr/m/n/12 . 
+ []
+
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 94.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[13]
+Overfull \hbox (59.95813pt too wide) in paragraph at lines 101--102
+\T1/cmr/m/n/12 dert. Die Firmware kon-fig-uri-ert den Socket auf dem Nicla Vi-sion mit-tels \T1/pcr/m/n/12 setblocking(False)\T1/cmr/m/n/12 .
+ []
+
+
+Overfull \hbox (11.08755pt too wide) in paragraph at lines 104--105
+\T1/cmr/m/n/12 strom (\T1/cmr/m/it/12 Stream\T1/cmr/m/n/12 ) in-ter-leavt kon-tinuier-liche Textnachrichten (JSON-Telemetrie) mit groÿen
+ []
+
+
+Overfull \hbox (11.09949pt too wide) in paragraph at lines 106--107
+\T1/cmr/m/n/12 sive Payload-Gröÿe vo-ran (z.B. \T1/pcr/m/n/12 AUD_START:12500\T1/cmr/m/n/12 ). Der An-droid \T1/pcr/m/n/12 AscentaService
+ []
+
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 116.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[14]
+Overfull \hbox (2.35077pt too wide) in paragraph at lines 135--136
+\T1/cmr/m/n/12 Die Ap-p-lika-tion im-ple-men-tiert einen asyn-chro-nen Watch-dog, um Verbindungsab-brüche
+ []
+
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 151.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[15]
+Overfull \hbox (46.49329pt too wide) in paragraph at lines 156--157
+\T1/cmr/m/n/12 nisierten Kon-tex-twech-sel zurück auf den Main-Thread durch (\T1/pcr/m/n/12 withContext(Dispatchers.
+ []
+
+
+Overfull \hbox (3.00316pt too wide) in paragraph at lines 159--160
+\T1/pcr/m/n/12 micropython.alloc_emergency_exception_buf(100)\T1/cmr/m/n/12 . Zu-dem erzwingt der
+ []
+
+
+Overfull \hbox (42.39531pt too wide) in paragraph at lines 159--160
+\T1/cmr/m/n/12 wird strate-gisch nach je-dem Frame-Snapshot manuell aufgerufen, um der Heap-Fragmentierung
+ []
+
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 169.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[16]
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 199.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [17]
+Overfull \hbox (28.65967pt too wide) in paragraph at lines 219--220
+[]\T1/cmr/m/n/12 Überschreitet der kom-binierte Beschle-u-ni-gungsvek-tor einen em-pirisch er-mit-tel-ten Schwellen-
+ []
+
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 227.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[18]
+Overfull \hbox (4.55537pt too wide) in paragraph at lines 247--248
+[]\T1/cmr/m/n/12 Durch den geziel-ten Ein-satz von \T1/pcr/m/n/12 memoryview \T1/cmr/m/n/12 wird eine \T1/cmr/m/it/12 Zero-Copy\T1/cmr/m/n/12 -Zuweisung erzwun-
+ []
+
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 260.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[19]
+Overfull \hbox (14.20209pt too wide) in paragraph at lines 278--279
+\T1/cmr/m/n/12 Nach der Tran-skrip-tion des Au-diosig-nals oder der Ob-jek-terken-nung er-folgt die Sprachaus-
+ []
+
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 282.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[20]
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 314.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [21]
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 336.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [22]
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 367.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [23]
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 378.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [24]
+Overfull \hbox (0.90402pt too wide) in paragraph at lines 379--380
+\T1/cmr/m/n/12 (Taps) den typ-is-chen Stör-be-we-gun-gen eines Nutzers (wie schnelles Gehen, Kopf-drehun-
+ []
+
+
+Overfull \hbox (15.41145pt too wide) in paragraph at lines 384--385
+\T1/cmr/m/n/12 Rah-men dieses Pro-to-typs nicht re-al-isier-bar waren, stützt sich die en-er-getis-che Evaluierung
+ []
+
+
+Overfull \hbox (35.0077pt too wide) in paragraph at lines 386--388
+\T1/cmr/m/n/12 net sich eine the-o-retis-che Max-i-mal-laufzeit von ex-akt $\OT1/cmr/m/n/12 11\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 8$ \T1/cmr/m/n/12 Stun-den ($\OT1/cmr/m/n/12 1240 []\OML/cmm/m/it/12 =\OT1/cmr/m/n/12 105 []$\T1/cmr/m/n/12 ). 
+ []
+
+) (./chapters/05_futurework.tex
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 2.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [25]
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
 Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 2.
@@ -1203,25 +1224,17 @@ Overfull \hbox (3.56718pt too wide) in paragraph at lines 9--10
 [27
 
 
-]
-Overfull \hbox (6.54086pt too wide) in paragraph at lines 29--30
-\T1/cmr/m/n/12 [Hier fügt Fabian seinen Aus-blick zum Modell-Training ein. Mögliche The-men: Nutzung
- []
-
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 37.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-[28]) (./chapters/06_relatedwork.tex
-Overfull \hbox (2.34892pt too wide) in paragraph at lines 43--2
-\T1/cmr/m/n/12 [Hier fügt Manuel seinen Aus-blick zum Gehäusedesign ein. Mögliche The-men: Nutzung
- []
-
+]) (./chapters/06_relatedwork.tex
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
 Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 2.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-[29]
+ [28]
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 2.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [29]
 chapter 6.
 
 Overfull \hbox (13.97154pt too wide) in paragraph at lines 5--6
@@ -1316,21 +1329,52 @@ Class scrbook Warning: \float@listhead detected!
 
 
 ] (./main.lol
-Overfull \hbox (16.48909pt too wide) in paragraph at lines 4--4
- [][] [][]\T1/cmr/m/n/12 Auszug der ini-tialen GATT-Service-Definitionen für die alte BLE-Architektur[] [][]  
+Overfull \hbox (12.079pt too wide) in paragraph at lines 8--8
+ [][] [][]\T1/cmr/m/n/12 Kotlin-Coroutine für dy-namis-ches TCP-Stream-Multiplexing und Thread- 
+ []
+
+
+Overfull \hbox (2.89809pt too wide) in paragraph at lines 11--11
+ [][] [][]\T1/cmr/m/n/12 Direkte I2C-Registerauslesung des State-of-Charge (SOC) vom MAX17262[] [][]  
  []
 
 )
 \tf@lol=\write7
 \openout7 = `main.lol'.
 
-
-No file main.bbl.
-(./chapters/99_authors.tex [38
+ (./main.bbl [38
 
 
 ]
-<media/images/cv_liam.pdf, id=722, 597.50829pt x 845.0471pt>
+Underfull \hbox (badness 1910) in paragraph at lines 4--8
+[]\T1/cmr/m/n/12 Alpha Cephei Inc.  Vosk Of-fline Speech Recog-ni-tion API.  []$\T1/pcr/m/n/12 https : / /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 16--20
+[]\T1/cmr/m/n/12 Google LLC.  App Man-i-fest Overview | An-droid De-vel-op-ers.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 16--20
+[]$\T1/pcr/m/n/12 https : / / developer . android . com / guide / topics / manifest /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--26
+[]\T1/cmr/m/n/12 Google LLC.  Blue-tooth-Gatt API Ref-er-ence | An-droid De-vel-op-ers.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--26
+[]$\T1/pcr/m/n/12 https : / / developer . android . com / reference / android / bluetooth /
+ []
+
+) [39
+
+
+] (./chapters/99_authors.tex
+<media/images/cv_liam.pdf, id=712, 597.50829pt x 845.0471pt>
 File: media/images/cv_liam.pdf Graphic file (type pdf)
 <use media/images/cv_liam.pdf>
 Package pdftex.def Info: media/images/cv_liam.pdf  used on input line 12.
@@ -1339,7 +1383,7 @@ File: media/images/cv_liam.pdf Graphic file (type pdf)
 <use media/images/cv_liam.pdf>
 Package pdftex.def Info: media/images/cv_liam.pdf  used on input line 12.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
-<media/images/cv_liam.pdf, id=725, page=1, 597.50829pt x 845.0471pt>
+<media/images/cv_liam.pdf, id=715, page=1, 597.50829pt x 845.0471pt>
 File: media/images/cv_liam.pdf Graphic file (type pdf)
 <use media/images/cv_liam.pdf, page 1>
 Package pdftex.def Info: media/images/cv_liam.pdf , page1 used on input line 12.
@@ -1360,14 +1404,15 @@ File: media/images/cv_liam.pdf Graphic file (type pdf)
 <use media/images/cv_liam.pdf, page 1>
 Package pdftex.def Info: media/images/cv_liam.pdf , page1 used on input line 12.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
- [39
+ [40
+
 
 
 
  <./media/images/cv_liam.pdf>]
 
 pdfTeX warning: pdflatex (file ./media/images/cv_manuel.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<media/images/cv_manuel.pdf, id=754, 597.55246pt x 845.07724pt>
+<media/images/cv_manuel.pdf, id=745, 597.55246pt x 845.07724pt>
 File: media/images/cv_manuel.pdf Graphic file (type pdf)
 <use media/images/cv_manuel.pdf>
 Package pdftex.def Info: media/images/cv_manuel.pdf  used on input line 14.
@@ -1385,7 +1430,7 @@ pdfTeX warning: pdflatex (file ./media/images/cv_manuel.pdf): PDF inclusion: fou
 
 
 pdfTeX warning: pdflatex (file ./media/images/cv_manuel.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<media/images/cv_manuel.pdf, id=757, page=1, 597.55246pt x 845.07724pt>
+<media/images/cv_manuel.pdf, id=748, page=1, 597.55246pt x 845.07724pt>
 File: media/images/cv_manuel.pdf Graphic file (type pdf)
 <use media/images/cv_manuel.pdf, page 1>
 Package pdftex.def Info: media/images/cv_manuel.pdf , page1 used on input line 14.
@@ -1406,10 +1451,10 @@ File: media/images/cv_manuel.pdf Graphic file (type pdf)
 <use media/images/cv_manuel.pdf, page 1>
 Package pdftex.def Info: media/images/cv_manuel.pdf , page1 used on input line 14.
 (pdftex.def)             Requested size: 597.57834pt x 845.11386pt.
-[40 <./media/images/cv_manuel.pdf>]
+[41 <./media/images/cv_manuel.pdf>]
 
 pdfTeX warning: pdflatex (file ./media/images/cv_fabian.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<media/images/cv_fabian.pdf, id=780, 597.55246pt x 845.07718pt>
+<media/images/cv_fabian.pdf, id=771, 597.55246pt x 845.07718pt>
 File: media/images/cv_fabian.pdf Graphic file (type pdf)
 <use media/images/cv_fabian.pdf>
 Package pdftex.def Info: media/images/cv_fabian.pdf  used on input line 15.
@@ -1427,7 +1472,7 @@ pdfTeX warning: pdflatex (file ./media/images/cv_fabian.pdf): PDF inclusion: fou
 
 
 pdfTeX warning: pdflatex (file ./media/images/cv_fabian.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<media/images/cv_fabian.pdf, id=783, page=1, 597.55246pt x 845.07718pt>
+<media/images/cv_fabian.pdf, id=774, page=1, 597.55246pt x 845.07718pt>
 File: media/images/cv_fabian.pdf Graphic file (type pdf)
 <use media/images/cv_fabian.pdf, page 1>
 Package pdftex.def Info: media/images/cv_fabian.pdf , page1 used on input line 15.
@@ -1448,23 +1493,23 @@ File: media/images/cv_fabian.pdf Graphic file (type pdf)
 <use media/images/cv_fabian.pdf, page 1>
 Package pdftex.def Info: media/images/cv_fabian.pdf , page1 used on input line 15.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
-[41 <./media/images/cv_fabian.pdf>]) (./main.aux)
+[42 <./media/images/cv_fabian.pdf>]) (./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 22733 strings out of 476034
- 392293 string characters out of 5792865
- 2003388 words of memory out of 6000000
- 42348 multiletter control sequences out of 15000+600000
- 531743 words of font info for 79 fonts, out of 8000000 for 9000
+ 22690 strings out of 476034
+ 392009 string characters out of 5792865
+ 2036388 words of memory out of 6000000
+ 42340 multiletter control sequences out of 15000+600000
+ 531406 words of font info for 78 fonts, out of 8000000 for 9000
  1137 hyphenation exceptions out of 8191
- 108i,22n,106p,10693b,2185s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 108i,22n,106p,10693b,2065s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/google/noto/NotoSans-Bold.pfb></usr/share/texlive/texmf-dist/fonts/type1/google/noto/NotoSans-Italic.pfb></usr/share/texlive/texmf-dist/fonts/type1/google/noto/NotoSans-Regular.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfsx1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfsx1728.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfsx2488.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfti1728.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on main.pdf (47 pages, 2614063 bytes).
+Output written on main.pdf (48 pages, 2679442 bytes).
 PDF statistics:
- 1172 PDF objects out of 1200 (max. 8388607)
- 1018 compressed objects within 11 object streams
- 421 named destinations out of 1000 (max. 500000)
- 651 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1142 PDF objects out of 1200 (max. 8388607)
+ 986 compressed objects within 10 object streams
+ 384 named destinations out of 1000 (max. 500000)
+ 637 words of extra memory for PDF output out of 10000 (max. 10000000)
 

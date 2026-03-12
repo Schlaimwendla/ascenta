@@ -1,12 +1,12 @@
 \babel@toc {english}{}\relax 
 \contentsline {chapter}{Abstract}{iii}{chapter*.2}%
 \contentsline {chapter}{Kurzfassung}{iv}{chapter*.3}%
-\contentsline {chapter}{\numberline {1}Einleitung}{2}{chapter.1}%
+\contentsline {chapter}{\numberline {1}Einleitung - Liam}{2}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Motivation und Ausgangssituation}{2}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Problemstellung}{2}{section.1.2}%
 \contentsline {section}{\numberline {1.3}Zielsetzung}{2}{section.1.3}%
 \contentsline {section}{\numberline {1.4}Lösungsansatz und Kernidee}{3}{section.1.4}%
-\contentsline {chapter}{\numberline {2}Szenarien und Use Cases}{4}{chapter.2}%
+\contentsline {chapter}{\numberline {2}Szenarien und Use Cases - Liam}{4}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Use Case A: Kollisionsvermeidung mit Personen}{4}{section.2.1}%
 \contentsline {subsection}{\numberline {2.1.1}Ausgangssituation}{4}{subsection.2.1.1}%
 \contentsline {subsection}{\numberline {2.1.2}Systemverhalten}{4}{subsection.2.1.2}%
@@ -18,61 +18,61 @@
 \contentsline {section}{\numberline {3.2}Komponenten}{6}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}Mechanik und Gehäusedesign}{6}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}Hardware und Elektronik}{6}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Software-Ökosystem}{7}{subsection.3.2.3}%
-\contentsline {section}{\numberline {3.3}Interaktionen}{7}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Technisches Design}{7}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Evolution der Netzwerkarchitektur (Vom BLE- zum WiFi-Protokoll)}{8}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}Initiale Konzeptionierung: Das BLE-GATT-Profil}{8}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}Speichermanagement während der Audio-Aufnahme}{9}{subsection.3.5.2}%
-\contentsline {subsection}{\numberline {3.5.3}Analyse des Flaschenhalses: MTU-Limits und OSError 11}{10}{subsection.3.5.3}%
-\contentsline {subsection}{\numberline {3.5.4}Architektonische Neuausrichtung (TCP/IP)}{11}{subsection.3.5.4}%
-\contentsline {chapter}{\numberline {4}Umsetzung}{12}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Implementierung der Komponenten}{12}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Konstruktion und 3D-Druck}{12}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Schaltungsdesign und Energiemanagement}{12}{subsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.1.3}Entwicklung des Machine-Learning-Modells (Objekterkennung)}{12}{subsection.4.1.3}%
-\contentsline {subsection}{\numberline {4.1.4}Software-Architektur und Datenverarbeitung}{12}{subsection.4.1.4}%
-\contentsline {subsubsection}{\nonumberline Android Lifecycle-Management und Systementkopplung}{12}{subsubsection*.6}%
-\contentsline {subsubsection}{\nonumberline Asynchrone BLE-GATT State-Machine}{13}{subsubsection*.8}%
-\contentsline {subsubsection}{\nonumberline Hybrides Netzwerkprotokoll (UDP \& TCP)}{14}{subsubsection*.10}%
-\contentsline {subsubsection}{\nonumberline Stream-Multiplexing und Custom Protocol Parser}{15}{subsubsection*.12}%
-\contentsline {subsubsection}{\nonumberline Ausfallsicherheit durch Heartbeat-Mechanismus}{16}{subsubsection*.14}%
-\contentsline {subsubsection}{\nonumberline Concurrency und Thread-Sicherheit in Kotlin}{16}{subsubsection*.16}%
-\contentsline {subsubsection}{\nonumberline Ressourcenmanagement und Modell-Integration (Nicla Vision)}{17}{subsubsection*.18}%
-\contentsline {subsubsection}{\nonumberline Die Kernschleife der Umgebungserfassung}{17}{subsubsection*.20}%
-\contentsline {subsubsection}{\nonumberline Auswertung des 4D-Tensors und Sensorfusion}{18}{subsubsection*.22}%
-\contentsline {subsubsection}{\nonumberline Low-Level Hardware-Kommunikation (I2C \& Registerauslesung)}{18}{subsubsection*.24}%
-\contentsline {subsubsection}{\nonumberline Kinetische Interaktionssteuerung (Tap-Detection)}{19}{subsubsection*.26}%
-\contentsline {subsubsection}{\nonumberline Speichereffizientes Audio-Streaming}{19}{subsubsection*.28}%
-\contentsline {subsubsection}{\nonumberline Dynamisches Asset-Management des Akustikmodells}{21}{subsubsection*.30}%
-\contentsline {subsubsection}{\nonumberline Audio-Verarbeitung und kognitive Entlastung}{21}{subsubsection*.32}%
-\contentsline {subsubsection}{\nonumberline I/O-Auslagerung beim Bild-Streaming}{22}{subsubsection*.34}%
-\contentsline {subsubsection}{\nonumberline Benutzeroberfläche und App-Architektur (GUI)}{23}{subsubsection*.36}%
+\contentsline {subsection}{\numberline {3.2.3}Software-Ökosystem und Netzwerkkonzept}{7}{subsection.3.2.3}%
+\contentsline {subsubsection}{\nonumberline Evolution der Netzwerkarchitektur (BLE $\rightarrow $ UDP $\rightarrow $ TCP)}{7}{subsubsection*.6}%
+\contentsline {section}{\numberline {3.3}Interaktionen}{8}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Technisches Design}{8}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Lokale Datenverarbeitung und Souveränität}{9}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Absicherung der Netzwerkschnittstellen}{9}{subsection.3.4.2}%
+\contentsline {chapter}{\numberline {4}Umsetzung}{10}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Implementierung der Komponenten}{10}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Konstruktion und 3D-Druck}{10}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Schaltungsdesign und Energiemanagement}{10}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Entwicklung des Machine-Learning-Modells (Objekterkennung)}{10}{subsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.1.4}Software-Architektur und Datenverarbeitung - Liam}{10}{subsection.4.1.4}%
+\contentsline {subsubsection}{\nonumberline Entwicklungsumgebungen und Werkzeuge (Toolchain)}{11}{subsubsection*.8}%
+\contentsline {subsubsection}{\nonumberline Projektkonfiguration (Gradle und Manifest)}{12}{subsubsection*.12}%
+\contentsline {subsubsection}{\nonumberline Android Lifecycle-Management und Systementkopplung}{12}{subsubsection*.14}%
+\contentsline {subsubsection}{\nonumberline Asynchrone BLE-GATT State-Machine}{13}{subsubsection*.16}%
+\contentsline {subsubsection}{\nonumberline Hybrides Netzwerkprotokoll (BLE \& TCP)}{14}{subsubsection*.18}%
+\contentsline {subsubsection}{\nonumberline Stream-Multiplexing und Custom Protocol Parser}{14}{subsubsection*.20}%
+\contentsline {subsubsection}{\nonumberline Ausfallsicherheit durch Heartbeat-Mechanismus}{15}{subsubsection*.22}%
+\contentsline {subsubsection}{\nonumberline Concurrency und Thread-Sicherheit in Kotlin}{16}{subsubsection*.24}%
+\contentsline {subsubsection}{\nonumberline Ressourcenmanagement und Modell-Integration (Nicla Vision)}{16}{subsubsection*.26}%
+\contentsline {subsubsection}{\nonumberline Die Kernschleife der Umgebungserfassung}{16}{subsubsection*.28}%
+\contentsline {subsubsection}{\nonumberline Auswertung des 4D-Tensors und Sensorfusion}{17}{subsubsection*.30}%
+\contentsline {subsubsection}{\nonumberline Low-Level Hardware-Kommunikation (I2C \& Registerauslesung)}{18}{subsubsection*.32}%
+\contentsline {subsubsection}{\nonumberline Kinetische Interaktionssteuerung (Tap-Detection)}{18}{subsubsection*.34}%
+\contentsline {subsubsection}{\nonumberline Speichereffizientes Audio-Streaming}{19}{subsubsection*.36}%
+\contentsline {subsubsection}{\nonumberline Dynamisches Asset-Management des Akustikmodells}{20}{subsubsection*.38}%
+\contentsline {subsubsection}{\nonumberline Audio-Verarbeitung und kognitive Entlastung}{20}{subsubsection*.40}%
+\contentsline {subsubsection}{\nonumberline I/O-Auslagerung beim Bild-Streaming}{21}{subsubsection*.42}%
+\contentsline {subsubsection}{\nonumberline Benutzeroberfläche und App-Architektur (GUI als Demonstrator)}{22}{subsubsection*.44}%
 \contentsline {section}{\numberline {4.2}Herausforderungen in der Entwicklung}{23}{section.4.2}%
 \contentsline {subsection}{\numberline {4.2.1}Mechanische und geometrische Restriktionen}{23}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Energiemanagement im begrenzten Bauraum}{23}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Ressourcenlimits und Speicher-Fragmentierung (Software)}{23}{subsection.4.2.3}%
-\contentsline {section}{\numberline {4.3}Tests und Validierung}{24}{section.4.3}%
+\contentsline {subsection}{\numberline {4.2.2}Energiemanagement im begrenzten Bauraum}{24}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Ressourcenlimits und Speicher-Fragmentierung (Software) - Liam}{24}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}Tests und Validierung - Liam}{24}{section.4.3}%
 \contentsline {subsection}{\numberline {4.3.1}Netzwerklatenz und Streaming-Performance}{24}{subsection.4.3.1}%
 \contentsline {subsection}{\numberline {4.3.2}Auswertung der kinetischen Interaktion (Tap-Detection)}{25}{subsection.4.3.2}%
 \contentsline {subsection}{\numberline {4.3.3}Energetische Evaluierung (Akkulaufzeit)}{25}{subsection.4.3.3}%
 \contentsline {chapter}{\numberline {5}Ausblick (Future Work)}{27}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Software und Benutzeroberfläche}{27}{section.5.1}%
+\contentsline {section}{\numberline {5.1}Software und Benutzeroberfläche - Liam}{27}{section.5.1}%
 \contentsline {subsection}{\numberline {5.1.1}Native Zero-UI-Applikation für blinde Nutzer}{27}{subsection.5.1.1}%
 \contentsline {subsection}{\numberline {5.1.2}Kontinuierliches auditives Raum-Feedback (Leitstrahl-Prinzip)}{27}{subsection.5.1.2}%
 \contentsline {section}{\numberline {5.2}Künstliche Intelligenz und Modell-Training}{28}{section.5.2}%
 \contentsline {subsection}{\numberline {5.2.1}Erweiterte Objekterkennung für Alltagsgegenstände}{28}{subsection.5.2.1}%
 \contentsline {subsection}{\numberline {5.2.2}Weiterentwicklung des Machine-Learning-Modells (Edge Impulse)}{28}{subsection.5.2.2}%
-\contentsline {section}{\numberline {5.3}Hardware und Elektronik}{29}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Optimierung der Schaltungstechnik und Sensorik}{29}{subsection.5.3.1}%
+\contentsline {section}{\numberline {5.3}Hardware und Elektronik}{28}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Optimierung der Schaltungstechnik und Sensorik}{28}{subsection.5.3.1}%
 \contentsline {section}{\numberline {5.4}Mechanik und Gehäusedesign}{29}{section.5.4}%
 \contentsline {subsection}{\numberline {5.4.1}Weiterentwicklung des 3D-Modells und der Ergonomie}{29}{subsection.5.4.1}%
-\contentsline {chapter}{\numberline {6}Verwandte Arbeiten (Related Work)}{30}{chapter.6}%
+\contentsline {chapter}{\numberline {6}Verwandte Arbeiten (Related Work) - Liam}{30}{chapter.6}%
 \contentsline {section}{\numberline {6.1}Klassische Mobilitätshilfen}{30}{section.6.1}%
 \contentsline {section}{\numberline {6.2}Smartphone-basierte Applikationen}{30}{section.6.2}%
 \contentsline {section}{\numberline {6.3}Kommerzielle Smart Glasses und Wearables}{31}{section.6.3}%
 \contentsline {section}{\numberline {6.4}Positionierung des Ascenta-Projekts}{31}{section.6.4}%
-\contentsline {chapter}{\numberline {7}Conclusion}{32}{chapter.7}%
+\contentsline {chapter}{\numberline {7}Zusammenfassung und Ausblick - Liam}{32}{chapter.7}%
 \contentsline {chapter}{\numberline {8}Project Management}{33}{chapter.8}%
 \contentsline {section}{\numberline {8.1}Planning}{33}{section.8.1}%
 \contentsline {section}{\numberline {8.2}Evaluation}{33}{section.8.2}%
@@ -80,9 +80,9 @@
 \contentsline {subsection}{\numberline {8.3.1}Liam Vendel}{34}{subsection.8.3.1}%
 \contentsline {subsection}{\numberline {8.3.2}Manuel Zauner}{34}{subsection.8.3.2}%
 \contentsline {subsection}{\numberline {8.3.3}Fabian Lindlbauer}{34}{subsection.8.3.3}%
-\contentsline {chapter}{Acknowledgements}{36}{chapter*.37}%
-\contentsline {chapter}{Abbildungsverzeichnis}{37}{chapter*.37}%
-\contentsline {chapter}{Quellcodeverzeichnis}{37}{chapter*.38}%
-\contentsline {chapter}{Literaturverzeichnis}{38}{chapter*.39}%
-\contentsline {chapter}{CV}{39}{chapter*.39}%
+\contentsline {chapter}{Acknowledgements}{36}{chapter*.45}%
+\contentsline {chapter}{Abbildungsverzeichnis}{37}{chapter*.45}%
+\contentsline {chapter}{Quellcodeverzeichnis}{37}{chapter*.46}%
+\contentsline {chapter}{Literaturverzeichnis}{38}{chapter*.47}%
+\contentsline {chapter}{CV}{40}{chapter*.48}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

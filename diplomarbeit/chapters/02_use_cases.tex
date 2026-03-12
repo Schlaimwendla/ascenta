@@ -1,6 +1,6 @@
 % !TEX root = ../main.tex
 
-\chapter{Szenarien und Use Cases}
+\chapter{Szenarien und Use Cases - Liam}
 
 Um die funktionalen Anforderungen an das Assistenzsystem \glqq Ascenta\grqq\ zu definieren und die spätere technische Umsetzung zu rechtfertigen, werden im Folgenden konkrete Anwendungsszenarien (Use Cases) beschrieben. Diese Szenarien repräsentieren alltägliche Herausforderungen von stark sehbeeinträchtigten oder blinden Personen, die durch das System gelöst werden. Gemäß dem aktuellen Entwicklungsstand fokussieren sich die Anwendungsfälle auf die Erkennung von Personen im direkten Umfeld, die Distanzabschätzung sowie die auditive Interaktion.
 
@@ -22,4 +22,4 @@ Der Nutzer befindet sich in einer Warteschlange oder an einem Haltepunkt (z. B. 
 \subsection{Systemverhalten}
 Anstatt die Umgebung physisch abzutasten, nutzt der Anwender die integrierte Sprachsteuerung. Der Nutzer aktiviert das System (beispielsweise durch ein definiertes Interaktionsmuster an der Brille) und stellt verbal eine Frage, wie etwa: \glqq Befindet sich jemand vor mir?\grqq. 
 
-Das Audiosignal wird über das in der Brille verbaute Mikrofon erfasst und via UDP-Protokoll latenzarm an das verbundene Smartphone gestreamt. Dort verarbeitet die lokale Vosk-Engine den Sprachbefehl offline, um den Datenschutz zu gewährleisten. Die Applikation gleicht die Anfrage mit den aktuellen Kameradaten (Personenerkennung) und der Distanzmessung (ToF) ab. Anschließend erhält der Nutzer über die Sprachausgabe (Text-to-Speech) ein diskretes, akustisches Feedback, beispielsweise: \glqq Person in einem Punkt fünf Metern Entfernung erkannt.\grqq\ Dadurch gewinnt der Nutzer ohne stigmatisierende Bewegungen ein präzises Verständnis seiner unmittelbaren sozialen Umgebung.
+Das Audiosignal wird über das in der Brille verbaute Mikrofon erfasst und via TCP-Protokoll latenzarm an das verbundene Smartphone gestreamt. Dort verarbeitet die lokale Vosk-Engine den Sprachbefehl offline, um den Datenschutz zu gewährleisten. Die Applikation gleicht die Anfrage mit den aktuellen Kameradaten (Personenerkennung) und der Distanzmessung (ToF) ab. Anschließend erhält der Nutzer über die Sprachausgabe (Text-to-Speech) ein diskretes, akustisches Feedback, beispielsweise: \glqq Person in einem Punkt fünf Metern Entfernung erkannt.\grqq\ Dadurch gewinnt der Nutzer ohne stigmatisierende Bewegungen ein präzises Verständnis seiner unmittelbaren sozialen Umgebung.

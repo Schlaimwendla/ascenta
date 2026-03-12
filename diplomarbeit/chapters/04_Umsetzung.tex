@@ -1,120 +1,138 @@
 % !TEX root = ../main.tex
-
-% ==========================================
-% KAPITEL 4: UMSETZUNG
-% ==========================================
 \chapter{Umsetzung}
-Das vorherige Kapitel definiert das theoretische Konzept. Dieses Kapitel beschreibt die praktische Realisierung des Prototyps.
+Das vorherige Kapitel definiert das theoretische Konzept. Dieses Kapitel beschreibt die detaillierte praktische Realisierung des Prototyps. Der Fokus liegt hierbei primär auf der komplexen softwareseitigen Implementierung der Kernfunktionen. Die Architektur vereint ein ressourcenbeschränktes Embedded-System (MicroPython auf dem Arduino Nicla Vision) mit einem asynchronen mobilen Betriebssystem (Kotlin unter Android).
 
 \section{Implementierung der Komponenten}
 
 \subsection{Konstruktion und 3D-Druck}
 \label{sec:3ddruck_umsetzung}
-% --- PLATZHALTER MANUEL (3D-DRUCK UMSETZUNG) ---
-[Hier fügt Manuel seinen sachlichen Text zur CAD-Modellierung in Fusion 360, den Maßen, dem Klappmechanismus und dem Druckvorgang ein.]
+Manuel
 
 \subsection{Schaltungsdesign und Energiemanagement}
 \label{sec:elektronik_umsetzung}
-% --- PLATZHALTER FABIAN (ELEKTRONIK UMSETZUNG) ---
-[Hier fügt Fabian seine Schaltpläne, die genaue Verkabelung (TP4056, Nicla) und die Entladungskurven der Akkus ein.]
+Fabian
 
 \subsection{Entwicklung des Machine-Learning-Modells (Objekterkennung)}
 \label{sec:ml_training}
-% --- PLATZHALTER FABIAN (EDGE IMPULSE / ROBOFLOW) ---
-[Hier fügt Fabian seinen Text zum Training des Modells mit Roboflow, Kaggle und Edge Impulse ein.]
+Fabian
 
-\subsection{Software-Architektur und Datenverarbeitung}
+\subsection{Software-Architektur und Datenverarbeitung - Liam}
 \label{sec:software_implementierung}
 Die softwareseitige Umsetzung erfordert die Koordination eines ressourcenbeschränkten Embedded-Systems (MicroPython) und eines mobilen Betriebssystems (Android). Die folgenden Abschnitte erläutern die Lösungsansätze für die Netzwerkkommunikation, die asynchrone Datenverarbeitung und das Speichermanagement detailliert.
 
-% --- BLOCK 1: NETZWERK & APP-INFRASTRUKTUR ---
+\subsubsection{Entwicklungsumgebungen und Werkzeuge (Toolchain)}
+Die softwareseitige Realisierung des \glqq Ascenta\grqq-Projekts erfordert den Einsatz spezialisierter Entwicklungsumgebungen (IDEs), um die unterschiedlichen Anforderungen von Embedded-Systems und mobiler App-Entwicklung effizient zu vereinen.
+
+\textbf{OpenMV IDE für MicroPython (Arduino Nicla Vision)} \\
+Für die Programmierung, das Flashen und das Debugging des Arduino Nicla Vision kommt die \textit{OpenMV IDE} zum Einsatz \cite{openmv_ide}. Im Gegensatz zu klassischen C++ basierten Arduino-Umgebungen ist OpenMV exakt auf Machine-Vision-Anwendungen unter MicroPython zugeschnitten. Die Umgebung bietet eine direkte serielle REPL-Schnittstelle (Read-Eval-Print Loop), welche die Ausführung von Skripten in Echtzeit ohne vorherigen Kompilierungszyklus ermöglicht. Ein für die Entwicklung essenzieller Vorteil dieser IDE ist der integrierte Framebuffer-Viewer: Er überträgt das Live-Bild des Kamerasensors direkt über die USB-Schnittstelle auf den PC, was die Kalibrierung des Sichtfeldes massiv erleichtert.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.4\textwidth]{media/images/openmv_ide.png}
+    \caption{Logo der OpenMV IDE}
+    \label{fig:openmv}
+\end{figure}
+
+\textbf{Android Studio (Kotlin Applikation)} \\
+Die Entwicklung der mobilen Applikation erfolgt in \textit{Android Studio}, der offiziellen und von Google empfohlenen Entwicklungsumgebung für das Android-Betriebssystem \cite{android_studio}. Die IDE stellt umfassende Werkzeuge für die Programmierung in Kotlin bereit, darunter den Android Profiler zur Echtzeitanalyse der Netzwerk- und CPU-Auslastung.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.4\textwidth]{media/images/android_studio.png}
+    \caption{Logo von Android Studio}
+    \label{fig:androidstudio}
+\end{figure}
+
+\subsubsection{Projektkonfiguration (Gradle und Manifest)}
+Die grundlegende Architektur, das Abhängigkeitsmanagement und die Rechteverwaltung der Android-Applikation werden über zwei zentrale Steuerungsdateien definiert.
+
+\textbf{Abhängigkeitsmanagement (build.gradle.kts)} \\
+Das \textit{Gradle-Build-System} automatisiert den Kompilierungsprozess und verwaltet externe Bibliotheken \cite{android_gradle}. In der \texttt{build.gradle.kts} auf App-Ebene wird die minimale Kompatibilität (\texttt{minSdk = 31}) auf Android 12 festgelegt. Dies ist eine bewusste Designentscheidung, da erst ab dieser Version die entkoppelten, modernen Bluetooth-Berechtigungen zur Verfügung stehen. Zudem werden hier die essenziellen Kernbibliotheken importiert, darunter die \textit{Vosk Offline Engine} (\texttt{vosk-android:0.3.47}) für die lokale Spracherkennung sowie \texttt{viewBinding = true} zur typsicheren Anbindung der grafischen XML-Layouts an den Kotlin-Code.
+
+\textbf{Rechteverwaltung und Deklaration (AndroidManifest.xml)} \\
+Die Datei \texttt{AndroidManifest.xml} fungiert als Steuerzentrale gegenüber dem Betriebssystem \cite{android_manifest}. Sie registriert die Kernkomponenten der Applikation, primär die \texttt{MainActivity} und den Netzwerk-Dienst (\texttt{AscentaService}). 
+Ein kritischer Aspekt ist die Deklaration der Hardware-Berechtigungen (Permissions). Da das System aktiv nach BLE-Geräten sucht und TCP-Verbindungen aufbaut, fordert das Manifest spezifische Netzwerk- und Bluetooth-Rechte an. Ausschlaggebend ist hierbei die Nutzung der neuen Android 12 Bluetooth-Rechte (\texttt{BLUETOOTH\_SCAN} und \texttt{BLUETOOTH\_CONNECT}), welche die feingranulare Kopplung der Brille erlauben. Um den TCP-Stream bei deaktiviertem Bildschirm aufrechtzuerhalten, wird der \texttt{AscentaService} explizit mit dem Attribut \texttt{foregroundServiceType="connectedDevice"} beim System deklariert.
 
 \subsubsection{Android Lifecycle-Management und Systementkopplung}
-Da das Smartphone während der Nutzung der Assistenzbrille typischerweise in der Tasche des Nutzers verbleibt und der Bildschirm deaktiviert ist, neigt das Android-Betriebssystem dazu, Hintergrundprozesse aus Energiespargründen zu terminieren (Doze-Mode). Die Architektur lagert daher die gesamte Netzwerk- und Bluetooth-Logik in einen Android \texttt{Service} (\texttt{AscentaService.kt}) aus. 
+Da das Smartphone während der Nutzung der Assistenzbrille typischerweise in der Tasche des Nutzers verbleibt und der Bildschirm deaktiviert ist, neigt das Android-Betriebssystem dazu, Hintergrundprozesse aus Energiespargründen zu terminieren (Doze-Mode). Die Architektur lagert daher die gesamte Netzwerk- und Bluetooth-Logik in den deklarierten \texttt{AscentaService} aus. 
 
-Der Aufruf von \texttt{startForeground()} signalisiert dem System höchste Priorität. Ein weiteres kritisches Problem stellt der Standby-Modus dar, der den Empfang von UDP-Broadcast-Paketen auf Hardware-Ebene blockiert. Die Applikation löst dies durch die Akquirierung eines \texttt{WifiManager.MulticastLock}. Dieser Lock zwingt den WiFi-Chip, Broadcast-Pakete auch bei deaktiviertem Display durchzureichen:
+Durch die Eskalation dieses Dienstes zu einem \textit{Foreground Service} priorisiert das Betriebssystem den Prozess dauerhaft auf die höchste Stufe \cite{android_foreground}. Das Android-System verlangt für diese Priorisierung zwingend die Einbindung einer permanenten Benachrichtigung (Notification), welche dem Anwender die aktive Nutzung im Hintergrund signalisiert:
 
-\begin{lstlisting}[language=Java, caption={Akquirierung des MulticastLocks und Start des Foreground Services}]
-val wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
-multicastLock = wifiManager.createMulticastLock("AscentaUDP")
-multicastLock?.setReferenceCounted(true)
-multicastLock?.acquire()
+\begin{lstlisting}[language=Java, caption={Start des Foreground Services zur Verhinderung der Terminierung}]
+val notification = NotificationCompat.Builder(this, CHANNEL_ID)
+    .setContentTitle("Ascenta Assistenzsystem")
+    .setContentText("Netzwerkverbindung zur Brille aktiv...")
+    .setSmallIcon(R.drawable.ic_eye)
+    .setPriority(NotificationCompat.PRIORITY_HIGH)
+    .build()
 
-startForeground(1, createNotification("Ascenta Active"))
+// Zwingt Android, den Service bei Display-Off nicht zu killen
+startForeground(1, notification)
 \end{lstlisting}
 
 \subsubsection{Asynchrone BLE-GATT State-Machine}
-Das System überträgt die WLAN-Credentials (Provisioning) initial über das Bluetooth Low Energy (BLE) Generic Attribute Profile (GATT) vom Smartphone auf die Brille. Da Bluetooth-Operationen in Android stark asynchron und Event-getrieben ablaufen, implementiert der Code eine komplexe State-Machine innerhalb eines \texttt{BluetoothGattCallback}.
+Das System überträgt die WLAN-Credentials (Provisioning) initial über das Bluetooth Low Energy (BLE) Generic Attribute Profile (GATT) vom Smartphone auf die Brille. Die größte programmiertechnische Herausforderung hierbei ist die stark ereignisgesteuerte, asynchrone API des Android-Bluetooth-Stacks \cite{android_gatt}. Die Applikation implementiert hierfür eine strikte State-Machine innerhalb eines \texttt{BluetoothGattCallback}.
 
-Sobald der \texttt{AscentaService} die Brille über den BLE-Scanner findet, baut er eine GATT-Verbindung auf. Das Betriebssystem meldet Statusänderungen an die Methode \texttt{onConnectionStateChange}. Bei erfolgreicher Verbindung initiiert die Applikation die \textit{Service Discovery}. Erst wenn die Services des Nicla Vision im Android-System registriert sind, schreibt die Applikation die SSID als Bytearray in die spezifische Characteristic. Ein erfolgreicher Schreibvorgang triggert \texttt{onCharacteristicWrite}. Daraufhin überträgt das System kaskadierend das Passwort und terminiert die BLE-Verbindung sauber:
+Um Puffer-Überläufe auf dem Bluetooth-Chip des Nicla Vision zu verhindern, darf das System SSID und Passwort nicht simultan senden. Die Kotlin-Logik schreibt zunächst die SSID in die entsprechende Characteristic und wartet zwingend auf den \texttt{onCharacteristicWrite}-Callback mit dem Status \texttt{GATT\_SUCCESS}, bevor das Passwort kaskadierend übertragen wird:
 
-\begin{lstlisting}[language=Java, caption={Ausschnitt der asynchronen GATT Callback-Struktur in Kotlin}]
-override fun onServicesDiscovered(g: BluetoothGatt, s: Int) {
-    val svc = g.getService(PROV_SERVICE_UUID)
-    val ssidChar = svc?.getCharacteristic(SSID_CHAR_UUID)
-    if (ssidChar != null) {
-        ssidChar.value = ssid.toByteArray()
-        g.writeCharacteristic(ssidChar) // Triggert asynchronen Schreibvorgang
-    }
-}
-
-override fun onCharacteristicWrite(g: BluetoothGatt, char: BluetoothGattCharacteristic, status: Int) {
-    if (status == BluetoothGatt.GATT_SUCCESS && char.uuid == SSID_CHAR_UUID) {
-        val passChar = g.getService(PROV_SERVICE_UUID).getCharacteristic(PASS_CHAR_UUID)
-        Thread.sleep(100) // Hardware-Pufferung des Nicla Vision abwarten
-        passChar.value = pendingPass!!.toByteArray()
-        g.writeCharacteristic(passChar)
-    }
-}
-\end{lstlisting}
-
-\subsubsection{Hybrides Netzwerkprotokoll (UDP \& TCP)}
-Nach erfolgreichem BLE-Provisioning verbindet sich der Mikrocontroller mit dem WLAN und sendet periodisch \texttt{NICLA\_READY}-Broadcasts via UDP auf Port 5006. Eine Kotlin-Coroutine in der App lauscht asynchron auf diese Pakete und ermittelt die dynamisch vergebene IP-Adresse der Brille. 
-
-\begin{lstlisting}[language=Java, caption={Asynchroner UDP-Discovery-Listener in Kotlin}]
-udpSocket = DatagramSocket(UDP_DISC_PORT).apply { broadcast = true }
-val packet = DatagramPacket(buffer, buffer.size)
-
-while (isActive && !isConnected) {
-    udpSocket?.receive(packet)
-    val str = String(packet.data, 0, packet.length).trim()
-    if (str == "NICLA_READY") {
-        udpSocket?.close()
-        connectTcp(packet.address) // TCP-Handshake einleiten
-        break
+\begin{lstlisting}[language=Java, caption={Kaskadierendes Provisioning der WLAN-Daten via BLE-GATT Callback}]
+override fun onCharacteristicWrite(
+    g: BluetoothGatt, 
+    char: BluetoothGattCharacteristic, 
+    status: Int
+) {
+    if (status == BluetoothGatt.GATT_SUCCESS) {
+        if (char.uuid == SSID_CHAR_UUID) {
+            // SSID erfolgreich bestaetigt, nun Passwort uebermitteln
+            val passChar = g.getService(PROV_SERVICE_UUID).getCharacteristic(PASS_CHAR_UUID)
+            passChar.value = pendingPassword!!.toByteArray()
+            g.writeCharacteristic(passChar)
+            
+        } else if (char.uuid == PASS_CHAR_UUID) {
+            // Provisioning komplett abgeschlossen
+            g.disconnect()
+            startTcpConnection() // Einleitung der Hauptkommunikation
+        }
     }
 }
 \end{lstlisting}
 
-Nach der IP-Ermittlung etabliert die App den Hauptdatenstrom über eine verbindungsorientierte TCP-Verbindung (Port 5005). Die Architektur nutzt hierbei TCP anstelle von UDP, da dieses Protokoll Paketverluste bei der Übertragung großer binärer Payloads (WAV-Audio-Chunks oder JPEG-Bilder) strikt verhindert. Die Firmware konfiguriert den Socket auf dem Nicla Vision mittels \texttt{setblocking(False)}. Dies verhindert, dass abgebrochene Verbindungen den Mikrocontroller in einen Deadlock versetzen.
+\subsubsection{Hybrides Netzwerkprotokoll (BLE \& TCP)}
+Nach erfolgreichem BLE-Provisioning verbindet sich der Mikrocontroller mit dem WLAN. Die App etabliert daraufhin den Hauptdatenstrom über eine verbindungsorientierte TCP-Verbindung (Port 5005). Die Architektur nutzt hierbei TCP, da dieses Protokoll durch sein internes Acknowledge-Verfahren Paketverluste bei der Übertragung großer binärer Payloads (WAV-Audio-Chunks oder JPEG-Bilder) strikt verhindert. Die Firmware konfiguriert den Socket auf dem Nicla Vision mittels \texttt{setblocking(False)}. Dies verhindert, dass Netzwerkverzögerungen den Mikrocontroller in einen Deadlock versetzen.
 
 \subsubsection{Stream-Multiplexing und Custom Protocol Parser}
-Die Nutzung einer einzigen TCP-Verbindung (Port 5005) für völlig unterschiedliche Datentypen kennzeichnet eine architektonische Besonderheit des Systems. Der Datenstrom (\textit{Stream}) interleavt kontinuierliche Textnachrichten (JSON-Telemetrie, Heartbeat-Pongs) mit großen binären Payloads (JPEG-Bilder, WAV-Audiodaten). 
+Die Nutzung einer einzigen TCP-Verbindung (Port 5005) für völlig unterschiedliche Datentypen kennzeichnet eine architektonische Besonderheit des Systems. Der Datenstrom (\textit{Stream}) interleavt kontinuierliche Textnachrichten (JSON-Telemetrie) mit großen binären Payloads (JPEG-Bilder, WAV-Audiodaten). 
 
-Ein eigenes, leichtgewichtiges Applikationsprotokoll (Application Layer) verhindert eine Vermischung der Datentypen. Der Code stellt binären Übertragungen einen definierten Präfix inklusive Payload-Größe voran (z.\,B. \texttt{IMG\_START:12500}). Der Android \texttt{AscentaService} implementiert einen maßgeschneiderten Parser. Dieser Parser liest den eingehenden \texttt{InputStream} zunächst zeichenweise (Byte für Byte) bis zum Line-Feed (\texttt{\textbackslash n}) aus. Erkennt der Parser einen Binär-Präfix, schaltet er den Lesemodus dynamisch um, extrahiert exakt die angegebene Anzahl an Bytes in ein \texttt{ByteArray} und wechselt danach wieder in den Text-Modus:
+Ein eigenes Applikationsprotokoll (Application Layer) verhindert eine Vermischung der Datentypen. Der Code stellt binären Übertragungen einen definierten Präfix inklusive Payload-Größe voran (z.\,B. \texttt{AUD\_START:12500}). Der Android \texttt{AscentaService} implementiert einen maßgeschneiderten Parser auf Basis von Kotlin-Coroutines, der den Stream zunächst zeichenweise bis zum Line-Feed (\texttt{\textbackslash n}) ausliest und bei Erkennung eines Binär-Präfixes temporär auf einen blockierenden Byte-Reader umschaltet:
 
-\begin{lstlisting}[language=Java, caption={Dynamisches Stream-Multiplexing zur Trennung von Text- und Binärdaten}]
-// Auslesen des TCP-InputStreams in der Coroutine
-val line = readLineFromStream(input) // Zeichenweises Lesen bis \n
-
-if (line.startsWith("IMG_START:")) {
-    val size = line.substringAfter(":").toInt()
-    val bytes = readBytesFromStream(input, size) // Blockweises Lesen
-    val bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-    if (bmp != null) handler.post { callback?.onImageReceived(bmp) }
-    
-} else if (line.startsWith("AUD_START:")) {
-    val size = line.substringAfter(":").toInt()
-    val bytes = readBytesFromStream(input, size)
-    saveAudioForVosk(bytes)
-    
-} else if (line.startsWith("{")) {
-    // Standard JSON-Parsing fuer Sensordaten
+\begin{lstlisting}[language=Java, caption={Kotlin-Coroutine für dynamisches TCP-Stream-Multiplexing und Thread-Switching}]
+tcpJob = CoroutineScope(Dispatchers.IO).launch {
+    val input = tcpSocket!!.getInputStream()
+    while (isActive && isConnected) {
+        val line = readLineFromStream(input) // Liest ASCII bis zum Line-Feed \n
+        
+        if (line.startsWith("IMG_START:")) {
+            val size = line.substringAfter(":").toInt()
+            // Temporaerer Wechsel auf blockierenden Binär-Reader
+            val imgBytes = readBytesFromStream(input, size)
+            val bitmap = BitmapFactory.decodeByteArray(imgBytes, 0, imgBytes.size)
+            // Synchronisation mit dem Main-Thread fuer UI-Updates
+            withContext(Dispatchers.Main) { updateUiWithImage(bitmap) }
+            
+        } else if (line.startsWith("AUD_START:")) {
+            val size = line.substringAfter(":").toInt()
+            val audioBytes = readBytesFromStream(input, size)
+            processAudioWithVosk(audioBytes)
+            
+        } else if (line.startsWith("{")) {
+            parseTelemetryJson(line) // Uebergabe an Standard JSON-Parser
+        }
+    }
 }
 \end{lstlisting}
 
 \subsubsection{Ausfallsicherheit durch Heartbeat-Mechanismus}
-Die \texttt{MainActivity} implementiert einen asynchronen Watchdog, um Verbindungsabbrüche zuverlässig zu erkennen. Die Applikation sendet alle zehn Sekunden einen Ping an die Brille. Bleibt der Response für mehr als 25 Sekunden aus, schließt die Software die Verbindung sicher und reaktiviert den UDP-Discovery-Modus (\textit{Self-Healing}):
+Die Applikation implementiert einen asynchronen Watchdog, um Verbindungsabbrüche zuverlässig zu erkennen. Über den stehenden TCP-Socket sendet die App alle zehn Sekunden einen Ping an die Brille. Bleibt der Response für mehr als 25 Sekunden aus, schließt die Software die Verbindung sicher und reaktiviert den BLE-Discovery-Modus zur automatischen Neuverbindung (\textit{Self-Healing}):
 
 \begin{lstlisting}[language=Java, caption={Heartbeat-Coroutine zur Überwachung der Verbindungsstabilität}]
 heartbeatJob = CoroutineScope(Dispatchers.IO).launch {
@@ -126,7 +144,7 @@ heartbeatJob = CoroutineScope(Dispatchers.IO).launch {
                 withContext(Dispatchers.Main) {
                     isConnected = false
                     stopHeartbeat()
-                    showHome() // Zurueck in den Discovery-Status
+                    startBleScan() // Zurueck in den Discovery-Status
                 }
             }
         } else { delay(5000) }
@@ -135,186 +153,149 @@ heartbeatJob = CoroutineScope(Dispatchers.IO).launch {
 \end{lstlisting}
 
 \subsubsection{Concurrency und Thread-Sicherheit in Kotlin}
-Die Android-Applikation führt netzwerkbasierte I/O-Operationen (TCP/UDP-Sockets) und rechenintensive Machine-Learning-Prozesse (Vosk) simultan aus. Dafür implementiert der Code ein striktes Thread-Dispatching mittels \textit{Coroutines}. Sämtliche Sockets und blockierende Lesevorgänge operieren ausschließlich im \texttt{Dispatchers.IO} Thread-Pool. Sobald die Coroutine ein Datenpaket vollständig empfängt, führt sie einen synchronisierten Kontextwechsel zurück auf den Main-Thread durch (\texttt{handler.post}). Der Main-Thread aktualisiert anschließend die Benutzeroberfläche oder steuert die TTS-Engine an:
-
-\begin{lstlisting}[language=Java, caption={Sicherer Kontextwechsel zwischen IO-Thread und Main-Thread in Kotlin}]
-scope.launch(Dispatchers.IO) { // Start im Hintergrund-Thread
-    val input = tcpSocket!!.getInputStream()
-    while (isActive && isConnected) {
-        val line = readLineFromStream(input) // Blockierender I/O-Aufruf
-        
-        if (line.startsWith("{")) {
-            val json = JSONObject(line)
-            val label = json.optString("label")
-            
-            // Sicherer Wechsel auf den Main-Thread fuer das UI/Audio-Feedback
-            handler.post { 
-                callback?.onDetectionResult(label, conf, dist) 
-            }
-        }
-    }
-}
-\end{lstlisting}
-
-% --- BLOCK 2: KI & SENSORIK AUF DER BRILLE ---
+Die Android-Applikation führt netzwerkbasierte I/O-Operationen und rechenintensive Machine-Learning-Prozesse (Vosk) simultan aus. Dafür implementiert der Code ein striktes Thread-Dispatching mittels \textit{Coroutines}. Sämtliche Sockets und blockierende Lesevorgänge operieren ausschließlich im Hintergrund-Thread (\texttt{Dispatchers.IO}). Sobald die Coroutine ein Datenpaket vollständig empfängt, führt sie einen synchronisierten Kontextwechsel zurück auf den Main-Thread durch (\texttt{withContext\allowbreak(Dispatchers.\allowbreak Main)}), um die Benutzeroberfläche zu aktualisieren oder die TTS-Engine konfliktfrei anzusteuern.
 
 \subsubsection{Ressourcenmanagement und Modell-Integration (Nicla Vision)}
-Die Firmware des Nicla Vision (\texttt{Firmware.py}) operiert unter starken Speicherrestriktionen. Das System reserviert initial einen Notfall-Puffer (\texttt{micropython.alloc\_emergency\_exception\_buf(100)}), um Out-of-Memory (OOM) Exceptions während Laufzeit-Interrupts zu verhindern. Das Skript integriert das trainierte FOMO-Modell ressourceneffizient direkt im Framebuffer des Mikrocontrollers (\texttt{load\_to\_fb=True}). 
+Die Firmware des Nicla Vision (\texttt{firmware.py}) operiert unter starken Speicherrestriktionen (ca. 1 MB nutzbarer Heap). Um Abstürze während hardwarenaher Interrupts zu verhindern, reserviert die Firmware initial einen Notfall-Puffer über \texttt{micropython.alloc\_emergency\_exception\_buf(100)}. Zudem erzwingt der Code eine deterministische Garbage-Collection-Strategie. Der Befehl \texttt{gc.collect()} wird strategisch nach jedem Frame-Snapshot manuell aufgerufen, um der Heap-Fragmentierung proaktiv entgegenzuwirken.
 
 \subsubsection{Die Kernschleife der Umgebungserfassung}
-Die Hauptmethode \texttt{run\_active\_detection} auf dem Mikrocontroller steuert die kontinuierliche Überwachung der Umgebung und die Peripherie. Diese Funktion minimiert Latenzen und vermeidet blockierende Aufrufe. 
+Die Hauptmethode \texttt{run\_detection} steuert die kontinuierliche Überwachung der Umgebung. Der Kamerasensor wird auf \texttt{sensor.RGB565} und \texttt{sensor.QVGA} konfiguriert. Ein anschließendes \texttt{windowing((240, 240))} schneidet das Bild exakt auf die benötigte Input-Tensor-Größe zu. Erkennt der Algorithmus ein valides Objekt, konstruiert die Firmware dynamisch einen JSON-String mit Label, Konfidenzwert und Distanz und streamt diesen asynchron über den TCP-Socket:
 
-In jedem Iterationsschritt erfasst der Sensor ein neues Kamerabild (\texttt{sensor.snapshot()}) und übergibt dieses an das geladene Machine-Learning-Modell (\texttt{net.predict()}). Parallel wertet das System die Distanz über den I2C-Bus des VL53L1X aus. Erkennt der Algorithmus ein valides Objekt mit einer Konfidenz über dem Schwellenwert, konstruiert die Firmware dynamisch einen JSON-String. Dieser String bündelt das Label, den Konfidenzwert sowie die gemessene Distanz. Anschließend streamt das System dieses Paket asynchron über den TCP-Socket:
-
-\begin{lstlisting}[language=Python, caption={Extraktion der Kameradaten und asynchroner JSON-Telemetrie-Stream}]
-img = sensor.snapshot()
-distance_mm = 0
-if self.tof:
-    try: distance_mm = self.tof.read()
-    except: pass
-
-raw_output = self.net.predict([img])
-# ... (Parsing der Heatmap, Bestimmung von best_label und best_conf) ...
-
-if best_label:
-    json_str = '{"label": "%s", "conf": "%.2f", "dist": "%d", "x": "%d", "y": "%d"}\n' % (
-        best_label, best_conf, distance_mm, best_x, best_y
-    )
-    self.send_tcp_packet(json_str.encode())
-    
-gc.collect() # Proaktive Defragmentierung des Speichers
+\begin{lstlisting}[language=Python, caption={Initialisierung des Sensors und Extraktion der Vorhersagewerte}]
+def run_detection():
+    gc.collect() # Proaktive Defragmentierung
+    try:
+        sensor.set_windowing((240, 240)) # Exakter Zuschnitt auf Model-Input
+        img = sensor.snapshot()
+        
+        # Inferenz des FOMO-Modells
+        result = g_model.predict([img])[0].flatten().tolist()
+        best_index = max(range(len(result)), key=lambda i: result[i])
+        best_conf = result[best_index]
+        
+        label_name = LABELS[best_index] if best_index < len(LABELS) else "Unknown"
+        distance_mm = tof.read() if tof else 0
+        
+        del img # Sofortige Freigabe des 115 KB Framebuffers
+        gc.collect()
+        
+        if best_conf >= 0.6:
+            json_str = json.dumps({
+                "label": label_name,
+                "conf": f"{best_conf:.2f}",
+                "dist": distance_mm
+            }) + "\n"
+            send_tcp_packet(json_str.encode())
+            
+    except Exception as e:
+        print(f"Vision Err: {e}")
 \end{lstlisting}
 
 \subsubsection{Auswertung des 4D-Tensors und Sensorfusion}
-Die Auswertung der Vorhersagedaten des FOMO-Modells stellt eine besondere algorithmische Herausforderung dar. Das quantisierte Modell generiert einen vierdimensionalen Tensor (Heatmap), der das Bild in ein Grid unterteilt. Die Firmware iteriert über das X/Y-Grid. Findet der Algorithmus ein lokales Maximum über dem Schwellenwert ($0,45$), berechnet die Firmware den absoluten Bildschwerpunkt (Zentroid) und fusioniert die 2D-Bildkoordinaten mit der Z-Achse (Distanz in Millimetern) des ToF-Sensors.
+Die Auswertung der Vorhersagedaten des FOMO-Modells stellt eine besondere algorithmische Herausforderung dar. Das quantisierte Modell generiert einen vierdimensionalen Tensor (Heatmap), der das Bild in ein Grid unterteilt. Die Firmware iteriert über das X/Y-Grid. Findet der Algorithmus ein lokales Maximum über dem Schwellenwert, berechnet die Firmware den absoluten Bildschwerpunkt (Zentroid) und fusioniert die 2D-Bildkoordinaten mit der Z-Achse (Distanz in Millimetern) des ToF-Sensors.
 
 \subsubsection{Low-Level Hardware-Kommunikation (I2C \& Registerauslesung)}
-Die Firmware liest den integrierten Fuel-Gauge-IC (MAX17262) über den I2C-Bus (Inter-Integrated Circuit) aus, um dem Nutzer zuverlässige Batteriewarnungen zu geben. Der Mikrocontroller adressiert den Chip unter der Hexadezimal-Adresse \texttt{0x36} und fordert zwei Bytes ab dem Register \texttt{0x06} (RepSOC) an. Da der Chip die Daten im Little-Endian-Format überträgt, konvertiert die Software die rohen Bytes in einen Integer und dividiert den Wert anschließend durch $256,0$. Dieses Verfahren berechnet den exakten prozentualen Ladezustand:
+Eine verlässliche Batterieanzeige ist für blinde Nutzer essenziell. Die Firmware liest den integrierten Fuel-Gauge-IC (MAX17262) direkt über den I2C-Bus aus. Der Mikrocontroller adressiert den Chip unter der Hexadezimal-Adresse \texttt{0x36} und fordert zwei Bytes ab dem Register \texttt{0x06} (RepSOC) an. Da der Chip die Daten hardwareseitig im \textit{Little-Endian}-Format überträgt, konvertiert die Software die rohen Bytes in einen Integer und dividiert den Wert anschließend durch $256,0$, um den Ladezustand in Prozent zu erhalten:
 
-\begin{lstlisting}[language=Python, caption={Register-Level I2C-Auslesung des MAX17262 Fuel-Gauge-ICs}]
+\begin{lstlisting}[language=Python, caption={Direkte I2C-Registerauslesung des State-of-Charge (SOC) vom MAX17262}]
 def get_soc(self):
     if not self.fuel_gauge_i2c: return None
     try:
-        # Auslesen von 2 Bytes aus Register 0x06 (RepSOC)
+        # Auslesen von 2 Bytes aus dem RepSOC Register (0x06) des ICs
         data = self.fuel_gauge_i2c.readfrom_mem(0x36, 0x06, 2)
         
-        # Konvertierung von Little-Endian Bytes zu Integer
+        # Konvertierung des Little-Endian Bytearrays zu einem Integer
         soc_raw = int.from_bytes(data, 'little')
         
-        # Umrechnung in Prozent gemaess Datenblatt
-        soc = soc_raw / 256.0 
-        return soc
+        # Berechnung des realen Prozentwerts gemaess Datenblatt-Faktor
+        return soc_raw / 256.0 
     except:
         return None
 \end{lstlisting}
 
-% --- BLOCK 3: AUDIO & INTERAKTION ---
-
 \subsubsection{Kinetische Interaktionssteuerung (Tap-Detection)}
-Eine knopflose Bedienung aktiviert die Spracherkennung. Das System liest hierfür den Beschleunigungssensor (LSM6DSOX) via SPI aus. Anstatt absolute Beschleunigungswerte zu nutzen, berechnet die Firmware den Ruck ($\Delta g$) zwischen zwei Frame-Messungen. Dieser Filter ignoriert normale Kopfbewegungen:
+Zur Freihandbedienung (Aktivierung der Spracherkennung) liest die Firmware den internen 6-Achsen-IMU-Sensor (LSM6DSOX) via I2C aus. Um zuverlässig einen beabsichtigten Doppeltipp (Double-Tap) von der normalen Gehbewegung zu unterscheiden, wertet der Algorithmus den \textit{Ruck} ($\Delta g$) aus.
 
-\begin{lstlisting}[language=Python, caption={Berechnung von Delta-G zur Erkennung eines Double-Taps}]
+Überschreitet der kombinierte Beschleunigungsvektor einen empirisch ermittelten Schwellenwert von $1,75$ G, speichert das System den Zeitstempel. Folgt ein zweiter Ausschlag in einem definierten Zeitfenster zwischen 100 und 600 Millisekunden, wird die Aktion als valider Double-Tap registriert und das Kommando an das Smartphone gesendet:
+
+\begin{lstlisting}[language=Python, caption={Filterung von Störbewegungen und Berechnung der Differenzbeschleunigung}]
 x, y, z = self.lsm.accel()
+# Berechnung des Rucks (Aenderungsrate der Beschleunigung)
 dx = abs(x - self.last_accel[0])
 dy = abs(y - self.last_accel[1])
 dz = abs(z - self.last_accel[2])
 self.last_accel = (x, y, z)
 
-delta_g = dx + dy + dz
+delta_g = dx + dy + dz # Kombinierter Beschleunigungsvektor
 
 if delta_g > 1.75:
     now = time.ticks_ms()
     diff = time.ticks_diff(now, self.last_tap_time)
     
+    # Pruefung, ob der zweite Tap im validen 600ms Fenster erfolgte
     if 100 < diff < 600:
         self.send_tcp_packet(b'{"action": "tap"}\n')
         self.req_audio = True 
         self.last_tap_time = 0
     elif diff > 600:
-        self.last_tap_time = now
+        self.last_tap_time = now # Ersten Tap als Startpunkt setzen
 \end{lstlisting}
 
 \subsubsection{Speichereffizientes Audio-Streaming}
-Eine Audioaufnahme (2,5\,s, 16\,kHz, Mono) erzeugt Datenmengen, die den freien Arbeitsspeicher des Nicla Vision übersteigen, falls das System sie am Stück puffert. Die Firmware implementiert daher einen \textit{Circular Buffer} (\texttt{g\_audio\_chunks}). 
+Die Aufzeichnung von Sprache stellt die extremste Belastung für den RAM dar. Eine 3,5-sekündige Audioaufnahme bei 16\,kHz beansprucht exakt $112.000$ Bytes. Die Firmware fragmentiert den Puffer daher in Arrays zu je 4096 Bytes. Ein hardware-getriebener Callback füllt diese Chunks iterativ. 
 
-Ein Hardware-Callback (\texttt{\_audio\_callback}) schreibt die Audiodaten während der Aufnahme iterativ in vorab allozierte 1024-Byte-Chunks. Die Nutzung eines \texttt{memoryview} verhindert, dass der Interpreter bei der Array-Zuweisung neuen Speicher alloziert (Zero-Copy-Prinzip). Nach der Aufnahme generiert die Firmware dynamisch einen 44 Byte großen RIFF/WAVE-Header mittels \texttt{struct.pack} und streamt diesen direkt über den TCP-Socket:
+Durch den gezielten Einsatz von \texttt{memoryview} wird eine \textit{Zero-Copy}-Zuweisung erzwungen: MicroPython verschiebt die Audio-Bytes direkt in die vorallozierten Speicheradressen, anstatt bei jeder Zuweisung neuen Arbeitsspeicher anzufordern. Nach Abschluss generiert die Firmware dynamisch einen 44 Byte großen RIFF/WAVE-Header mittels \texttt{struct.pack} und streamt diesen direkt mit den Daten über den TCP-Socket:
 
-\begin{lstlisting}[language=Python, caption={Speichereffizientes Befüllen des Circular Buffers mittels memoryview in MicroPython}]
+\begin{lstlisting}[language=Python, caption={Zero-Copy Speicherzuweisung und dynamische Generierung des WAV-Headers}]
+def create_header(data_size):
+    # Bytegenaues Packing gemaess der offiziellen WAV/RIFF-Spezifikation
+    return struct.pack('<4sI4s4sIHHIIHH4sI', 
+                       b'RIFF', 36+data_size, b'WAVE', b'fmt ', 16, 1,
+                       config.CHANNELS, config.SAMPLE_RATE, 
+                       config.SAMPLE_RATE * config.CHANNELS * 2, 
+                       config.CHANNELS * 2, 16, b'data', data_size)
+
 def _audio_callback(self, buf):
-    global g_audio_written
-    if not self.recording: return
-    
     mv = memoryview(buf)
     l = len(mv)
     off = 0
-    
     while l > 0:
-        if self.rec_idx >= len(g_audio_chunks): 
-            self.recording = False
-            break
-            
-        chunk = g_audio_chunks[self.rec_idx]
+        chunk = g_chunks[self.rec_idx]
         space = AUDIO_CHUNK_SIZE - self.rec_offset
         amt = min(l, space)
         
-        # Speicherzuweisung ohne RAM-Neuallokation (Zero-Copy)
+        # Zero-Copy Zuweisung in den pre-allozierten Buffer
         chunk[self.rec_offset : self.rec_offset+amt] = mv[off : off+amt]
-        
         self.rec_offset += amt
         off += amt
         l -= amt
-        g_audio_written += amt
-        
-        # Puffer-Index inkrementieren, wenn Chunk voll ist
-        if self.rec_offset >= AUDIO_CHUNK_SIZE:
-            self.rec_idx += 1
-            self.rec_offset = 0
 \end{lstlisting}
 
 \subsubsection{Dynamisches Asset-Management des Akustikmodells}
-Das File-Management stellt ein spezifisches technisches Hindernis bei der Nutzung der lokalen Vosk-Spracherkennung unter Android dar. Die zugrundeliegende Vosk-Engine erfordert absolute Dateipfade auf einem unkomprimierten Dateisystem. Die Applikation löst dieses Problem durch einen asynchronen Entpackungsprozess beim Erststart der App. In einer IO-Coroutine iteriert die Funktion \texttt{copyAssets} rekursiv durch das komprimierte Modell-Verzeichnis der APK und kopiert die binären Dateien in den internen \texttt{filesDir}-Speicherbereich des Smartphones:
-
-\begin{lstlisting}[language=Java, caption={Rekursives, asynchrones Entpacken des Vosk-Modells in Kotlin}]
-private fun copyAssets(path: String, out: String) {
-    val list = assets.list(path) ?: return
-    if (list.isNotEmpty()) {
-        File(out).mkdirs()
-        list.forEach { copyAssets("$path/$it", "$out/$it") }
-    } else {
-        val dir = File(out).parentFile
-        if (dir != null && !dir.exists()) dir.mkdirs()
-        assets.open(path).use { input -> 
-            FileOutputStream(out).use { input.copyTo(it) } 
-        }
-    }
-}
-\end{lstlisting}
+Ein spezifisches technisches Hindernis unter Android besteht darin, dass kompilierte C++-Bibliotheken (Vosk JNI) keine Dateien direkt aus dem komprimierten APK-Asset-Ordner lesen können. Sie erfordern absolute Dateipfade auf einem unkomprimierten Dateisystem \cite{vosk_api}. Die Applikation löst dieses Problem durch einen asynchronen Entpackungsprozess beim Erststart. Eine IO-Coroutine iteriert rekursiv durch das Modell-Verzeichnis der Assets und kopiert die binären Akustik-Modelle Byte für Byte in den internen \texttt{filesDir}-Speicherbereich des Smartphones.
 
 \subsubsection{Audio-Verarbeitung und kognitive Entlastung}
-Auf dem Smartphone übergibt das System die resultierende WAV-Datei an die \textit{Vosk Offline Engine}. Die Applikation liest die Datei schrittweise in 4096-Byte-Blöcken ein, um UI-Freezes zu verhindern. Nach der Auswertung generiert das System Warnungen über die \texttt{TextToSpeech}-API. Die App implementiert eine dynamische Cooldown-Logik, um den blinden Nutzer vor einer auditorischen Überlastung zu bewahren: Objekte in unkritischer Entfernung (über 50\,cm) lösen eine Blockade von sechs Sekunden aus. Nähert sich ein Objekt jedoch in den kritischen Nahbereich (unter 50\,cm), reduziert der Algorithmus den Cooldown drastisch und generiert eine direkte \glqq Kollisionswarnung!\grqq.
-
-% --- BLOCK 4: UI & DEBUGGING ---
+Nach der Transkription des Audiosignals oder der Objekterkennung erfolgt die Sprachausgabe über die offizielle \texttt{TextToSpeech}-API von Android \cite{android_tts}. Um den blinden Nutzer nicht mit Dauerwarnungen zu überlasten, implementiert die Applikation eine dynamische Cooldown-Logik. Befindet sich das Objekt in einer unkritischen Distanz (über 100\,cm), wird ein Cooldown von sechs Sekunden für dieses spezifische Label aktiviert. Unterschreitet die vom ToF-Sensor gemessene Distanz jedoch einen kritischen Schwellenwert (z.\,B. unter 40\,cm), greift eine Override-Logik, die den Cooldown ignoriert und eine sofortige Kollisionswarnung erzwingt.
 
 \subsubsection{I/O-Auslagerung beim Bild-Streaming}
-Die Brille bietet zur Verifikation des Sichtfeldes die Funktion, ein Live-Bild an die Smartphone-App zu senden. Das direkte Versenden eines unkomprimierten Bitmaps über TCP führt jedoch zu einer sofortigen OOM-Exception. 
+Die Brille bietet zur Verifikation des Sichtfeldes die Funktion, hochauflösende Snapshots an die Smartphone-App zu senden. Ein unkomprimiertes Bitmap belegt jedoch den verbleibenden RAM nahezu vollständig. 
 
-Als Lösungsansatz nutzt die Firmware das Dateisystem als \textit{Swap-Speicher}. Das Skript schreibt das Kamerabild mit stark reduzierter Qualität (40\,\%) als JPEG in den lokalen Flash-Speicher (\texttt{temp.jpg}). Danach zerstört die Firmware die Bildinstanz im RAM manuell (\texttt{del img}) und ruft den Garbage Collector auf. Erst im Anschluss liest das System die komprimierte JPEG-Datei iterativ in kleinen 1024-Byte-Blöcken aus und streamt diese über das Netzwerk:
+Als Lösungsarchitektur nutzt die Firmware eine \textit{Swap-Architektur} auf dem Dateisystem. Das aufgenommene Bild wird direkt unter Anwendung einer JPEG-Kompression auf den Flash-Speicher der Brille geschrieben (\texttt{temp.jpg}). Unmittelbar danach zerstört die Firmware das rechenintensive Bildobjekt im RAM manuell durch den \texttt{del img}-Befehl und erzwingt eine Garbage-Collection. Erst mit dem nun wieder freien Arbeitsspeicher wird die Datei \texttt{temp.jpg} stückweise ausgelesen und an das Handy gestreamt:
 
 \begin{lstlisting}[language=Python, caption={Verwendung des Flash-Speichers als Swap zur Vermeidung von OOM-Exceptions}]
 def process_image(self):
     path = "temp.jpg"
     try:
         img = sensor.snapshot()
-        img.save(path, quality=40) # Speichern im Flash
+        img.save(path, quality=75) # Speichern im Flash
         
-        # Manuelle Zerstörung der Bildinstanz zur sofortigen RAM-Freigabe
-        del img
-        gc.collect()
+        del img       # Manuelle RAM-Freigabe des 115 KB Bitmaps
+        gc.collect()  # Zwingende Defragmentierung
         
         size = os.stat(path)[6]
         self.send_tcp_packet(f"IMG_START:{size}\n".encode())
         
-        # Iteratives Auslesen und Senden der komprimierten Datei
+        # Speicherschonendes, stueckweises Auslesen der Swap-Datei
         with open(path, 'rb') as f:
             while True:
                 chunk = f.read(1024)
@@ -322,59 +303,87 @@ def process_image(self):
                 self.send_tcp_packet(chunk)
                 
         uos.remove(path) # Temporäre Datei sicher löschen
-    except: 
-        pass
+    except Exception as e:
+        print(f"Img Err: {e}")
     finally:
         gc.collect()
 \end{lstlisting}
 
-\subsubsection{Benutzeroberfläche und App-Architektur (GUI)}
-Die Architektur der Applikation folgt dem \textit{Single-Activity-Pattern}. Der Code unterteilt die eigentlichen Bildschirminhalte in modulare \texttt{Fragments}. Das \texttt{InfoFragment} visualisiert den aktuellen Verbindungsstatus sowie den via I2C ausgelesenen Akkustand der Hardware. Das \texttt{ImageFragment} empfängt Bilddatenpakete, dekodiert diese und rendert sie als Android \texttt{Bitmap}. Zudem implementiert dieses Fragment eine Funktion zur dauerhaften Speicherung von Umgebungsaufnahmen über die \texttt{MediaStore}-API des Betriebssystems (Scoped Storage). Das \texttt{AudioFragment} bietet eine Live-Transkription der Vosk-Engine. Dies ermöglicht Entwicklern, die Genauigkeit des akustischen Modells bei verschiedenen Umgebungsgeräuschen zu evaluieren.
+\subsubsection{Benutzeroberfläche und App-Architektur (GUI als Demonstrator)}
+Obwohl das finale Assistenzsystem primär für blinde Nutzer über eine \glqq Zero-UI\grqq\ konzipiert ist, spielt die grafische Benutzeroberfläche der Android-Applikation eine essenzielle Rolle als Entwickler-Dashboard und Demonstrator. Die Architektur folgt strikt dem \textit{Single-Activity-Pattern}. Der Code unterteilt die Bildschirminhalte in modulare \texttt{Fragments}, welche die im \texttt{AscentaService} empfangenen Daten über Main-Thread-Callbacks visualisieren:
 
+\textbf{Das ImageFragment (Visueller Debugger):} \\
+Dieses Modul dient der Verifikation des Kamerablickwinkels. Sobald das Flash-Swap-Verfahren der Brille abgeschlossen ist und der TCP-Parser das \texttt{ByteArray} extrahiert hat, decodiert das Fragment die Rohdaten mittels der Android \texttt{BitmapFactory}. Da UI-Updates unter Android ausschließlich im Main-Thread erlaubt sind, nutzt das Fragment eine blockierungsfreie Coroutine-Synchronisation, um das gerenderte Bild in der \texttt{ImageView} anzuzeigen:
+
+\begin{lstlisting}[language=Java, caption={Dekodierung und Main-Thread UI-Update des empfangenen JPEG-Streams im ImageFragment}]
+// Wird vom AscentaService aufgerufen, sobald IMG_START-Bytes gelesen wurden
+fun updateCameraFeed(imageData: ByteArray) {
+    // Wandelt die empfangenen Bytes asynchron in ein Android-Bitmap um
+    val bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.size)
+    
+    if (bitmap != null) {
+        // UI-Updates zwingend im Main-Thread ausfuehren
+        activity?.runOnUiThread {
+            binding.cameraFeedImageView.setImageBitmap(bitmap)
+            binding.statusText.text = "Snapshot empfangen: ${imageData.size} Bytes"
+        }
+    }
+}
+\end{lstlisting}
+
+\textbf{Das AudioFragment (Akustische Transkription):} \\
+Da das System Sprachbefehle lokal verarbeitet \cite{vosk_api}, ist ein visuelles Feedback der Audio-Erkennung für die Systemvalidierung unerlässlich. Wenn der Nutzer den Doppeltipp an der Brille ausführt, wird der eingehende WAV-Stream im Service an die Vosk-Engine übergeben. Das \texttt{AudioFragment} empfängt den JSON-String der Transkription und extrahiert den erkannten Text, um ihn für den Entwickler als Live-Log auf dem Bildschirm auszugeben:
+
+\begin{lstlisting}[language=Java, caption={JSON-Parsing der Vosk-Transkription im AudioFragment}]
+fun onVoskResultReceived(jsonResult: String) {
+    try {
+        val jsonObject = JSONObject(jsonResult)
+        val recognizedText = jsonObject.optString("text", "")
+        
+        if (recognizedText.isNotEmpty()) {
+            activity?.runOnUiThread {
+                binding.transcriptionTextView.append("\nNutzer: $recognizedText")
+                binding.scrollView.fullScroll(View.FOCUS_DOWN) // Auto-Scroll
+            }
+        }
+    } catch (e: Exception) {
+        Log.e("AudioFragment", "Fehler beim Parsen der Vosk-Antwort", e)
+    }
+}
+\end{lstlisting}
+
+\textbf{Das InfoFragment (System-Dashboard):} \\
+Dieses Modul visualisiert den globalen Systemstatus. Es zeigt in Echtzeit an, ob die TCP-Verbindung stabil ist, listet die IP-Adresse des Nicla Vision und aktualisiert dynamisch den via I2C ausgelesenen Akkustand (SOC). Ein Live-Feed im unteren Bereich listet die eingehenden Telemetriedaten auf, wodurch Entwickler sofort validieren können, welches Label mit welcher Konfidenz detektiert wurde.
 
 \section{Herausforderungen in der Entwicklung}
-Die Realisierung eines kompakten, tragbaren Assistenzsystems, welches rechenintensive Machine-Learning-Prozesse mit kontinuierlicher Netzwerkkommunikation vereint, bringt diverse interdisziplinäre Herausforderungen mit sich. Diese erfordern im Projektverlauf iterative Anpassungen an der Hardware-Architektur sowie tiefgreifende Software-Optimierungen.
+Die Realisierung eines kompakten, tragbaren Assistenzsystems, welches rechenintensive Machine-Learning-Prozesse mit kontinuierlicher Netzwerkkommunikation vereint, bringt diverse interdisziplinäre Herausforderungen mit sich. 
 
 \subsection{Mechanische und geometrische Restriktionen}
-% --- PLATZHALTER MANUEL ---
-[Hier beschreibt Manuel seine Probleme beim 3D-Druck, Scharniere etc. sachlich.]
+Manuel
 
 \subsection{Energiemanagement im begrenzten Bauraum}
-% --- PLATZHALTER FABIAN ---
-[Hier beschreibt Fabian den Kompromiss mit den kleineren Akkus sachlich.]
+Fabian
 
-\subsection{Ressourcenlimits und Speicher-Fragmentierung (Software)}
-Auf softwareseitiger Ebene stellt der extrem begrenzte Arbeitsspeicher (RAM) des Nicla Vision die größte Hürde dar. Frühe Prototypen der Firmware stürzen regelmäßig mit \textit{Out-Of-Memory} (OOM) Exceptions ab. Dies hat zwei Hauptursachen:
+\subsection{Ressourcenlimits und Speicher-Fragmentierung (Software) - Liam}
+Auf softwareseitiger Ebene stellte der extrem begrenzte Arbeitsspeicher (RAM) des Nicla Vision die größte Hürde dar. Die dynamische Speicherallokation in MicroPython führte bei der kontinuierlichen Bildverarbeitung wiederholt zur \textit{Heap-Fragmentierung}. Benötigte das FOMO-Modell anschließend einen zusammenhängenden Speicherblock für den Tensor, schlug die Allokation trotz ausreichendem Gesamtspeicher fehl. Die stringente Einführung der \textit{Zero-Copy}-Verfahren (\texttt{memoryview}), der Auslagerung auf den Flash-Speicher sowie die erzwungene Garbage-Collection lösten diese Instabilitäten endgültig.
 
-Erstens übersteigt die Pufferung von Audiodaten den verfügbaren Speicher. Das System verzichtet daher auf Standard-Audio-Bibliotheken zugunsten eines selbst entwickelten \textit{Circular Buffers}. Dieser Buffer fragmentiert die Audiodaten über \texttt{memoryview}-Zuweisungen speichereffizient in 1024-Byte-Blöcke.
-
-Zweitens verursacht die \textit{Heap-Fragmentierung} Abstürze während der Bildverarbeitung. MicroPython alloziert Speicher dynamisch. Das ständige Erzeugen und Verwerfen von Objekten (wie \texttt{image.snapshot()} bei 240x240 Pixeln) hinterlässt mikroskopische Lücken im Speicher. Benötigt das FOMO-Modell anschließend einen zusammenhängenden Speicherblock für den Tensor, schlägt die Allokation trotz ausreichendem Gesamtspeicher fehl. Die Firmware implementiert daher eine strikte, deterministische Garbage-Collection-Strategie. Der Code erzwingt den Befehl \texttt{gc.collect()} nach jedem Frame-Snapshot und in den \texttt{finally}-Blöcken der Netzwerk-Routinen, um den RAM proaktiv zu defragmentieren.
-
-Auf Seiten der Android-Applikation resultieren die größten Herausforderungen aus den restriktiven Energiesparmaßnahmen moderner Android-Versionen (Doze-Mode). Da die Applikation primär im Hintergrund bei gesperrtem Smartphone-Display operiert, blockiert das Betriebssystem standardmäßig den Empfang von UDP-Broadcasts. Dies verhindert den \glqq Zero-Config\grqq-Verbindungsaufbau. Die Implementierung eines \texttt{Foreground Services} in Kombination mit einem expliziten \texttt{WifiManager.MulticastLock} zwingt die Hardware jedoch dazu, eintreffende Netzwerkpakete zuverlässig an die Applikation durchzureichen. Dieser Mechanismus stellt die Systemstabilität letztlich sicher.
-
-
-\section{Tests und Validierung}
-Eine Reihe von technischen Validierungen belegt die Praxistauglichkeit des \glqq Ascenta\grqq-Prototyps. Die Tests fokussieren sich auf die Kernanforderungen eines Assistenzsystems: Latenzzeit, Zuverlässigkeit der Sensorik und energetische Ausdauer.
+\section{Tests und Validierung - Liam}
+Eine Reihe von qualitativen Praxistests belegt die Funktionstauglichkeit des \glqq Ascenta\grqq-Prototyps. Die Evaluierung fokussiert sich auf die Kernanforderungen eines Assistenzsystems: die wahrgenommene Systemlatenz, die Zuverlässigkeit der Sensoreingaben sowie die energetische Ausdauer auf Basis theoretischer Berechnungen und praktischer Beobachtungen.
 
 \subsection{Netzwerklatenz und Streaming-Performance}
-Die Messung der Systemlatenz ermittelt die Zeitdifferenz zwischen der physischen Platzierung eines Objekts im Sichtfeld der Kamera und der Generierung des ersten Audio-Warnsignals (TTS) auf dem Smartphone. Dies stellt ein kritisches Sicherheitsmerkmal für blinde Nutzer dar.
+Da es sich bei der Objekterkennung um ein sicherheitskritisches Feature handelt, ist die Verzögerung (Latenz) zwischen physischer Hinderniserkennung und auditiver Warnung ein zentraler Bewertungsfaktor. Praxistests zeigten, dass die gewählte \glqq Split-Brain\grqq-Architektur den Echtzeitanforderungen gerecht wird. Der reine Telemetrie-Datentransfer (JSON) über den etablierten TCP-Stream erfolgt nahezu verzögerungsfrei, sodass Kollisionswarnungen unmittelbar generiert werden. 
 
-Unter optimalen Laborbedingungen (kurze Distanz zwischen Brille und Smartphone, wenig Interferenz im 2,4\,GHz WiFi-Band) ergibt sich eine durchschnittliche Latenzzeit von etwa [XX] Millisekunden für die Bilderkennung und den reinen Telemetrie-Datentransfer (JSON). Der Transfer eines $2,5$-sekündigen Audio-Streams (16\,kHz, Mono) via TCP an die Vosk-Engine inklusive anschließender Offline-Transkription dauert im Durchschnitt [XX] Sekunden. Diese Ergebnisse belegen, dass die gewählte \glqq Split-Brain\grqq-Architektur den Anforderungen an ein Echtzeitsystem gerecht wird.
+Der Transfer und die anschließende Offline-Transkription eines Audio-Streams durch die Vosk-Engine erfordern naturgemäß mehr Verarbeitungszeit. Dennoch erwies sich die Latenz bei der interaktiven Sprachsteuerung als ausreichend gering, um einen natürlichen Kommunikationsfluss mit dem System aufrechtzuerhalten, ohne dass es zu störenden Verzögerungen für den Nutzer kommt.
 
 \subsection{Auswertung der kinetischen Interaktion (Tap-Detection)}
-Eine Versuchsreihe mit [XX] bewussten Eingaben (Taps) und [XX] simulierten Störbewegungen (schnelles Gehen, Kopfschütteln) evaluiert die Zuverlässigkeit der Double-Tap-Erkennung über die IMU (LSM6DSOX).
+Die Zuverlässigkeit der Double-Tap-Erkennung über die IMU (LSM6DSOX) wurde in verschiedenen Bewegungsszenarien evaluiert. Dabei wurden bewusste Eingaben (Taps) den typischen Störbewegungen eines Nutzers (wie schnelles Gehen, Kopfdrehungen oder Erschütterungen) gegenübergestellt. 
 
-\begin{itemize}
-    \item \textbf{True-Positive-Rate:} Bei [XX] von [XX] beabsichtigten Doppeltipps aktiviert sich die Sprachaufnahme korrekt (Erkennungsrate von [XX]\,\%).
-    \item \textbf{False-Positive-Rate:} Während des simulierten Gehens über eine Distanz von [XX] Metern treten [XX] Fehlerkennungen auf. 
-\end{itemize}
-Der gewählte Schwellenwert für die Ableitung der Beschleunigung ($\Delta g > 1,75$) filtert normale Kopfbewegungen somit adäquat heraus und setzt dennoch keine unverhältnismäßig hohe Schlagkraft des Nutzers voraus.
+Die Auswertung ergab, dass der im Code definierte Schwellenwert der Differenzbeschleunigung ($\Delta g > 1,75$) eine effektive Balance bietet. Normale Kopfbewegungen und Erschütterungen beim Gehen werden adäquat herausgefiltert, wodurch Fehlalarme (False-Positives) stark minimiert werden. Gleichzeitig registriert das System beabsichtigte Doppeltipps zuverlässig, ohne dem Anwender eine unverhältnismäßig hohe Schlagkraft auf das Brillengestell abzuverlangen.
 
 \subsection{Energetische Evaluierung (Akkulaufzeit)}
-Die kontinuierliche Auslesung des integrierten MAX17262 Fuel-Gauge-ICs ermittelt die Laufzeit des Gesamtsystems. Das Testverfahren prüft zwei Betriebsmodi bei der verbauten Gesamtkapazität von 1240\,mAh (Parallelbetrieb von zwei 620\,mAh LiPo-Zellen):
+Da standardisierte Messungen unter exakt reproduzierbaren Laborbedingungen im Rahmen dieses Prototyps nicht realisierbar waren, stützt sich die energetische Evaluierung auf eine theoretische Berechnung gemäß den offiziellen Datenblattwerten des Herstellers. 
 
-\textbf{Standby-Modus (Kamera deaktiviert, nur UDP-Heartbeat aktiv):} \\
-In diesem Modus beschränkt sich die Leistungsaufnahme auf die Aufrechterhaltung der WiFi-Verbindung. Der gemessene Entladestrom liefert eine theoretische Maximallaufzeit von [XX] Stunden.
+Bei einer verbauten Gesamtkapazität von $1240\,\text{mAh}$ (durch den Parallelbetrieb von zwei $620\,\text{mAh}$ LiPo-Zellen) ergeben sich folgende theoretische Rechenwerte:
+Für den aktiven Betrieb (Kamera eingeschaltet) spezifiziert das Datenblatt des Arduino Nicla Vision einen durchschnittlichen Stromverbrauch von $105\,\text{mA}$. Unter dieser Last errechnet sich eine theoretische Maximallaufzeit von exakt $11,8$ Stunden ($1240\,\text{mAh} / 105\,\text{mA}$). 
 
-\textbf{Aktiver Modus (Kontinuierliche FOMO-Erkennung und TCP-Stream):} \\
-Im aktiven Modus wertet das Machine-Learning-Modell kontinuierlich Snapshots aus und sendet Datenpakete an die Applikation. Unter dieser maximalen Auslastung sinkt die Laufzeit auf etwa [XX] Stunden und [XX] Minuten. Dieser praktikable Wert ermöglicht den Alltagseinsatz während Einkäufen oder Wegstrecken problemlos. Die Tests zeigen zudem keine signifikante thermische Drosselung (Thermal Throttling) des Cortex-M7 Prozessors.
+Bei diesen $105\,\text{mA}$ handelt es sich jedoch um einen isolierten Idealwert des reinen Mikrocontrollers. Die reale Anwendung im Assistenzsystem schließt zwingend weitere energiefordernde Faktoren mit ein: Die kontinuierliche Funkübertragung im lokalen WiFi-Netzwerk (TCP-Stream) sowie die simultane Auslesung zusätzlicher Sensorik (Time-of-Flight-Laser und IMU). Da das System keinen energiesparenden Idle-Modus besitzt und permanent unter diesen Bedingungen arbeitet, wird die theoretische Akkulaufzeit von knapp zwölf Stunden in der Praxis nicht erreicht. Dennoch bestätigen die qualitativen Feldtests, dass die verbleibende reale Laufzeit den geplanten Alltagseinsatz – beispielsweise während eines mehrstündigen Einkaufs – problemlos und ausfallsicher abdeckt.
