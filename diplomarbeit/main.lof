@@ -5,6 +5,17 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Logo der OpenMV IDE\relax }}{11}{figure.caption.9}%
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Logo von Android Studio\relax }}{11}{figure.caption.10}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Die Vorder- und Rückseite des Arduino Nicla Vision Boards\relax }}{23}{figure.caption.45}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Typische Entladungskurve eines Lithium-Polymer-Akkus\relax }}{24}{figure.caption.48}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Das verwendete TP4056-Lademodul\relax }}{25}{figure.caption.51}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Schaltplan der zentralen Energieversorgung und Verdrahtung\relax }}{26}{figure.caption.56}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Prinzipieller Aufbau eines Convolutional Neural Networks (CNN)\relax }}{28}{figure.caption.61}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Verlauf des Verlustes (Loss) über die Trainings-Epochen\relax }}{29}{figure.caption.64}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Validierte Trainingsperformance mit einem F1-Score von 80.0\%\relax }}{30}{figure.caption.65}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Visuelles Feedback der Objekterkennung über den gezeichneten Kreis\relax }}{32}{figure.caption.70}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Größenvergleich: Ursprünglich geplanter LiPo-Akku (2000\,mAh) gegenüber dem final verbauten Modell (620\,mAh)\relax }}{36}{figure.caption.71}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Confusion Matrix und F1-Score (69.5\,\%) des Multiklassen-Modells\relax }}{37}{figure.caption.72}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Confusion Matrix und F1-Score (80.0\,\%) des reduzierten binären Modells\relax }}{38}{figure.caption.73}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

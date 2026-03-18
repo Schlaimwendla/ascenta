@@ -1,10 +1,27 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{vosk_api}
 {Alpha Cephei Inc.}
 \newblock {Vosk Offline Speech Recognition API}.
 \newblock \url{https://alphacephei.com/vosk/}.
 \newblock Zugegriffen: 12.03.2026.
+
+\bibitem{arduino_nicla_vision}
+{Arduino SA}.
+\newblock {\em {Arduino Pro Nicla Vision - Product Reference Manual}}.
+\newblock Abgerufen am: 18.03.2026.
+
+\bibitem{eemb_akku_2000mah}
+{EEMB}.
+\newblock {3,7 V 2000mAh Lithium-Polymer-Akku mit JST-Anschluss}.
+\newblock Herstellerangaben.
+\newblock Abgerufen am: 18.03.2026.
+
+\bibitem{eemb_akku_620mah}
+{EEMB}.
+\newblock {Lipo-Akku, 3,7 V, 620 mAh, wiederaufladbarer Lithium-Ionen-Akku, 852040}.
+\newblock \url{https://www.amazon.de/}.
+\newblock Abgerufen am: 18.03.2026.
 
 \bibitem{android_studio}
 {Google LLC}.
@@ -42,10 +59,27 @@
 \newblock \url{https://developer.android.com/reference/android/speech/tts/TextToSpeech}.
 \newblock Zugegriffen: 12.03.2026.
 
+\bibitem{scharnier_vorlage}
+{JCW}.
+\newblock {3D-Modell eines Scharniers}.
+\newblock \url{https://www.printables.com/model/58767-modular-hinge}.
+\newblock Abgerufen am: 18.03.2026.
+
+\bibitem{tp4056_datasheet}
+{NanJing Top Power ASIC Corp.}
+\newblock {\em {TP4056 1A Standalone Linear Li-lon Battery Charger with Thermal Regulation}}.
+\newblock Abgerufen am: 18.03.2026.
+
 \bibitem{openmv_ide}
 {OpenMV LLC}.
 \newblock {OpenMV IDE and MicroPython Documentation}.
 \newblock \url{https://docs.openmv.io/}.
 \newblock Zugegriffen: 12.03.2026.
+
+\bibitem{wikipedia_cnn}
+{Wikipedia-Autoren}.
+\newblock {Convolutional Neural Network}.
+\newblock \url{https://de.wikipedia.org/wiki/Convolutional_Neural_Network}.
+\newblock Abgerufen am: 18.03.2026.
 
 \end{thebibliography}
