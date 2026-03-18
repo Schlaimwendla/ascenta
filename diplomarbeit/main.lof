@@ -3,6 +3,7 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+<<<<<<< HEAD
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Logo der OpenMV IDE\relax }}{11}{figure.caption.9}%
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Logo von Android Studio\relax }}{11}{figure.caption.10}%
 \contentsline {figure}{\numberline {4.3}{\ignorespaces Die Vorder- und Rückseite des Arduino Nicla Vision Boards\relax }}{23}{figure.caption.45}%
@@ -16,6 +17,10 @@
 \contentsline {figure}{\numberline {4.11}{\ignorespaces Größenvergleich: Ursprünglich geplanter LiPo-Akku (2000\,mAh) gegenüber dem final verbauten Modell (620\,mAh)\relax }}{36}{figure.caption.71}%
 \contentsline {figure}{\numberline {4.12}{\ignorespaces Confusion Matrix und F1-Score (69.5\,\%) des Multiklassen-Modells\relax }}{37}{figure.caption.72}%
 \contentsline {figure}{\numberline {4.13}{\ignorespaces Confusion Matrix und F1-Score (80.0\,\%) des reduzierten binären Modells\relax }}{38}{figure.caption.73}%
+=======
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Logo der OpenMV IDE}}{19}{figure.caption.12}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Logo von Android Studio}}{19}{figure.caption.13}%
+>>>>>>> db56c5a098920286a3493285b5740542f7536192
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
