@@ -1,6 +1,6 @@
 % !TEX root = ../main.tex
 \chapter{Umsetzung}
-Das vorherige Kapitel definiert das theoretische Konzept. Dieses Kapitel beschreibt die detaillierte praktische Realisierung des Prototyps. Der Fokus liegt hierbei primär auf der komplexen softwareseitigen Implementierung der Kernfunktionen. Die Architektur vereint ein ressourcenbeschränktes Embedded-System (MicroPython auf dem Arduino Nicla Vision) mit einem asynchronen mobilen Betriebssystem (Kotlin unter Android).
+Das vorherige Kapitel definiert das theoretische Konzept. Dieses Kapitel beschreibt die detaillierte praktische Realisierung des Prototyps. Der Fokus liegt hierbei primär auf der komplexen softwareseitigen Implementierung der Kernfunktionen. Die Architektur vereint ein ressourcenbeschränktes Embedded-System (MicroPython auf dem Arduino Nicla Vision \cite{arduino_nicla_vision}) mit einem asynchronen mobilen Betriebssystem (Kotlin unter Android).
 
 \section{Implementierung der Komponenten}
 
@@ -345,11 +345,170 @@ Dieses Modul visualisiert den globalen Systemstatus. Es zeigt in Echtzeit an, ob
 
 \subsection{Schaltungsdesign und Energiemanagement}
 \label{sec:elektronik_umsetzung}
-Fabian
+
+Um die elektronischen Herausforderungen zu bewältigen, wurde ein modulares System entwickelt. Das Ziel war eine integrierte Energieversorgung, die das System ohne externe Stromquellen betreibt und dabei kompakt und sicher im Brillengestell verbaut ist.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{media/images/nicla_vision.png}
+    \caption{Die Vorder- und Rückseite des Arduino Nicla Vision Boards}
+    \label{fig:niclavision}
+\end{figure}
+
+\subsubsection{Schaltungskonzept und Energieversorgung}
+Die zentrale Entscheidung beim Schaltungsdesign war die Aufteilung der Energiequelle. Anstatt einen großen, schweren Akku zu verbauen, wurden zwei identische LiPo-Zellen \cite{eemb_akku_620mah} mit einer Kapazität von jeweils 620\,mAh parallelgeschaltet. 
+Der wesentliche Vorteil dieser Parallelschaltung besteht darin, dass die Spannung bei nominal 3,7\,V stabil bleibt, was exakt den Betriebsspezifikationen der Nicla Vision entspricht. Gleichzeitig addiert sich die Gesamtkapazität auf 1240\,mAh, sodass die Brille länger genutzt werden kann, ohne dass ein einzelner Akku zu groß für den Brillenbügel wird. Durch diese Aufteilung auf zwei Zellen wird zudem der Entladestrom pro Akku halbiert. Dies verringert die thermische Belastung der einzelnen Zellen und erhöht langfristig die Lebensdauer.
+
+Ein wichtiger Faktor bei der Planung war die Entladecharakteristik der LiPo-Zellen. Wie aus dem typischen Spannungsverlauf (siehe Abbildung \ref{fig:entladungskurve}) ersichtlich wird, fällt die Spannung nach einem initialen Abfall über einen langen Zeitraum nur minimal ab (stabile Entladephase), bevor sie gegen Ende rapide einbricht.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{media/images/entladungskurve_lipo.png}
+    \caption{Typische Entladungskurve eines Lithium-Polymer-Akkus}
+    \label{fig:entladungskurve}
+\end{figure}
+
+Aufgrund dieser flachen Kurve ist es technisch kaum möglich, den exakten Ladezustand (z.\,B. 70\,\% vs. 30\,\%) allein über eine Spannungsmessung zu ermitteln. Um zu verhindern, dass die Brille am kritischen Endpunkt der Kurve ohne Vorwarnung abschaltet, macht sich das System den in die Nicla Vision integrierten Fuel-Gauge-Chip (MAX17262) zunutze. Dieser misst den exakten Stromverbrauch und berechnet die verbleibende Kapazität präzise.
+
+\subsubsection{Integration des Sicherheitsmanagements}
+Um das theoretische Risiko von Akkus in unmittelbarer Kopfnähe zu minimieren, wurde ein TP4056-Lademodul \cite{botland_tp4056} als zentrale Kontrollinstanz zwischen die Energiespeicher und die restliche Elektronik geschaltet:
+\begin{itemize}
+    \item \textbf{Schutzfunktion:} Das Modul überwacht den Stromfluss permanent. Bei einem Kurzschluss oder einer Überlastung trennt es die physische Verbindung zu den Akkus augenblicklich.
+    \item \textbf{Laderegelung:} Das Aufladen erfolgt sicher über einen integrierten USB-C-Anschluss. Das Modul steuert exakt, wann der Akku vollständig geladen ist, um eine Überladung zu verhindern. Zudem vereinfacht es den Ladevorgang maßgeblich, da beide Zellen durch die Parallelschaltung gleichzeitig aufgeladen werden können.
+\end{itemize}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{media/images/tp4056.png}
+    \caption{Das verwendete TP4056-Lademodul}
+    \label{fig:tp4056}
+\end{figure}
+
+\subsubsection{Lademodul (TP4056)}
+Zur sicheren und unkomplizierten Aufladung der Akkus fiel die Wahl auf das TP4056 Lademodul. Da die Brille unabhängig von speziellen Ladegeräten funktionieren soll, stellte ein Modul mit Standard-USB-C-Anschluss die optimale Lösung dar. Das TP4056 ist äußerst kompakt und lässt sich dadurch platzsparend in der Glashalterung platzieren, ohne das Design der Brille zu beeinträchtigen. Es fungiert als zentrale Schnittstelle zwischen einer externen Stromquelle und den internen LiPo-Akkus.
+
+Wichtigste Funktionen für das Projekt:
+\begin{itemize}
+    \item \textbf{Sicheres Laden:} Das Modul regelt den Ladevorgang nach dem CC/CV-Verfahren. Die Akkus werden zuerst mit konstantem Strom und anschließend mit konstanter Spannung geladen, was die Lebensdauer der Zellen verlängert und Überhitzung verhindert.
+    \item \textbf{Tiefentladeschutz:} Eine wesentliche Sicherheitsfunktion ist der Schutz vor Tiefentladung. Das Modul trennt die Verbindung zwischen Akku und Nicla Vision automatisch, bevor die Zellspannung einen kritischen Wert unterschreitet. Dies verhindert dauerhafte Schäden an den empfindlichen LiPo-Akkus.
+    \item \textbf{Überlastschutz:} Sollte das System durch einen Fehler zu viel Strom ziehen oder ein Kurzschluss entstehen, schaltet das Modul den Ausgang sofort ab. Da die Elektronik direkt am Kopf getragen wird, ist diese hardwareseitige Sicherung für die Nutzersicherheit unverzichtbar.
+\end{itemize}
+Integration in das System: Das Lademodul ist so verbaut, dass der USB-C-Port von außen leicht zugänglich bleibt. Von dieser Position aus wird der Ladestrom an beide parallelgeschalteten Akkus verteilt. Gleichzeitig erfolgt die Versorgung der Nicla Vision über den Out-Pin mit der nötigen Betriebsspannung. Durch diese Bauweise wird eine saubere Trennung zwischen dem Ladevorgang und dem eigentlichen Betrieb der Brille realisiert.
+
+\subsubsection{Schaltplan und Erklärung}
+Der Schaltplan zeigt die Vernetzung der zentralen Komponenten für das Energiemanagement der Brille.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{media/images/schaltplan.png}
+    \caption{Schaltplan der zentralen Energieversorgung und Verdrahtung}
+    \label{fig:schaltplan}
+\end{figure}
+
+Zentrale Verdrahtung:
+\begin{itemize}
+    \item \textbf{Lademodul (TP4056):} Das Modul bildet das Herzstück der Stromversorgung. Über die Anschlüsse B+ und B- sind die beiden LiPo-Akkus parallel mit dem Laderegler verbunden. Dies ermöglicht es, beide Zellen gleichzeitig über einen einzigen USB-C-Port zu laden.
+    \item \textbf{Parallelschaltung der Akkus:} Durch die parallele Verbindung von LiPo 1 und LiPo 2 bleibt die Spannung bei stabilen 3,7\,V, während sich die Kapazität auf insgesamt 1240\,mAh addiert.
+    \item \textbf{Versorgung der Nicla Vision:} Die Ausgänge OUT+ und OUT- des Lademoduls führen direkt zur Recheneinheit. Der OUT+ ist mit dem VIN-Pin der Nicla Vision verbunden, während OUT- an GND anliegt.
+    \item \textbf{Sicherheitsaspekt:} Durch diese Verschaltung fließt der Strom der Akkus immer zuerst durch das Schutz-Board des TP4056, bevor er die Nicla Vision erreicht. Dadurch ist sichergestellt, dass die empfindliche Elektronik bei einem eventuellen Kurzschluss oder einer zu tiefen Entladung der Akkus sofort vom Stromkreis getrennt wird.
+\end{itemize}
 
 \subsection{Entwicklung des Machine-Learning-Modells (Objekterkennung)}
 \label{sec:ml_training}
-Fabian
+
+\subsubsection{Eingesetzte Plattformen}
+Für die Datenverarbeitung sowie die Modellentwicklung kamen folgende Plattformen zum Einsatz:
+\begin{itemize}
+    \item \textbf{Edge Impulse:} Edge Impulse ist eine führende Entwicklungsumgebung für Machine Learning auf Embedded-Geräten (TinyML). Die Plattform ermöglicht den gesamten Workflow von der Datenerfassung über die Merkmalsextraktion bis hin zum Training optimierter Modelle.
+    \item \textbf{Roboflow:} Roboflow ist ein spezialisiertes Tool für das Management von Computer-Vision-Datensätzen. Es unterstützt Entwickler dabei, Bilder effizient zu annotieren, zu organisieren und durch Augmentierung künstlich zu erweitern. Zudem bietet es Schnittstellen, um die vorbereiteten Daten direkt in verschiedene Trainings-Frameworks zu exportieren.
+    \item \textbf{Kaggle:} Kaggle ist die weltweit größte Online-Community für Data Science und Machine Learning. Die Plattform bietet Zugriff auf eine riesige Auswahl an öffentlichen Datensätzen. Darüber hinaus stellt sie kostenlose cloudbasierte Rechenleistung (GPUs) zur Verfügung, um komplexe Modelle direkt im Browser zu trainieren.
+\end{itemize}
+
+\subsubsection{Architektur des Neuronalen Netzes}
+Die Plattform Edge Impulse diente der Konstruktion und dem Training des künstlichen neuronalen Netzes (Convolutional Neural Network, kurz CNN \cite{wikipedia_cnn}). Edge Impulse automatisiert den Aufbau der komplexen Netzstrukturen, greift im Hintergrund jedoch auf die bewährte Schichtarchitektur für die Bildverarbeitung zurück.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{media/images/cnn_neural_network.png}
+    \caption{Prinzipieller Aufbau eines Convolutional Neural Networks (CNN)}
+    \label{fig:cnn_architektur}
+\end{figure}
+
+Aufbau und Schichtmodell in der Verarbeitungskette: Ein in Edge Impulse definierter \glqq Impulse\grqq\ (eine Daten-Pipeline) übernimmt die schrittweise Analyse der Kamerabilder:
+\begin{itemize}
+    \item \textbf{Eingabeschicht (Input Layer):} Die Eingabeschicht leitet die Kamerabilder in einer vorab festgelegten, reduzierten Auflösung in das Netz ein.
+    \item \textbf{Faltungsschichten (Convolutional Layers):} Das Netz wendet in diesen Schichten verschiedene Filter auf das Bild an. Dieser Prozess extrahiert wichtige visuelle Merkmale wie Kanten, Formen und Texturen.
+    \item \textbf{Pooling-Schichten (Subsampling):} Diese Schichten reduzieren die räumlichen Dimensionen der Daten innerhalb des Netzes. Dies senkt die Rechenlast für den Mikrocontroller drastisch und behält ausschließlich die relevantesten Informationen bei.
+    \item \textbf{Ausgabeschicht (Output Layer):} Die Ausgabeschicht berechnet abschließend die Wahrscheinlichkeiten für die definierten Objektklassen.
+\end{itemize}
+
+Einsatz der FOMO-Architektur: Die Konfiguration in Edge Impulse nutzt explizit die FOMO-Architektur (Faster Objects, More Objects). Dieses Framework wurde speziell für leistungslimitierte Hardware wie die Nicla Vision konzipiert.
+\begin{itemize}
+    \item \textbf{Klassifizierung statt Regression:} Das Verfahren verzichtet bewusst auf die rechenintensive Berechnung von Bounding Boxes (Rechtecken um die Objekte).
+    \item \textbf{Grid-basierte Erkennung:} Der FOMO-Algorithmus teilt das Kamerabild in ein Raster auf. Anschließend bewertet das neuronale Netz für jede Zelle einzeln, welches Objekt sich dort mit welcher Wahrscheinlichkeit befindet.
+    \item \textbf{Effizienz und Deployment:} Dieser Ansatz erzielt eine enorm hohe Verarbeitungsgeschwindigkeit. Nach dem Training stellt ein direkter Export aus Edge Impulse das fertige Modell als quantisierte TensorFlow Lite Datei (.tflite) bereit, was eine nahtlose Ausführung auf der Hardware der Brille ermöglicht.
+\end{itemize}
+
+\subsubsection{Modelltraining und Parameterkonfiguration}
+Nach der Vorverarbeitung der Bilddaten startet in Edge Impulse der eigentliche Trainingsprozess des neuronalen Netzes. Eine gezielte Anpassung der Hyperparameter stellt dabei ein optimales Gleichgewicht zwischen Erkennungsgenauigkeit und Ressourceneffizienz her.
+
+Konfiguration der Trainingsparameter:
+\begin{itemize}
+    \item \textbf{Trainingszyklen und Lernrate:} Die Festlegung der Epochen (Training cycles) auf 60 gibt dem Algorithmus ausreichend Durchläufe, um die visuellen Muster zu erlernen. Gleichzeitig vermeidet dieser Wert ein sogenanntes \glqq Overfitting\grqq\ (Auswendiglernen der Trainingsdaten). Eine definierte Lernrate (Learning rate) von 0,001 passt die internen Gewichtungen des Netzes in kleinen, präzisen Schritten an.
+    \item \textbf{Validierungsset:} Eine gezielte Aufteilung reserviert 20\,\% des gesamten Datensatzes ausschließlich als Validierungsset. Dieses Vorgehen überprüft die reale Performance des Modells kontinuierlich an Bildern, die das Netz im laufenden Training noch nicht gesehen hat.
+    \item \textbf{Batch-Größe:} Die definierte Batch-Größe (Batch size) von 32 führt dem Netz jeweils exakt 32 Bilder gleichzeitig zu, bevor der Algorithmus die internen Gewichtungen aktualisiert.
+\end{itemize}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{media/images/trainingsgraph.png}
+    \caption{Verlauf des Verlustes (Loss) über die Trainings-Epochen}
+    \label{fig:trainingsgraph}
+\end{figure}
+
+Spezifikation der Netzwerkarchitektur:
+\begin{itemize}
+    \item \textbf{Eingabeschicht (Input layer):} Die Eingabeschicht speist exakt 172.800 Features in das neuronale Netz ein. Diese Zahl resultiert direkt aus der gewählten Auflösung und den Farbkanälen der übergebenen Bilddaten.
+    \item \textbf{Basis-Modell (Backbone):} Die Architektur nutzt das FOMO-Framework auf Basis eines MobileNetV2 0.35 Modells. Diese spezifische Struktur arbeitet extrem leichtgewichtig und optimiert die Rechenabläufe speziell für Mikrocontroller.
+    \item \textbf{Ausgabeschicht (Output layer):} Die Konfiguration richtet die letzte Schicht gezielt darauf aus, exakt eine Klasse (1 class) auszugeben. Das neuronale Netz konzentriert sich durch diese Limitierung ausschließlich auf die Erkennung des definierten Zielobjekts.
+\end{itemize}
+
+Optimierung für den Mikrocontroller: Die gezielte Aktivierung der Option \glqq Profile int8 model\grqq\ in den erweiterten Einstellungen bereitet das Modell bereits während der Konfiguration auf die nachfolgende Quantisierung vor. Diese Maßnahme garantiert eine speichereffiziente Übertragung des resultierenden Modells im 8-Bit-Format auf den Flash-Speicher der Brille. Mit diesen Spezifikationen wurde nach dem Training ein F1-Score von 80\,\% erreicht.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{media/images/training_performance.png}
+    \caption{Validierte Trainingsperformance mit einem F1-Score von 80.0\%}
+    \label{fig:training_performance}
+\end{figure}
+
+\subsubsection{Deployment und Integration in OpenMV}
+Nach dem erfolgreichen Training und der Validierung überträgt der Bereitstellungsprozess das fertige Modell auf die Hardware der Nicla Vision. 
+
+Deployment-Prozess:
+\begin{itemize}
+    \item \textbf{Modell-Export:} Die Auswahl der Zielplattform OpenMV im Bereich \glqq Deployment\grqq\ des Edge Impulse Studios startet den Exportvorgang. Daraufhin generiert und kompiliert die Plattform ein anwendungsbereites Paket.
+    \item \textbf{Dateistruktur:} Die Extraktion des heruntergeladenen Pakets liefert zwei essenzielle Dateien: das quantisierte neuronale Netz als .tflite-Datei (TensorFlow Lite) sowie eine Textdatei (labels.txt), welche die Namen der trainierten Objektklassen enthält.
+    \item \textbf{Hardware-Transfer:} Die dauerhafte Ablage dieser Dateien im Speicher der Nicla Vision schließt den Datentransfer ab und bildet die technische Voraussetzung, um die Hauptsoftware der Objekterkennung zu starten.
+\end{itemize}
+
+\subsubsection{Softwareseitige Validierung}
+Die nachfolgende Analyse schlüsselt die Code-Passagen und ihre technischen Funktionen detailliert auf.
+
+1. Sensor-Konfiguration und Bildvorbereitung: Vor der Dateneinspeisung in das neuronale Netz passt die Initialisierung die Kamera exakt an die Vorgaben des Modells an. Die Konfiguration setzt die Grundauflösung zunächst auf QVGA (320x240 Pixel). Da das FOMO-Modell ein quadratisches Eingangsformat verlangt, schneidet der Befehl \texttt{sensor.set\_windowing} das Bild aktiv auf 240x240 Pixel zu. Abschließend gibt der Parameter \texttt{skip\_frames} der Kamera 2000 Millisekunden Zeit, um den Weißabgleich und die Belichtung an die Umgebung anzupassen.
+
+2. Dynamisches Speichermanagement: Der limitierte Arbeitsspeicher (RAM) der Nicla Vision erzwingt einen effizienten Umgang mit den Ressourcen. Der Code lädt die Modelldatei .tflite direkt in das System. Der Parameter \texttt{load\_to\_fb} (Load to Framebuffer) entscheidet dabei dynamisch über den Speicherort. Eine logische Prüfung weist das System an, das Modell nur dann in den regulären RAM zu laden, wenn danach noch eine Sicherheitsreserve von 64 Kilobyte frei bleibt. Dies verhindert Systemabstürze während der rechenintensiven Bildverarbeitung.
+
+3. Post-Processing und die Heatmap-Übersetzung: Das neuronale Netz liefert keine fertigen Koordinaten, sondern eine vierdimensionale Matrix (Heatmap) mit Wahrscheinlichkeiten. Die Post-Processing-Routine übersetzt diese Matrix in greifbare Objektdaten. Eine Schleife iteriert durch die Ausgabe-Schichten des Netzes. Die Multiplikation der rohen Wahrscheinlichkeitswerte des quantisierten Modells mit 255.0 erzwingt durch die gezielte Fließkomma-Operation ein gültiges Datenformat für die OpenMV-Bibliothek. Dieser Schritt wandelt die Datenmatrix in ein virtuelles Graustufenbild um und nutzt die \texttt{find\_blobs}-Funktion, um die dichtesten Pixel-Zentren (die erkannten Objekte) zu isolieren.
+
+4. Die Hauptschleife: Die Endlosschleife führt die eigentliche Erkennung durch und erzeugt ein visuelles Feedback. Der Sensor erfasst kontinuierlich neue Kamerabilder und übergibt sie über \texttt{net.predict} an das neuronale Netz. Das Programm ignoriert die Klasse "0", da diese standardmäßig den Hintergrund repräsentiert. Für jedes valide Objekt berechnet der Algorithmus den geometrischen Mittelpunkt und zeichnet einen farbigen Kreis in das Live-Bild, um die Funktionalität optisch direkt am Bild zu verifizieren.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{media/images/live_erkennung.png}
+    \caption{Visuelles Feedback der Objekterkennung über den gezeichneten Kreis}
+    \label{fig:live_erkennung}
+\end{figure}
 
 \subsection{Konstruktion und 3D-Druck}
 \label{sec:3ddruck_umsetzung}
@@ -358,14 +517,37 @@ Manuel
 \section{Herausforderungen in der Entwicklung}
 Die Realisierung eines kompakten, tragbaren Assistenzsystems, welches rechenintensive Machine-Learning-Prozesse mit kontinuierlicher Netzwerkkommunikation vereint, bringt diverse interdisziplinäre Herausforderungen mit sich. 
 
-\subsection{Mechanische und geometrische Restriktionen}
-Manuel
-
-\subsection{Energiemanagement im begrenzten Bauraum}
-Fabian
-
 \subsection{Ressourcenlimits und Speicher-Fragmentierung (Software) - Liam}
 Auf softwareseitiger Ebene stellte der extrem begrenzte Arbeitsspeicher (RAM) des Nicla Vision die größte Hürde dar. Die dynamische Speicherallokation in MicroPython führte bei der kontinuierlichen Bildverarbeitung wiederholt zur \textit{Heap-Fragmentierung}. Benötigte das FOMO-Modell anschließend einen zusammenhängenden Speicherblock für den Tensor, schlug die Allokation trotz ausreichendem Gesamtspeicher fehl. Die stringente Einführung der \textit{Zero-Copy}-Verfahren (\texttt{memoryview}), der Auslagerung auf den Flash-Speicher sowie die erzwungene Garbage-Collection lösten diese Instabilitäten endgültig.
+
+\subsection{Softwaretechnische Hürden und Optimierung (Objekterkennung) - Fabian}
+Die Implementierung der Objekterkennung auf der Nicla Vision brachte aufgrund genereller Hardware-Limitierungen komplexe Herausforderungen mit sich. Dieser Abschnitt beschreibt die strategischen Entscheidungen und die technischen Lösungen.
+
+\begin{itemize}
+    \item \textbf{Speichermangel und Modell-Architektur:} Die stark begrenzte Kapazität des Flash-Speichers verhinderte den Einsatz großer Standard-Architekturen zur Bildklassifizierung. Da solche Modelle den vorhandenen Speicherplatz bei weitem überstiegen, machte dieser Engpass ein eigens trainiertes, schlankes Modell zwingend erforderlich, welches sich exakt an die Ressourcen der Nicla Vision anpasst.
+    
+    \item \textbf{Auflösung versus Verarbeitungsgeschwindigkeit:} Ein direkter Zusammenhang zwischen der Bildauflösung und der Rechenleistung bestimmte die Performance der Brille. Eine hohe Eingangsauflösung der Kamera resultierte in einer niedrigen Bildrate (FPS), was eine flüssige Objekterkennung in Echtzeit verhinderte. Die Lösung bestand in der Reduzierung der Auflösung sowie der Implementierung des FOMO-Frameworks. FOMO verzichtet auf rechenintensive Bounding Boxes und erkennt Objekte stattdessen ressourcenschonend als Schwerpunkte im Bild.
+    
+    \item \textbf{Modell-Optimierung durch Quantisierung:} Eine mathematische Optimierung des Netzes nutzt den begrenzten Arbeitsspeicher (RAM) und Flash-Speicher effizient. Durch die sogenannte Quantisierung werden die internen Gewichte des trainierten Modells von 32-Bit-Fließkommazahlen (float32) in 8-Bit-Ganzzahlen (int8) umgewandelt. Dieses Verfahren reduzierte den Speicherverbrauch signifikant und ermöglichte erst die Ausführung des Modells auf dem Mikrocontroller, ohne die Erkennungsrate entscheidend negativ zu beeinflussen.
+\end{itemize}
+
+\subsection{Energiemanagement im begrenzten Bauraum - Fabian}
+Die größte Hürde bei der Entwicklung von Hilfsmitteln für Menschen mit Sehbehinderung ist der Kompromiss zwischen technischer Leistungsfähigkeit und Alltagstauglichkeit. Während stationäre Systeme oft sehr präzise arbeiten, scheitern mobile Lösungen häufig an ihrer Unhandlichkeit. Im Bereich der Elektronik ergaben sich daraus drei spezifische Herausforderungen:
+
+\begin{itemize}
+    \item \textbf{Gewicht VS Tragekomfort:} Eine Brille muss über einen längeren Zeitraum getragen werden können, ohne Druckstellen zu verursachen. Dies limitiert das zulässige Gewicht der Akkus massiv. Gleichzeitig ist die Bildverarbeitung der Nicla Vision durch die integrierte KI rechenintensiv, was den Stromverbrauch im Vergleich zu einfachen Sensoren deutlich erhöht.
+    \item \textbf{Elektronische Integration:} Eine signifikante Herausforderung stellte der begrenzte Platz auf den schmalen Brillenbügeln dar. Da die gesamte Elektronik direkt am Gestell untergebracht werden muss, durften die Komponenten die Ergonomie der Brille nicht negativ beeinflussen. Jedes Bauteil musste extrem flach und unauffällig gewählt werden.
+    \item \textbf{Sicherheitsaspekte:} Da die Stromversorgung unmittelbar am Kopf getragen wird, ist die Sicherheit ein kritischer Faktor. Bei der Verwendung von Lithium-Polymer-Akkus (LiPo) muss durchgehend sichergestellt sein, dass es unter keinen Umständen zu einer Überhitzung kommt. 
+\end{itemize}
+
+Einordnung des Risikos: Trotz dieser theoretischen Gefahr ist das Risiko in der Praxis aus zwei Gründen minimal, weshalb die Entscheidung dennoch auf LiPo-Zellen fiel:
+\begin{itemize}
+    \item \textbf{Geringe Energiedichte:} Die verwendeten Akkus sind sehr klein. Die darin gespeicherte Gesamtenergie ist im Vergleich zu herkömmlichen Smartphone-Akkus so gering, dass selbst bei einem Defekt kaum genug thermische Energie für eine gefährliche Kettenreaktion vorhanden wäre.
+    \item \textbf{Systembedingte Überwachung:} Das Restrisiko wird durch den Einsatz des speziellen Lademoduls adressiert, welches den Stromkreis bei Fehlern sofort physisch trennt.
+\end{itemize}
+
+\subsection{Mechanische und geometrische Restriktionen}
+Manuel
 
 \section{Tests und Validierung - Liam}
 Eine Reihe von qualitativen Praxistests belegt die Funktionstauglichkeit des \glqq Ascenta\grqq-Prototyps. Die Evaluierung fokussiert sich auf die Kernanforderungen eines Assistenzsystems: die wahrgenommene Systemlatenz, die Zuverlässigkeit der Sensoreingaben sowie die energetische Ausdauer auf Basis theoretischer Berechnungen und praktischer Beobachtungen.
@@ -383,7 +565,47 @@ Die Auswertung ergab, dass der im Code definierte Schwellenwert der Differenzbes
 \subsection{Energetische Evaluierung (Akkulaufzeit)}
 Da standardisierte Messungen unter exakt reproduzierbaren Laborbedingungen im Rahmen dieses Prototyps nicht realisierbar waren, stützt sich die energetische Evaluierung auf eine theoretische Berechnung gemäß den offiziellen Datenblattwerten des Herstellers. 
 
-Bei einer verbauten Gesamtkapazität von $1240\,\text{mAh}$ (durch den Parallelbetrieb von zwei $620\,\text{mAh}$ LiPo-Zellen) ergeben sich folgende theoretische Rechenwerte:
+Bei einer verbauten Gesamtkapazität von $1240\,\text{mAh}$ (durch den Parallelbetrieb der zuvor genannten zwei $620\,\text{mAh}$ LiPo-Zellen) ergeben sich folgende theoretische Rechenwerte:
 Für den aktiven Betrieb (Kamera eingeschaltet) spezifiziert das Datenblatt des Arduino Nicla Vision einen durchschnittlichen Stromverbrauch von $105\,\text{mA}$. Unter dieser Last errechnet sich eine theoretische Maximallaufzeit von exakt $11,8$ Stunden ($1240\,\text{mAh} / 105\,\text{mA}$). 
 
 Bei diesen $105\,\text{mA}$ handelt es sich jedoch um einen isolierten Idealwert des reinen Mikrocontrollers. Die reale Anwendung im Assistenzsystem schließt zwingend weitere energiefordernde Faktoren mit ein: Die kontinuierliche Funkübertragung im lokalen WiFi-Netzwerk (TCP-Stream) sowie die simultane Auslesung zusätzlicher Sensorik (Time-of-Flight-Laser und IMU). Da das System keinen energiesparenden Idle-Modus besitzt und permanent unter diesen Bedingungen arbeitet, wird die theoretische Akkulaufzeit von knapp zwölf Stunden in der Praxis nicht erreicht. Dennoch bestätigen die qualitativen Feldtests, dass die verbleibende reale Laufzeit den geplanten Alltagseinsatz – beispielsweise während eines mehrstündigen Einkaufs – problemlos und ausfallsicher abdeckt.
+
+\subsection{Anpassung der Akkukapazität im Praxistest}
+Der Wechsel von ursprünglich getesteten 2000\,mAh Zellen \cite{eemb_akku_2000mah} auf die nun verwendeten 620\,mAh Zellen erwies sich in der Praxis als essenzieller Schritt für die Nutzbarkeit. Während größere Akkus das Brillengestell extrem unförmig gemacht hätten, verschwinden die kleineren Speichermodule nahezu vollständig im Design der Bügel. Die einhergehende Laufzeitverkürzung wird durch den massiven Gewinn an Tragekomfort und die weitaus unauffälligere Optik mehr als ausgeglichen.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{media/images/akkus_vergleich.png}
+    \caption{Größenvergleich: Ursprünglich geplanter LiPo-Akku (2000\,mAh) gegenüber dem final verbauten Modell (620\,mAh)}
+    \label{fig:akku_vergleich}
+\end{figure}
+
+\subsection{Einfluss der Klassenanzahl auf die Modell-Konfidenz}
+Die Evaluierung der Bilderkennung analysiert die Leistungsfähigkeit der trainierten neuronalen Netze anhand der Validierungsdaten. Ein direkter Vergleich der Wahrheitsmatrizen (Confusion Matrix) und der F1-Scores zweier unterschiedlicher Modell-Iterationen verdeutlicht den massiven Einfluss der Klassenanzahl auf die Erkennungsgenauigkeit. Die Gegenüberstellung der grafischen Trainingsergebnisse zeigt eine eindeutige Tendenz:
+
+\begin{itemize}
+    \item \textbf{Multiklassen-Modell:} Ein Modell, das auf mehrere spezifische Klassen (wie „Beer“, „Can“, „Face“ und „Person“) trainiert ist, erreicht einen F1-Gesamtscore von lediglich 69,5\,\%. Die Confusion Matrix belegt hierbei eine hohe Fehlerquote bei der Zuweisung. Beispielsweise ordnet der Algorithmus die Klasse „Person“ in 52,2\,\% der Fälle und die Klasse „Can“ in 49,4\,\% der Fälle fälschlicherweise dem Hintergrund (Background) zu.
+\end{itemize}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{media/images/confusion_matrix_multi.png}
+    \caption{Confusion Matrix und F1-Score (69.5\,\%) des Multiklassen-Modells}
+    \label{fig:conf_matrix_multi}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{Reduziertes Modell:} Eine Reduktion der Komplexität auf ein binäres Modell (ausschließlich „Background“ und „Person“) steigert den Gesamt-F1-Score signifikant auf 80,0\,\%. Die korrekte Erkennungsrate für die spezifische Klasse „Person“ steigt parallel dazu auf 81,7\,\% an, während die Fehlzuweisungen zum Hintergrund auf 18,3\,\% sinken.
+\end{itemize}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{media/images/confusion_matrix_binary.png}
+    \caption{Confusion Matrix und F1-Score (80.0\,\%) des reduzierten binären Modells}
+    \label{fig:conf_matrix_binary}
+\end{figure}
+
+Dieser Leistungsabfall bei einer höheren Klassenanzahl resultiert direkt aus den Kapazitätsgrenzen des Netzwerks. Ein quantisiertes Modell für limitierte Mikrocontroller verfügt über eine fest definierte, stark reduzierte Anzahl an internen Parametern. Das Training von mehreren Klassen zwingt das System, deutlich mehr und vielfältigere visuelle Merkmale innerhalb derselben winzigen Parameter-Struktur abzubilden. Diese Informationsverdichtung reduziert die Trennschärfe zwischen den einzelnen Objekten drastisch und führt zu einer wesentlich höheren Verwechslungsgefahr.
+
+\subsection{Evaluierung komplexer Standard-Architekturen (YOLO)}
+Die Validierungsphase schloss zusätzlich die Evaluierung wesentlich komplexerer YOLO-Modelle ein, um die theoretische Leistungsfähigkeit fortschrittlicherer Architekturen zu prüfen. Diese leistungsstarken neuronalen Netze durchliefen die Bildtests jedoch ausschließlich auf einem Desktop-PC. Ein Transfer der fertigen YOLO-Modelle auf die Nicla Vision scheiterte erwartungsgemäß an den strengen Hardware-Restriktionen. Der stark begrenzte Flash-Speicher des Mikrocontrollers verweigerte die Aufnahme der speicherintensiven Modelldateien vollständig. Dieser Testaufbau bestätigte eindrücklich, dass ein produktiver Einsatz der unmodifizierten YOLO-Architektur direkt auf der Smart-Brille technisch unmöglich ist und validierte damit den gewählten, extrem reduzierten FOMO-Ansatz als bestmögliche Alternative.

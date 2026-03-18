@@ -16,6 +16,87 @@
 \contentsline {chapter}{\numberline {3}Konzept}{6}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Gesamtüberblick}{6}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Komponenten}{6}{section.3.2}%
+<<<<<<< HEAD
+\contentsline {subsection}{\numberline {3.2.1}Mechanik und Gehäusedesign}{6}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Hardware und Elektronik}{6}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Software-Ökosystem und Netzwerkkonzept}{7}{subsection.3.2.3}%
+\contentsline {subsubsection}{\nonumberline Evolution der Netzwerkarchitektur (BLE $\rightarrow $ UDP $\rightarrow $ TCP)}{7}{subsubsection*.6}%
+\contentsline {section}{\numberline {3.3}Interaktionen}{8}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Technisches Design}{8}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Lokale Datenverarbeitung und Souveränität}{9}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Absicherung der Netzwerkschnittstellen}{9}{subsection.3.4.2}%
+\contentsline {chapter}{\numberline {4}Umsetzung}{10}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Implementierung der Komponenten}{10}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Software-Architektur und Datenverarbeitung - Liam}{10}{subsection.4.1.1}%
+\contentsline {subsubsection}{\nonumberline Entwicklungsumgebungen und Werkzeuge (Toolchain)}{10}{subsubsection*.8}%
+\contentsline {subsubsection}{\nonumberline Projektkonfiguration (Gradle und Manifest)}{11}{subsubsection*.12}%
+\contentsline {subsubsection}{\nonumberline Android Lifecycle-Management und Systementkopplung}{12}{subsubsection*.14}%
+\contentsline {subsubsection}{\nonumberline Asynchrone BLE-GATT State-Machine}{12}{subsubsection*.16}%
+\contentsline {subsubsection}{\nonumberline Hybrides Netzwerkprotokoll (BLE \& TCP)}{13}{subsubsection*.18}%
+\contentsline {subsubsection}{\nonumberline Stream-Multiplexing und Custom Protocol Parser}{14}{subsubsection*.20}%
+\contentsline {subsubsection}{\nonumberline Ausfallsicherheit durch Heartbeat-Mechanismus}{15}{subsubsection*.22}%
+\contentsline {subsubsection}{\nonumberline Concurrency und Thread-Sicherheit in Kotlin}{15}{subsubsection*.24}%
+\contentsline {subsubsection}{\nonumberline Ressourcenmanagement und Modell-Integration (Nicla Vision)}{15}{subsubsection*.26}%
+\contentsline {subsubsection}{\nonumberline Die Kernschleife der Umgebungserfassung}{16}{subsubsection*.28}%
+\contentsline {subsubsection}{\nonumberline Auswertung des 4D-Tensors und Sensorfusion}{17}{subsubsection*.30}%
+\contentsline {subsubsection}{\nonumberline Low-Level Hardware-Kommunikation (I2C \& Registerauslesung)}{17}{subsubsection*.32}%
+\contentsline {subsubsection}{\nonumberline Kinetische Interaktionssteuerung (Tap-Detection)}{18}{subsubsection*.34}%
+\contentsline {subsubsection}{\nonumberline Speichereffizientes Audio-Streaming}{18}{subsubsection*.36}%
+\contentsline {subsubsection}{\nonumberline Dynamisches Asset-Management des Akustikmodells}{19}{subsubsection*.38}%
+\contentsline {subsubsection}{\nonumberline Audio-Verarbeitung und kognitive Entlastung}{20}{subsubsection*.40}%
+\contentsline {subsubsection}{\nonumberline I/O-Auslagerung beim Bild-Streaming}{20}{subsubsection*.42}%
+\contentsline {subsubsection}{\nonumberline Benutzeroberfläche und App-Architektur (GUI als Demonstrator)}{21}{subsubsection*.44}%
+\contentsline {subsection}{\numberline {4.1.2}Schaltungsdesign und Energiemanagement}{23}{subsection.4.1.2}%
+\contentsline {subsubsection}{\nonumberline Schaltungskonzept und Energieversorgung}{23}{subsubsection*.47}%
+\contentsline {subsubsection}{\nonumberline Integration des Sicherheitsmanagements}{24}{subsubsection*.50}%
+\contentsline {subsubsection}{\nonumberline Lademodul (TP4056)}{24}{subsubsection*.53}%
+\contentsline {subsubsection}{\nonumberline Schaltplan und Erklärung}{26}{subsubsection*.55}%
+\contentsline {subsection}{\numberline {4.1.3}Entwicklung des Machine-Learning-Modells (Objekterkennung)}{27}{subsection.4.1.3}%
+\contentsline {subsubsection}{\nonumberline Eingesetzte Plattformen}{27}{subsubsection*.58}%
+\contentsline {subsubsection}{\nonumberline Architektur des Neuronalen Netzes}{27}{subsubsection*.60}%
+\contentsline {subsubsection}{\nonumberline Modelltraining und Parameterkonfiguration}{29}{subsubsection*.63}%
+\contentsline {subsubsection}{\nonumberline Deployment und Integration in OpenMV}{30}{subsubsection*.67}%
+\contentsline {subsubsection}{\nonumberline Softwareseitige Validierung}{31}{subsubsection*.69}%
+\contentsline {subsection}{\numberline {4.1.4}Konstruktion und 3D-Druck}{32}{subsection.4.1.4}%
+\contentsline {section}{\numberline {4.2}Herausforderungen in der Entwicklung}{32}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Ressourcenlimits und Speicher-Fragmentierung (Software) - Liam}{32}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Softwaretechnische Hürden und Optimierung (Objekterkennung) - Fabian}{33}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Energiemanagement im begrenzten Bauraum - Fabian}{33}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Mechanische und geometrische Restriktionen}{34}{subsection.4.2.4}%
+\contentsline {section}{\numberline {4.3}Tests und Validierung - Liam}{34}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Netzwerklatenz und Streaming-Performance}{35}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Auswertung der kinetischen Interaktion (Tap-Detection)}{35}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Energetische Evaluierung (Akkulaufzeit)}{35}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Anpassung der Akkukapazität im Praxistest}{36}{subsection.4.3.4}%
+\contentsline {subsection}{\numberline {4.3.5}Einfluss der Klassenanzahl auf die Modell-Konfidenz}{37}{subsection.4.3.5}%
+\contentsline {subsection}{\numberline {4.3.6}Evaluierung komplexer Standard-Architekturen (YOLO)}{38}{subsection.4.3.6}%
+\contentsline {chapter}{\numberline {5}Ausblick (Future Work)}{39}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Software und Benutzeroberfläche - Liam}{39}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Native Zero-UI-Applikation für blinde Nutzer}{39}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Kontinuierliches auditives Raum-Feedback (Leitstrahl-Prinzip)}{39}{subsection.5.1.2}%
+\contentsline {section}{\numberline {5.2}Künstliche Intelligenz und Modell-Training}{40}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Erweiterte Objekterkennung für Alltagsgegenstände}{40}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Weiterentwicklung des Machine-Learning-Modells (Edge Impulse)}{40}{subsection.5.2.2}%
+\contentsline {section}{\numberline {5.3}Hardware und Elektronik}{41}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Optimierung der Schaltungstechnik und Sensorik}{41}{subsection.5.3.1}%
+\contentsline {section}{\numberline {5.4}Mechanik und Gehäusedesign}{41}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Weiterentwicklung des 3D-Modells und der Ergonomie}{41}{subsection.5.4.1}%
+\contentsline {chapter}{\numberline {6}Verwandte Arbeiten (Related Work) - Liam}{42}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Klassische Mobilitätshilfen}{42}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Smartphone-basierte Applikationen}{42}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Kommerzielle Smart Glasses und Wearables}{43}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Positionierung des von Ascenta}{43}{section.6.4}%
+\contentsline {chapter}{\numberline {7}Zusammenfassung und Ausblick - Liam}{44}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Project Management}{45}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Planung und Organisation}{45}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Evaluierung der Arbeitsstunden}{45}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Zeitplan}{46}{section.8.3}%
+\contentsline {chapter}{Acknowledgements}{47}{chapter*.74}%
+\contentsline {chapter}{Abbildungsverzeichnis}{48}{chapter*.74}%
+\contentsline {chapter}{Quellcodeverzeichnis}{48}{chapter*.75}%
+\contentsline {chapter}{Literaturverzeichnis}{49}{chapter*.76}%
+\contentsline {chapter}{CV}{52}{chapter*.77}%
+=======
 \contentsline {subsection}{\numberline {3.2.1}Software-Ökosystem und Netzwerkkonzept}{6}{subsection.3.2.1}%
 \contentsline {subsubsection}{\numberline {3.2.1.1}Evolution der Netzwerkarchitektur (BLE $\rightarrow $ UDP $\rightarrow $ TCP)}{7}{subsubsection.3.2.1.1}%
 \contentsline {subsection}{\numberline {3.2.2}Hardware und Elektronik}{8}{subsection.3.2.2}%
@@ -88,4 +169,5 @@
 \contentsline {chapter}{Quellcodeverzeichnis}{45}{chapter*.15}%
 \contentsline {chapter}{Literaturverzeichnis}{46}{chapter*.16}%
 \contentsline {chapter}{CV}{48}{chapter*.17}%
+>>>>>>> db56c5a098920286a3493285b5740542f7536192
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
