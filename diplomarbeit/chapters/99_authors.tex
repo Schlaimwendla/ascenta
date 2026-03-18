@@ -1,19 +1,15 @@
 % !TEX root = ../main.tex
 
 \clearpage
-
-% Dieser Befehl erstellt den Link im Inhaltsverzeichnis, ohne Text auf der Seite zu erzeugen
 \cleardoublepage
 \addcontentsline{toc}{chapter}{CV}
 \markboth{CV}{CV}
 
-% Liam: PDF wird nun ohne zusätzliche Überschrift eingebunden
 \includepdf[
     pages=1, 
-    scale=1.0,       % Volle Größe, da kein Platz für einen Titel gelassen werden muss
-    offset=0 0       % Zentriert auf der Seite
+    scale=1.0,
+    offset=0 0
 ]{media/images/cv_liam.pdf}
 
-% Manuel & Fabian (analog)
 \includepdf[pages=1]{media/images/cv_manuel.pdf}
 \includepdf[pages=1]{media/images/cv_fabian.pdf}

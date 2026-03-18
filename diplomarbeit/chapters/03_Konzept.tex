@@ -1,34 +1,58 @@
 % !TEX root = ../main.tex
-
 \chapter{Konzept}
 
-Dieses Kapitel beschreibt die abstrakte Architektur des Assistenzsystems \glqq Ascenta\grqq. Es liefert einen Gesamtüberblick über das funktionale Zusammenwirken der Teilsysteme, ohne dabei auf tiefergehende Implementierungsdetails einzugehen.
+Dieses Kapitel beschreibt die abstrakte Architektur des Assistenzsystems \glqq Ascenta\grqq. Es liefert einen Gesamtüberblick über das funktionale Zusammenwirken der Teilsysteme und erläutert die iterativen Designentscheidungen, welche zur finalen Netzwerktopologie führten.
 
 \section{Gesamtüberblick}
-Das System basiert auf einer dezentralen \glqq Split-Brain\grqq-Architektur. Um die Hardware direkt am Kopf des Nutzers so leicht und unauffällig wie möglich zu gestalten, wird die ressourcenintensive Datenverarbeitung auf das Smartphone des Nutzers ausgelagert. Die Brille fungiert als reiner Sensor- und Kommunikationsknotenpunkt (Edge-Device), der Umgebungsdaten erfasst und Ergebnisse der lokalen Vorverarbeitung an das mobile Endgerät streamt. Das Smartphone übernimmt die Rolle des Hauptrechenzentrums, welches die Sensordaten fusioniert, Benutzereingaben interpretiert und das akustische Feedback generiert.
+Das System basiert auf einer dezentralen \glqq Split-Brain\grqq-Architektur. Um die Hardware direkt am Kopf des Nutzers so leicht und unauffällig wie möglich zu gestalten, lagert die Architektur die ressourcenintensive Datenverarbeitung auf das Smartphone des Nutzers aus. Die Brille fungiert als reiner Sensor- und Kommunikationsknotenpunkt (Edge-Device). Sie erfasst Umgebungsdaten und streamt die Ergebnisse einer lokalen Vorverarbeitung an das mobile Endgerät. Das Smartphone übernimmt die Rolle des Hauptrechenzentrums. Es fusioniert die Sensordaten, interpretiert Benutzereingaben und generiert das akustische Feedback.
 
 \section{Komponenten}
 Das Gesamtsystem setzt sich aus drei wesentlichen logischen Bausteinen zusammen: der physischen Struktur (Gehäuse), der elektronischen Hardware (Sensorik und Energieversorgung) und dem Software-Ökosystem.
 
 \subsection{Mechanik und Gehäusedesign}
-% --- PLATZHALTER MANUEL (3D-DRUCK KONZEPT) ---
-[Hier fügt Manuel seine konzeptionellen Gedanken zum Gehäusedesign und den ergonomischen Anforderungen ein (Warum 3D-Druck, Gewichtsverteilung, etc.).]
-
+Manuel
 \subsection{Hardware und Elektronik}
-% --- PLATZHALTER FABIAN (ELEKTRONIK KONZEPT) ---
-[Hier fügt Fabian die konzeptionelle Begründung der Elektronik und Bauteilwahl ein (Warum Nicla Vision, warum LiPo-Akkus, grobes Energiekonzept).]
+Fabian
 
-\subsection{Software-Ökosystem}
-Die Softwarearchitektur teilt sich in die Firmware des Mikrocontrollers und die mobile Applikation. Die Firmware (MicroPython) ist für die hardwarenahe Sensorsteuerung und eine erste Datenreduktion (Edge AI mittels FOMO) verantwortlich. Die Android-Applikation (Kotlin) dient als unsichtbares Interface (Zero-UI) und integriert komplexe Algorithmen wie die Offline-Spracherkennung (Vosk) zur auditiven Interaktion.
+\subsection{Software-Ökosystem und Netzwerkkonzept}
+\label{sec:konzept_software}
+Die Softwarearchitektur teilt sich in die Firmware des Mikrocontrollers und die mobile Applikation. Die Firmware (MicroPython) verantwortet die hardwarenahe Sensorsteuerung und eine erste Datenreduktion (Edge AI mittels FOMO). Die Android-Applikation (Kotlin) dient als unsichtbares Interface (Zero-UI) und integriert komplexe Algorithmen wie die Offline-Spracherkennung (Vosk) zur auditiven Interaktion.
+
+\subsubsection{Evolution der Netzwerkarchitektur (BLE $\rightarrow$ UDP $\rightarrow$ TCP)}
+Die finale Netzwerktopologie resultiert aus einer dreistufigen Evaluierungsphase. Da das System hohe Anforderungen an Latenz und Datensicherheit stellt, dokumentiert der folgende Prozess die Abwägung zwischen verschiedenen Protokollstacks.
+
+\vspace{1em}
+\noindent\textbf{Phase 1: Das initiale BLE-GATT-Profil} \\
+Das ursprüngliche Konzept sah das Nicla Vision als eigenständiges BLE-Peripheral vor. Das System spannte einen GATT-Server auf, um Daten über spezifische Characteristics zu übertragen. Die Übertragung von Audiodaten (ca. $128.000$ Bytes) stieß jedoch auf massive Barrieren. BLE-Pakete sind im Standard auf eine Payload (MTU) von 20 Bytes limitiert. Um den Hardware-Puffer des Mikrocontrollers zu schützen und einen \texttt{OSError 11} zu vermeiden, musste der Versand künstlich auf 15\,ms Intervalle gedrosselt werden. Dies führte zu inakzeptablen Latenzen von mehreren Sekunden für eine einzige Sprachnachricht.
+
+\begin{lstlisting}[language=Python, caption={Berechnung des Audiospeichers und initiales BLE-Setup}]
+# 16000 Hz * 1 Channel * 2 Bytes * 4.0s = 128.000 Bytes Pufferbedarf
+TOTAL_BYTES = int(SAMPLE_RATE * CHANNELS * BYTES_PER_SAMPLE * RECORD_SECONDS)
+UART_SERVICE_UUID = bluetooth.UUID("6E400001-B5A3-F393-E0A9-E50E24DCCA9E")
+\end{lstlisting}
+
+\vspace{1em}
+\noindent\textbf{Phase 2: Der Zwischenschritt über das User Datagram Protocol (UDP)} \\
+Um die BLE-Limitierung zu umgehen, erfolgte der Wechsel auf ein WiFi-basiertes Netzwerk unter Nutzung von UDP. Dieses Protokoll ermöglichte theoretisch eine verzögerungsfreie Übertragung, da es keine Bestätigungszyklen (Acknowledge) erfordert. In der praktischen Erprobung offenbarte UDP jedoch eine kritische Instabilität: \textit{Packet Loss}. In einem mobilen Szenario, in dem sich der Nutzer bewegt, führten verlorene Datenpakete zu korrupten JPEG-Dateien und unvollständigen Audio-Chunks. Da UDP keine Fehlerkorrektur bietet, konnte die Applikation die defekten Binärströme nicht mehr zusammensetzen.
+
+\vspace{1em}
+\noindent\textbf{Phase 3: Finale hybride Topologie (BLE \& TCP)} \\
+Aufgrund der Unzuverlässigkeit von UDP wechselte die Architektur final zum Transmission Control Protocol (TCP). TCP garantiert durch interne Prüfsummen und automatische Paketwiederholung eine verlustfreie Übertragung. Das System nutzt nun eine hybride Strategie: BLE übernimmt ausschließlich die Geräteerkennung und den Austausch der WLAN-Daten (Provisioning). Sobald die Verbindung steht, übernimmt ein TCP-Socket auf Port 5005 den gesamten Datenstrom. Dieser Ansatz vereint die einfache Kopplung von Bluetooth mit der Stabilität und Bandbreite eines WiFi-Netzwerks.
 
 \section{Interaktionen}
 Die Interaktion zwischen den Systemkomponenten und dem Nutzer verläuft in einem kontinuierlichen Kreislauf:
 \begin{enumerate}
-    \item \textbf{Datenerfassung:} Kamera und Time-of-Flight-Sensor erfassen synchron die visuelle Umgebung und Distanzdaten. Parallel überwacht die Inertial Measurement Unit (IMU) physische Eingaben durch den Nutzer.
-    \item \textbf{Vorverarbeitung und Übertragung:} Der Mikrocontroller identifiziert relevante Objektkoordinaten und überträgt diese, bei Bedarf ergänzt durch Audio-Fragmente, asynchron über ein lokales WiFi-Netzwerk an das Smartphone.
-    \item \textbf{Fusion und Auswertung:} Das Smartphone verknüpft die visuellen Koordinaten mit den Distanzwerten und wertet eventuelle Sprachbefehle aus.
-    \item \textbf{Feedback:} Überschreitet ein Objekt einen kritischen Schwellenwert oder erfordert ein Sprachbefehl eine Antwort, generiert das Smartphone ein auditives Signal oder eine Sprachausgabe (TTS), die der Nutzer wahrnimmt.
+    \item \textbf{Datenerfassung:} Kamera und ToF-Sensor erfassen synchron die visuelle Umgebung und Distanzdaten. Parallel überwacht die IMU physische Eingaben durch den Nutzer.
+    \item \textbf{Vorverarbeitung und Übertragung:} Der Mikrocontroller identifiziert relevante Objektkoordinaten und überträgt diese asynchron über eine TCP-Verbindung an das Smartphone.
+    \item \textbf{Fusion und Auswertung:} Das Smartphone verknüpft die Koordinaten mit Distanzwerten und wertet Sprachbefehle aus.
+    \item \textbf{Feedback:} Das System generiert akustische Signale oder Sprachausgaben (TTS) über das Handy.
 \end{enumerate}
 
 \section{Technisches Design}
-Das technische Design der Kommunikation stellt sicher, dass kritische Warnungen höchste Priorität erhalten. Die Wahl des User Datagram Protocols (UDP) für Discovery-Prozesse und TCP für den asynchronen Binärdaten-Stream ist eine bewusste Designentscheidung. Zudem garantiert die konsequente Offline-Ausführung aller Machine-Learning-Modelle den Schutz sensibler Nutzerdaten (Privacy-by-Design), da keine Umgebungsvideos oder Audiodaten an externe Cloud-Anbieter übermittelt werden.
+Da das System mittels Kamera und Mikrofon sensible Umgebungsdaten erfasst, ist ein striktes Sicherheitskonzept integraler Bestandteil des Entwurfs. Das Konzept verfolgt hierbei den Ansatz des \textit{Privacy-by-Design}.
+
+\subsection{Lokale Datenverarbeitung und Souveränität}
+Im Gegensatz zu kommerziellen Smart-Glasses verzichtet \glqq Ascenta\grqq\ konsequent auf Cloud-Schnittstellen für die Kernfunktionen. Die Objekterkennung (FOMO) findet direkt auf dem Mikrocontroller statt, während die Spracherkennung (Vosk) lokal auf dem Android-Endgerät ausgeführt wird. Dies stellt sicher, dass zu keinem Zeitpunkt Videostreams oder private Audiodaten an externe Server übertragen werden. Die Datenhoheit verbleibt vollständig auf der Hardware des Nutzers.
+
+\subsection{Absicherung der Netzwerkschnittstellen}
+Durch den Verzicht auf das verbindungslose UDP und den Einsatz des verbindungsorientierten TCP wird die Stabilität der Sitzung erhöht. Da das System in einem lokalen Netzwerk operiert, ist die Angriffsfläche minimiert. Nach dem erfolgreichen Austausch der WLAN-Credentials über BLE wird dieser Kanal für weitere Datenübertragungen geschlossen. Das System nutzt die asynchrone TCP-Struktur, um Telemetrie und Binärdaten klar voneinander zu trennen, was eine Fehlinterpretation von Datenpaketen (Cross-Talk) auf Softwareebene verhindert. Die lokale Verschlüsselung des WLAN-Access-Points sorgt zusätzlich dafür, dass Dritte den Datenstrom nicht passiv mitschneiden können.

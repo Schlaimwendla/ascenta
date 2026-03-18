@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2026.3.9)  10 MAR 2026 11:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2026.3.9)  12 MAR 2026 10:59
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/laim/Documents/diplomarbeit/main.tex
-(/home/laim/Documents/diplomarbeit/main.tex
+**/home/laim/AndroidStudioProjects/ascenta/diplomarbeit/main.tex
+(/home/laim/AndroidStudioProjects/ascenta/diplomarbeit/main.tex
 LaTeX2e <2022-11-01> patch level 1
 L3 programming layer <2023-02-22> (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrbook.cls
 Document Class: scrbook 2022/10/12 v3.38 KOMA-Script document class (book)
@@ -32,21 +32,21 @@ Package: tocbasic 2022/10/12 v3.38 KOMA-Script package (handling toc-files)
 Package tocbasic Info: omitting babel extension for `toc'
 (tocbasic)             because of feature `nobabel' available
 (tocbasic)             for `toc' on input line 137.
-Package scrbook Info: You've used standard option `11pt'.
+Package scrbook Info: You've used standard option `12pt'.
 (scrbook)             This is correct!
-(scrbook)             Internally I'm using `fontsize=11pt'.
+(scrbook)             Internally I'm using `fontsize=12pt'.
 (scrbook)             If you'd like to set the option with \KOMAoptions,
-(scrbook)             you'd have to use `fontsize=11pt' there
-(scrbook)             instead of `11pt', too.
+(scrbook)             you'd have to use `fontsize=12pt' there
+(scrbook)             instead of `12pt', too.
 Class scrbook Info: You've used standard option `oneside'.
 (scrbook)           This is correct!
 (scrbook)           Internally I'm using `twoside=false'.
 (scrbook)           If you'd like to set the option with \KOMAoptions,
 (scrbook)           you'd have to use `twoside=false' there
 (scrbook)           instead of `oneside', too.
-Class scrbook Info: File `scrsize11pt.clo' used to setup font sizes on input line 2617.
- (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrsize11pt.clo
-File: scrsize11pt.clo 2022/10/12 v3.38 KOMA-Script font size class option (11pt)
+Class scrbook Info: File `scrsize12pt.clo' used to setup font sizes on input line 2617.
+ (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrsize12pt.clo
+File: scrsize12pt.clo 2022/10/12 v3.38 KOMA-Script font size class option (12pt)
 ) (/usr/share/texlive/texmf-dist/tex/latex/koma-script/typearea.sty
 Package: typearea 2022/10/12 v3.38 KOMA-Script package (type area)
 \ta@bcor=\skip49
@@ -62,21 +62,21 @@ Package typearea Info: You've used standard option `oneside'.
 \ta@temp=\skip52
 \footheight=\skip53
 Package typearea Info: These are the values describing the layout:
-(typearea)             DIV  = 10
+(typearea)             DIV  = 12
 (typearea)             BCOR = 0.0pt
 (typearea)             \paperwidth      = 597.50793pt
-(typearea)              \textwidth      = 418.25555pt
+(typearea)              \textwidth      = 448.13095pt
 (typearea)              DIV departure   = -6%
-(typearea)              \evensidemargin = 17.3562pt
-(typearea)              \oddsidemargin  = 17.3562pt
+(typearea)              \evensidemargin = 2.4185pt
+(typearea)              \oddsidemargin  = 2.4185pt
 (typearea)             \paperheight     = 845.04694pt
-(typearea)              \textheight     = 595.80026pt
-(typearea)              \topmargin      = -25.16531pt
-(typearea)              \headheight     = 17.0pt
-(typearea)              \headsep        = 20.40001pt
-(typearea)              \topskip        = 11.0pt
-(typearea)              \footskip       = 47.6pt
-(typearea)              \baselineskip   = 13.6pt
+(typearea)              \textheight     = 635.5pt
+(typearea)              \topmargin      = -41.72441pt
+(typearea)              \headheight     = 18.125pt
+(typearea)              \headsep        = 21.75pt
+(typearea)              \topskip        = 12.0pt
+(typearea)              \footskip       = 50.75pt
+(typearea)              \baselineskip   = 14.5pt
 (typearea)              on input line 1767.
 )
 \c@part=\count186
@@ -717,34 +717,34 @@ Package: setspace 2022/12/04 v6.7b set line spacing
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-Package scrbase Info: activating english \partname on input line 9.
-Package scrbase Info: activating english \chaptername on input line 9.
-Package scrbase Info: activating english \appendixname on input line 9.
-Package scrbase Info: activating english \figurename on input line 9.
-Package scrbase Info: activating english \tablename on input line 9.
-Package scrbase Info: activating english \contentsname on input line 9.
-Package scrbase Info: activating english \listfigurename on input line 9.
-Package scrbase Info: activating english \listtablename on input line 9.
-Package scrbase Info: activating english \bibname on input line 9.
-Package scrbase Info: activating english \indexname on input line 9.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+Package scrbase Info: activating english \partname on input line 13.
+Package scrbase Info: activating english \chaptername on input line 13.
+Package scrbase Info: activating english \appendixname on input line 13.
+Package scrbase Info: activating english \figurename on input line 13.
+Package scrbase Info: activating english \tablename on input line 13.
+Package scrbase Info: activating english \contentsname on input line 13.
+Package scrbase Info: activating english \listfigurename on input line 13.
+Package scrbase Info: activating english \listtablename on input line 13.
+Package scrbase Info: activating english \bibname on input line 13.
+Package scrbase Info: activating english \indexname on input line 13.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -762,15 +762,15 @@ Package scrbase Info: activating english \indexname on input line 9.
 * \textheight=658.28194pt
 * \oddsidemargin=17.3571pt
 * \evensidemargin=17.3571pt
-* \topmargin=-8.26335pt
-* \headheight=17.0pt
-* \headsep=20.40001pt
-* \topskip=11.0pt
-* \footskip=47.6pt
-* \marginparwidth=59.7508pt
+* \topmargin=-10.73834pt
+* \headheight=18.125pt
+* \headsep=21.75pt
+* \topskip=12.0pt
+* \footskip=50.75pt
+* \marginparwidth=49.79233pt
 * \marginparsep=12.8401pt
 * \columnsep=10.0pt
-* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
@@ -812,7 +812,7 @@ Package: pdflscape-nometadata 2022-10-28 v0.13 Display of landscape pages in PDF
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
 \c@lstlisting=\count346
-Package hyperref Info: Link coloring OFF on input line 9.
+Package hyperref Info: Link coloring OFF on input line 13.
  (./main.out) (./main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
@@ -824,7 +824,7 @@ Class scrbook Info: loading recommended package `bookmark'.
 (scrbook)           `bookmarkpackage=false' before \begin{document} and
 (scrbook)           you can avoid this message adding:
 (scrbook)             \usepackage{bookmark}
-(scrbook)           before \begin{document} on input line 9.
+(scrbook)           before \begin{document} on input line 13.
  (/usr/share/texlive/texmf-dist/tex/latex/bookmark/bookmark.sty
 Package: bookmark 2020-11-06 v1.29 PDF bookmarks (HO)
  (/usr/share/texlive/texmf-dist/tex/latex/bookmark/bkm-pdftex.def
@@ -834,27 +834,27 @@ File: bkm-pdftex.def 2020-11-06 v1.29 bookmark driver for pdfTeX (HO)
 <media/images/htl_c_cmyk_rein.pdf, id=4, 315.82591pt x 165.02654pt>
 File: media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: media/images/htl_c_cmyk_rein.pdf  used on input line 34.
+Package pdftex.def Info: media/images/htl_c_cmyk_rein.pdf  used on input line 33.
 (pdftex.def)             Requested size: 69.87901pt x 36.51242pt.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 34.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 33.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 34.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 33.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for T1+cmss on input line 34.
+LaTeX Font Info:    Trying to load font information for T1+cmss on input line 33.
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmss.fd
 File: t1cmss.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 )
 <media/images/htl-bildung-mit-zukunft.png, id=5, 82.8696pt x 36.6168pt>
 File: media/images/htl-bildung-mit-zukunft.png Graphic file (type png)
 <use media/images/htl-bildung-mit-zukunft.png>
-Package pdftex.def Info: media/images/htl-bildung-mit-zukunft.png  used on input line 34.
+Package pdftex.def Info: media/images/htl-bildung-mit-zukunft.png  used on input line 33.
 (pdftex.def)             Requested size: 69.87901pt x 30.87746pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 34--34
+Underfull \hbox (badness 10000) in paragraph at lines 33--33
 
  []
 
@@ -862,85 +862,70 @@ Underfull \hbox (badness 10000) in paragraph at lines 34--34
 
 
 
-
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc} <./media/images/htl_c_cmyk_rein.pdf> <./media/images/htl-bildung-mit-zukunft.png>]
-<./media/images/htl_c_cmyk_rein.pdf, id=35, 315.82591pt x 165.02654pt>
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 34.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-
-
-Package fancyhdr Warning: \headheight is too small (17.0pt): 
-(fancyhdr)                Make it at least 17.45868pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.45868pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-0.45868pt}.
-
-[2 <./media/images/htl_c_cmyk_rein.pdf>]) (./chapters/00_ee.tex
-<media/images/sig_liam.png, id=65, 216.05719pt x 108.405pt>
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc} <./media/images/htl_c_cmyk_rein.pdf> <./media/images/htl-bildung-mit-zukunft.png>]) (./chapters/00_ee.tex
+<media/images/sig_liam.png, id=39, 216.05719pt x 108.405pt>
 File: media/images/sig_liam.png Graphic file (type png)
 <use media/images/sig_liam.png>
-Package pdftex.def Info: media/images/sig_liam.png  used on input line 18.
-(pdftex.def)             Requested size: 198.48819pt x 99.58464pt.
+Package pdftex.def Info: media/images/sig_liam.png  used on input line 20.
+(pdftex.def)             Requested size: 158.78857pt x 79.6678pt.
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 17--21
+Overfull \hbox (12.0pt too wide) in paragraph at lines 19--23
 []|[]| 
  []
 
-<media/images/sig_manuel.png, id=66, 219.06844pt x 67.0003pt>
+<media/images/sig_manuel.png, id=40, 219.06844pt x 67.0003pt>
 File: media/images/sig_manuel.png Graphic file (type png)
 <use media/images/sig_manuel.png>
-Package pdftex.def Info: media/images/sig_manuel.png  used on input line 31.
-(pdftex.def)             Requested size: 204.66748pt x 62.59596pt.
+Package pdftex.def Info: media/images/sig_manuel.png  used on input line 32.
+(pdftex.def)             Requested size: 163.73265pt x 50.07669pt.
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 30--34
+Overfull \hbox (12.0pt too wide) in paragraph at lines 31--35
 []|[]| 
  []
 
-<media/images/sig_fabian.png, id=67, 266.49562pt x 62.48344pt>
+<media/images/sig_fabian.png, id=41, 266.49562pt x 62.48344pt>
 File: media/images/sig_fabian.png Graphic file (type png)
 <use media/images/sig_fabian.png>
 Package pdftex.def Info: media/images/sig_fabian.png  used on input line 44.
-(pdftex.def)             Requested size: 266.98698pt x 62.59596pt.
+(pdftex.def)             Requested size: 213.58716pt x 50.07669pt.
 
 Overfull \hbox (12.0pt too wide) in paragraph at lines 43--48
 []|[]| 
  []
 
 ) (./chapters/00_abstract.tex
-Overfull \hbox (14.0424pt too wide) in paragraph at lines 8--2
+Overfull \hbox (14.0424pt too wide) in paragraph at lines 11--2
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 8--2
+Underfull \hbox (badness 10000) in paragraph at lines 11--2
 
  []
 
-[3
+[2
 
 
- <./media/images/sig_liam.png> <./media/images/sig_manuel.png> <./media/images/sig_fabian.png>] [4
+ <./media/images/sig_liam.png> <./media/images/sig_manuel.png> <./media/images/sig_fabian.png>] [3
 
 
+
+
+]) [4
+
+
+
+
+] (./main.toc [5
 
 
 ]
-Overfull \hbox (8.14719pt too wide) in paragraph at lines 22--23
-[]\T1/cmr/m/n/10.95 Die tech-nis-che Um-set-zung basiert auf dem Ar-duino Nicla Vi-sion Mikro-con-troller. Die Firmware
- []
-
-) [5
-
-
-
-
-] (./main.toc [6
-
-
-])
+<./media/images/htl_c_cmyk_rein.pdf, id=158, 315.82591pt x 165.02654pt>
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 84.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [6 <./media/images/htl_c_cmyk_rein.pdf>])
 \tf@toc=\write5
 \openout5 = `main.toc'.
 
@@ -949,15 +934,7 @@ File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
 Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 3.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-
-
-Package fancyhdr Warning: \headheight is too small (17.0pt): 
-(fancyhdr)                Make it at least 17.45868pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.45868pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-0.45868pt}.
-
-[1]
+ [1]
 chapter 1.
 
 Class scrbook Warning: \float@addtolists detected!
@@ -974,6 +951,16 @@ Class scrbook Warning: \float@addtolists detected!
 (scrbook)              a package that still implements the
 (scrbook)              deprecated \float@addtolist interface.
 
+
+Overfull \hbox (15.09438pt too wide) in paragraph at lines 9--10
+\T1/cmr/m/n/12 und tech-nol-o-gis-cher Hür-den. Mo-bile As-sis-ten-zsys-teme müssen eine Echtzeit-Verarbeitung
+ []
+
+
+Overfull \hbox (6.24008pt too wide) in paragraph at lines 9--10
+\T1/cmr/m/n/12 basierte An-sätze eine ständige In-ter-netverbindung, was die Zu-ver-läs-sigkeit in geschlosse-
+ []
+
 ) (./chapters/02_use_cases.tex [2
 
 
@@ -982,242 +969,239 @@ File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
 Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 3.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-
-
-Package fancyhdr Warning: \headheight is too small (17.0pt): 
-(fancyhdr)                Make it at least 17.45868pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.45868pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-0.45868pt}.
-
-[3]
+ [3]
 chapter 2.
 
-Overfull \hbox (10.9087pt too wide) in paragraph at lines 20--21
-\T1/cmr/m/n/10.95 Bushal-testelle) und möchte wis-sen, ob sich eine Per-son di-rekt vor ihm befindet, um entsprechend
+Overfull \hbox (15.75539pt too wide) in paragraph at lines 5--6
+\T1/cmr/m/n/12 An-wen-dungsszenar-ien (Use Cases) beschrieben. Diese Szenar-ien repräsen-tieren alltägliche
  []
 
 [4
 
 
-]) (./chapters/03_Konzept.tex
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 3.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+]
+Overfull \hbox (1.99403pt too wide) in paragraph at lines 23--24
+\T1/cmr/m/n/12 Anstatt die Umge-bung ph-ysisch abzu-tas-ten, nutzt der An-wen-der die in-te-gri-erte Sprach-
+ []
 
-
-Package fancyhdr Warning: \headheight is too small (17.0pt): 
-(fancyhdr)                Make it at least 17.45868pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.45868pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-0.45868pt}.
-
-[5]
-chapter 3.
-[6
-
-
-]) (./chapters/04_Umsetzung.tex
+) (./chapters/03_Konzept.tex
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
 Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 2.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [5]
+chapter 3.
+[6
 
 
-Package fancyhdr Warning: \headheight is too small (17.0pt): 
-(fancyhdr)                Make it at least 17.45868pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.45868pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-0.45868pt}.
+]
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 26.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2023/02/27 1.9 listings language file
+)
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 28.
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 37.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [7{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}]
+Overfull \hbox (0.34285pt too wide) in paragraph at lines 45--46
+[]\T1/cmr/bx/n/12 Datenerfassung: \T1/cmr/m/n/12 Kam-era und ToF-Sensor er-fassen syn-chron die vi-suelle Umge-
+ []
 
-[7]
+
+Overfull \hbox (14.17844pt too wide) in paragraph at lines 46--47
+\T1/cmr/m/n/12 vante Ob-jek-tko-or-di-naten und überträgt diese asyn-chron über eine TCP-Verbindung
+ []
+
+
+Overfull \hbox (0.97188pt too wide) in paragraph at lines 48--49
+[]\T1/cmr/bx/n/12 Feedback: \T1/cmr/m/n/12 Das Sys-tem gener-iert akustis-che Sig-nale oder Sprachaus-gaben (TTS)
+ []
+
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 56.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[8]) (./chapters/04_Umsetzung.tex
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 2.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [9]
 chapter 4.
 
-Overfull \hbox (27.34428pt too wide) in paragraph at lines 24--25
-\T1/cmr/m/n/10.95 Die soft-ware-seit-ige Um-set-zung er-fordert die Ko-or-di-na-tion eines ressourcenbeschränk-ten Embedded-
+Overfull \hbox (0.38501pt too wide) in paragraph at lines 21--22
+\T1/cmr/m/n/12 tion, die asyn-chrone Daten-ver-ar-beitung und das Spe-icher-man-age-ment de-tail-liert. 
  []
 
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 27.
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
-File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
-) [8
+[10
 
 
-] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+]
+<media/images/openmv_ide.png, id=284, 414.54875pt x 122.4575pt>
+File: media/images/openmv_ide.png Graphic file (type png)
+<use media/images/openmv_ide.png>
+Package pdftex.def Info: media/images/openmv_ide.png  used on input line 31.
+(pdftex.def)             Requested size: 174.69688pt x 51.6037pt.
+
+Overfull \hbox (32.47304pt too wide) in paragraph at lines 36--38
+\T1/cmr/m/n/12 darunter den An-droid Pro-filer zur Echtzei-t-anal-yse der Netzwerk- und CPU-Auslastung. 
+ []
+
+<media/images/android_studio.png, id=286, 1204.5pt x 632.3625pt>
+File: media/images/android_studio.png Graphic file (type png)
+<use media/images/android_studio.png>
+Package pdftex.def Info: media/images/android_studio.png  used on input line 41.
+(pdftex.def)             Requested size: 174.69688pt x 91.71432pt.
+
+Overfull \hbox (20.44687pt too wide) in paragraph at lines 47--48
+\T1/cmr/m/n/12 tung der Android-Applikation wer-den über zwei zen-trale Steuerungs-dateien definiert. 
+ []
+
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 49.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[11 <./media/images/openmv_ide.png> <./media/images/android_studio.png>]
+Overfull \hbox (47.13393pt too wide) in paragraph at lines 52--55
+\T1/cmr/m/n/12 den TCP-Stream bei deak-tiviertem Bild-schirm aufrechtzuer-hal-ten, wird der \T1/pcr/m/n/12 AscentaService
+ []
+
+
+Overfull \hbox (1.98045pt too wide) in paragraph at lines 52--55
+\T1/cmr/m/n/12 ex-plizit mit dem At-tribut \T1/pcr/m/n/12 foregroundServiceType="connectedDevice" \T1/cmr/m/n/12 beim
+ []
+
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 60.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[12] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 31.
-
-Overfull \hbox (18.75183pt too wide) in paragraph at lines 43--45
-\T1/cmr/m/n/10.95 Applikation verbindet sich und schreibt die WLAN-Credentials in dedi-zierte BLE-Characteristics.
+Overfull \hbox (43.80301pt too wide) in paragraph at lines 74--75
+\T1/cmr/m/n/12 men-tiert hi-er-für eine strikte State-Machine in-ner-halb eines \T1/pcr/m/n/12 BluetoothGattCallback\T1/cmr/m/n/12 . 
  []
 
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 66.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 94.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-
-Package fancyhdr Warning: \headheight is too small (17.0pt): 
-(fancyhdr)                Make it at least 17.45868pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.45868pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-0.45868pt}.
-
-[9{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2023/02/27 1.9 listings language file
-)
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 102.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-
-
-Package fancyhdr Warning: \headheight is too small (17.0pt): 
-(fancyhdr)                Make it at least 17.45868pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.45868pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-0.45868pt}.
-
-[10]
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 139.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-
-
-Package fancyhdr Warning: \headheight is too small (17.0pt): 
-(fancyhdr)                Make it at least 17.45868pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.45868pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-0.45868pt}.
-
-[11]
-Overfull \hbox (0.53682pt too wide) in paragraph at lines 155--156
-\T1/cmr/m/n/10.95 die Soft-ware den Verbindungssta-tus als un-ter-brochen, schlieÿt die Sock-ets sicher (\T1/pcr/m/n/10.95 try-catch
- []
-
-
-Overfull \hbox (124.78407pt too wide) in paragraph at lines 158--159
-\T1/cmr/m/n/10.95 serviert das Sys-tem ini-tial einen Notfall-Puffer (\T1/pcr/m/n/10.95 micropython.alloc_emergency_exception_buf(100)\T1/cmr/m/n/10.95 ). 
- []
-
-
-Overfull \hbox (9.36278pt too wide) in paragraph at lines 160--161
-\T1/cmr/m/n/10.95 fizient di-rekt im Frame-buffer des Mikro-con-trollers (\T1/pcr/m/n/10.95 load_to_fb=True\T1/cmr/m/n/10.95 ). Iteriert die Firmware
- []
-
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 162.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-
-Package fancyhdr Warning: \headheight is too small (17.0pt): 
-(fancyhdr)                Make it at least 17.45868pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.45868pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-0.45868pt}.
-
-[12]
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 179.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-
-
-Package fancyhdr Warning: \headheight is too small (17.0pt): 
-(fancyhdr)                Make it at least 17.45868pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.45868pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-0.45868pt}.
-
 [13]
-Overfull \hbox (8.98807pt too wide) in paragraph at lines 183--184
-\T1/cmr/m/n/10.95 Erken-nun-gen zu min-imieren, wird ein strik-ter Konfidenz-Schwellenwert (Confidence-Threshold)
+Overfull \hbox (59.95813pt too wide) in paragraph at lines 101--102
+\T1/cmr/m/n/12 dert. Die Firmware kon-fig-uri-ert den Socket auf dem Nicla Vi-sion mit-tels \T1/pcr/m/n/12 setblocking(False)\T1/cmr/m/n/12 .
+ []
+
+
+Overfull \hbox (11.08755pt too wide) in paragraph at lines 104--105
+\T1/cmr/m/n/12 strom (\T1/cmr/m/it/12 Stream\T1/cmr/m/n/12 ) in-ter-leavt kon-tinuier-liche Textnachrichten (JSON-Telemetrie) mit groÿen
+ []
+
+
+Overfull \hbox (11.09949pt too wide) in paragraph at lines 106--107
+\T1/cmr/m/n/12 sive Payload-Gröÿe vo-ran (z.B. \T1/pcr/m/n/12 AUD_START:12500\T1/cmr/m/n/12 ). Der An-droid \T1/pcr/m/n/12 AscentaService
  []
 
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 210.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 116.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-
-Package fancyhdr Warning: \headheight is too small (17.0pt): 
-(fancyhdr)                Make it at least 17.45868pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.45868pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-0.45868pt}.
-
 [14]
-Overfull \hbox (6.22565pt too wide) in paragraph at lines 229--230
-\T1/cmr/m/n/10.95 rechen-in-ten-sive Machine-Learning-Prozesse (Vosk-Spracherkennung) si-mul-tan aus-führen muss,
- []
-
-
-Overfull \hbox (78.44621pt too wide) in paragraph at lines 231--232
-\T1/cmr/m/it/10.95 Corou-tines \T1/cmr/m/n/10.95 gelöst. Sämtliche Sock-ets und block-ierende Le-sevorgänge (\T1/pcr/m/n/10.95 tcpSocket!!.getInputStream()\T1/cmr/m/n/10.95 )
+Overfull \hbox (2.35077pt too wide) in paragraph at lines 135--136
+\T1/cmr/m/n/12 Die Ap-p-lika-tion im-ple-men-tiert einen asyn-chro-nen Watch-dog, um Verbindungsab-brüche
  []
 
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 243.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 151.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-
-Package fancyhdr Warning: \headheight is too small (17.0pt): 
-(fancyhdr)                Make it at least 17.45868pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.45868pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-0.45868pt}.
-
 [15]
-Overfull \hbox (24.3107pt too wide) in paragraph at lines 255--258
-\T1/cmr/m/n/10.95 Die Ar-chitek-tur der Ap-p-lika-tion folgt dem mod-er-nen \T1/cmr/m/it/10.95 Single-Activity-Pattern\T1/cmr/m/n/10.95 . Die \T1/pcr/m/n/10.95 MainActivity
+Overfull \hbox (46.49329pt too wide) in paragraph at lines 156--157
+\T1/cmr/m/n/12 nisierten Kon-tex-twech-sel zurück auf den Main-Thread durch (\T1/pcr/m/n/12 withContext(Dispatchers.
+ []
+
+
+Overfull \hbox (3.00316pt too wide) in paragraph at lines 159--160
+\T1/pcr/m/n/12 micropython.alloc_emergency_exception_buf(100)\T1/cmr/m/n/12 . Zu-dem erzwingt der
+ []
+
+
+Overfull \hbox (42.39531pt too wide) in paragraph at lines 159--160
+\T1/cmr/m/n/12 wird strate-gisch nach je-dem Frame-Snapshot manuell aufgerufen, um der Heap-Fragmentierung
  []
 
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 276.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 169.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-
-Package fancyhdr Warning: \headheight is too small (17.0pt): 
-(fancyhdr)                Make it at least 17.45868pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.45868pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-0.45868pt}.
-
 [16]
-Overfull \hbox (20.42029pt too wide) in paragraph at lines 281--283
-\T1/cmr/m/n/10.95 das \T1/pcr/m/n/10.95 ImageFragment \T1/cmr/m/n/10.95 Bild-daten-pakete via TCP. Ein-tr-e-f-fende JPEG-Bytearrays wer-den dekodiert
- []
-
-
-Overfull \hbox (0.56728pt too wide) in paragraph at lines 303--304
-[]\T1/cmr/m/n/10.95 Zudem im-ple-men-tiert das Frag-ment Steuerele-mente zur manuellen Aufze-ich-nungsan-forderung
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 199.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [17]
+Overfull \hbox (28.65967pt too wide) in paragraph at lines 219--220
+[]\T1/cmr/m/n/12 Überschreitet der kom-binierte Beschle-u-ni-gungsvek-tor einen em-pirisch er-mit-tel-ten Schwellen-
  []
 
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 304.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 227.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[18]
+Overfull \hbox (4.55537pt too wide) in paragraph at lines 247--248
+[]\T1/cmr/m/n/12 Durch den geziel-ten Ein-satz von \T1/pcr/m/n/12 memoryview \T1/cmr/m/n/12 wird eine \T1/cmr/m/it/12 Zero-Copy\T1/cmr/m/n/12 -Zuweisung erzwun-
+ []
 
-Package fancyhdr Warning: \headheight is too small (17.0pt): 
-(fancyhdr)                Make it at least 17.45868pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.45868pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-0.45868pt}.
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 260.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[19]
+Overfull \hbox (14.20209pt too wide) in paragraph at lines 278--279
+\T1/cmr/m/n/12 Nach der Tran-skrip-tion des Au-diosig-nals oder der Ob-jek-terken-nung er-folgt die Sprachaus-
+ []
 
-[17]
-Overfull \hbox (16.5206pt too wide) in paragraph at lines 306--307
-\T1/cmr/m/n/10.95 Die Re-al-isierung eines kom-pak-ten, trag-baren As-sis-ten-zsys-tems, welches rechen-in-ten-sive Machine-
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 282.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[20]
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 314.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [21]
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 336.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [22]
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 367.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [23]
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 378.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [24]
+Overfull \hbox (0.90402pt too wide) in paragraph at lines 379--380
+\T1/cmr/m/n/12 (Taps) den typ-is-chen Stör-be-we-gun-gen eines Nutzers (wie schnelles Gehen, Kopf-drehun-
  []
 
 
-Overfull \hbox (3.81055pt too wide) in paragraph at lines 315--316
-\T1/cmr/m/it/10.95 Buffers\T1/cmr/m/n/10.95 , der Au-dio-daten über \T1/pcr/m/n/10.95 memoryview\T1/cmr/m/n/10.95 -Zuweisungen spe-icher-ef-fizient frag-men-tiert. 
+Overfull \hbox (15.41145pt too wide) in paragraph at lines 384--385
+\T1/cmr/m/n/12 Rah-men dieses Pro-to-typs nicht re-al-isier-bar waren, stützt sich die en-er-getis-che Evaluierung
  []
 
 
-Overfull \hbox (28.88171pt too wide) in paragraph at lines 317--318
-\T1/cmr/m/n/10.95 Config^^P-Verbindungsaufbau ver-hin-derte. Erst die Im-ple-men-tierung eines \T1/pcr/m/n/10.95 Foreground Services
+Overfull \hbox (35.0077pt too wide) in paragraph at lines 386--388
+\T1/cmr/m/n/12 net sich eine the-o-retis-che Max-i-mal-laufzeit von ex-akt $\OT1/cmr/m/n/12 11\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 8$ \T1/cmr/m/n/12 Stun-den ($\OT1/cmr/m/n/12 1240 []\OML/cmm/m/it/12 =\OT1/cmr/m/n/12 105 []$\T1/cmr/m/n/12 ). 
  []
 
 ) (./chapters/05_futurework.tex
@@ -1225,58 +1209,39 @@ File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
 Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 2.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-
-
-Package fancyhdr Warning: \headheight is too small (17.0pt): 
-(fancyhdr)                Make it at least 17.45868pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.45868pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-0.45868pt}.
-
-[18]
+ [25]
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
 Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 2.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-
-
-Package fancyhdr Warning: \headheight is too small (17.0pt): 
-(fancyhdr)                Make it at least 17.45868pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.45868pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-0.45868pt}.
-
-[19]
+ [26]
 chapter 5.
 
-Overfull \hbox (4.84511pt too wide) in paragraph at lines 3--4
-\T1/cmr/m/n/10.95 tionalen Pro-to-typ zu einem mark-treifen End-kun-den-pro-dukt weit-erzuen-twick-eln, sind in zukün-
+Overfull \hbox (3.56718pt too wide) in paragraph at lines 9--10
+\T1/cmr/m/n/12 Die ak-tuelle Android-Applikation ver-fügt über eine grafis-che Be-nutze-r-ober-fläche (GUI),
  []
 
-[20
+[27
 
 
-]
-Overfull \hbox (12.84361pt too wide) in paragraph at lines 36--37
-\T1/cmr/m/n/10.95 dedi-zierten Audio-Chips für besseres Mikrofon-Handling, Um-stieg auf ein Custom-PCB (Printed
- []
-
-) (./chapters/06_relatedwork.tex
+]) (./chapters/06_relatedwork.tex
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
 Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 2.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-
-
-Package fancyhdr Warning: \headheight is too small (17.0pt): 
-(fancyhdr)                Make it at least 17.45868pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.45868pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-0.45868pt}.
-
-[21]
+ [28]
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 2.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [29]
 chapter 6.
-[22
+
+Overfull \hbox (13.97154pt too wide) in paragraph at lines 5--6
+[]\T1/cmr/m/n/12 Die En-twick-lung von As-sis-ten-zsys-te-men für se-hbeein-trächtigte Per-so-nen ist ein etabliertes
+ []
+
+[30
 
 
 ]) (./chapters/07_conclusion.tex
@@ -1284,46 +1249,48 @@ File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
 Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 2.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-
-
-Package fancyhdr Warning: \headheight is too small (17.0pt): 
-(fancyhdr)                Make it at least 17.45868pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.45868pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-0.45868pt}.
-
-[23]
+ [31]
 chapter 7.
-) (./chapters/08_projectmanagement.tex [24
+) (./chapters/08_projectmanagement.tex [32
 
 
 ]
 chapter 8.
 
-Overfull \hbox (5.13867pt too wide) in paragraph at lines 11--12
-\T1/cmr/m/n/10.95 Fortschritts und der in-di-vidu-ellen Ar-beit-slast wurde eine de-tail-lierte Zeit-er-fas-sung (Timesheet)
+Overfull \hbox (11.71794pt too wide) in paragraph at lines 7--8
+\T1/cmr/m/n/12 Ar-beit-steilung zwis-chen den Bere-ichen Soft-ware, Elek-tronik und 3D-Druck zu gewährleis-
  []
 
 
-Overfull \hbox (7.67622pt too wide) in paragraph at lines 14--15
-\T1/cmr/m/n/10.95 des Pro-jek-t-fortschritts. Ein Ab-gle-ich der ge-planten Ressourcen mit dem tat-säch-lichen Aufwand
+Overfull \hbox (20.20612pt too wide) in paragraph at lines 10--11
+\T1/cmr/m/n/12 Die wöchentliche Evaluierung der Tätigkeits-berichte er-möglichte eine präzise Überwachung
  []
 
-[25
+
+Overfull \hbox (10.80421pt too wide) in paragraph at lines 10--11
+\T1/cmr/m/n/12 an-fängliche Un-ter-schätzung ist typ-isch für kom-plexe Hardware-Software-Kombinationen,
+ []
+
+[33
 
 
 ]
-Overfull \hbox (30.0pt too wide) in paragraph at lines 30--31
+Overfull \hbox (226.63954pt too wide) in paragraph at lines 18--24
+\T1/cmr/m/n/12 Gesamtarbeitsaufwand: [XX] Stun-den [] 
+ []
+
+
+Overfull \hbox (30.0pt too wide) in paragraph at lines 32--33
 [][] 
  []
 
 
-Overfull \hbox (30.0pt too wide) in paragraph at lines 39--40
-[][] 
+Overfull \hbox (7.40155pt too wide) in paragraph at lines 41--41
+[]|\T1/cmr/m/it/12 Unterschrift
  []
 
 ) (./chapters/99_acknowledgements.tex
-Underfull \hbox (badness 10000) in paragraph at lines 48--1
+Underfull \hbox (badness 10000) in paragraph at lines 41--1
 
  []
 
@@ -1331,14 +1298,12 @@ File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
 Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 1.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-
-Package fancyhdr Warning: \headheight is too small (17.0pt): 
-(fancyhdr)                Make it at least 17.45868pt, for example:
-(fancyhdr)                \setlength{\headheight}{17.45868pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-0.45868pt}.
-
-[26]) [27
+[34]
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 1.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [35]) [36
 
 
 ] (./main.lof)
@@ -1357,69 +1322,107 @@ Class scrbook Warning: \float@listhead detected!
 (scrbook)              Loading of package `scrhack' may help to
 (scrbook)              avoid this warning, if you are using a
 (scrbook)              a package that still implements the
-(scrbook)              deprecated \float@listhead interface on input line 35.
+(scrbook)              deprecated \float@listhead interface on input line 42.
 
-[28
+[37
 
 
-] (./main.lol)
+
+] (./main.lol
+Overfull \hbox (12.079pt too wide) in paragraph at lines 8--8
+ [][] [][]\T1/cmr/m/n/12 Kotlin-Coroutine für dy-namis-ches TCP-Stream-Multiplexing und Thread- 
+ []
+
+
+Overfull \hbox (2.89809pt too wide) in paragraph at lines 11--11
+ [][] [][]\T1/cmr/m/n/12 Direkte I2C-Registerauslesung des State-of-Charge (SOC) vom MAX17262[] [][]  
+ []
+
+)
 \tf@lol=\write7
 \openout7 = `main.lol'.
 
-
-No file main.bbl.
-(./chapters/99_authors.tex [29
+ (./main.bbl [38
 
 
 ]
-<media/images/cv_liam.pdf, id=557, 597.50829pt x 845.0471pt>
+Underfull \hbox (badness 1910) in paragraph at lines 4--8
+[]\T1/cmr/m/n/12 Alpha Cephei Inc.  Vosk Of-fline Speech Recog-ni-tion API.  []$\T1/pcr/m/n/12 https : / /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 16--20
+[]\T1/cmr/m/n/12 Google LLC.  App Man-i-fest Overview | An-droid De-vel-op-ers.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 16--20
+[]$\T1/pcr/m/n/12 https : / / developer . android . com / guide / topics / manifest /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--26
+[]\T1/cmr/m/n/12 Google LLC.  Blue-tooth-Gatt API Ref-er-ence | An-droid De-vel-op-ers.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--26
+[]$\T1/pcr/m/n/12 https : / / developer . android . com / reference / android / bluetooth /
+ []
+
+) [39
+
+
+] (./chapters/99_authors.tex
+<media/images/cv_liam.pdf, id=712, 597.50829pt x 845.0471pt>
 File: media/images/cv_liam.pdf Graphic file (type pdf)
 <use media/images/cv_liam.pdf>
-Package pdftex.def Info: media/images/cv_liam.pdf  used on input line 15.
+Package pdftex.def Info: media/images/cv_liam.pdf  used on input line 12.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
 File: media/images/cv_liam.pdf Graphic file (type pdf)
 <use media/images/cv_liam.pdf>
-Package pdftex.def Info: media/images/cv_liam.pdf  used on input line 15.
+Package pdftex.def Info: media/images/cv_liam.pdf  used on input line 12.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
-<media/images/cv_liam.pdf, id=560, page=1, 597.50829pt x 845.0471pt>
+<media/images/cv_liam.pdf, id=715, page=1, 597.50829pt x 845.0471pt>
 File: media/images/cv_liam.pdf Graphic file (type pdf)
 <use media/images/cv_liam.pdf, page 1>
-Package pdftex.def Info: media/images/cv_liam.pdf , page1 used on input line 15.
-(pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
-File: media/images/cv_liam.pdf Graphic file (type pdf)
-<use media/images/cv_liam.pdf, page 1>
-Package pdftex.def Info: media/images/cv_liam.pdf , page1 used on input line 15.
+Package pdftex.def Info: media/images/cv_liam.pdf , page1 used on input line 12.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
 File: media/images/cv_liam.pdf Graphic file (type pdf)
 <use media/images/cv_liam.pdf, page 1>
-Package pdftex.def Info: media/images/cv_liam.pdf , page1 used on input line 15.
+Package pdftex.def Info: media/images/cv_liam.pdf , page1 used on input line 12.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
 File: media/images/cv_liam.pdf Graphic file (type pdf)
 <use media/images/cv_liam.pdf, page 1>
-Package pdftex.def Info: media/images/cv_liam.pdf , page1 used on input line 15.
+Package pdftex.def Info: media/images/cv_liam.pdf , page1 used on input line 12.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
 File: media/images/cv_liam.pdf Graphic file (type pdf)
 <use media/images/cv_liam.pdf, page 1>
-Package pdftex.def Info: media/images/cv_liam.pdf , page1 used on input line 15.
+Package pdftex.def Info: media/images/cv_liam.pdf , page1 used on input line 12.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
- [30
+File: media/images/cv_liam.pdf Graphic file (type pdf)
+<use media/images/cv_liam.pdf, page 1>
+Package pdftex.def Info: media/images/cv_liam.pdf , page1 used on input line 12.
+(pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
+ [40
+
 
 
 
  <./media/images/cv_liam.pdf>]
 
 pdfTeX warning: pdflatex (file ./media/images/cv_manuel.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<media/images/cv_manuel.pdf, id=589, 597.55246pt x 845.07724pt>
+<media/images/cv_manuel.pdf, id=745, 597.55246pt x 845.07724pt>
 File: media/images/cv_manuel.pdf Graphic file (type pdf)
 <use media/images/cv_manuel.pdf>
-Package pdftex.def Info: media/images/cv_manuel.pdf  used on input line 18.
+Package pdftex.def Info: media/images/cv_manuel.pdf  used on input line 14.
 (pdftex.def)             Requested size: 597.551pt x 845.07518pt.
 
 
 pdfTeX warning: pdflatex (file ./media/images/cv_manuel.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
 File: media/images/cv_manuel.pdf Graphic file (type pdf)
 <use media/images/cv_manuel.pdf>
-Package pdftex.def Info: media/images/cv_manuel.pdf  used on input line 18.
+Package pdftex.def Info: media/images/cv_manuel.pdf  used on input line 14.
 (pdftex.def)             Requested size: 597.551pt x 845.07518pt.
 
 
@@ -1427,41 +1430,41 @@ pdfTeX warning: pdflatex (file ./media/images/cv_manuel.pdf): PDF inclusion: fou
 
 
 pdfTeX warning: pdflatex (file ./media/images/cv_manuel.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<media/images/cv_manuel.pdf, id=592, page=1, 597.55246pt x 845.07724pt>
+<media/images/cv_manuel.pdf, id=748, page=1, 597.55246pt x 845.07724pt>
 File: media/images/cv_manuel.pdf Graphic file (type pdf)
 <use media/images/cv_manuel.pdf, page 1>
-Package pdftex.def Info: media/images/cv_manuel.pdf , page1 used on input line 18.
+Package pdftex.def Info: media/images/cv_manuel.pdf , page1 used on input line 14.
 (pdftex.def)             Requested size: 597.551pt x 845.07518pt.
 File: media/images/cv_manuel.pdf Graphic file (type pdf)
 <use media/images/cv_manuel.pdf, page 1>
-Package pdftex.def Info: media/images/cv_manuel.pdf , page1 used on input line 18.
+Package pdftex.def Info: media/images/cv_manuel.pdf , page1 used on input line 14.
 (pdftex.def)             Requested size: 597.57834pt x 845.11386pt.
 File: media/images/cv_manuel.pdf Graphic file (type pdf)
 <use media/images/cv_manuel.pdf, page 1>
-Package pdftex.def Info: media/images/cv_manuel.pdf , page1 used on input line 18.
+Package pdftex.def Info: media/images/cv_manuel.pdf , page1 used on input line 14.
 (pdftex.def)             Requested size: 597.57834pt x 845.11386pt.
 File: media/images/cv_manuel.pdf Graphic file (type pdf)
 <use media/images/cv_manuel.pdf, page 1>
-Package pdftex.def Info: media/images/cv_manuel.pdf , page1 used on input line 18.
+Package pdftex.def Info: media/images/cv_manuel.pdf , page1 used on input line 14.
 (pdftex.def)             Requested size: 597.57834pt x 845.11386pt.
 File: media/images/cv_manuel.pdf Graphic file (type pdf)
 <use media/images/cv_manuel.pdf, page 1>
-Package pdftex.def Info: media/images/cv_manuel.pdf , page1 used on input line 18.
+Package pdftex.def Info: media/images/cv_manuel.pdf , page1 used on input line 14.
 (pdftex.def)             Requested size: 597.57834pt x 845.11386pt.
-[31 <./media/images/cv_manuel.pdf>]
+[41 <./media/images/cv_manuel.pdf>]
 
 pdfTeX warning: pdflatex (file ./media/images/cv_fabian.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<media/images/cv_fabian.pdf, id=616, 597.55246pt x 845.07718pt>
+<media/images/cv_fabian.pdf, id=771, 597.55246pt x 845.07718pt>
 File: media/images/cv_fabian.pdf Graphic file (type pdf)
 <use media/images/cv_fabian.pdf>
-Package pdftex.def Info: media/images/cv_fabian.pdf  used on input line 19.
+Package pdftex.def Info: media/images/cv_fabian.pdf  used on input line 15.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 
 
 pdfTeX warning: pdflatex (file ./media/images/cv_fabian.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
 File: media/images/cv_fabian.pdf Graphic file (type pdf)
 <use media/images/cv_fabian.pdf>
-Package pdftex.def Info: media/images/cv_fabian.pdf  used on input line 19.
+Package pdftex.def Info: media/images/cv_fabian.pdf  used on input line 15.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 
 
@@ -1469,44 +1472,44 @@ pdfTeX warning: pdflatex (file ./media/images/cv_fabian.pdf): PDF inclusion: fou
 
 
 pdfTeX warning: pdflatex (file ./media/images/cv_fabian.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<media/images/cv_fabian.pdf, id=619, page=1, 597.55246pt x 845.07718pt>
+<media/images/cv_fabian.pdf, id=774, page=1, 597.55246pt x 845.07718pt>
 File: media/images/cv_fabian.pdf Graphic file (type pdf)
 <use media/images/cv_fabian.pdf, page 1>
-Package pdftex.def Info: media/images/cv_fabian.pdf , page1 used on input line 19.
+Package pdftex.def Info: media/images/cv_fabian.pdf , page1 used on input line 15.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 File: media/images/cv_fabian.pdf Graphic file (type pdf)
 <use media/images/cv_fabian.pdf, page 1>
-Package pdftex.def Info: media/images/cv_fabian.pdf , page1 used on input line 19.
+Package pdftex.def Info: media/images/cv_fabian.pdf , page1 used on input line 15.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
 File: media/images/cv_fabian.pdf Graphic file (type pdf)
 <use media/images/cv_fabian.pdf, page 1>
-Package pdftex.def Info: media/images/cv_fabian.pdf , page1 used on input line 19.
+Package pdftex.def Info: media/images/cv_fabian.pdf , page1 used on input line 15.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
 File: media/images/cv_fabian.pdf Graphic file (type pdf)
 <use media/images/cv_fabian.pdf, page 1>
-Package pdftex.def Info: media/images/cv_fabian.pdf , page1 used on input line 19.
+Package pdftex.def Info: media/images/cv_fabian.pdf , page1 used on input line 15.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
 File: media/images/cv_fabian.pdf Graphic file (type pdf)
 <use media/images/cv_fabian.pdf, page 1>
-Package pdftex.def Info: media/images/cv_fabian.pdf , page1 used on input line 19.
+Package pdftex.def Info: media/images/cv_fabian.pdf , page1 used on input line 15.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
-[32 <./media/images/cv_fabian.pdf>]) (./main.aux)
+[42 <./media/images/cv_fabian.pdf>]) (./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 22551 strings out of 476034
- 389660 string characters out of 5792865
- 2005388 words of memory out of 6000000
- 42293 multiletter control sequences out of 15000+600000
- 531321 words of font info for 80 fonts, out of 8000000 for 9000
+ 22690 strings out of 476034
+ 392009 string characters out of 5792865
+ 2037388 words of memory out of 6000000
+ 42340 multiletter control sequences out of 15000+600000
+ 531406 words of font info for 78 fonts, out of 8000000 for 9000
  1137 hyphenation exceptions out of 8191
- 108i,22n,106p,10673b,2158s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/google/noto/NotoSans-Bold.pfb></usr/share/texlive/texmf-dist/fonts/type1/google/noto/NotoSans-Italic.pfb></usr/share/texlive/texmf-dist/fonts/type1/google/noto/NotoSans-Regular.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfsx1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfsx1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfsx2074.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfti1440.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on main.pdf (38 pages, 2627775 bytes).
+ 108i,22n,106p,10693b,2065s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texlive/texmf-dist/fonts/type1/google/noto/NotoSans-Bold.pfb></usr/share/texlive/texmf-dist/fonts/type1/google/noto/NotoSans-Italic.pfb></usr/share/texlive/texmf-dist/fonts/type1/google/noto/NotoSans-Regular.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfsx1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfsx1728.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfsx2488.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfti1728.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
+Output written on main.pdf (48 pages, 2679440 bytes).
 PDF statistics:
- 969 PDF objects out of 1000 (max. 8388607)
- 821 compressed objects within 9 object streams
- 298 named destinations out of 1000 (max. 500000)
- 587 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1142 PDF objects out of 1200 (max. 8388607)
+ 986 compressed objects within 10 object streams
+ 384 named destinations out of 1000 (max. 500000)
+ 637 words of extra memory for PDF output out of 10000 (max. 10000000)
 
