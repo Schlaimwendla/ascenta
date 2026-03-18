@@ -4,18 +4,6 @@ Das vorherige Kapitel definiert das theoretische Konzept. Dieses Kapitel beschre
 
 \section{Implementierung der Komponenten}
 
-\subsection{Konstruktion und 3D-Druck}
-\label{sec:3ddruck_umsetzung}
-Manuel
-
-\subsection{Schaltungsdesign und Energiemanagement}
-\label{sec:elektronik_umsetzung}
-Fabian
-
-\subsection{Entwicklung des Machine-Learning-Modells (Objekterkennung)}
-\label{sec:ml_training}
-Fabian
-
 \subsection{Software-Architektur und Datenverarbeitung - Liam}
 \label{sec:software_implementierung}
 Die softwareseitige Umsetzung erfordert die Koordination eines ressourcenbeschränkten Embedded-Systems (MicroPython) und eines mobilen Betriebssystems (Android). Die folgenden Abschnitte erläutern die Lösungsansätze für die Netzwerkkommunikation, die asynchrone Datenverarbeitung und das Speichermanagement detailliert.
@@ -354,6 +342,18 @@ fun onVoskResultReceived(jsonResult: String) {
 
 \textbf{Das InfoFragment (System-Dashboard):} \\
 Dieses Modul visualisiert den globalen Systemstatus. Es zeigt in Echtzeit an, ob die TCP-Verbindung stabil ist, listet die IP-Adresse des Nicla Vision und aktualisiert dynamisch den via I2C ausgelesenen Akkustand (SOC). Ein Live-Feed im unteren Bereich listet die eingehenden Telemetriedaten auf, wodurch Entwickler sofort validieren können, welches Label mit welcher Konfidenz detektiert wurde.
+
+\subsection{Schaltungsdesign und Energiemanagement}
+\label{sec:elektronik_umsetzung}
+Fabian
+
+\subsection{Entwicklung des Machine-Learning-Modells (Objekterkennung)}
+\label{sec:ml_training}
+Fabian
+
+\subsection{Konstruktion und 3D-Druck}
+\label{sec:3ddruck_umsetzung}
+Manuel
 
 \section{Herausforderungen in der Entwicklung}
 Die Realisierung eines kompakten, tragbaren Assistenzsystems, welches rechenintensive Machine-Learning-Prozesse mit kontinuierlicher Netzwerkkommunikation vereint, bringt diverse interdisziplinäre Herausforderungen mit sich. 
