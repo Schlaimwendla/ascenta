@@ -13,8 +13,8 @@
 \contentsline {figure}{\numberline {4.8}{\ignorespaces Verlauf des Verlustes (Loss) über die Trainings-Epochen\relax }}{37}{figure.caption.49}%
 \contentsline {figure}{\numberline {4.9}{\ignorespaces Validierte Trainingsperformance mit einem F1-Score von 80.0\%\relax }}{38}{figure.caption.50}%
 \contentsline {figure}{\numberline {4.10}{\ignorespaces Visuelles Feedback der Objekterkennung über den gezeichneten Kreis\relax }}{40}{figure.caption.53}%
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Größenvergleich: Ursprünglich geplanter LiPo-Akku (2000\,mAh) gegenüber dem final verbauten Modell (620\,mAh)\relax }}{44}{figure.caption.54}%
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Confusion Matrix und F1-Score (69.5\,\%) des Multiklassen-Modells\relax }}{45}{figure.caption.55}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Größenvergleich: Ursprünglich geplanter LiPo-Akku (2000\,mAh) gegenüber dem final verbauten Modell (620\,mAh)\relax }}{45}{figure.caption.54}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Confusion Matrix und F1-Score (69.5\,\%) des Multiklassen-Modells\relax }}{46}{figure.caption.55}%
 \contentsline {figure}{\numberline {4.13}{\ignorespaces Confusion Matrix und F1-Score (80.0\,\%) des reduzierten binären Modells\relax }}{46}{figure.caption.56}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }

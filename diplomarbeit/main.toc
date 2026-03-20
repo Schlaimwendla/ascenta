@@ -36,39 +36,39 @@
 \contentsline {section}{\numberline {4.2}Herausforderungen in der Entwicklung}{40}{section.4.2}%
 \contentsline {subsection}{\numberline {4.2.1}Ressourcenlimits und Speicher-Fragmentierung (Software) - Liam}{40}{subsection.4.2.1}%
 \contentsline {subsection}{\numberline {4.2.2}Softwaretechnische Hürden und Optimierung (Objekterkennung) - Fabian}{41}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Energiemanagement im begrenzten Bauraum - Fabian}{41}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.3}Energiemanagement im begrenzten Bauraum - Fabian}{42}{subsection.4.2.3}%
 \contentsline {subsection}{\numberline {4.2.4}Mechanische und geometrische Restriktionen}{42}{subsection.4.2.4}%
-\contentsline {section}{\numberline {4.3}Tests und Validierung - Liam}{42}{section.4.3}%
+\contentsline {section}{\numberline {4.3}Tests und Validierung - Liam}{43}{section.4.3}%
 \contentsline {subsection}{\numberline {4.3.1}Netzwerklatenz und Streaming-Performance}{43}{subsection.4.3.1}%
 \contentsline {subsection}{\numberline {4.3.2}Auswertung der kinetischen Interaktion (Tap-Detection)}{43}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Energetische Evaluierung (Akkulaufzeit)}{43}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}Anpassung der Akkukapazität im Praxistest}{44}{subsection.4.3.4}%
+\contentsline {subsection}{\numberline {4.3.3}Energetische Evaluierung (Akkulaufzeit)}{44}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Anpassung der Akkukapazität im Praxistest}{45}{subsection.4.3.4}%
 \contentsline {subsection}{\numberline {4.3.5}Einfluss der Klassenanzahl auf die Modell-Konfidenz}{45}{subsection.4.3.5}%
-\contentsline {subsection}{\numberline {4.3.6}Evaluierung komplexer Standard-Architekturen (YOLO)}{46}{subsection.4.3.6}%
-\contentsline {chapter}{\numberline {5}Ausblick (Future Work)}{47}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Software und Benutzeroberfläche - Liam}{47}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Native Zero-UI-Applikation für blinde Nutzer}{47}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}Kontinuierliches auditives Raum-Feedback (Leitstrahl-Prinzip)}{47}{subsection.5.1.2}%
-\contentsline {section}{\numberline {5.2}Künstliche Intelligenz und Modell-Training - Fabian}{48}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Erweiterte Objekterkennung für Alltagsgegenstände}{48}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Weiterentwicklung des Machine-Learning-Modells (Edge Impulse)}{48}{subsection.5.2.2}%
-\contentsline {section}{\numberline {5.3}Hardware und Elektronik - Fabian}{49}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Optimierung der Schaltungstechnik und Sensorik}{49}{subsection.5.3.1}%
-\contentsline {section}{\numberline {5.4}Mechanik und Gehäusedesign - Manuel}{49}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Weiterentwicklung des 3D-Modells und der Ergonomie}{49}{subsection.5.4.1}%
-\contentsline {chapter}{\numberline {6}Verwandte Arbeiten (Related Work) - Liam}{50}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Klassische Mobilitätshilfen}{50}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Smartphone-basierte Applikationen}{50}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Kommerzielle Smart Glasses und Wearables}{51}{section.6.3}%
-\contentsline {section}{\numberline {6.4}Positionierung des von Ascenta}{51}{section.6.4}%
-\contentsline {chapter}{\numberline {7}Fazit - Liam}{52}{chapter.7}%
-\contentsline {chapter}{\numberline {8}Project Management - Liam}{53}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Planung und Organisation}{53}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Evaluierung der Arbeitsstunden}{53}{section.8.2}%
-\contentsline {section}{\numberline {8.3}Zeitplan}{54}{section.8.3}%
-\contentsline {chapter}{Acknowledgements}{61}{chapter*.57}%
-\contentsline {chapter}{Abbildungsverzeichnis}{62}{chapter*.57}%
-\contentsline {chapter}{Quellcodeverzeichnis}{62}{chapter*.58}%
-\contentsline {chapter}{Literaturverzeichnis}{63}{chapter*.59}%
-\contentsline {chapter}{CV}{66}{chapter*.60}%
+\contentsline {subsection}{\numberline {4.3.6}Evaluierung komplexer Standard-Architekturen (YOLO)}{47}{subsection.4.3.6}%
+\contentsline {chapter}{\numberline {5}Ausblick (Future Work)}{48}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Software und Benutzeroberfläche - Liam}{48}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Native Zero-UI-Applikation für blinde Nutzer}{48}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Kontinuierliches auditives Raum-Feedback (Leitstrahl-Prinzip)}{48}{subsection.5.1.2}%
+\contentsline {section}{\numberline {5.2}Künstliche Intelligenz und Modell-Training - Fabian}{49}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Erweiterte Objekterkennung für Alltagsgegenstände}{49}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Weiterentwicklung des Machine-Learning-Modells (Edge Impulse)}{49}{subsection.5.2.2}%
+\contentsline {section}{\numberline {5.3}Hardware und Elektronik - Fabian}{50}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Optimierung der Schaltungstechnik und Sensorik}{50}{subsection.5.3.1}%
+\contentsline {section}{\numberline {5.4}Mechanik und Gehäusedesign - Manuel}{50}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Weiterentwicklung des 3D-Modells und der Ergonomie}{50}{subsection.5.4.1}%
+\contentsline {chapter}{\numberline {6}Verwandte Arbeiten (Related Work) - Liam}{51}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Klassische Mobilitätshilfen}{51}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Smartphone-basierte Applikationen}{51}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Kommerzielle Smart Glasses und Wearables}{52}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Positionierung von Ascenta}{52}{section.6.4}%
+\contentsline {chapter}{\numberline {7}Fazit - Liam}{53}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Project Management - Liam}{54}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Planung und Organisation}{54}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Evaluierung der Arbeitsstunden}{54}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Zeitplan}{55}{section.8.3}%
+\contentsline {chapter}{Acknowledgements}{62}{chapter*.57}%
+\contentsline {chapter}{Abbildungsverzeichnis}{63}{chapter*.57}%
+\contentsline {chapter}{Quellcodeverzeichnis}{63}{chapter*.58}%
+\contentsline {chapter}{Literaturverzeichnis}{64}{chapter*.59}%
+\contentsline {chapter}{CV}{67}{chapter*.60}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
