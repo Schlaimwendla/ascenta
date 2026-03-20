@@ -1,4 +1,3 @@
-\babel@toc {english}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
@@ -13,10 +12,9 @@
 \contentsline {lstlisting}{\numberline {4.7}{\ignorespaces Filterung von Störbewegungen und Berechnung der Differenzbeschleunigung}}{26}{lstlisting.4.7}%
 \contentsline {lstlisting}{\numberline {4.8}{\ignorespaces Zero-Copy Speicherzuweisung und dynamische Generierung des WAV-Headers}}{27}{lstlisting.4.8}%
 \contentsline {lstlisting}{\numberline {4.9}{\ignorespaces Verwendung des Flash-Speichers als Swap zur Vermeidung von OOM-Exceptions}}{28}{lstlisting.4.9}%
-\contentsline {lstlisting}{\numberline {4.10}{\ignorespaces Dekodierung und Main-Thread UI-Update des empfangenen JPEG-Streams im ImageFragment}}{30}{lstlisting.4.10}%
+\contentsline {lstlisting}{\numberline {4.10}{\ignorespaces Dekodierung und Main-Thread UI-Update des empfangenen JPEG-Streams im ImageFragment}}{29}{lstlisting.4.10}%
 \contentsline {lstlisting}{\numberline {4.11}{\ignorespaces JSON-Parsing der Vosk-Transkription im AudioFragment}}{30}{lstlisting.4.11}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

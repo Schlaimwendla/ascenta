@@ -34,8 +34,17 @@ Um die BLE-Limitierung zu umgehen, erfolgte der Wechsel auf ein WiFi-basiertes N
 \noindent\textbf{Phase 3: Finale hybride Topologie (BLE \& TCP)} \\
 Aufgrund der Unzuverlässigkeit von UDP wechselte die Architektur final zum Transmission Control Protocol (TCP). TCP garantiert durch interne Prüfsummen und automatische Paketwiederholung eine verlustfreie Übertragung. Das System nutzt nun eine hybride Strategie: BLE übernimmt ausschließlich die Geräteerkennung und den Austausch der WLAN-Daten (Provisioning). Sobald die Verbindung steht, übernimmt ein TCP-Socket auf Port 5005 den gesamten Datenstrom. Dieser Ansatz vereint die einfache Kopplung von Bluetooth mit der Stabilität und Bandbreite eines WiFi-Netzwerks.
 
-\subsection{Hardware und Elektronik}
-Fabian
+\subsection{Hardware und Elektronik - Fabian}
+\label{sec:konzept_elektronik}
+Das hardwareseitige Konzept fokussiert sich auf eine autonome Energieversorgung sowie eine intuitive Nutzersteuerung. Für eine maximale mobile Betriebsdauer sah der initiale Entwurf die Integration von zwei leistungsstarken Akkus mit einer Kapazität von jeweils 2000\,mAh vor. Diese großzügige Dimensionierung sollte konzeptionell sicherstellen, dass das System ausreichend Energie für den kontinuierlichen Betrieb der rechenintensiven KI-Modelle bereitstellt.
+
+Zur Steuerung der Hardware integrierte das ursprüngliche Konzept einen physischen Taster als zentrales Bedienelement, welches dem Nutzer die direkte Kontrolle über verschiedene Druckmuster ermöglichen sollte:
+\begin{itemize}
+    \item \textbf{Systemaktivierung:} Eine einfache Betätigung schaltet das Nicla Vision Modul ein. Diese Hardware-Trennung schont die Kapazität der Akkus in Ruhephasen maßgeblich.
+    \item \textbf{Kameraauslöser und Sprachsuche:} Ein schnelles, zweimaliges Drücken (Double-Click) erfasst ein aktuelles Bild und aktiviert zeitgleich die Audioaufnahme, um die Umgebung per Sprachbefehl nach einem bestimmten Gegenstand zu durchsuchen.
+\end{itemize}
+
+Um diese sprachgesteuerte Suchfunktion im Alltag praktikabel zu gestalten, sieht der theoretische Entwurf vor, das zugrundeliegende neuronale Netz auf eine Vielzahl von alltagsgebräuchlichen Objekten zu trainieren. Das Modell soll diese Gegenstände im aufgenommenen Bild anschließend zuverlässig identifizieren und lokalisieren.
 
 \subsection{Mechanik und Gehäusedesign}
 \subsubsection{Allgemein}
@@ -51,6 +60,7 @@ Folgende Elemente sind für die Integration der geplanten Elektronik in der Bril
 \end{itemize}
 
 Der geplante Aufbau des Modells besteht, wie bei herkömmlichen Brillen, aus zwei Brillenbügeln, einem Rahmen und anstelle der zwei Gläser einer Abdeckung. Letztere ist nicht transparent und deckt den Innenraum des Rahmens ab, in welchem die Elektronik verstaut ist.
+
 \subsubsection{Rahmen und Abdeckung}
 \subsubsection*{Rahmen v1 - 2 und Abdeckung v1 - 2}
 Die Konstruktion des Rahmens begann mit der Entwicklung einer Grundform in der zweidimensionalen Ebene.
@@ -69,12 +79,9 @@ Die Abdeckung entstand durch die Extrusion des inneren Rahmen-Bereichs - mit ein
 
 \textbf{Elektronik:} Im linken Bereich des Rahmens befindet sich das Nicla-Board. Über jeweils ein Loch für Kamera, Distanzsensor und Mikrofon in der Brillen-Abdeckung bleibt die wichtigste Sensorik frei. Um zu versichern, dass der Mikrocontroller an seiner Stelle bleibt, wurde entschieden, ihn von unten mit Stützen und von oben mit folgender Ausbuchtung zusammenzuhalten:
 
-
 \textit{Abdeckung v1: Rückseite (links)}
 \newline
 \textit{Rahmen v2: Nicla Vision-Stützen}
-
-% Die Ausbuchtung orientiert sich an einem Nicla Vision-Case aus dem Internet, welches zuvor noch leicht modifiziert wurde.
 
 Im rechten Bereich der Brille ist das Lademodul untergebracht. Unterhalb davon befindet sich eine USB-C-Öffnung für den Anschluss, über welche die Akkus aufgeladen werden können (\textit{siehe Elektronik}). % MTODO
 
@@ -86,7 +93,7 @@ Im Gegensatz zum Nicla-Board und dem Lademodul war die Positionierung der Button
     \centering
     \includegraphics[width=0.55\textwidth]{media/images/Button-Öffnung.jpg}
     \caption*{Rahmen v2: Button-Öffnung (rechts)}
-    \label{fig:Rahmen v2: Button-Öffnung}
+    \label{fig:Rahmen_v2_Button-Oeffnung}
 \end{figure}
 
 \textit{Abdeckung v1}
@@ -97,14 +104,14 @@ An den beiden Enden der Abdeckung, links und rechts, sind Ausbuchtungen mit Löc
 
 \subsubsection*{Rahmen v3}
 
-Die Umsetzung einer geeignetet Passform gelang bei Prototyp v1 + v2 nicht, da die Modelle aufgrund einer zu geringen Gesamtbreite Defizite im Bereich der Nase wie auch an den Schläfen aufwies.
+Die Umsetzung einer geeigneten Passform gelang bei Prototyp v1 + v2 nicht, da die Modelle aufgrund einer zu geringen Gesamtbreite Defizite im Bereich der Nase wie auch an den Schläfen aufwies.
 Um ein komfortables Tragen der Brille im Nasenbereich zu ermöglichen, wurden die Brillen-Gläser provisorisch verkleinert, wodurch mehr Platz im inneren Bereich geschaffen wurde. (siehe \textit{Abbildung}) %MTODO).
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.5\textwidth]{media/images/Nasenbereich-Erweiterung.jpg}
     \caption*{Rahmen v3: Nasenbereich-Erweiterung}
-    \label{fig:Rahmen v3: Nasenbereich-Erweiterung}
+    \label{fig:Rahmen_v3_Nasenbereich-Erweiterung}
 \end{figure}
 
 Da das Skalieren der Bügel-Ausbuchtungen weiter nach außen eine vollständige Redimensionierung erfordert hätte, wurde dieser Arbeitsschritt vorerst noch übersprungen.  
@@ -128,7 +135,7 @@ Da das Skalieren der Bügel-Ausbuchtungen weiter nach außen eine vollständige 
     \centering
     \includegraphics[width=0.5\textwidth]{media/images/Abdeckungs-Stützen.png}
     \caption*{Rahmen v3: Abdeckungs-Stützen}
-    \label{fig:Rahmen v3: Abdeckungs-Stützen}
+    \label{fig:Rahmen_v3_Abdeckungs-Stuetzen}
 \end{figure}
 
 \subsubsection*{Rahmen v4}
@@ -140,23 +147,23 @@ Die zuvor fehlenden Auflageflächen für den Knopf wurden nun unterhalb der Öff
     \centering
     \includegraphics[width=0.4\textwidth]{media/images/Auflageflächen.png}
     \caption*{Rahmen v4: Auflageflächen}
-    \label{fig:Rahmen v4: Auflageflächen}
+    \label{fig:Rahmen_v4_Auflageflaechen}
 \end{figure}
 
 Im Vergleich zur Vorversion wurden die zuvor vorhandenen Öffnungen an den äußeren Enden links und rechts zur Verbindung der Abdeckung wieder geschlossen. Stattdessen kommt eine Haken-Einrastfunktion zum Einsatz, die eine sichere und ästhetische Verbindung zwischen Abdeckung und Rahmen gewährleisten soll.
-\newline
+
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.25\textwidth]{media/images/Haken.png}
     \caption*{Haken v1: Angebracht an der Abdeckung}
-    \label{fig:Haken v1}
+    \label{fig:Haken_v1}
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.2\textwidth]{media/images/Haken-Gegenstück.png}
     \caption*{Haken-Gegenstück v1: Angebracht im Rahmen}
-    \label{fig:Haken-Gegenstück v1}
+    \label{fig:Haken-Gegenstueck_v1}
 \end{figure}
 
 \textbf{Idee:} Beim Einsetzen wird der Haken von oben in die abgerundete Öffnung des Haken-Gegenstücks eingeführt und kann aufgrund seiner Biegsamkeit gut einrasten, wodurch die Abdeckung passgenau sitzt. Zum Lösen der Verbindung soll ein dünner Stab durch ein kleines Loch an der Rückseite des Gegenstücks geführt werden. Dadurch wird der Haken aus seiner Position gelockert und die Abdeckung kann abgenommen werden.
@@ -167,7 +174,7 @@ Ein weiteres Problem trat im Zusammenhang mit den Bügeln auf. Um diese einklapp
 
 \textit{Rahmen v4: Hinteransicht} %MTODO
 
-An den äußeren Enden links und rechts, neben der Kabeldurchführung vom Rahmen zum Bügel, wird ein Scharnierkonzept aus dem Internet eingesetzt (\cite{scharnier_vorlage}). Dieses besteht aus zwei identischen Bauteilen, die entgegengesetzt zueinander angeordnet sind. Die Teile sind so ausgeführt, dass sie ineinandergesteckt werden können: Eine Seite bildet das Einsteckelement, während die gegenüberliegende Seite als passendes Gegenstück fungiert. Durch das Zusammenstecken der beiden Teile entsteht ein gelenkartiger Mechanismus, der das Zuklappen der Bügel ermöglichen soll.
+An den äußeren Enden links und rechts, neben der Kabeldurchführung vom Rahmen zum Bügel, wird ein Scharnierkonzept aus dem Internet eingesetzt. Dieses besteht aus zwei identischen Bauteilen, die entgegengesetzt zueinander angeordnet sind. Die Teile sind so ausgeführt, dass sie ineinandergesteckt werden können: Eine Seite bildet das Einsteckelement, während die gegenüberliegende Seite als passendes Gegenstück fungiert. Durch das Zusammenstecken der beiden Teile entsteht ein gelenkartiger Mechanismus, der das Zuklappen der Bügel ermöglichen soll.
 
 Jedoch zeigte sich nach dem 3D-Druck des Bauteils, dass das Scharnier zu klein dimensioniert war und der Drucker die erforderlichen Feinheiten nicht mit ausreichender Genauigkeit umsetzen konnte.
 
