@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.11)  18 MAR 2026 16:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.11)  20 MAR 2026 17:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1046,96 +1046,86 @@ File: media/images/Nasenbereich-Erweiterung.jpg Graphic file (type jpg)
 <use media/images/Nasenbereich-Erweiterung.jpg>
 Package pdftex.def Info: media/images/Nasenbereich-Erweiterung.jpg  used on input line 105.
 (pdftex.def)             Requested size: 218.37445pt x 89.0245pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 110--112
-
- []
-
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 117.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 118.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-[10 <./media/images/Button-Öffnung.jpg> <./media/images/Nasenbereich-Erweiterung.jpg>]
-<media/images/Abdeckungs-Stützen.png, id=332, 207.174pt x 118.917pt>
+ [10 <./media/images/Button-Öffnung.jpg> <./media/images/Nasenbereich-Erweiterung.jpg>]
+<media/images/Abdeckungs-Stützen.png, id=333, 207.174pt x 118.917pt>
 File: media/images/Abdeckungs-Stützen.png Graphic file (type png)
 <use media/images/Abdeckungs-Stützen.png>
-Package pdftex.def Info: media/images/Abdeckungs-Stützen.png  used on input line 129.
+Package pdftex.def Info: media/images/Abdeckungs-Stützen.png  used on input line 131.
 (pdftex.def)             Requested size: 218.37445pt x 125.34555pt.
-<media/images/Auflageflächen.png, id=333, 463.7325pt x 202.7575pt>
+<media/images/Auflageflächen.png, id=334, 463.7325pt x 202.7575pt>
 File: media/images/Auflageflächen.png Graphic file (type png)
 <use media/images/Auflageflächen.png>
-Package pdftex.def Info: media/images/Auflageflächen.png  used on input line 141.
+Package pdftex.def Info: media/images/Auflageflächen.png  used on input line 143.
 (pdftex.def)             Requested size: 174.69688pt x 76.38347pt.
-<media/images/Haken.png, id=334, 441.65pt x 247.92625pt>
+<media/images/Haken.png, id=335, 441.65pt x 247.92625pt>
 File: media/images/Haken.png Graphic file (type png)
 <use media/images/Haken.png>
-Package pdftex.def Info: media/images/Haken.png  used on input line 150.
+Package pdftex.def Info: media/images/Haken.png  used on input line 152.
 (pdftex.def)             Requested size: 109.18723pt x 61.2929pt.
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 154.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 156.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
  [11 <./media/images/Abdeckungs-Stützen.png> <./media/images/Auflageflächen.png>]
-<media/images/Haken-Gegenstück.png, id=342, 331.2375pt x 387.4475pt>
+<media/images/Haken-Gegenstück.png, id=343, 331.2375pt x 387.4475pt>
 File: media/images/Haken-Gegenstück.png Graphic file (type png)
 <use media/images/Haken-Gegenstück.png>
-Package pdftex.def Info: media/images/Haken-Gegenstück.png  used on input line 157.
+Package pdftex.def Info: media/images/Haken-Gegenstück.png  used on input line 159.
 (pdftex.def)             Requested size: 87.34843pt x 102.17058pt.
-
-
-LaTeX Warning: Citation `scharnier_vorlage' on page 12 undefined on input line 170.
-
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 171.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 177.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-[12 <./media/images/Haken.png> <./media/images/Haken-Gegenstück.png>]
-Overfull \hbox (1.03358pt too wide) in paragraph at lines 174--175
-\T1/cmr/m/n/12 gewonnenen Erken-nt-nisse aus den bish-eri-gen Ver-sio-nen ange-wandt wer-den sollen. 
- []
+ [12 <./media/images/Haken.png> <./media/images/Haken-Gegenstück.png>]
+
+LaTeX Warning: Citation `scharnier_vorlage' on page 13 undefined on input line 177.
 
 
-Overfull \hbox (29.01552pt too wide) in paragraph at lines 186--187
+Overfull \hbox (29.01552pt too wide) in paragraph at lines 197--198
 \T1/cmr/m/n/12 lich wie bei herk�mm-lichen Brillen, in zwei sep-a-rate Bere-iche f�r die Gl�ser aufzuteilen. 
  []
 
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 195.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 206.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
 [13]
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 226.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 235.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
  [14]
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 247.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 263.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
  [15]
-Overfull \hbox (11.70084pt too wide) in paragraph at lines 248--249
+Overfull \hbox (11.70084pt too wide) in paragraph at lines 263--264
 \T1/cmr/m/n/12 men verbinden. In vorheri-gen Ab-bil-dun-gen (\T1/cmr/m/it/12 siehe Ab-deck-ung v1\T1/cmr/m/n/12 ) ist der An-schraubpunkt
  []
 
 
-Overfull \hbox (0.34285pt too wide) in paragraph at lines 257--258
+Overfull \hbox (0.34285pt too wide) in paragraph at lines 275--276
 []\T1/cmr/bx/n/12 Datenerfassung: \T1/cmr/m/n/12 Kam-era und ToF-Sensor er-fassen syn-chron die vi-suelle Umge-
  []
 
 
-Overfull \hbox (14.17844pt too wide) in paragraph at lines 258--259
+Overfull \hbox (14.17844pt too wide) in paragraph at lines 276--277
 \T1/cmr/m/n/12 vante Ob-jek-tko-or-di-naten und �bertr�gt diese asyn-chron �ber eine TCP-Verbindung
  []
 
 
-Overfull \hbox (0.97188pt too wide) in paragraph at lines 260--261
+Overfull \hbox (0.97188pt too wide) in paragraph at lines 278--279
 []\T1/cmr/bx/n/12 Feedback: \T1/cmr/m/n/12 Das Sys-tem gener-iert akustis-che Sig-nale oder Sprachaus-gaben (TTS)
  []
 
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 266.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 286.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
 [16]) (./chapters/04_Umsetzung.tex
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
@@ -1149,7 +1139,7 @@ Overfull \hbox (0.38501pt too wide) in paragraph at lines 9--10
 \T1/cmr/m/n/12 tion, die asyn-chrone Daten-ver-ar-beitung und das Spe-icher-man-age-ment de-tail-liert. 
  []
 
-<media/images/openmv_ide.png, id=378, 414.54875pt x 122.4575pt>
+<media/images/openmv_ide.png, id=379, 414.54875pt x 122.4575pt>
 File: media/images/openmv_ide.png Graphic file (type png)
 <use media/images/openmv_ide.png>
 Package pdftex.def Info: media/images/openmv_ide.png  used on input line 19.
@@ -1162,7 +1152,7 @@ Overfull \hbox (32.47304pt too wide) in paragraph at lines 24--26
 \T1/cmr/m/n/12 darunter den An-droid Pro-filer zur Echtzei-t-anal-yse der Netzwerk- und CPU-Auslastung. 
  []
 
-<media/images/android_studio.png, id=385, 1204.5pt x 632.3625pt>
+<media/images/android_studio.png, id=386, 1204.5pt x 632.3625pt>
 File: media/images/android_studio.png Graphic file (type png)
 <use media/images/android_studio.png>
 Package pdftex.def Info: media/images/android_studio.png  used on input line 29.
@@ -1299,29 +1289,28 @@ Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 
  [31]
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 377.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 380.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
  [32]
-Overfull \hbox (0.90402pt too wide) in paragraph at lines 379--380
+Overfull \hbox (0.90402pt too wide) in paragraph at lines 387--388
 \T1/cmr/m/n/12 (Taps) den typ-is-chen St�r-be-we-gun-gen eines Nutzers (wie schnelles Gehen, Kopf-drehun-
  []
 
 
-Overfull \hbox (15.41145pt too wide) in paragraph at lines 384--385
+Overfull \hbox (15.41145pt too wide) in paragraph at lines 392--393
 \T1/cmr/m/n/12 Rah-men dieses Pro-to-typs nicht re-al-isier-bar waren, st�tzt sich die en-er-getis-che Evaluierung
  []
 
-
-Overfull \hbox (35.0077pt too wide) in paragraph at lines 386--388
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 394.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[33]
+Overfull \hbox (35.0077pt too wide) in paragraph at lines 394--396
 \T1/cmr/m/n/12 net sich eine the-o-retis-che Max-i-mal-laufzeit von ex-akt $\OT1/cmr/m/n/12 11\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 8$ \T1/cmr/m/n/12 Stun-den ($\OT1/cmr/m/n/12 1240 []\OML/cmm/m/it/12 =\OT1/cmr/m/n/12 105 []$\T1/cmr/m/n/12 ). 
  []
 
 ) (./chapters/05_futurework.tex
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 2.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
- [33]
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
 Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 2.
@@ -1472,12 +1461,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 22--26
 
 
 ] (./chapters/99_authors.tex
-<media/images/cv_liam.pdf, id=774, 597.50829pt x 845.0471pt>
+<media/images/cv_liam.pdf, id=775, 597.50829pt x 845.0471pt>
 File: media/images/cv_liam.pdf Graphic file (type pdf)
 <use media/images/cv_liam.pdf>
 Package pdftex.def Info: media/images/cv_liam.pdf  used on input line 12.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
-<media/images/cv_liam.pdf, id=776, page=1, 597.50829pt x 845.0471pt>
+<media/images/cv_liam.pdf, id=777, page=1, 597.50829pt x 845.0471pt>
 File: media/images/cv_liam.pdf Graphic file (type pdf)
 <use media/images/cv_liam.pdf, page 1>
 Package pdftex.def Info: media/images/cv_liam.pdf , page1 used on input line 12.
@@ -1505,12 +1494,12 @@ Package pdftex.def Info: media/images/cv_liam.pdf , page1 used on input line 12.
 
 
  <./media/images/cv_liam.pdf>]
-<media/images/cv_manuel.pdf, id=805, 597.55246pt x 845.07724pt>
+<media/images/cv_manuel.pdf, id=806, 597.55246pt x 845.07724pt>
 File: media/images/cv_manuel.pdf Graphic file (type pdf)
 <use media/images/cv_manuel.pdf>
 Package pdftex.def Info: media/images/cv_manuel.pdf  used on input line 14.
 (pdftex.def)             Requested size: 597.551pt x 845.07518pt.
-<media/images/cv_manuel.pdf, id=807, page=1, 597.55246pt x 845.07724pt>
+<media/images/cv_manuel.pdf, id=808, page=1, 597.55246pt x 845.07724pt>
 File: media/images/cv_manuel.pdf Graphic file (type pdf)
 <use media/images/cv_manuel.pdf, page 1>
 Package pdftex.def Info: media/images/cv_manuel.pdf , page1 used on input line 14.
@@ -1534,12 +1523,12 @@ Package pdftex.def Info: media/images/cv_manuel.pdf , page1 used on input line 1
  [49
 
  <./media/images/cv_manuel.pdf>]
-<media/images/cv_fabian.pdf, id=831, 597.55246pt x 845.07718pt>
+<media/images/cv_fabian.pdf, id=832, 597.55246pt x 845.07718pt>
 File: media/images/cv_fabian.pdf Graphic file (type pdf)
 <use media/images/cv_fabian.pdf>
 Package pdftex.def Info: media/images/cv_fabian.pdf  used on input line 15.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
-<media/images/cv_fabian.pdf, id=833, page=1, 597.55246pt x 845.07718pt>
+<media/images/cv_fabian.pdf, id=834, page=1, 597.55246pt x 845.07718pt>
 File: media/images/cv_fabian.pdf Graphic file (type pdf)
 <use media/images/cv_fabian.pdf, page 1>
 Package pdftex.def Info: media/images/cv_fabian.pdf , page1 used on input line 15.
@@ -1573,18 +1562,18 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 23258 strings out of 467525
- 417432 string characters out of 5398440
+ 23263 strings out of 467525
+ 417498 string characters out of 5398440
  1370342 words of memory out of 5000000
- 51408 multiletter control sequences out of 15000+600000
- 648277 words of font info for 89 fonts, out of 8000000 for 9000
+ 51412 multiletter control sequences out of 15000+600000
+ 648976 words of font info for 90 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,22n,107p,11318b,2058s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/google/noto/NotoSans-Bold.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/google/noto/NotoSans-Italic.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/google/noto/NotoSans-Regular.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfsx1200.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfsx1728.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfsx2488.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfti1728.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on main.pdf (56 pages, 3247241 bytes).
+<c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/google/noto/NotoSans-Bold.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/google/noto/NotoSans-Italic.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/google/noto/NotoSans-Regular.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfbi1200.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfsx1200.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfsx1728.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfsx2488.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfti1728.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
+Output written on main.pdf (56 pages, 3286551 bytes).
 PDF statistics:
- 1271 PDF objects out of 1440 (max. 8388607)
- 1098 compressed objects within 11 object streams
+ 1277 PDF objects out of 1440 (max. 8388607)
+ 1101 compressed objects within 12 object streams
  383 named destinations out of 1000 (max. 500000)
  833 words of extra memory for PDF output out of 10000 (max. 10000000)
 

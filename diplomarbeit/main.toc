@@ -52,11 +52,11 @@
 \contentsline {subsection}{\numberline {4.1.3}Entwicklung des Machine-Learning-Modells (Objekterkennung)}{31}{subsection.4.1.3}%
 \contentsline {subsection}{\numberline {4.1.4}Konstruktion und 3D-Druck}{31}{subsection.4.1.4}%
 \contentsline {section}{\numberline {4.2}Herausforderungen in der Entwicklung}{31}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Mechanische und geometrische Restriktionen}{31}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.1}Mechanische und geometrische Restriktionen}{32}{subsection.4.2.1}%
 \contentsline {subsection}{\numberline {4.2.2}Energiemanagement im begrenzten Bauraum}{32}{subsection.4.2.2}%
 \contentsline {subsection}{\numberline {4.2.3}Ressourcenlimits und Speicher-Fragmentierung (Software) - Liam}{32}{subsection.4.2.3}%
 \contentsline {section}{\numberline {4.3}Tests und Validierung - Liam}{32}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Netzwerklatenz und Streaming-Performance}{32}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.1}Netzwerklatenz und Streaming-Performance}{33}{subsection.4.3.1}%
 \contentsline {subsection}{\numberline {4.3.2}Auswertung der kinetischen Interaktion (Tap-Detection)}{33}{subsection.4.3.2}%
 \contentsline {subsection}{\numberline {4.3.3}Energetische Evaluierung (Akkulaufzeit)}{33}{subsection.4.3.3}%
 \contentsline {chapter}{\numberline {5}Ausblick (Future Work)}{35}{chapter.5}%
