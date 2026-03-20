@@ -1,38 +1,37 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.11)  18 MAR 2026 16:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2026.3.14)  20 MAR 2026 20:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/ascenta/diplomarbeit/main.tex
-(c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/ascenta/diplomarbeit/main.tex
-LaTeX2e <2025-11-01>
-L3 programming layer <2026-01-19>
-(c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/koma-script/scrbook.cls
-Document Class: scrbook 2026/02/02 v3.49.2 KOMA-Script document class (book)
-(c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/koma-script/scrkbase.sty
-Package: scrkbase 2026/02/02 v3.49.2 KOMA-Script package (KOMA-Script-dependent basics and keyval usage)
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/koma-script/scrbase.sty
-Package: scrbase 2026/02/02 v3.49.2 KOMA-Script package (KOMA-Script-independent basics and keyval usage)
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/koma-script/scrlfile.sty
-Package: scrlfile 2026/02/02 v3.49.2 KOMA-Script package (file load hooks)
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/koma-script/scrlfile-hook.sty
-Package: scrlfile-hook 2026/02/02 v3.49.2 KOMA-Script package (using LaTeX hooks)
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/koma-script/scrlogo.sty
-Package: scrlogo 2026/02/02 v3.49.2 KOMA-Script package (logo)
-))) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/graphics/keyval.sty
+**/home/laim/AndroidStudioProjects/ascenta/diplomarbeit/main.tex
+(/home/laim/AndroidStudioProjects/ascenta/diplomarbeit/main.tex
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-02-22> (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrbook.cls
+Document Class: scrbook 2022/10/12 v3.38 KOMA-Script document class (book)
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrkbase.sty
+Package: scrkbase 2022/10/12 v3.38 KOMA-Script package (KOMA-Script-dependent basics and keyval usage)
+ (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrbase.sty
+Package: scrbase 2022/10/12 v3.38 KOMA-Script package (KOMA-Script-independent basics and keyval usage)
+ (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrlfile.sty
+Package: scrlfile 2022/10/12 v3.38 KOMA-Script package (file load hooks)
+ (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrlfile-hook.sty
+Package: scrlfile-hook 2022/10/12 v3.38 KOMA-Script package (using LaTeX hooks)
+ (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrlogo.sty
+Package: scrlogo 2022/10/12 v3.38 KOMA-Script package (logo)
+))) (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
-\KV@toks@=\toks17
+\KV@toks@=\toks16
 )
-Applying: [2021/05/01] Usage of raw or classic option list on input line 254.
-Already applied: [0000/00/00] Usage of raw or classic option list on input line 370.
-)) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/koma-script/tocbasic.sty
-Package: tocbasic 2026/02/02 v3.49.2 KOMA-Script package (handling toc-files)
-\scr@dte@tocline@numberwidth=\skip49
-\scr@dte@tocline@numbox=\box53
+Applying: [2021/05/01] Usage of raw or classic option list on input line 252.
+Already applied: [0000/00/00] Usage of raw or classic option list on input line 368.
+)) (/usr/share/texlive/texmf-dist/tex/latex/koma-script/tocbasic.sty
+Package: tocbasic 2022/10/12 v3.38 KOMA-Script package (handling toc-files)
+\scr@dte@tocline@numberwidth=\skip48
+\scr@dte@tocline@numbox=\box51
 )
 Package tocbasic Info: omitting babel extension for `toc'
 (tocbasic)             because of feature `nobabel' available
-(tocbasic)             for `toc' on input line 143.
+(tocbasic)             for `toc' on input line 137.
 Package scrbook Info: You've used standard option `12pt'.
 (scrbook)             This is correct!
 (scrbook)             Internally I'm using `fontsize=12pt'.
@@ -45,23 +44,23 @@ Class scrbook Info: You've used standard option `oneside'.
 (scrbook)           If you'd like to set the option with \KOMAoptions,
 (scrbook)           you'd have to use `twoside=false' there
 (scrbook)           instead of `oneside', too.
-Class scrbook Info: File `scrsize12pt.clo' used to setup font sizes on input line 2713.
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/koma-script/scrsize12pt.clo
-File: scrsize12pt.clo 2026/02/02 v3.49.2 KOMA-Script font size class option (12pt)
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/koma-script/typearea.sty
-Package: typearea 2026/02/02 v3.49.2 KOMA-Script package (type area)
-\ta@bcor=\skip50
-\ta@div=\count275
+Class scrbook Info: File `scrsize12pt.clo' used to setup font sizes on input line 2617.
+ (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrsize12pt.clo
+File: scrsize12pt.clo 2022/10/12 v3.38 KOMA-Script font size class option (12pt)
+) (/usr/share/texlive/texmf-dist/tex/latex/koma-script/typearea.sty
+Package: typearea 2022/10/12 v3.38 KOMA-Script package (type area)
+\ta@bcor=\skip49
+\ta@div=\count185
 Package typearea Info: You've used standard option `oneside'.
 (typearea)             This is correct!
 (typearea)             Internally I'm using `twoside=false'.
 (typearea)             If you'd like to set the option with \KOMAoptions,
 (typearea)             you'd have to use `twoside=false' there
 (typearea)             instead of `oneside', too.
-\ta@hblk=\skip51
-\ta@vblk=\skip52
-\ta@temp=\skip53
-\footheight=\skip54
+\ta@hblk=\skip50
+\ta@vblk=\skip51
+\ta@temp=\skip52
+\footheight=\skip53
 Package typearea Info: These are the values describing the layout:
 (typearea)             DIV  = 12
 (typearea)             BCOR = 0.0pt
@@ -78,107 +77,100 @@ Package typearea Info: These are the values describing the layout:
 (typearea)              \topskip        = 12.0pt
 (typearea)              \footskip       = 50.75pt
 (typearea)              \baselineskip   = 14.5pt
-(typearea)              on input line 1810.
+(typearea)              on input line 1767.
 )
-\c@part=\count276
-\c@chapter=\count277
-\c@section=\count278
-\c@subsection=\count279
-\c@subsubsection=\count280
-\c@paragraph=\count281
-\c@subparagraph=\count282
-\scr@dte@chapter@maxnumwidth=\skip55
+\c@part=\count186
+\c@chapter=\count187
+\c@section=\count188
+\c@subsection=\count189
+\c@subsubsection=\count190
+\c@paragraph=\count191
+\c@subparagraph=\count192
+\scr@dte@chapter@maxnumwidth=\skip54
 Class scrbook Info: using compatibility default `afterindent=bysign'
-(scrbook)           for `\chapter on input line 5945.
-\scr@dte@section@maxnumwidth=\skip56
+(scrbook)           for `\chapter on input line 5898.
+\scr@dte@section@maxnumwidth=\skip55
 Class scrbook Info: using compatibility default `runin=bysign'
-(scrbook)           for `\section on input line 5956.
+(scrbook)           for `\section on input line 5909.
 Class scrbook Info: using compatibility default `afterindent=bysign'
-(scrbook)           for `\section on input line 5956.
-\scr@dte@part@maxnumwidth=\skip57
+(scrbook)           for `\section on input line 5909.
+\scr@dte@part@maxnumwidth=\skip56
 Class scrbook Info: using compatibility default `afterindent=true'
-(scrbook)           for `\part on input line 5965.
-\scr@dte@subsection@maxnumwidth=\skip58
+(scrbook)           for `\part on input line 5918.
+\scr@dte@subsection@maxnumwidth=\skip57
 Class scrbook Info: using compatibility default `runin=bysign'
-(scrbook)           for `\subsection on input line 5975.
+(scrbook)           for `\subsection on input line 5928.
 Class scrbook Info: using compatibility default `afterindent=bysign'
-(scrbook)           for `\subsection on input line 5975.
-\scr@dte@subsubsection@maxnumwidth=\skip59
+(scrbook)           for `\subsection on input line 5928.
+\scr@dte@subsubsection@maxnumwidth=\skip58
 Class scrbook Info: using compatibility default `runin=bysign'
-(scrbook)           for `\subsubsection on input line 5985.
+(scrbook)           for `\subsubsection on input line 5938.
 Class scrbook Info: using compatibility default `afterindent=bysign'
-(scrbook)           for `\subsubsection on input line 5985.
-\scr@dte@paragraph@maxnumwidth=\skip60
+(scrbook)           for `\subsubsection on input line 5938.
+\scr@dte@paragraph@maxnumwidth=\skip59
 Class scrbook Info: using compatibility default `runin=bysign'
-(scrbook)           for `\paragraph on input line 5996.
+(scrbook)           for `\paragraph on input line 5949.
 Class scrbook Info: using compatibility default `afterindent=bysign'
-(scrbook)           for `\paragraph on input line 5996.
-\scr@dte@subparagraph@maxnumwidth=\skip61
+(scrbook)           for `\paragraph on input line 5949.
+\scr@dte@subparagraph@maxnumwidth=\skip60
 Class scrbook Info: using compatibility default `runin=bysign'
-(scrbook)           for `\subparagraph on input line 6006.
+(scrbook)           for `\subparagraph on input line 5959.
 Class scrbook Info: using compatibility default `afterindent=bysign'
-(scrbook)           for `\subparagraph on input line 6006.
-\abovecaptionskip=\skip62
-\belowcaptionskip=\skip63
-\c@pti@nb@sid@b@x=\box54
+(scrbook)           for `\subparagraph on input line 5959.
+\abovecaptionskip=\skip61
+\belowcaptionskip=\skip62
+\c@pti@nb@sid@b@x=\box52
 Package tocbasic Info: omitting babel extension for `lof'
 (tocbasic)             because of feature `nobabel' available
-(tocbasic)             for `lof' on input line 7242.
-\scr@dte@figure@maxnumwidth=\skip64
-\c@figure=\count283
+(tocbasic)             for `lof' on input line 7142.
+\scr@dte@figure@maxnumwidth=\skip63
+\c@figure=\count193
 Package tocbasic Info: omitting babel extension for `lot'
 (tocbasic)             because of feature `nobabel' available
-(tocbasic)             for `lot' on input line 7255.
-\scr@dte@table@maxnumwidth=\skip65
-\c@table=\count284
-Class scrbook Info: Redefining `\numberline' on input line 7426.
-\bibindent=\dimen148
-) (./includes/htl_definintions.tex (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/geometry/geometry.sty
-Package: geometry 2026/03/07 v6.0 Page Geometry
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/generic/iftex/ifvtex.sty
+(tocbasic)             for `lot' on input line 7159.
+\scr@dte@table@maxnumwidth=\skip64
+\c@table=\count194
+Class scrbook Info: Redefining `\numberline' on input line 7330.
+\bibindent=\dimen140
+) (./includes/htl_definintions.tex (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+ (/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/generic/iftex/iftex.sty
-Package: iftex 2024/12/12 v1.0g TeX engine tests
+ (/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
 ))
-\Gm@cnth=\count285
-\Gm@cntv=\count286
-\c@Gm@tempcnt=\count287
-\Gm@bindingoffset=\dimen149
-\Gm@wd@mp=\dimen150
-\Gm@odd@mp=\dimen151
-\Gm@even@mp=\dimen152
-\Gm@layoutwidth=\dimen153
-\Gm@layoutheight=\dimen154
-\Gm@layouthoffset=\dimen155
-\Gm@layoutvoffset=\dimen156
-\Gm@dimlist=\toks18
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2026/03/08 v26.4 The multilingual framework for LuaLaTeX, pdfLaTeX and XeLaTeX
-\babel@savecnt=\count288
-LaTeX Encoding Info:    Redeclaring text command \ij (encoding OT1) on input line 2078.
-LaTeX Encoding Info:    Redeclaring text command \IJ (encoding OT1) on input line 2080.
-LaTeX Encoding Info:    Redeclaring text command \ij (encoding T1) on input line 2082.
-LaTeX Encoding Info:    Redeclaring text command \IJ (encoding T1) on input line 2083.
-LaTeX Encoding Info:    Ignoring declaration for text command \ij (encoding ?) on input line 2084.
-LaTeX Encoding Info:    Ignoring declaration for text command \IJ (encoding ?) on input line 2086.
-LaTeX Encoding Info:    Ignoring declaration for text command \SS (encoding ?) on input line 2111.
-\U@D=\dimen157
-\l@unhyphenated=\language91
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/generic/babel/txtbabel.def)
+\Gm@cnth=\count195
+\Gm@cntv=\count196
+\c@Gm@tempcnt=\count197
+\Gm@bindingoffset=\dimen141
+\Gm@wd@mp=\dimen142
+\Gm@odd@mp=\dimen143
+\Gm@even@mp=\dimen144
+\Gm@layoutwidth=\dimen145
+\Gm@layoutheight=\dimen146
+\Gm@layouthoffset=\dimen147
+\Gm@layoutvoffset=\dimen148
+\Gm@dimlist=\toks17
+) (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2023/02/13 3.86 The Babel package
+\babel@savecnt=\count198
+\U@D=\dimen149
+\l@unhyphenated=\language86
+ (/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
 \bbl@readstream=\read2
-\bbl@dirlevel=\count289
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/generic/babel/locale/en/babel-english.tex)
-Package babel Info: Importing font and identification data for english
-(babel)             from babel-en.ini. Reported on input line 4330.
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/generic/babel-english/english.ldf
+\bbl@dirlevel=\count199
+ (/usr/share/texlive/texmf-dist/tex/generic/babel-english/english.ldf
 Language: english 2017/06/06 v3.3r English support from the babel system
 Package babel Info: Hyphen rules for 'canadian' set to \l@english
 (babel)             (\language0). Reported on input line 102.
 Package babel Info: Hyphen rules for 'australian' set to \l@ukenglish
-(babel)             (\language22). Reported on input line 105.
+(babel)             (\language72). Reported on input line 105.
 Package babel Info: Hyphen rules for 'newzealand' set to \l@ukenglish
-(babel)             (\language22). Reported on input line 108.
-))
+(babel)             (\language72). Reported on input line 108.
+)) (/usr/share/texlive/texmf-dist/tex/generic/babel/locale/en/babel-english.tex
+Package babel Info: Importing font and identification data for english
+(babel)             from babel-en.ini. Reported on input line 11.
+)
 
 Class scrbook Warning: Usage of package `parskip' together
 (scrbook)              with a KOMA-Script class is not recommended.
@@ -187,424 +179,432 @@ Class scrbook Warning: Usage of package `parskip' together
 (scrbook)              Nevertheless, using requested
 (scrbook)              package `parskip' on input line 6.
 
-(c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/parskip/parskip.sty
+(/usr/share/texlive/texmf-dist/tex/latex/parskip/parskip.sty
 Package: parskip 2021-03-14 v2.0h non-zero parskip adjustments
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+ (/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
-Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
+ (/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
+) (/usr/share/texlive/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
 Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
-)) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/etoolbox/etoolbox.sty
-Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count290
-)) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/graphics/trig.sty
-Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+)) (/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count266
+)
+Couldn't patch \@startsection
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
-Package graphics Info: Driver file: pdftex.def on input line 106.
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/graphics-def/pdftex.def
-File: pdftex.def 2025/09/29 v1.2d Graphics/color driver for pdftex
+Package graphics Info: Driver file: pdftex.def on input line 107.
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
 ))
-\Gin@req@height=\dimen158
-\Gin@req@width=\dimen159
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/amsfonts/amssymb.sty
+\Gin@req@height=\dimen150
+\Gin@req@width=\dimen151
+) (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
-\@emptytoks=\toks19
+\@emptytoks=\toks18
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-)) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/mathtools/mathtools.sty
-Package: mathtools 2024/10/04 v1.31 mathematical typesetting tools
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/tools/calc.sty
-Package: calc 2025/03/01 v4.3b Infix arithmetic (KKT,FJ)
-\calc@Acount=\count291
-\calc@Bcount=\count292
-\calc@Adimen=\dimen160
-\calc@Bdimen=\dimen161
-\calc@Askip=\skip66
-\calc@Bskip=\skip67
-LaTeX Info: Redefining \setlength on input line 86.
-LaTeX Info: Redefining \addtolength on input line 87.
-\calc@Ccount=\count293
-\calc@Cskip=\skip68
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/mathtools/mhsetup.sty
+)) (/usr/share/texlive/texmf-dist/tex/latex/mathtools/mathtools.sty
+Package: mathtools 2022/06/29 v1.29 mathematical typesetting tools
+ (/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count267
+\calc@Bcount=\count268
+\calc@Adimen=\dimen152
+\calc@Bdimen=\dimen153
+\calc@Askip=\skip65
+\calc@Bskip=\skip66
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count269
+\calc@Cskip=\skip67
+) (/usr/share/texlive/texmf-dist/tex/latex/mathtools/mhsetup.sty
 Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2025/07/09 v2.17z AMS math features
-\@mathmargin=\skip69
+) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2022/04/08 v2.17n AMS math features
+\@mathmargin=\skip68
 
 For additional information on amsmath, use the `?' option.
-(c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/amsmath/amstext.sty
-Package: amstext 2024/11/17 v2.01 AMS text
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/amsmath/amsgen.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+ (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks20
-\ex@=\dimen162
-)) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/amsmath/amsbsy.sty
+\@emptytoks=\toks19
+\ex@=\dimen154
+)) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen163
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/amsmath/amsopn.sty
+\pmbraise@=\dimen155
+) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
-\inf@bad=\count294
-LaTeX Info: Redefining \frac on input line 233.
-\uproot@=\count295
-\leftroot@=\count296
-LaTeX Info: Redefining \overline on input line 398.
-LaTeX Info: Redefining \colon on input line 409.
-\classnum@=\count297
-\DOTSCASE@=\count298
-LaTeX Info: Redefining \ldots on input line 495.
-LaTeX Info: Redefining \dots on input line 498.
-LaTeX Info: Redefining \cdots on input line 619.
-\Mathstrutbox@=\box55
-\strutbox@=\box56
-LaTeX Info: Redefining \big on input line 721.
-LaTeX Info: Redefining \Big on input line 722.
-LaTeX Info: Redefining \bigg on input line 723.
-LaTeX Info: Redefining \Bigg on input line 724.
-\big@size=\dimen164
-LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
-LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
-\macc@depth=\count299
-LaTeX Info: Redefining \bmod on input line 904.
-LaTeX Info: Redefining \pmod on input line 909.
-LaTeX Info: Redefining \smash on input line 939.
-LaTeX Info: Redefining \relbar on input line 969.
-LaTeX Info: Redefining \Relbar on input line 970.
-\c@MaxMatrixCols=\count300
-\dotsspace@=\muskip17
-\c@parentequation=\count301
-\dspbrk@lvl=\count302
-\tag@help=\toks21
-\row@=\count303
-\column@=\count304
-\maxfields@=\count305
-\andhelp@=\toks22
-\eqnshift@=\dimen165
-\alignsep@=\dimen166
-\tagshift@=\dimen167
-\tagwidth@=\dimen168
-\totwidth@=\dimen169
-\lineht@=\dimen170
-\@envbody=\toks23
-\multlinegap=\skip70
-\multlinetaggap=\skip71
-\mathdisplay@stack=\toks24
-LaTeX Info: Redefining \[ on input line 2950.
-LaTeX Info: Redefining \] on input line 2951.
+\inf@bad=\count270
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count271
+\leftroot@=\count272
+LaTeX Info: Redefining \overline on input line 399.
+LaTeX Info: Redefining \colon on input line 410.
+\classnum@=\count273
+\DOTSCASE@=\count274
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box53
+\strutbox@=\box54
+LaTeX Info: Redefining \big on input line 722.
+LaTeX Info: Redefining \Big on input line 723.
+LaTeX Info: Redefining \bigg on input line 724.
+LaTeX Info: Redefining \Bigg on input line 725.
+\big@size=\dimen156
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count275
+LaTeX Info: Redefining \bmod on input line 905.
+LaTeX Info: Redefining \pmod on input line 910.
+LaTeX Info: Redefining \smash on input line 940.
+LaTeX Info: Redefining \relbar on input line 970.
+LaTeX Info: Redefining \Relbar on input line 971.
+\c@MaxMatrixCols=\count276
+\dotsspace@=\muskip16
+\c@parentequation=\count277
+\dspbrk@lvl=\count278
+\tag@help=\toks20
+\row@=\count279
+\column@=\count280
+\maxfields@=\count281
+\andhelp@=\toks21
+\eqnshift@=\dimen157
+\alignsep@=\dimen158
+\tagshift@=\dimen159
+\tagwidth@=\dimen160
+\totwidth@=\dimen161
+\lineht@=\dimen162
+\@envbody=\toks22
+\multlinegap=\skip69
+\multlinetaggap=\skip70
+\mathdisplay@stack=\toks23
+LaTeX Info: Redefining \[ on input line 2953.
+LaTeX Info: Redefining \] on input line 2954.
 )
-\g_MT_multlinerow_int=\count306
-\l_MT_multwidth_dim=\dimen171
-\origjot=\skip72
-\l_MT_shortvdotswithinadjustabove_dim=\dimen172
-\l_MT_shortvdotswithinadjustbelow_dim=\dimen173
-\l_MT_above_intertext_sep=\dimen174
-\l_MT_below_intertext_sep=\dimen175
-\l_MT_above_shortintertext_sep=\dimen176
-\l_MT_below_shortintertext_sep=\dimen177
-\xmathstrut@box=\box57
-\xmathstrut@dim=\dimen178
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/base/inputenc.sty
-Package: inputenc 2024/02/08 v1.3d Input encoding file
-\inpenc@prehook=\toks25
-\inpenc@posthook=\toks26
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/base/fontenc.sty
-Package: fontenc 2025/07/18 v2.1d Standard LaTeX package
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/graphics/lscape.sty
+\g_MT_multlinerow_int=\count282
+\l_MT_multwidth_dim=\dimen163
+\origjot=\skip71
+\l_MT_shortvdotswithinadjustabove_dim=\dimen164
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen165
+\l_MT_above_intertext_sep=\dimen166
+\l_MT_below_intertext_sep=\dimen167
+\l_MT_above_shortintertext_sep=\dimen168
+\l_MT_below_shortintertext_sep=\dimen169
+\xmathstrut@box=\box55
+\xmathstrut@dim=\dimen170
+) (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2021/02/14 v1.3d Input encoding file
+\inpenc@prehook=\toks24
+\inpenc@posthook=\toks25
+) (/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
 Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/tools/tabularx.sty
-Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/tools/array.sty
-Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
-\col@sep=\dimen179
-\ar@mcellbox=\box58
-\extrarowheight=\dimen180
-\NC@list=\toks27
-\extratabsurround=\skip73
-\backup@length=\skip74
-\ar@cellbox=\box59
+) (/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty
+Package: tabularx 2020/01/15 v2.11c `tabularx' package (DPC)
+ (/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2022/09/04 v2.5g Tabular extension package (FMi)
+\col@sep=\dimen171
+\ar@mcellbox=\box56
+\extrarowheight=\dimen172
+\NC@list=\toks26
+\extratabsurround=\skip72
+\backup@length=\skip73
+\ar@cellbox=\box57
 )
-\TX@col@width=\dimen181
-\TX@old@table=\dimen182
-\TX@old@col=\dimen183
-\TX@target=\dimen184
-\TX@delta=\dimen185
-\TX@cols=\count307
-\TX@ftn=\toks28
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/tools/longtable.sty
-Package: longtable 2025-10-13 v4.24 Multi-page Table package (DPC)
-\LTleft=\skip75
-\LTright=\skip76
-\LTpre=\skip77
-\LTpost=\skip78
-\LTchunksize=\count308
-\LTcapwidth=\dimen186
-\LT@head=\box60
-\LT@firsthead=\box61
-\LT@foot=\box62
-\LT@lastfoot=\box63
-\LT@gbox=\box64
-\LT@cols=\count309
-\LT@rows=\count310
-\c@LT@tables=\count311
-\c@LT@chunks=\count312
-\LT@p@ftn=\toks29
+\TX@col@width=\dimen173
+\TX@old@table=\dimen174
+\TX@old@col=\dimen175
+\TX@target=\dimen176
+\TX@delta=\dimen177
+\TX@cols=\count283
+\TX@ftn=\toks27
+) (/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
+\LTleft=\skip74
+\LTright=\skip75
+\LTpre=\skip76
+\LTpost=\skip77
+\LTchunksize=\count284
+\LTcapwidth=\dimen178
+\LT@head=\box58
+\LT@firsthead=\box59
+\LT@foot=\box60
+\LT@lastfoot=\box61
+\LT@gbox=\box62
+\LT@cols=\count285
+\LT@rows=\count286
+\c@LT@tables=\count287
+\c@LT@chunks=\count288
+\LT@p@ftn=\toks28
 )
 Class scrbook Info: longtable captions redefined on input line 24.
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/multirow/multirow.sty
-Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
-\multirow@colwidth=\skip79
-\multirow@cntb=\count313
-\multirow@dima=\skip80
-\bigstrutjot=\dimen187
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/subfig/subfig.sty
+ (/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
+\multirow@colwidth=\skip78
+\multirow@cntb=\count289
+\multirow@dima=\skip79
+\bigstrutjot=\dimen179
+) (/usr/share/texlive/texmf-dist/tex/latex/subfig/subfig.sty
 Package: subfig 2005/06/28 ver: 1.3 subfig package
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/caption/caption.sty
-Package: caption 2023/08/05 v3.6o Customizing captions (AR)
-
-Package tocbasic Info: Loading of class-dependent code for package caption3
-(tocbasic)             prevented on line 50.
-
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/caption/caption3.sty
-Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
-\caption@tempdima=\dimen188
-\captionmargin=\dimen189
-\caption@leftmargin=\dimen190
-\caption@rightmargin=\dimen191
-\caption@width=\dimen192
-\caption@indent=\dimen193
-\caption@parindent=\dimen194
-\caption@hangindent=\dimen195
-)
-\c@caption@flags=\count314
-\c@continuedfloat=\count315
-Package caption Info: longtable package is loaded.
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/caption/ltcaption.sty
-Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
+ (/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2023/03/12 v3.6j Customizing captions (AR)
+ (/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2023/03/12 v2.4 caption3 kernel (AR)
+\caption@tempdima=\dimen180
+\captionmargin=\dimen181
+\caption@leftmargin=\dimen182
+\caption@rightmargin=\dimen183
+\caption@width=\dimen184
+\caption@indent=\dimen185
+\caption@parindent=\dimen186
+\caption@hangindent=\dimen187
+Package caption Info: KOMA-Script document class detected.
+ (/usr/share/texlive/texmf-dist/tex/latex/caption/caption-koma.sto
+File: caption-koma.sto 2022/12/27 v2.0c Adaption of the caption package to the KOMA-Script document classes (AR)
 ))
-\c@KVtest=\count316
-\sf@farskip=\skip81
-\sf@captopadj=\dimen196
-\sf@capskip=\skip82
-\sf@nearskip=\skip83
-\c@subfigure=\count317
-\c@subfigure@save=\count318
-\c@lofdepth=\count319
-\c@subtable=\count320
-\c@subtable@save=\count321
-\c@lotdepth=\count322
-\sf@top=\skip84
-\sf@bottom=\skip85
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/pdfpages/pdfpages.sty
-Package: pdfpages 2025/07/23 v0.6g Insert pages of external PDF documents (AM)
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/base/ifthen.sty
-Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/eso-pic/eso-pic.sty
-Package: eso-pic 2025/12/10 v3.0d eso-pic (RN)
-\ESO@tempdima=\dimen197
-\ESO@tempdimb=\dimen198
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/xcolor/xcolor.sty
-Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/graphics-cfg/color.cfg
+\c@caption@flags=\count290
+\c@continuedfloat=\count291
+Package caption Info: longtable package is loaded.
+ (/usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty
+Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
+)
+Package caption Info: KOMA-Script scrextend package detected.
+\caption@addmargin@hsize=\dimen188
+\caption@addmargin@linewidth=\dimen189
+)
+\c@KVtest=\count292
+\sf@farskip=\skip80
+\sf@captopadj=\dimen190
+\sf@capskip=\skip81
+\sf@nearskip=\skip82
+\c@subfigure=\count293
+\c@subfigure@save=\count294
+\c@lofdepth=\count295
+\c@subtable=\count296
+\c@subtable@save=\count297
+\c@lotdepth=\count298
+\sf@top=\skip83
+\sf@bottom=\skip84
+) (/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+Package: pdfpages 2022/12/19 v0.5x Insert pages of external PDF documents (AM)
+ (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
+) (/usr/share/texlive/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+Package: eso-pic 2020/10/14 v3.0a eso-pic (RN)
+\ESO@tempdima=\dimen191
+\ESO@tempdimb=\dimen192
+ (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2022/06/12 v2.14 LaTeX color extensions (UK)
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
-Package xcolor Info: Driver file: pdftex.def on input line 274.
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/graphics/mathcolor.ltx)
-Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
-Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
-Package xcolor Info: Model `RGB' extended on input line 1365.
-Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
-Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
-Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
-Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
-Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
-Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
+Package xcolor Info: Driver file: pdftex.def on input line 227.
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1353.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1357.
+Package xcolor Info: Model `RGB' extended on input line 1369.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1371.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1372.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1373.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1374.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1375.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1376.
 ))
-\AM@pagewidth=\dimen199
-\AM@pageheight=\dimen256
-\AM@fboxrule=\dimen257
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/pdfpages/pppdftex.def
-File: pppdftex.def 2025/07/23 v0.6g Pdfpages driver for pdfTeX (AM)
+\AM@pagewidth=\dimen193
+\AM@pageheight=\dimen194
+\AM@fboxrule=\dimen195
+ (/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pppdftex.def
+File: pppdftex.def 2022/12/19 v0.5x Pdfpages driver for pdfTeX (AM)
 )
-\pdfpages@includegraphics@status=\count323
-\AM@pagebox=\box65
-\AM@global@opts=\toks30
-\AM@pagecnt=\count324
-\AM@toc@title=\toks31
-\AM@lof@heading=\toks32
-\c@AM@survey=\count325
-\AM@templatesizebox=\box66
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/framed/framed.sty
+\pdfpages@includegraphics@status=\count299
+\AM@pagebox=\box63
+\AM@global@opts=\toks29
+\AM@pagecnt=\count300
+\AM@toc@title=\toks30
+\AM@lof@heading=\toks31
+\c@AM@survey=\count301
+\AM@templatesizebox=\box64
+) (/usr/share/texlive/texmf-dist/tex/latex/framed/framed.sty
 Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
-\OuterFrameSep=\skip86
-\fb@frw=\dimen258
-\fb@frh=\dimen259
-\FrameRule=\dimen260
-\FrameSep=\dimen261
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/forloop/forloop.sty
-Package: forloop 2023/05/03 v3.0 For Loops for LaTeX
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count326
-\lst@gtempboxa=\box67
-\lst@token=\toks33
-\lst@length=\count327
-\lst@currlwidth=\dimen262
-\lst@column=\count328
-\lst@pos=\count329
-\lst@lostspace=\dimen263
-\lst@width=\dimen264
-\lst@newlines=\count330
-\lst@lineno=\count331
-\lst@maxwidth=\dimen265
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/listings/lstpatch.sty
-File: lstpatch.sty 2025/11/14 1.11b (Carsten Heinz)
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2025/11/14 1.11b (Carsten Heinz)
-\c@lstnumber=\count332
-\lst@skipnumbers=\count333
-\lst@framebox=\box68
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/listings/listings.cfg
-File: listings.cfg 2025/11/14 1.11b listings configuration
+\OuterFrameSep=\skip85
+\fb@frw=\dimen196
+\fb@frh=\dimen197
+\FrameRule=\dimen198
+\FrameSep=\dimen199
+) (/usr/share/texlive/texmf-dist/tex/latex/forloop/forloop.sty
+Package: forloop 2006/09/18 v3.0 For Loops for LaTeX
+) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count302
+\lst@gtempboxa=\box65
+\lst@token=\toks32
+\lst@length=\count303
+\lst@currlwidth=\dimen256
+\lst@column=\count304
+\lst@pos=\count305
+\lst@lostspace=\dimen257
+\lst@width=\dimen258
+\lst@newlines=\count306
+\lst@lineno=\count307
+\lst@maxwidth=\dimen259
+ (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
+\c@lstnumber=\count308
+\lst@skipnumbers=\count309
+\lst@framebox=\box66
+) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2023/02/27 1.9 listings configuration
 ))
-Package: listings 2025/11/14 1.11b (Carsten Heinz)
-
-==> First Aid for listings.sty no longer applied!
-    Expected:
-        2024/09/23 1.10c (Carsten Heinz)
-    but found:
-        2025/11/14 1.11b (Carsten Heinz)
-    so I'm assuming it got fixed.
-(c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
-Package: fancyvrb 2025/07/28 4.6 verbatim text (tvz,hv)
-\FV@CodeLineNo=\count334
+Package: listings 2023/02/27 1.9 (Carsten Heinz)
+ (/usr/share/texlive/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+Package: fancyvrb 2023/01/19 4.5a verbatim text (tvz,hv)
+\FV@CodeLineNo=\count310
 \FV@InFile=\read3
-\FV@TabBox=\box69
-\c@FancyVerbLine=\count335
-\FV@StepNumber=\count336
+\FV@TabBox=\box67
+\c@FancyVerbLine=\count311
+\FV@StepNumber=\count312
 \FV@OutFile=\write3
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/colortbl/colortbl.sty
-Package: colortbl 2024/10/29 v1.0k Color table columns (DPC)
-\everycr=\toks34
-\minrowclearance=\skip87
-\rownum=\count337
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/psnfss/courier.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2022/06/20 v1.0f Color table columns (DPC)
+\everycr=\toks33
+\minrowclearance=\skip86
+\rownum=\count313
+) (/usr/share/texlive/texmf-dist/tex/latex/psnfss/courier.sty
 Package: courier 2020/03/25 PSNFSS-v9.3 (WaS) 
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/psnfss/pifont.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/psnfss/pifont.sty
 Package: pifont 2020/03/25 PSNFSS-v9.3 Pi font support (SPQR) 
 LaTeX Font Info:    Trying to load font information for U+pzd on input line 63.
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/psnfss/upzd.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/upzd.fd
 File: upzd.fd 2001/06/04 font definitions for U/pzd.
 )
 LaTeX Font Info:    Trying to load font information for U+psy on input line 64.
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/psnfss/upsy.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/upsy.fd
 File: upsy.fd 2001/06/04 font definitions for U/psy.
-)) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2026-01-29 v7.01p Hypertext links for LaTeX
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
-Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/generic/pdfescape/pdfescape.sty
-Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+)) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2023-02-07 v7.00v Hypertext links for LaTeX
+ (/usr/share/texlive/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
 Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+ (/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty
 Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
 )
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
-)) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/hycolor/hycolor.sty
+) (/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+) (/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+) (/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty
 Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/hyperref/nameref.sty
-Package: nameref 2026-01-29 v2.58 Cross-referencing by name of section
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/refcount/refcount.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty
+Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
+) (/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2022-05-17 v2.50 Cross-referencing by name of section
+ (/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+) (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count338
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/generic/stringenc/stringenc.sty
-Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
+\c@section@level=\count314
 )
-\@linkdim=\dimen266
-\Hy@linkcounter=\count339
-\Hy@pagecounter=\count340
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2026-01-29 v7.01p Hyperref: PDFDocEncoding definition (HO)
+\@linkdim=\dimen260
+\Hy@linkcounter=\count315
+\Hy@pagecounter=\count316
+ (/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2023-02-07 v7.00v Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/generic/intcalc/intcalc.sty
+) (/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+) (/usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
-\Hy@SavedSpaceFactor=\count341
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/hyperref/puenc.def
-File: puenc.def 2026-01-29 v7.01p Hyperref: PDF Unicode definition (HO)
+\Hy@SavedSpaceFactor=\count317
+ (/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2023-02-07 v7.00v Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
-Package hyperref Info: Hyper figures OFF on input line 4201.
-Package hyperref Info: Link nesting OFF on input line 4206.
-Package hyperref Info: Hyper index ON on input line 4209.
-Package hyperref Info: Plain pages OFF on input line 4216.
-Package hyperref Info: Backreferencing OFF on input line 4221.
+Package hyperref Info: Hyper figures OFF on input line 4177.
+Package hyperref Info: Link nesting OFF on input line 4182.
+Package hyperref Info: Hyper index ON on input line 4185.
+Package hyperref Info: Plain pages OFF on input line 4192.
+Package hyperref Info: Backreferencing OFF on input line 4197.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4468.
-\c@Hy@tempcnt=\count342
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/url/url.sty
-\Urlmuskip=\muskip18
+Package hyperref Info: Bookmarks ON on input line 4425.
+\c@Hy@tempcnt=\count318
+ (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 4807.
-\XeTeXLinkMargin=\dimen267
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/generic/bitset/bitset.sty
+LaTeX Info: Redefining \url on input line 4763.
+\XeTeXLinkMargin=\dimen261
+ (/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+ (/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
-\Fld@menulength=\count343
-\Field@Width=\dimen268
-\Fld@charsize=\dimen269
-Package hyperref Info: Hyper figures OFF on input line 6084.
-Package hyperref Info: Link nesting OFF on input line 6089.
-Package hyperref Info: Hyper index ON on input line 6092.
-Package hyperref Info: backreferencing OFF on input line 6099.
-Package hyperref Info: Link coloring OFF on input line 6104.
-Package hyperref Info: Link coloring with OCG OFF on input line 6109.
-Package hyperref Info: PDF/A mode OFF on input line 6114.
-\Hy@abspage=\count344
-\c@Item=\count345
-\c@Hfootnote=\count346
+\Fld@menulength=\count319
+\Field@Width=\dimen262
+\Fld@charsize=\dimen263
+Package hyperref Info: Hyper figures OFF on input line 6042.
+Package hyperref Info: Link nesting OFF on input line 6047.
+Package hyperref Info: Hyper index ON on input line 6050.
+Package hyperref Info: backreferencing OFF on input line 6057.
+Package hyperref Info: Link coloring OFF on input line 6062.
+Package hyperref Info: Link coloring with OCG OFF on input line 6067.
+Package hyperref Info: PDF/A mode OFF on input line 6072.
+ (/usr/share/texlive/texmf-dist/tex/latex/base/atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\Hy@abspage=\count320
+\c@Item=\count321
+\c@Hfootnote=\count322
 )
 Package hyperref Info: Driver: hpdftex.
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/hyperref/hpdftex.def
-File: hpdftex.def 2026-01-29 v7.01p Hyperref driver for pdfTeX
-\Fld@listcount=\count347
-\c@bookmark@seq@number=\count348
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
-Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+ (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2023-02-07 v7.00v Hyperref driver for pdfTeX
+ (/usr/share/texlive/texmf-dist/tex/latex/base/atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
+with kernel methods
+)
+\Fld@listcount=\count323
+\c@bookmark@seq@number=\count324
+ (/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
+ (/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
 Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
-Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 284.
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
 )
-\Hy@SectionHShift=\skip88
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/float/float.sty
+\Hy@SectionHShift=\skip87
+) (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count349
-\float@exts=\toks35
-\float@box=\box70
-\@float@everytoks=\toks36
-\@floatcapt=\box71
+\c@float@type=\count325
+\float@exts=\toks34
+\float@box=\box68
+\@float@everytoks=\toks35
+\@floatcapt=\box69
 )
 
 Class scrbook Warning: Usage of package `fancyhdr' together
@@ -620,59 +620,55 @@ Class scrbook Warning: Usage of package `fancyhdr' together
 (scrbook)              Nevertheless, using requested
 (scrbook)              package `fancyhdr' on input line 42.
 
-(c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
-Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
-\f@nch@headwidth=\skip89
-\f@nch@offset@elh=\skip90
-\f@nch@offset@erh=\skip91
-\f@nch@offset@olh=\skip92
-\f@nch@offset@orh=\skip93
-\f@nch@offset@elf=\skip94
-\f@nch@offset@erf=\skip95
-\f@nch@offset@olf=\skip96
-\f@nch@offset@orf=\skip97
-\f@nch@height=\skip98
-\f@nch@footalignment=\skip99
-\f@nch@widthL=\skip100
-\f@nch@widthC=\skip101
-\f@nch@widthR=\skip102
-\@temptokenb=\toks37
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/lipsum/lipsum.sty (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2026-01-19 L3 programming layer (loader) 
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count350
+(/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+Package: fancyhdr 2022/11/09 v4.1 Extensive control of page headers and footers
+\f@nch@headwidth=\skip88
+\f@nch@O@elh=\skip89
+\f@nch@O@erh=\skip90
+\f@nch@O@olh=\skip91
+\f@nch@O@orh=\skip92
+\f@nch@O@elf=\skip93
+\f@nch@O@erf=\skip94
+\f@nch@O@olf=\skip95
+\f@nch@O@orf=\skip96
+) (/usr/share/texlive/texmf-dist/tex/latex/lipsum/lipsum.sty (/usr/share/texlive/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty (/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2023-02-22 L3 programming layer (loader) 
+ (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count326
+\l__pdf_internal_box=\box70
 ))
-Package: l3keys2e 2025-10-09 LaTeX2e option processing using LaTeX3 keys
+Package: l3keys2e 2023-02-02 LaTeX2e option processing using LaTeX3 keys
 )
 Package: lipsum 2021-09-20 v2.7 150 paragraphs of Lorem Ipsum dummy text
-\g__lipsum_par_int=\count351
-\l__lipsum_a_int=\count352
-\l__lipsum_b_int=\count353
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/lipsum/lipsum.ltd.tex)) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/tools/multicol.sty
-Package: multicol 2025/10/21 v2.0b multicolumn formatting (FMi)
-\c@tracingmulticols=\count354
-\mult@box=\box72
-\multicol@leftmargin=\dimen270
-\c@unbalance=\count355
-\c@collectmore=\count356
-\doublecol@number=\count357
-\multicoltolerance=\count358
-\multicolpretolerance=\count359
-\full@width=\dimen271
-\page@free=\dimen272
-\premulticols=\dimen273
-\postmulticols=\dimen274
-\multicolsep=\skip103
-\multicolbaselineskip=\skip104
-\partial@page=\box73
-\last@line=\box74
-\mc@boxedresult=\box75
-\maxbalancingoverflow=\dimen275
-\mult@rightbox=\box76
-\mult@grightbox=\box77
-\mult@firstbox=\box78
-\mult@gfirstbox=\box79
+\g__lipsum_par_int=\count327
+\l__lipsum_a_int=\count328
+\l__lipsum_b_int=\count329
+ (/usr/share/texlive/texmf-dist/tex/latex/lipsum/lipsum.ltd.tex)) (/usr/share/texlive/texmf-dist/tex/latex/tools/multicol.sty
+Package: multicol 2021/11/30 v1.9d multicolumn formatting (FMi)
+\c@tracingmulticols=\count330
+\mult@box=\box71
+\multicol@leftmargin=\dimen264
+\c@unbalance=\count331
+\c@collectmore=\count332
+\doublecol@number=\count333
+\multicoltolerance=\count334
+\multicolpretolerance=\count335
+\full@width=\dimen265
+\page@free=\dimen266
+\premulticols=\dimen267
+\postmulticols=\dimen268
+\multicolsep=\skip97
+\multicolbaselineskip=\skip98
+\partial@page=\box72
+\last@line=\box73
+\maxbalancingoverflow=\dimen269
+\mult@rightbox=\box74
+\mult@grightbox=\box75
+\mult@firstbox=\box76
+\mult@gfirstbox=\box77
+\@tempa=\box78
+\@tempa=\box79
 \@tempa=\box80
 \@tempa=\box81
 \@tempa=\box82
@@ -707,35 +703,18 @@ Package: multicol 2025/10/21 v2.0b multicolumn formatting (FMi)
 \@tempa=\box111
 \@tempa=\box112
 \@tempa=\box113
-\@tempa=\box114
-\@tempa=\box115
-\c@minrows=\count360
-\c@columnbadness=\count361
-\c@finalcolumnbadness=\count362
-\last@try=\dimen276
-\multicolovershoot=\dimen277
-\multicolundershoot=\dimen278
-\mult@nat@firstbox=\box116
-\colbreak@box=\box117
-\mc@col@check@num=\count363
-\g__mc_curr_col_int=\count364
-)) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/setspace/setspace.sty
+\c@minrows=\count336
+\c@columnbadness=\count337
+\c@finalcolumnbadness=\count338
+\last@try=\dimen270
+\multicolovershoot=\dimen271
+\multicolundershoot=\dimen272
+\mult@nat@firstbox=\box114
+\colbreak@box=\box115
+\mc@col@check@num=\count339
+)) (/usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty
 Package: setspace 2022/12/04 v6.7b set line spacing
-)
-Class scrbook Info: loading recommended package `bookmark'.
-(scrbook)           Using `bookmark' together with `hyperref' is recommended,
-(scrbook)           because of handling of possible bookmark level gaps.
-(scrbook)           You can avoid loading `bookmark' with KOMA-Script option
-(scrbook)           `bookmarkpackage=false' before \begin{document} and
-(scrbook)           you can avoid this message adding:
-(scrbook)             \usepackage{bookmark}
-(scrbook)           before \begin{document} on input line 14.
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/bookmark/bookmark.sty
-Package: bookmark 2023-12-10 v1.31 PDF bookmarks (HO)
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/bookmark/bkm-pdftex.def
-File: bkm-pdftex.def 2023-12-10 v1.31 bookmark driver for pdfTeX and luaTeX (HO)
-\BKM@id=\count365
-)) (./main.aux)
+) (./main.aux)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
@@ -801,23 +780,23 @@ Package scrbase Info: activating english \indexname on input line 14.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-(c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count366
-\scratchdimen=\dimen279
-\scratchbox=\box118
-\nofMPsegments=\count367
-\nofMParguments=\count368
-\everyMPshowfont=\toks38
-\MPscratchCnt=\count369
-\MPscratchDim=\dimen280
-\MPnumerator=\count370
-\makeMPintoPDFobject=\count371
-\everyMPtoPDFconversion=\toks39
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+\scratchcounter=\count340
+\scratchdimen=\dimen273
+\scratchbox=\box116
+\nofMPsegments=\count341
+\nofMParguments=\count342
+\everyMPshowfont=\toks36
+\MPscratchCnt=\count343
+\MPscratchDim=\dimen274
+\MPnumerator=\count344
+\makeMPintoPDFobject=\count345
+\everyMPtoPDFconversion=\toks37
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+ (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 Package caption Info: Begin \AtBeginDocument code.
@@ -826,29 +805,48 @@ Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/pdflscape/pdflscape.sty
-Package: pdflscape 2025-06-23 v0.14 Display of landscape pages in PDF
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/pdflscape/pdflscape-nometadata.sty
-Package: pdflscape-nometadata 2025-06-23 v0.14 Display of landscape pages in PDF (HO)
+ (/usr/share/texlive/texmf-dist/tex/latex/pdflscape/pdflscape.sty
+Package: pdflscape 2022-10-27 v0.13 Display of landscape pages in PDF
+ (/usr/share/texlive/texmf-dist/tex/latex/pdflscape/pdflscape-nometadata.sty
+Package: pdflscape-nometadata 2022-10-28 v0.13 Display of landscape pages in PDF (HO)
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
-\c@lstlisting=\count372
-Package tocbasic Info: setting babel extension for `lol' on input line 14.
-\scr@dte@lstlisting@maxnumwidth=\skip105
+\c@lstlisting=\count346
 Package hyperref Info: Link coloring OFF on input line 14.
- (./chapters/00_deckblatt.tex
+ (./main.out) (./main.out)
+\@outlinefile=\write4
+\openout4 = `main.out'.
+
+Class scrbook Info: loading recommended package `bookmark'.
+(scrbook)           Using `bookmark' together with `hyperref' is recommended,
+(scrbook)           because of handling of possible bookmark level gaps.
+(scrbook)           You can avoid loading `bookmark' with KOMA-Script option
+(scrbook)           `bookmarkpackage=false' before \begin{document} and
+(scrbook)           you can avoid this message adding:
+(scrbook)             \usepackage{bookmark}
+(scrbook)           before \begin{document} on input line 14.
+ (/usr/share/texlive/texmf-dist/tex/latex/bookmark/bookmark.sty
+Package: bookmark 2020-11-06 v1.29 PDF bookmarks (HO)
+ (/usr/share/texlive/texmf-dist/tex/latex/bookmark/bkm-pdftex.def
+File: bkm-pdftex.def 2020-11-06 v1.29 bookmark driver for pdfTeX (HO)
+\BKM@id=\count347
+)) (./chapters/00_deckblatt.tex
 <media/images/htl_c_cmyk_rein.pdf, id=4, 315.82591pt x 165.02654pt>
 File: media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use media/images/htl_c_cmyk_rein.pdf>
 Package pdftex.def Info: media/images/htl_c_cmyk_rein.pdf  used on input line 33.
 (pdftex.def)             Requested size: 69.87901pt x 36.51242pt.
 LaTeX Font Info:    Trying to load font information for U+msa on input line 33.
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/amsfonts/umsa.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 33.
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/amsfonts/umsb.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Trying to load font information for T1+cmss on input line 33.
+ (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmss.fd
+File: t1cmss.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 )
 <media/images/htl-bildung-mit-zukunft.png, id=5, 82.8696pt x 36.6168pt>
 File: media/images/htl-bildung-mit-zukunft.png Graphic file (type png)
@@ -864,7 +862,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 33--33
 
 
 
-{c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc} <./media/images/htl_c_cmyk_rein.pdf> <./media/images/htl-bildung-mit-zukunft.png>]) (./chapters/00_ee.tex
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc} <./media/images/htl_c_cmyk_rein.pdf> <./media/images/htl-bildung-mit-zukunft.png>]) (./chapters/00_ee.tex
 <media/images/sig_liam.png, id=39, 216.05719pt x 108.405pt>
 File: media/images/sig_liam.png Graphic file (type png)
 <use media/images/sig_liam.png>
@@ -875,21 +873,21 @@ Overfull \hbox (12.0pt too wide) in paragraph at lines 19--23
 []|[]| 
  []
 
-<media/images/sig_manuel.png, id=40, 219.06844pt x 67.0003pt>
-File: media/images/sig_manuel.png Graphic file (type png)
-<use media/images/sig_manuel.png>
-Package pdftex.def Info: media/images/sig_manuel.png  used on input line 32.
-(pdftex.def)             Requested size: 163.73265pt x 50.07669pt.
+<media/images/sig_fabian.png, id=40, 266.49562pt x 62.48344pt>
+File: media/images/sig_fabian.png Graphic file (type png)
+<use media/images/sig_fabian.png>
+Package pdftex.def Info: media/images/sig_fabian.png  used on input line 32.
+(pdftex.def)             Requested size: 213.58716pt x 50.07669pt.
 
 Overfull \hbox (12.0pt too wide) in paragraph at lines 31--35
 []|[]| 
  []
 
-<media/images/sig_fabian.png, id=41, 266.49562pt x 62.48344pt>
-File: media/images/sig_fabian.png Graphic file (type png)
-<use media/images/sig_fabian.png>
-Package pdftex.def Info: media/images/sig_fabian.png  used on input line 44.
-(pdftex.def)             Requested size: 213.58716pt x 50.07669pt.
+<media/images/sig_manuel.png, id=41, 219.06844pt x 67.0003pt>
+File: media/images/sig_manuel.png Graphic file (type png)
+<use media/images/sig_manuel.png>
+Package pdftex.def Info: media/images/sig_manuel.png  used on input line 44.
+(pdftex.def)             Requested size: 163.73265pt x 50.07669pt.
 
 Overfull \hbox (12.0pt too wide) in paragraph at lines 43--48
 []|[]| 
@@ -908,7 +906,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 11--2
 [2
 
 
- <./media/images/sig_liam.png> <./media/images/sig_manuel.png> <./media/images/sig_fabian.png>] [3
+ <./media/images/sig_liam.png> <./media/images/sig_fabian.png> <./media/images/sig_manuel.png>] [3
 
 
 
@@ -922,8 +920,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 11--2
 
 
 ]
-Overfull \hbox (20.012pt too wide) in paragraph at lines 50--50
- [][] [][]\T1/cmr/m/n/12 Benutzeroberfläche und App-Architektur (GUI als Demon- 
+Overfull \hbox (2.78548pt too wide) in paragraph at lines 38--38
+ [][] [][]\T1/cmr/m/n/12 Softwaretechnische Hür-den und Op-ti-mierung (Ob-jek-terken-nung) 
  []
 
 <./media/images/htl_c_cmyk_rein.pdf, id=159, 315.82591pt x 165.02654pt>
@@ -932,8 +930,8 @@ File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 65.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
 [6 <./media/images/htl_c_cmyk_rein.pdf>])
-\tf@toc=\write4
-\openout4 = `main.toc'.
+\tf@toc=\write5
+\openout5 = `main.toc'.
 
  (./chapters/01_introduction.tex
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
@@ -942,6 +940,21 @@ Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
  [1]
 chapter 1.
+
+Class scrbook Warning: \float@addtolists detected!
+(scrbook)              Implementation of \float@addtolist became
+(scrbook)              deprecated in KOMA-Script v3.01 2008/11/14 and
+(scrbook)              has been replaced by several more flexible
+(scrbook)              features of package `tocbasic`.
+(scrbook)              Since Version 3.12 support for deprecated
+(scrbook)              \float@addtolist interface has been
+(scrbook)              restricted to only some of the KOMA-Script
+(scrbook)              features and been removed from others.
+(scrbook)              Loading of package `scrhack' may help to
+(scrbook)              avoid this warning, if you are using a
+(scrbook)              a package that still implements the
+(scrbook)              deprecated \float@addtolist interface.
+
 
 Overfull \hbox (15.09438pt too wide) in paragraph at lines 9--10
 \T1/cmr/m/n/12 und tech-nol-o-gis-cher Hür-den. Mo-bile As-sis-ten-zsys-teme müssen eine Echtzeit-Verarbeitung
@@ -1011,133 +1024,124 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 ]
 LaTeX Font Info:    Trying to load font information for T1+pcr on input line 21.
- (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/psnfss/t1pcr.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
-) (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2025/11/14 1.11b listings language file
+) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 23.
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
 Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 36.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
- [7{c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/enc/dvips/base/8r.enc}]
-<media/images/Grundform-Skizze.png, id=313, 849.1725pt x 511.15968pt>
+ [7{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}]
+Overfull \hbox (18.3675pt too wide) in paragraph at lines 44--45
+[]\T1/cmr/bx/n/12 Kameraauslöser und Sprach-suche: \T1/cmr/m/n/12 Ein schnelles, zweima-liges Drücken (Double-
+ []
+
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 53.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[8{/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+<media/images/Grundform-Skizze.png, id=282, 849.1725pt x 511.15968pt>
 File: media/images/Grundform-Skizze.png Graphic file (type png)
 <use media/images/Grundform-Skizze.png>
-Package pdftex.def Info: media/images/Grundform-Skizze.png  used on input line 60.
+Package pdftex.def Info: media/images/Grundform-Skizze.png  used on input line 70.
 (pdftex.def)             Requested size: 218.37445pt x 131.44763pt.
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 63.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
- [8{c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 84.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 79.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
  [9 <./media/images/Grundform-Skizze.png>]
-<media/images/Button-Ã–ffnung.jpg, id=324, 252.507pt x 59.568pt>
+<media/images/Button-Ã–ffnung.jpg, id=289, 252.507pt x 59.568pt>
 File: media/images/Button-Ã–ffnung.jpg Graphic file (type jpg)
 <use media/images/Button-Ã–ffnung.jpg>
-Package pdftex.def Info: media/images/Button-Ã–ffnung.jpg  used on input line 87.
+Package pdftex.def Info: media/images/Button-Ã–ffnung.jpg  used on input line 95.
 (pdftex.def)             Requested size: 240.21323pt x 56.66832pt.
-<media/images/Nasenbereich-Erweiterung.jpg, id=325, 240.1335pt x 97.893pt>
+<media/images/Nasenbereich-Erweiterung.jpg, id=290, 240.1335pt x 97.893pt>
 File: media/images/Nasenbereich-Erweiterung.jpg Graphic file (type jpg)
 <use media/images/Nasenbereich-Erweiterung.jpg>
-Package pdftex.def Info: media/images/Nasenbereich-Erweiterung.jpg  used on input line 105.
+Package pdftex.def Info: media/images/Nasenbereich-Erweiterung.jpg  used on input line 113.
 (pdftex.def)             Requested size: 218.37445pt x 89.0245pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 110--112
-
- []
-
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 117.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 121.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-[10 <./media/images/Button-Ã–ffnung.jpg> <./media/images/Nasenbereich-Erweiterung.jpg>]
-<media/images/Abdeckungs-StÃ¼tzen.png, id=332, 207.174pt x 118.917pt>
+ [10 <./media/images/Button-Ã–ffnung.jpg>]
+<media/images/Abdeckungs-StÃ¼tzen.png, id=297, 207.174pt x 118.917pt>
 File: media/images/Abdeckungs-StÃ¼tzen.png Graphic file (type png)
 <use media/images/Abdeckungs-StÃ¼tzen.png>
-Package pdftex.def Info: media/images/Abdeckungs-StÃ¼tzen.png  used on input line 129.
+Package pdftex.def Info: media/images/Abdeckungs-StÃ¼tzen.png  used on input line 139.
 (pdftex.def)             Requested size: 218.37445pt x 125.34555pt.
-<media/images/AuflageflÃ¤chen.png, id=333, 463.7325pt x 202.7575pt>
+<media/images/AuflageflÃ¤chen.png, id=298, 463.7325pt x 202.7575pt>
 File: media/images/AuflageflÃ¤chen.png Graphic file (type png)
 <use media/images/AuflageflÃ¤chen.png>
-Package pdftex.def Info: media/images/AuflageflÃ¤chen.png  used on input line 141.
+Package pdftex.def Info: media/images/AuflageflÃ¤chen.png  used on input line 151.
 (pdftex.def)             Requested size: 174.69688pt x 76.38347pt.
-<media/images/Haken.png, id=334, 441.65pt x 247.92625pt>
+<media/images/Haken.png, id=299, 441.65pt x 247.92625pt>
 File: media/images/Haken.png Graphic file (type png)
 <use media/images/Haken.png>
-Package pdftex.def Info: media/images/Haken.png  used on input line 150.
+Package pdftex.def Info: media/images/Haken.png  used on input line 160.
 (pdftex.def)             Requested size: 109.18723pt x 61.2929pt.
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 154.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 164.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
- [11 <./media/images/Abdeckungs-StÃ¼tzen.png> <./media/images/AuflageflÃ¤chen.png>]
-<media/images/Haken-GegenstÃ¼ck.png, id=342, 331.2375pt x 387.4475pt>
+ [11 <./media/images/Nasenbereich-Erweiterung.jpg>]
+<media/images/Haken-GegenstÃ¼ck.png, id=307, 331.2375pt x 387.4475pt>
 File: media/images/Haken-GegenstÃ¼ck.png Graphic file (type png)
 <use media/images/Haken-GegenstÃ¼ck.png>
-Package pdftex.def Info: media/images/Haken-GegenstÃ¼ck.png  used on input line 157.
+Package pdftex.def Info: media/images/Haken-GegenstÃ¼ck.png  used on input line 167.
 (pdftex.def)             Requested size: 87.34843pt x 102.17058pt.
-
-
-LaTeX Warning: Citation `scharnier_vorlage' on page 12 undefined on input line 170.
-
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 171.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 182.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-[12 <./media/images/Haken.png> <./media/images/Haken-GegenstÃ¼ck.png>]
-Overfull \hbox (1.03358pt too wide) in paragraph at lines 174--175
-\T1/cmr/m/n/12 gewonnenen Erken-nt-nisse aus den bish-eri-gen Ver-sio-nen ange-wandt wer-den sollen. 
- []
-
-
-Overfull \hbox (29.01552pt too wide) in paragraph at lines 186--187
+ [12 <./media/images/Abdeckungs-StÃ¼tzen.png> <./media/images/AuflageflÃ¤chen.png> <./media/images/Haken.png>]
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 199.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [13 <./media/images/Haken-GegenstÃ¼ck.png>]
+Overfull \hbox (29.01552pt too wide) in paragraph at lines 205--206
 \T1/cmr/m/n/12 lich wie bei herkömm-lichen Brillen, in zwei sep-a-rate Bere-iche für die Gläser aufzuteilen. 
  []
 
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 195.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 231.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-[13]
+[14]
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 226.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
- [14]
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 247.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 264.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
  [15]
-Overfull \hbox (11.70084pt too wide) in paragraph at lines 248--249
+Overfull \hbox (11.70084pt too wide) in paragraph at lines 271--272
 \T1/cmr/m/n/12 men verbinden. In vorheri-gen Ab-bil-dun-gen (\T1/cmr/m/it/12 siehe Ab-deck-ung v1\T1/cmr/m/n/12 ) ist der An-schraubpunkt
  []
 
 
-Overfull \hbox (0.34285pt too wide) in paragraph at lines 257--258
+Overfull \hbox (0.34285pt too wide) in paragraph at lines 283--284
 []\T1/cmr/bx/n/12 Datenerfassung: \T1/cmr/m/n/12 Kam-era und ToF-Sensor er-fassen syn-chron die vi-suelle Umge-
  []
 
 
-Overfull \hbox (14.17844pt too wide) in paragraph at lines 258--259
+Overfull \hbox (14.17844pt too wide) in paragraph at lines 284--285
 \T1/cmr/m/n/12 vante Ob-jek-tko-or-di-naten und überträgt diese asyn-chron über eine TCP-Verbindung
- []
-
-
-Overfull \hbox (0.97188pt too wide) in paragraph at lines 260--261
-[]\T1/cmr/bx/n/12 Feedback: \T1/cmr/m/n/12 Das Sys-tem gener-iert akustis-che Sig-nale oder Sprachaus-gaben (TTS)
  []
 
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 266.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 285.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-[16]) (./chapters/04_Umsetzung.tex
+[16]
+Overfull \hbox (0.97188pt too wide) in paragraph at lines 286--287
+[]\T1/cmr/bx/n/12 Feedback: \T1/cmr/m/n/12 Das Sys-tem gener-iert akustis-che Sig-nale oder Sprachaus-gaben (TTS)
+ []
+
+) (./chapters/04_Umsetzung.tex
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
 Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 2.
@@ -1149,20 +1153,21 @@ Overfull \hbox (0.38501pt too wide) in paragraph at lines 9--10
 \T1/cmr/m/n/12 tion, die asyn-chrone Daten-ver-ar-beitung und das Spe-icher-man-age-ment de-tail-liert. 
  []
 
-<media/images/openmv_ide.png, id=378, 414.54875pt x 122.4575pt>
+<media/images/openmv_ide.png, id=351, 414.54875pt x 122.4575pt>
 File: media/images/openmv_ide.png Graphic file (type png)
 <use media/images/openmv_ide.png>
 Package pdftex.def Info: media/images/openmv_ide.png  used on input line 19.
 (pdftex.def)             Requested size: 174.69688pt x 51.6037pt.
-[18
 
-
-]
 Overfull \hbox (32.47304pt too wide) in paragraph at lines 24--26
 \T1/cmr/m/n/12 darunter den An-droid Pro-filer zur Echtzei-t-anal-yse der Netzwerk- und CPU-Auslastung. 
  []
 
-<media/images/android_studio.png, id=385, 1204.5pt x 632.3625pt>
+[18
+
+
+]
+<media/images/android_studio.png, id=360, 1204.5pt x 632.3625pt>
 File: media/images/android_studio.png Graphic file (type png)
 <use media/images/android_studio.png>
 Package pdftex.def Info: media/images/android_studio.png  used on input line 29.
@@ -1186,8 +1191,8 @@ File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
 Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 43.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-[19 <./media/images/openmv_ide.png> <./media/images/android_studio.png>] (c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2025/11/14 1.11b listings language file
+[19 <./media/images/openmv_ide.png> <./media/images/android_studio.png>] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
 Overfull \hbox (43.80301pt too wide) in paragraph at lines 62--63
 \T1/cmr/m/n/12 men-tiert hi-er-für eine strikte State-Machine in-ner-halb eines \T1/pcr/m/n/12 BluetoothGattCallback\T1/cmr/m/n/12 . 
@@ -1202,30 +1207,30 @@ Overfull \hbox (59.95813pt too wide) in paragraph at lines 89--90
 \T1/cmr/m/n/12 dert. Die Firmware kon-fig-uri-ert den Socket auf dem Nicla Vi-sion mit-tels \T1/pcr/m/n/12 setblocking(False)\T1/cmr/m/n/12 .
  []
 
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 91.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-[21]
+
 Overfull \hbox (11.08755pt too wide) in paragraph at lines 92--93
 \T1/cmr/m/n/12 strom (\T1/cmr/m/it/12 Stream\T1/cmr/m/n/12 ) in-ter-leavt kon-tinuier-liche Textnachrichten (JSON-Telemetrie) mit groÿen
  []
 
-
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 93.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[21]
 Overfull \hbox (11.09949pt too wide) in paragraph at lines 94--95
 \T1/cmr/m/n/12 sive Payload-Gröÿe vo-ran (z.B. \T1/pcr/m/n/12 AUD_START:12500\T1/cmr/m/n/12 ). Der An-droid \T1/pcr/m/n/12 AscentaService
  []
 
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 120.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-[22]
+
 Overfull \hbox (2.35077pt too wide) in paragraph at lines 123--124
 \T1/cmr/m/n/12 Die Ap-p-lika-tion im-ple-men-tiert einen asyn-chro-nen Watch-dog, um Verbindungsab-brüche
  []
 
-
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 124.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[22]
 Overfull \hbox (46.49329pt too wide) in paragraph at lines 144--145
 \T1/cmr/m/n/12 nisierten Kon-tex-twech-sel zurück auf den Main-Thread durch (\T1/pcr/m/n/12 withContext(Dispatchers.
  []
@@ -1247,113 +1252,308 @@ Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 
 [23]
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 174.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 179.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
  [24]
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 200.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 206.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
  [25]
 Overfull \hbox (28.65967pt too wide) in paragraph at lines 207--208
 []\T1/cmr/m/n/12 Überschreitet der kom-binierte Beschle-u-ni-gungsvek-tor einen em-pirisch er-mit-tel-ten Schwellen-
  []
 
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 234.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-[26]
+
 Overfull \hbox (4.55537pt too wide) in paragraph at lines 235--236
 []\T1/cmr/m/n/12 Durch den geziel-ten Ein-satz von \T1/pcr/m/n/12 memoryview \T1/cmr/m/n/12 wird eine \T1/cmr/m/it/12 Zero-Copy\T1/cmr/m/n/12 -Zuweisung erzwun-
  []
 
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 264.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 236.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-[27]
+[26]
 Overfull \hbox (14.20209pt too wide) in paragraph at lines 266--267
 \T1/cmr/m/n/12 Nach der Tran-skrip-tion des Au-diosig-nals oder der Ob-jek-terken-nung er-folgt die Sprachaus-
  []
 
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 278.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 267.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-[28]
+[27]
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 308.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 293.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [28]
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 319.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
  [29]
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 341.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 350.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
  [30]
+<media/images/nicla_vision.png, id=658, 390.258pt x 260.172pt>
+File: media/images/nicla_vision.png Graphic file (type png)
+<use media/images/nicla_vision.png>
+Package pdftex.def Info: media/images/nicla_vision.png  used on input line 353.
+(pdftex.def)             Requested size: 262.052pt x 174.70337pt.
+
+Overfull \hbox (1.18028pt too wide) in paragraph at lines 359--361
+\T1/cmr/m/n/12 Die zen-trale Entschei-dung beim Schal-tungs-de-sign war die Aufteilung der En-ergiequelle.
+ []
+
+<media/images/entladungskurve_lipo.png, id=661, 333.6465pt x 193.2018pt>
+File: media/images/entladungskurve_lipo.png Graphic file (type png)
+<use media/images/entladungskurve_lipo.png>
+Package pdftex.def Info: media/images/entladungskurve_lipo.png  used on input line 366.
+(pdftex.def)             Requested size: 305.72289pt x 177.04321pt.
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 367.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 372.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
- [31]
+[31 <./media/images/nicla_vision.png>]
+
+LaTeX Warning: Citation `botland_tp4056' on page 32 undefined on input line 374.
+
+<media/images/tp4056.png, id=673, 126.7134pt x 126.7134pt>
+File: media/images/tp4056.png Graphic file (type png)
+<use media/images/tp4056.png>
+Package pdftex.def Info: media/images/tp4056.png  used on input line 382.
+(pdftex.def)             Requested size: 218.37445pt x 218.39134pt.
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 377.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 389.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
- [32]
-Overfull \hbox (0.90402pt too wide) in paragraph at lines 379--380
+[32 <./media/images/entladungskurve_lipo.png>]
+Overfull \hbox (13.32033pt too wide) in paragraph at lines 392--393
+[]\T1/cmr/bx/n/12 Sicheres Laden: \T1/cmr/m/n/12 Das Modul regelt den Lade-vor-gang nach dem CC/CV-Verfahren.
+ []
+
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 397.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[33 <./media/images/tp4056.png>]
+<media/images/schaltplan.png, id=687, 246.6816pt x 135.1449pt>
+File: media/images/schaltplan.png Graphic file (type png)
+<use media/images/schaltplan.png>
+Package pdftex.def Info: media/images/schaltplan.png  used on input line 403.
+(pdftex.def)             Requested size: 349.40045pt x 191.43692pt.
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 414.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [34 <./media/images/schaltplan.png>]
+Overfull \hbox (18.68561pt too wide) in paragraph at lines 423--424
+[]\T1/cmr/bx/n/12 Roboflow: \T1/cmr/m/n/12 Roboflow ist ein spezial-isiertes Tool für das Man-age-ment von Computer-
+ []
+
+<media/images/cnn_neural_network.png, id=696, 250.536pt x 77.088pt>
+File: media/images/cnn_neural_network.png Graphic file (type png)
+<use media/images/cnn_neural_network.png>
+Package pdftex.def Info: media/images/cnn_neural_network.png  used on input line 432.
+(pdftex.def)             Requested size: 393.07133pt x 120.94606pt.
+
+Overfull \hbox (30.09718pt too wide) in paragraph at lines 437--438
+\T1/cmr/m/n/12 ^^RIm-pulse^^P (eine Daten-Pipeline) übern-immt die schrit-tweise Anal-yse der Kam-er-abilder: 
+ []
+
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 441.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[35]
+Overfull \hbox (1.82715pt too wide) in paragraph at lines 442--443
+[]\T1/cmr/bx/n/12 Ausgabeschicht (Out-put Layer): \T1/cmr/m/n/12 Die Aus-gabeschicht berech-net ab-schlieÿend
+ []
+
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 454.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[36 <./media/images/cnn_neural_network.png>]
+Overfull \hbox (4.07808pt too wide) in paragraph at lines 459--460
+\T1/cmr/m/n/12 jew-eils ex-akt 32 Bilder gle-ichzeitig zu, bevor der Al-go-rith-mus die in-ter-nen Gewich-
+ []
+
+<media/images/trainingsgraph.png, id=710, 270.5307pt x 90.3375pt>
+File: media/images/trainingsgraph.png Graphic file (type png)
+<use media/images/trainingsgraph.png>
+Package pdftex.def Info: media/images/trainingsgraph.png  used on input line 464.
+(pdftex.def)             Requested size: 349.40045pt x 116.68608pt.
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 473.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[37 <./media/images/trainingsgraph.png>]
+<media/images/training_performance.png, id=719, 238.7319pt x 100.6962pt>
+File: media/images/training_performance.png Graphic file (type png)
+<use media/images/training_performance.png>
+Package pdftex.def Info: media/images/training_performance.png  used on input line 480.
+(pdftex.def)             Requested size: 305.72289pt x 128.95828pt.
+
+Overfull \hbox (14.29794pt too wide) in paragraph at lines 486--487
+\T1/cmr/m/n/12 Nach dem er-fol-gre-ichen Train-ing und der Va-li-dierung überträgt der Bere-it-stel-lungsprozess
+ []
+
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 493.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[38 <./media/images/training_performance.png>]
+Overfull \hbox (7.47177pt too wide) in paragraph at lines 502--503
+\T1/cmr/m/n/12 fer-ti-gen Ko-or-di-naten, son-dern eine vierdi-men-sion-ale Ma-trix (Heatmap) mit Wahrschein-
+ []
+
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 505.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[39]
+<media/images/live_erkennung.png, id=732, 115.8729pt x 55.6479pt>
+File: media/images/live_erkennung.png Graphic file (type png)
+<use media/images/live_erkennung.png>
+Package pdftex.def Info: media/images/live_erkennung.png  used on input line 508.
+(pdftex.def)             Requested size: 218.37445pt x 104.88551pt.
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 526.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [40 <./media/images/live_erkennung.png>]
+Overfull \hbox (8.44272pt too wide) in paragraph at lines 528--529
+\T1/cmr/m/n/12 schnitt beschreibt die strate-gis-chen Entschei-dun-gen und die tech-nis-chen Lö-sun-gen. 
+ []
+
+
+Overfull \hbox (1.2435pt too wide) in paragraph at lines 531--532
+\T1/cmr/m/n/12 Bild-klas-si-fizierung. Da solche Mod-elle den vorhan-de-nen Spe-icher-platz bei weitem
+ []
+
+
+Overfull \hbox (14.2338pt too wide) in paragraph at lines 535--536
+[]\T1/cmr/bx/n/12 Modell-Optimierung durch Quan-tisierung: \T1/cmr/m/n/12 Eine math-e-ma-tis-che Op-ti-mierung
+ []
+
+
+Overfull \hbox (25.00064pt too wide) in paragraph at lines 539--540
+\T1/cmr/m/n/12 derung ist der Kom-pro-miss zwis-chen tech-nis-cher Leis-tungs-fähigkeit und All-t-agstauglichkeit.
+ []
+
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 540.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[41]
+Overfull \hbox (8.03172pt too wide) in paragraph at lines 547--548
+\T1/cmr/m/n/12 aus zwei Grün-den min-i-mal, we-shalb die Entschei-dung den-noch auf LiPo-Zellen fiel: 
+ []
+
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 555.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[42]
+Overfull \hbox (0.90402pt too wide) in paragraph at lines 569--570
 \T1/cmr/m/n/12 (Taps) den typ-is-chen Stör-be-we-gun-gen eines Nutzers (wie schnelles Gehen, Kopf-drehun-
  []
 
-
-Overfull \hbox (15.41145pt too wide) in paragraph at lines 384--385
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 570.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[43]
+Overfull \hbox (15.41145pt too wide) in paragraph at lines 574--575
 \T1/cmr/m/n/12 Rah-men dieses Pro-to-typs nicht re-al-isier-bar waren, stützt sich die en-er-getis-che Evaluierung
  []
 
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 583.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[44]
+<media/images/akkus_vergleich.png, id=757, 353.82187pt x 152.06813pt>
+File: media/images/akkus_vergleich.png Graphic file (type png)
+<use media/images/akkus_vergleich.png>
+Package pdftex.def Info: media/images/akkus_vergleich.png  used on input line 586.
+(pdftex.def)             Requested size: 349.40045pt x 150.16968pt.
 
-Overfull \hbox (35.0077pt too wide) in paragraph at lines 386--388
-\T1/cmr/m/n/12 net sich eine the-o-retis-che Max-i-mal-laufzeit von ex-akt $\OT1/cmr/m/n/12 11\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 8$ \T1/cmr/m/n/12 Stun-den ($\OT1/cmr/m/n/12 1240 []\OML/cmm/m/it/12 =\OT1/cmr/m/n/12 105 []$\T1/cmr/m/n/12 ). 
+Underfull \hbox (badness 7326) in paragraph at lines 587--587
+[][][]|\T1/cmr/m/n/12 Gröÿen-ver-gle-ich: Ur-sprünglich ge-planter LiPo-Akku (2000mAh)
  []
 
+
+Overfull \hbox (0.67166pt too wide) in paragraph at lines 592--593
+\T1/cmr/m/n/12 neu-ronalen Netze an-hand der Va-li-dierungs-daten. Ein di-rek-ter Ver-gle-ich der Wahrheits-
+ []
+
+
+Overfull \hbox (23.36508pt too wide) in paragraph at lines 592--593
+\T1/cmr/m/n/12 ma-trizen (Con-fu-sion Ma-trix) und der F1-Scores zweier un-ter-schiedlicher Modell-Iterationen
+ []
+
+<media/images/confusion_matrix_multi.png, id=758, 232.4685pt x 128.3997pt>
+File: media/images/confusion_matrix_multi.png Graphic file (type png)
+<use media/images/confusion_matrix_multi.png>
+Package pdftex.def Info: media/images/confusion_matrix_multi.png  used on input line 600.
+(pdftex.def)             Requested size: 349.40045pt x 193.00854pt.
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 607.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[45 <./media/images/akkus_vergleich.png>]
+<media/images/confusion_matrix_binary.png, id=766, 238.7319pt x 100.6962pt>
+File: media/images/confusion_matrix_binary.png Graphic file (type png)
+<use media/images/confusion_matrix_binary.png>
+Package pdftex.def Info: media/images/confusion_matrix_binary.png  used on input line 611.
+(pdftex.def)             Requested size: 349.40045pt x 147.38243pt.
 ) (./chapters/05_futurework.tex
+Overfull \hbox (6.9842pt too wide) in paragraph at lines 619--2
+\T1/cmr/m/n/12 Die Va-li-dierungsphase schloss zusät-zlich die Evaluierung wesentlich kom-plex-erer YOLO-
+ []
+
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
 Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 2.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
- [33]
+[46 <./media/images/confusion_matrix_multi.png> <./media/images/confusion_matrix_binary.png>]
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
 Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 2.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
- [34]
+ [47]
 chapter 5.
 
 Overfull \hbox (3.56718pt too wide) in paragraph at lines 9--10
 \T1/cmr/m/n/12 Die ak-tuelle Android-Applikation ver-fügt über eine grafis-che Be-nutze-r-ober-fläche (GUI),
  []
 
-[35
+[48
 
 
-]) (./chapters/06_relatedwork.tex
+]
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 28.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [49]) (./chapters/06_relatedwork.tex
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
 Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 2.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
- [36]
-File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
-<use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 2.
-(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
- [37]
+ [50]
 chapter 6.
 
 Overfull \hbox (13.97154pt too wide) in paragraph at lines 5--6
 []\T1/cmr/m/n/12 Die En-twick-lung von As-sis-ten-zsys-te-men für se-hbeein-trächtigte Per-so-nen ist ein etabliertes
  []
 
-[38
+[51
 
 
 ]) (./chapters/07_conclusion.tex
@@ -1361,9 +1561,9 @@ File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
 Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 2.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
- [39]
+ [52]
 chapter 7.
-) (./chapters/08_projectmanagement.tex [40
+) (./chapters/08_projectmanagement.tex [53
 
 
 ]
@@ -1383,101 +1583,282 @@ Overfull \hbox (10.80421pt too wide) in paragraph at lines 10--11
 \T1/cmr/m/n/12 an-fängliche Un-ter-schätzung ist typ-isch für kom-plexe Hardware-Software-Kombinationen,
  []
 
-[41
+[54
 
 
 ]
-Overfull \hbox (226.63954pt too wide) in paragraph at lines 18--24
-\T1/cmr/m/n/12 Gesamtarbeitsaufwand: [XX] Stun-den [] 
+Overfull \hbox (36.3187pt too wide) in alignment at lines 19--26
+ [] [] [] [] 
  []
 
 
-Overfull \hbox (30.0pt too wide) in paragraph at lines 32--33
-[][] 
+Overfull \hbox (36.3187pt too wide) in alignment at lines 26--32
+ [] [] [] [] 
  []
 
 
-Overfull \hbox (7.40155pt too wide) in paragraph at lines 41--41
-[]|\T1/cmr/m/it/12 Unterschrift
+Overfull \hbox (36.3187pt too wide) in alignment at lines 32--35
+ [] [] [] [] 
  []
 
-) (./chapters/99_acknowledgements.tex
-Underfull \hbox (badness 10000) in paragraph at lines 41--1
 
+Overfull \hbox (36.3187pt too wide) in alignment at lines 35--40
+ [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 2662) in paragraph at lines 49--50
+[]|\T1/cmr/m/n/12 Einrastfunktion mod-el-liert. STT über App. Code
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--66
+[]|\T1/cmr/m/n/12 Erfolgreiche Im-ple-men-tierung der TCP/WiFi-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 66--67
+[]|\T1/cmr/m/n/12 Finale Soft-ware auf GitHub. Demo
+ []
+
+
+Overfull \hbox (36.3187pt too wide) in alignment at lines 40--70
+ [] [] [] [] 
  []
 
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
-Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 1.
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 70.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
-[42]
+[55]
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 70.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [56]
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 71.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [57]
+Overfull \hbox (36.3187pt too wide) in alignment at lines 76--83
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (36.3187pt too wide) in alignment at lines 83--90
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (36.3187pt too wide) in alignment at lines 90--94
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (36.3187pt too wide) in alignment at lines 94--100
+ [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 2662) in paragraph at lines 109--110
+[]|\T1/cmr/m/n/12 Einrastfunktion mod-el-liert. STT über App. Code
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 125--126
+[]|\T1/cmr/m/n/12 Erfolgreiche Im-ple-men-tierung der TCP/WiFi-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 126--127
+[]|\T1/cmr/m/n/12 Finale Soft-ware auf GitHub. Demo
+ []
+
+
+Overfull \hbox (36.3187pt too wide) in alignment at lines 100--130
+ [] [] [] [] 
+ []
+
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 130.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[58]
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 131.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [59]
+Overfull \hbox (36.3187pt too wide) in alignment at lines 135--142
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (36.3187pt too wide) in alignment at lines 142--149
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (36.3187pt too wide) in alignment at lines 149--153
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (36.3187pt too wide) in alignment at lines 153--159
+ [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 2662) in paragraph at lines 168--169
+[]|\T1/cmr/m/n/12 Einrastfunktion mod-el-liert. STT über App. Code
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 184--185
+[]|\T1/cmr/m/n/12 Erfolgreiche Im-ple-men-tierung der TCP/WiFi-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 185--186
+[]|\T1/cmr/m/n/12 Finale Soft-ware auf GitHub. Demo
+ []
+
+
+Overfull \hbox (36.3187pt too wide) in alignment at lines 159--189
+ [] [] [] [] 
+ []
+
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 189.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+[60]) (./chapters/99_acknowledgements.tex
 File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
 <use ./media/images/htl_c_cmyk_rein.pdf>
 Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 1.
 (pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
- [43]) [44
+ [61]) [62
 
 
-] (./main.lof)
-\tf@lof=\write5
-\openout5 = `main.lof'.
+] (./main.lof
+Overfull \hbox (18.12518pt too wide) in paragraph at lines 16--16
+ [][] [][]\T1/cmr/m/n/12 Gröÿenvergleich: Ur-sprünglich ge-planter LiPo-Akku (2000mAh) gegenüber 
+ []
 
- [45
+)
+\tf@lof=\write6
+\openout6 = `main.lof'.
+
+
+
+Class scrbook Warning: \float@listhead detected!
+(scrbook)              Implementation of \float@listhead became
+(scrbook)              deprecated in KOMA-Script v3.01 2008/11/14 and
+(scrbook)              has been replaced by several more flexible
+(scrbook)              features of package `tocbasic`.
+(scrbook)              Maybe implementation of \float@listhead will
+(scrbook)              be removed from KOMA-Script soon.
+(scrbook)              Loading of package `scrhack' may help to
+(scrbook)              avoid this warning, if you are using a
+(scrbook)              a package that still implements the
+(scrbook)              deprecated \float@listhead interface on input line 43.
+
+[63
 
 
 
 ] (./main.lol
-Overfull \hbox (12.079pt too wide) in paragraph at lines 9--9
+Overfull \hbox (12.079pt too wide) in paragraph at lines 8--8
  [][] [][]\T1/cmr/m/n/12 Kotlin-Coroutine für dy-namis-ches TCP-Stream-Multiplexing und Thread- 
  []
 
 
-Overfull \hbox (2.89809pt too wide) in paragraph at lines 12--12
+Overfull \hbox (2.89809pt too wide) in paragraph at lines 11--11
  [][] [][]\T1/cmr/m/n/12 Direkte I2C-Registerauslesung des State-of-Charge (SOC) vom MAX17262[] [][]  
  []
 
 )
-\tf@lol=\write6
-\openout6 = `main.lol'.
+\tf@lol=\write7
+\openout7 = `main.lol'.
 
- (./main.bbl [46
+ (./main.bbl [64
 
 
 ]
-Underfull \hbox (badness 1910) in paragraph at lines 4--8
+Underfull \hbox (badness 1418) in paragraph at lines 4--8
 []\T1/cmr/m/n/12 Alpha Cephei Inc.  Vosk Of-fline Speech Recog-ni-tion API.  []$\T1/pcr/m/n/12 https : / /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 16--20
+Underfull \hbox (badness 10000) in paragraph at lines 33--37
 []\T1/cmr/m/n/12 Google LLC.  App Man-i-fest Overview | An-droid De-vel-op-ers.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 16--20
+Underfull \hbox (badness 10000) in paragraph at lines 33--37
 []$\T1/pcr/m/n/12 https : / / developer . android . com / guide / topics / manifest /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 22--26
-[]\T1/cmr/m/n/12 Google LLC.  Blue-tooth-Gatt API Ref-er-ence | An-droid De-vel-op-ers.
+Underfull \hbox (badness 10000) in paragraph at lines 39--43
+[]\T1/cmr/m/n/12 Google LLC.  Blue-tooth-Gatt API Ref-er-ence | An-droid De-vel-op-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 22--26
-[]$\T1/pcr/m/n/12 https : / / developer . android . com / reference / android / bluetooth /
+Underfull \hbox (badness 10000) in paragraph at lines 39--43
+\T1/cmr/m/n/12 ers.  []$\T1/pcr/m/n/12 https : / / developer . android . com / reference / android /
  []
 
-) [47
+
+Underfull \hbox (badness 10000) in paragraph at lines 51--55
+[]\T1/cmr/m/n/12 Google LLC.  Fore-ground Ser-vices | An-droid De-vel-op-ers.
+ []
 
 
-] (./chapters/99_authors.tex
-<media/images/cv_liam.pdf, id=774, 597.50829pt x 845.0471pt>
+Underfull \hbox (badness 10000) in paragraph at lines 51--55
+[]$\T1/pcr/m/n/12 https : / / developer . android . com / guide / components /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 57--61
+\T1/pcr/m/n/12 android . com / reference / android / speech / tts / TextToSpeech$[]\T1/cmr/m/n/12 .
+ []
+
+
+Underfull \hbox (badness 1168) in paragraph at lines 63--67
+[]\T1/cmr/m/n/12 JCW.  3D-Modell eines Scharniers.  []$\T1/pcr/m/n/12 https : / / www . printables . com /
+ []
+
+[65
+
+
+]
+Underfull \hbox (badness 6078) in paragraph at lines 80--84
+[]\T1/cmr/m/n/12 Wikipedia-Autoren.  Con-vo-lu-tional Neu-ral Net-work.  []$\T1/pcr/m/n/12 https : / / de .
+ []
+
+
+Underfull \hbox (badness 1072) in paragraph at lines 80--84
+\T1/pcr/m/n/12 wikipedia . org / wiki / Convolutional _ Neural _ Network$[]\T1/cmr/m/n/12 .  Abgerufen
+ []
+
+)
+File: ./media/images/htl_c_cmyk_rein.pdf Graphic file (type pdf)
+<use ./media/images/htl_c_cmyk_rein.pdf>
+Package pdftex.def Info: ./media/images/htl_c_cmyk_rein.pdf  used on input line 50.
+(pdftex.def)             Requested size: 25.6073pt x 13.37865pt.
+ [66] (./chapters/99_authors.tex
+<media/images/cv_liam.pdf, id=918, 597.50829pt x 845.0471pt>
 File: media/images/cv_liam.pdf Graphic file (type pdf)
 <use media/images/cv_liam.pdf>
 Package pdftex.def Info: media/images/cv_liam.pdf  used on input line 12.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
-<media/images/cv_liam.pdf, id=776, page=1, 597.50829pt x 845.0471pt>
+File: media/images/cv_liam.pdf Graphic file (type pdf)
+<use media/images/cv_liam.pdf>
+Package pdftex.def Info: media/images/cv_liam.pdf  used on input line 12.
+(pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
+<media/images/cv_liam.pdf, id=921, page=1, 597.50829pt x 845.0471pt>
 File: media/images/cv_liam.pdf Graphic file (type pdf)
 <use media/images/cv_liam.pdf, page 1>
 Package pdftex.def Info: media/images/cv_liam.pdf , page1 used on input line 12.
@@ -1498,93 +1879,115 @@ File: media/images/cv_liam.pdf Graphic file (type pdf)
 <use media/images/cv_liam.pdf, page 1>
 Package pdftex.def Info: media/images/cv_liam.pdf , page1 used on input line 12.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
- [48
-
+ [67
 
 
 
 
  <./media/images/cv_liam.pdf>]
-<media/images/cv_manuel.pdf, id=805, 597.55246pt x 845.07724pt>
-File: media/images/cv_manuel.pdf Graphic file (type pdf)
-<use media/images/cv_manuel.pdf>
-Package pdftex.def Info: media/images/cv_manuel.pdf  used on input line 14.
-(pdftex.def)             Requested size: 597.551pt x 845.07518pt.
-<media/images/cv_manuel.pdf, id=807, page=1, 597.55246pt x 845.07724pt>
-File: media/images/cv_manuel.pdf Graphic file (type pdf)
-<use media/images/cv_manuel.pdf, page 1>
-Package pdftex.def Info: media/images/cv_manuel.pdf , page1 used on input line 14.
-(pdftex.def)             Requested size: 597.551pt x 845.07518pt.
-File: media/images/cv_manuel.pdf Graphic file (type pdf)
-<use media/images/cv_manuel.pdf, page 1>
-Package pdftex.def Info: media/images/cv_manuel.pdf , page1 used on input line 14.
-(pdftex.def)             Requested size: 597.57834pt x 845.11386pt.
-File: media/images/cv_manuel.pdf Graphic file (type pdf)
-<use media/images/cv_manuel.pdf, page 1>
-Package pdftex.def Info: media/images/cv_manuel.pdf , page1 used on input line 14.
-(pdftex.def)             Requested size: 597.57834pt x 845.11386pt.
-File: media/images/cv_manuel.pdf Graphic file (type pdf)
-<use media/images/cv_manuel.pdf, page 1>
-Package pdftex.def Info: media/images/cv_manuel.pdf , page1 used on input line 14.
-(pdftex.def)             Requested size: 597.57834pt x 845.11386pt.
-File: media/images/cv_manuel.pdf Graphic file (type pdf)
-<use media/images/cv_manuel.pdf, page 1>
-Package pdftex.def Info: media/images/cv_manuel.pdf , page1 used on input line 14.
-(pdftex.def)             Requested size: 597.57834pt x 845.11386pt.
- [49
 
- <./media/images/cv_manuel.pdf>]
-<media/images/cv_fabian.pdf, id=831, 597.55246pt x 845.07718pt>
+pdfTeX warning: pdflatex (file ./media/images/cv_fabian.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<media/images/cv_fabian.pdf, id=951, 597.53635pt x 845.04686pt>
 File: media/images/cv_fabian.pdf Graphic file (type pdf)
 <use media/images/cv_fabian.pdf>
-Package pdftex.def Info: media/images/cv_fabian.pdf  used on input line 15.
-(pdftex.def)             Requested size: 597.551pt x 845.07512pt.
-<media/images/cv_fabian.pdf, id=833, page=1, 597.55246pt x 845.07718pt>
-File: media/images/cv_fabian.pdf Graphic file (type pdf)
-<use media/images/cv_fabian.pdf, page 1>
-Package pdftex.def Info: media/images/cv_fabian.pdf , page1 used on input line 15.
-(pdftex.def)             Requested size: 597.551pt x 845.07512pt.
-File: media/images/cv_fabian.pdf Graphic file (type pdf)
-<use media/images/cv_fabian.pdf, page 1>
-Package pdftex.def Info: media/images/cv_fabian.pdf , page1 used on input line 15.
-(pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
-File: media/images/cv_fabian.pdf Graphic file (type pdf)
-<use media/images/cv_fabian.pdf, page 1>
-Package pdftex.def Info: media/images/cv_fabian.pdf , page1 used on input line 15.
-(pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
-File: media/images/cv_fabian.pdf Graphic file (type pdf)
-<use media/images/cv_fabian.pdf, page 1>
-Package pdftex.def Info: media/images/cv_fabian.pdf , page1 used on input line 15.
-(pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
-File: media/images/cv_fabian.pdf Graphic file (type pdf)
-<use media/images/cv_fabian.pdf, page 1>
-Package pdftex.def Info: media/images/cv_fabian.pdf , page1 used on input line 15.
-(pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
- [50
+Package pdftex.def Info: media/images/cv_fabian.pdf  used on input line 14.
+(pdftex.def)             Requested size: 597.53488pt x 845.0448pt.
 
- <./media/images/cv_fabian.pdf>]) (./main.aux)
- ***********
-LaTeX2e <2025-11-01>
-L3 programming layer <2026-01-19>
- ***********
 
+pdfTeX warning: pdflatex (file ./media/images/cv_fabian.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+File: media/images/cv_fabian.pdf Graphic file (type pdf)
+<use media/images/cv_fabian.pdf>
+Package pdftex.def Info: media/images/cv_fabian.pdf  used on input line 14.
+(pdftex.def)             Requested size: 597.53488pt x 845.0448pt.
+
+
+pdfTeX warning: pdflatex (file ./media/images/cv_fabian.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex (file ./media/images/cv_fabian.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<media/images/cv_fabian.pdf, id=954, page=1, 597.53635pt x 845.04686pt>
+File: media/images/cv_fabian.pdf Graphic file (type pdf)
+<use media/images/cv_fabian.pdf, page 1>
+Package pdftex.def Info: media/images/cv_fabian.pdf , page1 used on input line 14.
+(pdftex.def)             Requested size: 597.53488pt x 845.0448pt.
+File: media/images/cv_fabian.pdf Graphic file (type pdf)
+<use media/images/cv_fabian.pdf, page 1>
+Package pdftex.def Info: media/images/cv_fabian.pdf , page1 used on input line 14.
+(pdftex.def)             Requested size: 597.56223pt x 845.08348pt.
+File: media/images/cv_fabian.pdf Graphic file (type pdf)
+<use media/images/cv_fabian.pdf, page 1>
+Package pdftex.def Info: media/images/cv_fabian.pdf , page1 used on input line 14.
+(pdftex.def)             Requested size: 597.56223pt x 845.08348pt.
+File: media/images/cv_fabian.pdf Graphic file (type pdf)
+<use media/images/cv_fabian.pdf, page 1>
+Package pdftex.def Info: media/images/cv_fabian.pdf , page1 used on input line 14.
+(pdftex.def)             Requested size: 597.56223pt x 845.08348pt.
+File: media/images/cv_fabian.pdf Graphic file (type pdf)
+<use media/images/cv_fabian.pdf, page 1>
+Package pdftex.def Info: media/images/cv_fabian.pdf , page1 used on input line 14.
+(pdftex.def)             Requested size: 597.56223pt x 845.08348pt.
+[68 <./media/images/cv_fabian.pdf>]
+
+pdfTeX warning: pdflatex (file ./media/images/cv_manuel.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<media/images/cv_manuel.pdf, id=966, 597.55246pt x 845.07724pt>
+File: media/images/cv_manuel.pdf Graphic file (type pdf)
+<use media/images/cv_manuel.pdf>
+Package pdftex.def Info: media/images/cv_manuel.pdf  used on input line 15.
+(pdftex.def)             Requested size: 597.551pt x 845.07518pt.
+
+
+pdfTeX warning: pdflatex (file ./media/images/cv_manuel.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+File: media/images/cv_manuel.pdf Graphic file (type pdf)
+<use media/images/cv_manuel.pdf>
+Package pdftex.def Info: media/images/cv_manuel.pdf  used on input line 15.
+(pdftex.def)             Requested size: 597.551pt x 845.07518pt.
+
+
+pdfTeX warning: pdflatex (file ./media/images/cv_manuel.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex (file ./media/images/cv_manuel.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<media/images/cv_manuel.pdf, id=969, page=1, 597.55246pt x 845.07724pt>
+File: media/images/cv_manuel.pdf Graphic file (type pdf)
+<use media/images/cv_manuel.pdf, page 1>
+Package pdftex.def Info: media/images/cv_manuel.pdf , page1 used on input line 15.
+(pdftex.def)             Requested size: 597.551pt x 845.07518pt.
+File: media/images/cv_manuel.pdf Graphic file (type pdf)
+<use media/images/cv_manuel.pdf, page 1>
+Package pdftex.def Info: media/images/cv_manuel.pdf , page1 used on input line 15.
+(pdftex.def)             Requested size: 597.57834pt x 845.11386pt.
+File: media/images/cv_manuel.pdf Graphic file (type pdf)
+<use media/images/cv_manuel.pdf, page 1>
+Package pdftex.def Info: media/images/cv_manuel.pdf , page1 used on input line 15.
+(pdftex.def)             Requested size: 597.57834pt x 845.11386pt.
+File: media/images/cv_manuel.pdf Graphic file (type pdf)
+<use media/images/cv_manuel.pdf, page 1>
+Package pdftex.def Info: media/images/cv_manuel.pdf , page1 used on input line 15.
+(pdftex.def)             Requested size: 597.57834pt x 845.11386pt.
+File: media/images/cv_manuel.pdf Graphic file (type pdf)
+<use media/images/cv_manuel.pdf, page 1>
+Package pdftex.def Info: media/images/cv_manuel.pdf , page1 used on input line 15.
+(pdftex.def)             Requested size: 597.57834pt x 845.11386pt.
+[69 <./media/images/cv_manuel.pdf>]) (./main.aux)
 
 LaTeX Warning: There were undefined references.
 
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 23258 strings out of 467525
- 417432 string characters out of 5398440
- 1370342 words of memory out of 5000000
- 51408 multiletter control sequences out of 15000+600000
- 648277 words of font info for 89 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 108i,22n,107p,11318b,2058s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/google/noto/NotoSans-Bold.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/google/noto/NotoSans-Italic.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/google/noto/NotoSans-Regular.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfsx1200.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfsx1728.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfsx2488.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfti1728.pfb><c:/Users/Manuel/Documents/HTL/5AHELS/Diplomarbeit/texlive/2026/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on main.pdf (56 pages, 3247241 bytes).
+ 22925 strings out of 476034
+ 398115 string characters out of 5792864
+ 2024388 words of memory out of 6000000
+ 42500 multiletter control sequences out of 15000+600000
+ 532442 words of font info for 80 fonts, out of 8000000 for 9000
+ 1137 hyphenation exceptions out of 8191
+ 108i,22n,106p,10693b,2063s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texlive/texmf-dist/fonts/type1/google/noto/NotoSans-Bold.pfb></usr/share/texlive/texmf-dist/fonts/type1/google/noto/NotoSans-Italic.pfb></usr/share/texlive/texmf-dist/fonts/type1/google/noto/NotoSans-Regular.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbi1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfsx1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfsx1728.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfsx2488.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfti1728.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
+Output written on main.pdf (75 pages, 4714462 bytes).
 PDF statistics:
- 1271 PDF objects out of 1440 (max. 8388607)
- 1098 compressed objects within 11 object streams
- 383 named destinations out of 1000 (max. 500000)
- 833 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1382 PDF objects out of 1440 (max. 8388607)
+ 1161 compressed objects within 12 object streams
+ 437 named destinations out of 1000 (max. 500000)
+ 767 words of extra memory for PDF output out of 10000 (max. 10000000)
 
