@@ -1,0 +1,13 @@
+# LaTeX build files
+*.aux
+*.bbl
+*.blg
+*.log
+*.toc
+*.lof
+*.lol
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.pdf
