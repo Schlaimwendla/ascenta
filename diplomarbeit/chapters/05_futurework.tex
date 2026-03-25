@@ -13,11 +13,9 @@ Das visuelle Interface wird dabei vollständig obsolet. Die Applikation sollte s
 \subsection{Kontinuierliches auditives Raum-Feedback (Leitstrahl-Prinzip)}
 Eine vielversprechende funktionale Erweiterung stellt die Implementierung eines dynamischen, akustischen Suchmodus dar. Sucht der Nutzer nach einem bestimmten Objekt (z.\,B. einem Stuhl oder einer Tür), könnte das System ein kontinuierliches Audiosignal generieren, das an die Funktion eines Geigerzählers oder eines Einparkhilfesensors angelehnt ist. 
 
-
-
 Wenn der Nutzer den Kopf schwenkt und das gesuchte Objekt in das Sichtfeld der Kamera gerät, passt der Algorithmus die Frequenz (Tonhöhe) und das Intervall (Pings pro Sekunde) des Audiosignals in Echtzeit an. Je zentrierter das Objekt im Sichtfeld ist und je geringer die Distanz (gemessen durch den Time-of-Flight-Sensor) wird, desto intensiver wird das akustische Feedback. Dies würde blinden Nutzern eine hochpräzise, intuitive Zielführung ermöglichen, ohne sie mit komplexen, gesprochenen Sätzen zu überlasten.
 
-\section{Künstliche Intelligenz und Modell-Training}
+\section{Künstliche Intelligenz und Modell-Training - Fabian}
 
 \subsection{Erweiterte Objekterkennung für Alltagsgegenstände}
 \label{sec:future_ml_objects}
@@ -25,15 +23,15 @@ Derzeit ist das System auf die Erkennung von Personen optimiert. Für eine umfas
 
 \subsection{Weiterentwicklung des Machine-Learning-Modells (Edge Impulse)}
 \label{sec:future_edge_impulse}
-Fabian
+Für mögliche Weiterentwicklungen dieses Projekts bietet sich ein grundlegender Wechsel der Hardware-Architektur an. Da die Umsetzung mit der Nicla Vision \cite{arduino_nicla_vision} die Leistungsgrenzen des Mikrocontrollers aufzeigte, steigert der Einsatz eines wesentlich leistungsfähigeren Prozessors in einer zukünftigen Version die Alltagsfähigkeit der Smart-Brille maßgeblich. Ein solches Hardware-Upgrade stellt die notwendigen Ressourcen bereit, um deutlich aufwendigere neuronale Netze auszuführen. Das System überwindet so die Limitierungen des aktuellen Modells und klassifiziert eine viel größere Anzahl unterschiedlicher Objekte gleichzeitig und präzise. Dadurch steigt der praktische Nutzen für den Anwender, da die Brille komplexe Umgebungen umfassender analysiert und versteht.
 
-\section{Hardware und Elektronik}
+\section{Hardware und Elektronik - Fabian}
 
 \subsection{Optimierung der Schaltungstechnik und Sensorik}
 \label{sec:future_elektronik}
-Fabian
+Ein solcher Ansatz bringt jedoch neue konstruktive Herausforderungen mit sich. Ein leistungsstärkeres Kernsystem verhindert den Rückgriff auf das praktische All-in-One-Format der Nicla Vision \cite{arduino_nicla_vision}. Stattdessen erfordert die neue Architektur eine Anbindung der Kamera und eines Großteils der Sensorik als separate Bauteile an den Hauptprozessor. Dies erschwert den physischen Entwurf der Brille erheblich. Die komplexe Verkabelung, der erweiterte Aufbau der Elektronik und das anspruchsvolle Platzmanagement für die vielen Einzelkomponenten verlangen im ohnehin engen Gehäuse eine komplett neue Konzeption.
 
-\section{Mechanik und Gehäusedesign}
+\section{Mechanik und Gehäusedesign - Manuel}
 
 \subsection{Weiterentwicklung des 3D-Modells und der Ergonomie}
 \label{sec:future_3ddruck}

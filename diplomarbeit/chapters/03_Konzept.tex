@@ -34,8 +34,17 @@ Um die BLE-Limitierung zu umgehen, erfolgte der Wechsel auf ein WiFi-basiertes N
 \noindent\textbf{Phase 3: Finale hybride Topologie (BLE \& TCP)} \\
 Aufgrund der Unzuverlässigkeit von UDP wechselte die Architektur final zum Transmission Control Protocol (TCP). TCP garantiert durch interne Prüfsummen und automatische Paketwiederholung eine verlustfreie Übertragung. Das System nutzt nun eine hybride Strategie: BLE übernimmt ausschließlich die Geräteerkennung und den Austausch der WLAN-Daten (Provisioning). Sobald die Verbindung steht, übernimmt ein TCP-Socket auf Port 5005 den gesamten Datenstrom. Dieser Ansatz vereint die einfache Kopplung von Bluetooth mit der Stabilität und Bandbreite eines WiFi-Netzwerks.
 
-\subsection{Hardware und Elektronik}
-Fabian
+\subsection{Hardware und Elektronik - Fabian}
+\label{sec:konzept_elektronik}
+Das hardwareseitige Konzept fokussiert sich auf eine autonome Energieversorgung sowie eine intuitive Nutzersteuerung. Für eine maximale mobile Betriebsdauer sah der initiale Entwurf die Integration von zwei leistungsstarken Akkus mit einer Kapazität von jeweils 2000\,mAh vor. Diese großzügige Dimensionierung sollte konzeptionell sicherstellen, dass das System ausreichend Energie für den kontinuierlichen Betrieb der rechenintensiven KI-Modelle bereitstellt.
+
+Zur Steuerung der Hardware integrierte das ursprüngliche Konzept einen physischen Taster als zentrales Bedienelement, welches dem Nutzer die direkte Kontrolle über verschiedene Druckmuster ermöglichen sollte:
+\begin{itemize}
+    \item \textbf{Systemaktivierung:} Eine einfache Betätigung schaltet das Nicla Vision Modul ein. Diese Hardware-Trennung schont die Kapazität der Akkus in Ruhephasen maßgeblich.
+    \item \textbf{Kameraauslöser und Sprachsuche:} Ein schnelles, zweimaliges Drücken (Double-Click) erfasst ein aktuelles Bild und aktiviert zeitgleich die Audioaufnahme, um die Umgebung per Sprachbefehl nach einem bestimmten Gegenstand zu durchsuchen.
+\end{itemize}
+
+Um diese sprachgesteuerte Suchfunktion im Alltag praktikabel zu gestalten, sieht der theoretische Entwurf vor, das zugrundeliegende neuronale Netz auf eine Vielzahl von alltagsgebräuchlichen Objekten zu trainieren. Das Modell soll diese Gegenstände im aufgenommenen Bild anschließend zuverlässig identifizieren und lokalisieren.
 
 \subsection{Mechanik und Gehäusedesign}
 \subsubsection{Allgemein}
@@ -51,6 +60,7 @@ Folgende Elemente sind für die Integration der geplanten Elektronik in der Bril
 \end{itemize}
 
 Der geplante Aufbau des Modells besteht, wie bei herkömmlichen Brillen, aus zwei Brillenbügeln, einem Rahmen und anstelle der zwei Gläser einer Abdeckung. Letztere ist nicht transparent und deckt den Innenraum des Rahmens ab, in welchem die Elektronik verstaut ist.
+
 \subsubsection{Rahmen und Abdeckung}
 \subsubsection*{Rahmen v1 - 2 und Abdeckung v1 - 2}
 Die Konstruktion des Rahmens begann mit der Entwicklung einer Grundform in der zweidimensionalen Ebene.
@@ -73,8 +83,6 @@ Die Abdeckung entstand durch die Extrusion des inneren Rahmen-Bereichs - mit ein
 \textit{Abdeckung v1: Rückseite (links)}
 \newline
 \textit{Rahmen v2: Nicla Vision-Stützen}
-
-% Die Ausbuchtung orientiert sich an einem Nicla Vision-Case aus dem Internet, welches zuvor noch leicht modifiziert wurde.
 
 Im rechten Bereich der Brille ist das Lademodul untergebracht. Unterhalb davon befindet sich eine USB-C-Öffnung für den Anschluss, über welche die Akkus aufgeladen werden können (\textit{siehe Elektronik}).
 
@@ -215,7 +223,7 @@ Um im Bügel einen Lithium-Ionen-Akku unterbringen zu können, wurde die Vorders
 
 \textit{Bügel v1: Vorderansicht}
 
-Mit einem 3D-gedruckten Probe-Bauteil konnten folgende Probleme festgestellt werden: ($\rightarrow$ Herausforderung // TODO)
+Mit einem 3D-gedruckten Probe-Bauteil konnten folgende Probleme festgestellt werden: ($\rightarrow$ Herausforderung)
 {
 \itshape
 \begin{itemize}
@@ -262,7 +270,7 @@ Ein wesentliches Konstruktionskriterium war zudem die Berücksichtigung der inte
 
 Beachtet werden müssen zudem die Schrauben, welche die Abdeckung mit dem Rahmen verbinden. In vorherigen Abbildungen (\textit{siehe Abdeckung v1}) ist der Anschraubpunkt der Abdeckung sichtlich erkennbar (rechts außen). Über diesen wird durch den Rahmen eine Schraube geführt und von unten mit einer Mutter fixiert. Die Schraube soll so kurz wie möglich sein (provisorische Lösung).
 
-Probleme dieser Version: (Link zu Herausforderungen 4.2.1 // TODO) \newline
+Probleme dieser Version: (Link zu Herausforderungen 4.2.1) \newline
 {
 \itshape
 Nach der Fertigstellung eines 3D-Drucks der Brille wurde ein Problem erkannt: Der Abstand zwischen Schraubenloch und Rahmen (\textit{siehe gestrichelter Bereich in Abbildung}) erwies sich als zu gering, um den erforderlichen Umklappradius der Bügel zu gewährleisten.
