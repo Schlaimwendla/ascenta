@@ -1,7 +1,7 @@
 \documentclass[12pt, oneside, numbers=noenddot]{scrbook}
-\input{./includes/htl_definintions.tex}	
+\input{./includes/htl_definintions.tex} 
 
-\def\htlArbeitsthema{Ascenta -- Guiding your Vision}	
+\def\htlArbeitsthema{Ascenta -- Guiding your Vision}  
 \RedeclareSectionCommand[
   beforeskip=0pt,
   afterskip=2\baselineskip
@@ -13,15 +13,15 @@
 \setcounter{tocdepth}{3}
 \begin{document}
 
-\pagenumbering{roman}	
-		
+\pagenumbering{roman} 
+    
 \input{./chapters/00_deckblatt.tex}
 \input{./chapters/00_ee.tex}
 \input{./chapters/00_abstract.tex}
-	
+  
 \tableofcontents
 
-\pagenumbering{arabic}	
+\pagenumbering{arabic}  
 
 \input{./chapters/01_introduction.tex}
 \input{./chapters/02_use_cases.tex}
@@ -35,19 +35,32 @@
 
 \clearpage
 
-\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+% --- Abbildungsverzeichnis ---
+\phantomsection
+\renewcommand{\listfigurename}{Abbildungsverzeichnis}
+\addcontentsline{toc}{chapter}{\listfigurename}
 \listoffigures
 
+\clearpage
+
+% --- Quellcodeverzeichnis ---
+\phantomsection
 \renewcommand{\lstlistlistingname}{Quellcodeverzeichnis}
-\addcontentsline{toc}{chapter}{Quellcodeverzeichnis}
+\addcontentsline{toc}{chapter}{\lstlistlistingname}
 \lstlistoflistings
 
+\clearpage
+
+% --- Literaturverzeichnis ---
+\phantomsection
 \addcontentsline{toc}{chapter}{Literaturverzeichnis}
 \renewcommand{\bibname}{Literaturverzeichnis} 
 \nocite{*} 
 \bibliographystyle{plain}
 \bibliography{literature} 
+
 \clearpage
+
 \input{./chapters/99_authors.tex}
 
 \end{document}

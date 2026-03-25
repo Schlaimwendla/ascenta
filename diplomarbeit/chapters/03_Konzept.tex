@@ -1,38 +1,39 @@
 % !TEX root = ../main.tex
 \chapter{Konzept}
 
-Dieses Kapitel beschreibt die abstrakte Architektur des Assistenzsystems \glqq Ascenta\grqq. Es liefert einen Gesamtüberblick über das funktionale Zusammenwirken der Teilsysteme und erläutert die iterativen Designentscheidungen, welche zur finalen Netzwerktopologie führten.
+Dieses Kapitel beschreibt die Architektur zum finalen Konzept des Assistenzsystems \glqq Ascenta\grqq. Es liefert einen detaillierten Gesamtüberblick über das funktionale Zusammenwirken der Teilsysteme und definiert die logischen Verantwortlichkeiten der einzelnen Komponenten.
 
-\section{Gesamtüberblick}
-Das System basiert auf einer dezentralen \glqq Split-Brain\grqq-Architektur. Um die Hardware direkt am Kopf des Nutzers so leicht und unauffällig wie möglich zu gestalten, lagert die Architektur die ressourcenintensive Datenverarbeitung auf das Smartphone des Nutzers aus. Die Brille fungiert als reiner Sensor- und Kommunikationsknotenpunkt (Edge-Device). Sie erfasst Umgebungsdaten und streamt die Ergebnisse einer lokalen Vorverarbeitung an das mobile Endgerät. Das Smartphone übernimmt die Rolle des Hauptrechenzentrums. Es fusioniert die Sensordaten, interpretiert Benutzereingaben und generiert das akustische Feedback.
+\section{Gesamtüberblick und Systeminteraktion}
+Das System basiert konzeptionell auf einer dezentralen \glqq Split-Brain\grqq-Architektur, die die Gesamtarbeitslast strategisch auf zwei physisch getrennte, aber logisch eng vernetzte Knotenpunkte aufteilt. Das übergeordnete Ziel dieses Ansatzes ist es, die Hardware direkt am Kopf des Nutzers so leicht, energieeffizient und unauffällig wie möglich zu gestalten. Daher lagert die Architektur die ressourcenintensive Datenverarbeitung und komplexe Entscheidungslogik gezielt auf das ohnehin vorhandene Smartphone des Nutzers aus.
+
+Die Interaktion im Gesamtsystem wird durch diese Zweiteilung definiert:
+\begin{itemize}
+    \item \textbf{Die smarte Brille (Edge-Device):} Sie fungiert in diesem Konstrukt als hochspezialisierter Sensor- und Kommunikationsknotenpunkt. Ihre Hauptaufgabe ist die kontinuierliche Erfassung der Umgebungsdaten (visuell, auditiv, räumlich) und die unmittelbare, latenzarme Vorverarbeitung direkt an der Datenquelle (Edge-AI). Anstatt rohe Videoströme zu senden, extrahiert sie lediglich relevante Metadaten (wie Koordinaten erkannter Gesichter) und streamt diese bandbreitenschonend an das mobile Endgerät.
+    \item \textbf{Das Smartphone (Host-Device):} Es übernimmt die Rolle des leistungsstarken Hauptrechenzentrums. Hier laufen die asynchronen Datenströme der Brille zusammen. Das System fusioniert die eingehenden Sensordaten, verarbeitet und analysiert die Benutzereingaben über Natural Language Processing (NLP) und führt die finale Kontextbewertung durch. Basierend auf dieser Auswertung generiert das Smartphone das situativ passende akustische Feedback.
+\end{itemize}
 
 \section{Komponenten}
-Das Gesamtsystem setzt sich aus drei wesentlichen logischen Bausteinen zusammen: der physischen Struktur (Gehäuse), der elektronischen Hardware (Sensorik und Energieversorgung) und dem Software-Ökosystem.
+Um den zuvor beschriebenen Datenfluss zu realisieren, setzt sich das Gesamtsystem aus drei wesentlichen logischen Bausteinen zusammen. Diese Säulen sind stark voneinander abhängig und wurden parallel konzipiert, um einen reibungslosen Betriebsablauf zu gewährleisten:
+
+\begin{enumerate}
+    \item \textbf{Die physische Struktur (Mechanik und Gehäuse):} Sie bildet das ergonomische Fundament. Sie muss die gesamte Elektronik sicher und unauffällig aufnehmen, eine exakte Ausrichtung der Sensorik (insbesondere das Sichtfeld der Kamera) garantieren und gleichzeitig die Gewichtsbalance für den Dauereinsatz sicherstellen.
+    \item \textbf{Die elektronische Hardware (Sensorik und Energie):} Sie umfasst die physischen Schnittstellen zur realen Welt, primär den Mikrocontroller zur Datenerfassung sowie das autarke Akkumanagement zur mobilen Stromversorgung.
+    \item \textbf{Das Software-Ökosystem (Intelligenz und Netzwerk):} Es ist das digitale Bindeglied, welches die rohen Hardware-Signale in verwertbare Informationen übersetzt. Es regelt die asynchrone Kommunikation und beinhaltet die trainierten neuronalen Netze zur Objekt- und Spracherkennung.
+\end{enumerate}
 
 \subsection{Software-Ökosystem und Netzwerkkonzept}
 \label{sec:konzept_software}
-Die Softwarearchitektur teilt sich in die Firmware des Mikrocontrollers und die mobile Applikation. Die Firmware (MicroPython) verantwortet die hardwarenahe Sensorsteuerung und eine erste Datenreduktion (Edge AI mittels FOMO). Die Android-Applikation (Kotlin) dient als unsichtbares Interface (Zero-UI) und integriert komplexe Algorithmen wie die Offline-Spracherkennung (Vosk) zur auditiven Interaktion.
+Die Softwarearchitektur teilt sich in die Firmware des Mikrocontrollers und die mobile Applikation. Die Firmware (MicroPython) verantwortet die hardwarenahe Sensorsteuerung und eine erste Datenreduktion (Edge AI mittels FOMO). Die Android-Applikation (Kotlin) dient als unsichtbares Interface (reine Hintergrund-Applikation) und integriert komplexe Algorithmen wie die Offline-Spracherkennung (Vosk) zur auditiven Interaktion.
 
-\subsubsection{Evolution der Netzwerkarchitektur (BLE $\rightarrow$ UDP $\rightarrow$ TCP)}
-Die finale Netzwerktopologie resultiert aus einer dreistufigen Evaluierungsphase. Da das System hohe Anforderungen an Latenz und Datensicherheit stellt, dokumentiert der folgende Prozess die Abwägung zwischen verschiedenen Protokollstacks.
+Der Kern des Konzepts liegt in der asynchronen, herstellerunabhängigen Interaktion zwischen der Brille (Sensorik), dem Kommunikationskanal (WiFi-TCP) und dem Smartphone (Logik und Feedback). Abbildung~\ref{fig:gesamtarchitektur} visualisiert diesen Datenfluss und die Aufteilung der logischen Blöcke.
 
-\vspace{1em}
-\noindent\textbf{Phase 1: Das initiale BLE-GATT-Profil} \\
-Das ursprüngliche Konzept sah das Nicla Vision als eigenständiges BLE-Peripheral vor. Das System spannte einen GATT-Server auf, um Daten über spezifische Characteristics zu übertragen. Die Übertragung von Audiodaten (ca. $128.000$ Bytes) stieß jedoch auf massive Barrieren. BLE-Pakete sind im Standard auf eine Payload (MTU) von 20 Bytes limitiert. Um den Hardware-Puffer des Mikrocontrollers zu schützen und einen \texttt{OSError 11} zu vermeiden, musste der Versand künstlich auf 15\,ms Intervalle gedrosselt werden. Dies führte zu inakzeptablen Latenzen von mehreren Sekunden für eine einzige Sprachnachricht.
-
-\begin{lstlisting}[language=Python, caption={Berechnung des Audiospeichers und initiales BLE-Setup}]
-# 16000 Hz * 1 Channel * 2 Bytes * 4.0s = 128.000 Bytes Pufferbedarf
-TOTAL_BYTES = int(SAMPLE_RATE * CHANNELS * BYTES_PER_SAMPLE * RECORD_SECONDS)
-UART_SERVICE_UUID = bluetooth.UUID("6E400001-B5A3-F393-E0A9-E50E24DCCA9E")
-\end{lstlisting}
-
-\vspace{1em}
-\noindent\textbf{Phase 2: Der Zwischenschritt über das User Datagram Protocol (UDP)} \\
-Um die BLE-Limitierung zu umgehen, erfolgte der Wechsel auf ein WiFi-basiertes Netzwerk unter Nutzung von UDP. Dieses Protokoll ermöglichte theoretisch eine verzögerungsfreie Übertragung, da es keine Bestätigungszyklen (Acknowledge) erfordert. In der praktischen Erprobung offenbarte UDP jedoch eine kritische Instabilität: \textit{Packet Loss}. In einem mobilen Szenario, in dem sich der Nutzer bewegt, führten verlorene Datenpakete zu korrupten JPEG-Dateien und unvollständigen Audio-Chunks. Da UDP keine Fehlerkorrektur bietet, konnte die Applikation die defekten Binärströme nicht mehr zusammensetzen.
-
-\vspace{1em}
-\noindent\textbf{Phase 3: Finale hybride Topologie (BLE \& TCP)} \\
-Aufgrund der Unzuverlässigkeit von UDP wechselte die Architektur final zum Transmission Control Protocol (TCP). TCP garantiert durch interne Prüfsummen und automatische Paketwiederholung eine verlustfreie Übertragung. Das System nutzt nun eine hybride Strategie: BLE übernimmt ausschließlich die Geräteerkennung und den Austausch der WLAN-Daten (Provisioning). Sobald die Verbindung steht, übernimmt ein TCP-Socket auf Port 5005 den gesamten Datenstrom. Dieser Ansatz vereint die einfache Kopplung von Bluetooth mit der Stabilität und Bandbreite eines WiFi-Netzwerks.
+\begin{figure}[htbp]
+    \centering
+    % HIER DEINEN BILD-PFAD ZUM FLUSSDIAGRAMM EINTRAGEN
+    %\includegraphics[width=\textwidth]{media/images/architektur_flussdiagramm.png}
+    \caption{System-Architektur und Datenfluss (Split-Brain)}
+    \label{fig:gesamtarchitektur}
+\end{figure}
 
 \subsection{Hardware und Elektronik - Fabian}
 \label{sec:konzept_elektronik}
@@ -278,19 +279,22 @@ Nach der Fertigstellung eines 3D-Drucks der Brille wurde ein Problem erkannt: De
 }
 
 \section{Interaktionen}
-Die Interaktion zwischen den Systemkomponenten und dem Nutzer verläuft in einem kontinuierlichen Kreislauf:
+Die Interaktion zwischen den Systemkomponenten und dem Nutzer verläuft in einem kontinuierlichen Kreislauf, der als asynchroner kaskadierender Prozess aufgebaut ist:
+
 \begin{enumerate}
-    \item \textbf{Datenerfassung:} Kamera und ToF-Sensor erfassen synchron die visuelle Umgebung und Distanzdaten. Parallel überwacht die IMU physische Eingaben durch den Nutzer.
-    \item \textbf{Vorverarbeitung und Übertragung:} Der Mikrocontroller identifiziert relevante Objektkoordinaten und überträgt diese asynchron über eine TCP-Verbindung an das Smartphone.
-    \item \textbf{Fusion und Auswertung:} Das Smartphone verknüpft die Koordinaten mit Distanzwerten und wertet Sprachbefehle aus.
-    \item \textbf{Feedback:} Das System generiert akustische Signale oder Sprachausgaben (TTS) über das Handy.
+    \item \textbf{Eingabe-Trigger (Nutzer):} Der Prozess wird durch einen physischen Doppel-Klick auf den Taster an der Brille initiiert. Dieser Hardware-Interrupt triggert synchron die Kamera- und die Audioaufnahme.
+    \item \textbf{Lokale Vorverarbeitung \& Edge-AI (Brille):} Das Nicla Vision erfasst Kamera-Frames und Audiodaten. Parallel läuft ein ressourcensparendes Edge-AI-Modell (FOMO) direkt auf dem Mikrocontroller. Es lokalisiert bekannte Gesichter oder vordefinierte Objektklassen im Kamerabild und übergibt die Koordinaten an die Vorverarbeitungseinheit.
+    \item \textbf{Paketierung und WiFi-Stream:} Der Mikrocontroller paketiert die Sensorrohdaten (Audio-Chunks), die Distanzwerte (ToF-Sensor) und die KI-Koordinaten. Diese Daten werden asynchron in einen TCP-Stream auf Port 5005 geschrieben und über das lokale WiFi-Netzwerk gesendet.
+    \item \textbf{Zentrale Logik \& Datenfusion (Smartphone):} Ein TCP-Socket-Server auf der Android-Applikation empfängt den Datenstrom. Die zentrale Steuerung fusioniert die Rohdaten und nutzt die ToF-Werte, um die relativen Distanzen der ermittelten KI-Koordinaten zu berechnen.
+    \item \textbf{Kontextanalyse und Sprachverarbeitung:} Der Audiodatenstrom wird an die Offline-Spracherkennungs-Engine (Vosk) weitergeleitet, die den Sprachbefehl des Nutzers (z.\,B. \glqq Befindet sich jemand vor mir?\grqq) in Text umwandelt. Die Entscheidungslogik gleicht den Sprachbefehl anschließend mit den fusionierten Sensordaten ab.
+    \item \textbf{Akustisches Feedback (Ausgabe):} Basierend auf der Analyse generiert das System ein Feedback. Es besteht entweder aus synthetisierter Sprache via Text-to-Speech (z.\,B. \glqq Person in einem Meter Entfernung erkannt\grqq) oder aus Signaltönen. Die Ausgabe erfolgt diskret über den Lautsprecher oder Kopfhörer des Smartphones.
 \end{enumerate}
 
 \section{Technisches Design}
-Da das System mittels Kamera und Mikrofon sensible Umgebungsdaten erfasst, ist ein striktes Sicherheitskonzept integraler Bestandteil des Entwurfs. Das Konzept verfolgt hierbei den Ansatz des \textit{Privacy-by-Design}.
+Da das System mittels Kamera und Mikrofon sensible Umgebungsdaten erfasst, ist ein striktes Sicherheitskonzept integraler Bestandteil des Entwurfs. Das Konzept verfolgt hierbei den Ansatz des \textit{Privacy-by-Design}. Dies bedeutet, dass der Datenschutz nicht nachträglich aufgesetzt, sondern bereits in der fundamentalen Architektur als Standard verankert ist, indem Datenvermeidung und Offline-Verarbeitung strukturell priorisiert werden.
 
 \subsection{Lokale Datenverarbeitung und Souveränität}
 Im Gegensatz zu kommerziellen Smart-Glasses verzichtet \glqq Ascenta\grqq\ konsequent auf Cloud-Schnittstellen für die Kernfunktionen. Die Objekterkennung (FOMO) findet direkt auf dem Mikrocontroller statt, während die Spracherkennung (Vosk) lokal auf dem Android-Endgerät ausgeführt wird. Dies stellt sicher, dass zu keinem Zeitpunkt Videostreams oder private Audiodaten an externe Server übertragen werden. Die Datenhoheit verbleibt vollständig auf der Hardware des Nutzers.
 
 \subsection{Absicherung der Netzwerkschnittstellen}
-Durch den Verzicht auf das verbindungslose UDP und den Einsatz des verbindungsorientierten TCP wird die Stabilität der Sitzung erhöht. Da das System in einem lokalen Netzwerk operiert, ist die Angriffsfläche minimiert. Nach dem erfolgreichen Austausch der WLAN-Credentials über BLE wird dieser Kanal für weitere Datenübertragungen geschlossen. Das System nutzt die asynchrone TCP-Struktur, um Telemetrie und Binärdaten klar voneinander zu trennen, was eine Fehlinterpretation von Datenpaketen (Cross-Talk) auf Softwareebene verhindert. Die lokale Verschlüsselung des WLAN-Access-Points sorgt zusätzlich dafür, dass Dritte den Datenstrom nicht passiv mitschneiden können.
+Durch den Verzicht auf das verbindungslose UDP und den Einsatz des verbindungsorientierten TCP wird die Stabilität der Sitzung erhöht. Da das System in einem lokalen Netzwerk operiert, ist die Angriffsfläche minimiert. Nach dem erfolgreichen Austausch der WLAN-Credentials über BLE wird dieser Kanal für weitere Datenübertragungen geschlossen. Das System nutzt die asynchrone TCP-Struktur, um Telemetrie und Binärdaten klar voneinander zu trennen. Das zugehörige Anwendungsprotokoll stellt jedem Binärpaket einen definierten Präfix inklusive der genauen Byte-Größe voran. Dies verhindert eine Fehlinterpretation von Datenpaketen (Cross-Talk) auf Softwareebene zuverlässig. Die lokale Verschlüsselung des WLAN-Access-Points sorgt zusätzlich dafür, dass Dritte den Datenstrom nicht passiv mitschneiden können.
