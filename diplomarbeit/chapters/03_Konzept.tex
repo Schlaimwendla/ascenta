@@ -1,22 +1,50 @@
 % !TEX root = ../main.tex
+% !TEX root = ../main.tex
 \chapter{Konzept}
 
 Dieses Kapitel beschreibt die Architektur zum finalen Konzept des Assistenzsystems \glqq Ascenta\grqq. Es liefert einen detaillierten Gesamtüberblick über das funktionale Zusammenwirken der Teilsysteme und definiert die logischen Verantwortlichkeiten der einzelnen Komponenten.
 
 \section{Gesamtüberblick und Systeminteraktion}
-Das System basiert konzeptionell auf einer dezentralen \glqq Split-Brain\grqq-Architektur, die die Gesamtarbeitslast strategisch auf zwei physisch getrennte, aber logisch eng vernetzte Knotenpunkte aufteilt. Das übergeordnete Ziel dieses Ansatzes ist es, die Hardware direkt am Kopf des Nutzers so leicht, energieeffizient und unauffällig wie möglich zu gestalten. Daher lagert die Architektur die ressourcenintensive Datenverarbeitung und komplexe Entscheidungslogik gezielt auf das ohnehin vorhandene Smartphone des Nutzers aus.
+Das System basiert konzeptionell auf einer dezentralen \glqq Split-Brain\grqq-Architektur, die die Gesamtarbeitslast strategisch auf zwei physisch getrennte, aber logisch eng vernetzte Knotenpunkte aufteilt[cite: 1, 3]. Das übergeordnete Ziel dieses Ansatzes ist es, die Hardware direkt am Kopf des Nutzers so leicht, energieeffizient und unauffällig wie möglich zu gestalten. Daher lagert die Architektur die ressourcenintensive Datenverarbeitung und komplexe Entscheidungslogik gezielt auf das ohnehin vorhandene Smartphone des Nutzers aus.
 
 Die Interaktion im Gesamtsystem wird durch diese Zweiteilung definiert:
 \begin{itemize}
-    \item \textbf{Die smarte Brille (Edge-Device):} Sie fungiert in diesem Konstrukt als hochspezialisierter Sensor- und Kommunikationsknotenpunkt. Ihre Hauptaufgabe ist die kontinuierliche Erfassung der Umgebungsdaten (visuell, auditiv, räumlich) und die unmittelbare, latenzarme Vorverarbeitung direkt an der Datenquelle (Edge-AI). Anstatt rohe Videoströme zu senden, extrahiert sie lediglich relevante Metadaten (wie Koordinaten erkannter Gesichter) und streamt diese bandbreitenschonend an das mobile Endgerät.
+    \item \textbf{Die smarte Brille (Edge-Device):} Sie fungiert in diesem Konstrukt als spezialisierter Sensor-Satellit. Ihre Hauptaufgabe ist die kontinuierliche Erfassung der Umgebungsdaten (visuell, auditiv, räumlich) und die unmittelbare, latenzarme Vorverarbeitung direkt an der Datenquelle (Edge-AI). Anstatt rohe Videoströme zu senden, extrahiert sie lediglich relevante Metadaten und streamt diese bandbreitenschonend an das mobile Endgerät.
     \item \textbf{Das Smartphone (Host-Device):} Es übernimmt die Rolle des leistungsstarken Hauptrechenzentrums. Hier laufen die asynchronen Datenströme der Brille zusammen. Das System fusioniert die eingehenden Sensordaten, verarbeitet und analysiert die Benutzereingaben über Natural Language Processing (NLP) und führt die finale Kontextbewertung durch. Basierend auf dieser Auswertung generiert das Smartphone das situativ passende akustische Feedback.
 \end{itemize}
+
+Der detaillierte Informationsfluss zwischen diesen Komponenten wird in den folgenden Abschnitten anhand der spezifischen Datenflussdiagramme für die Use Cases visualisiert (siehe Abbildungen \ref{fig:flow_use_case_a} und \ref{fig:flow_use_case_b}).
+
+\section{Datenfluss der Anwendungsszenarien}
+Um das theoretische Zusammenwirken zwischen der Edge-Hardware (Brille) und der zentralen Logik (Smartphone) zu verdeutlichen, wird im Folgenden der Datenfluss für die definierten Kernszenarien (siehe Kapitel \ref{ch:use_cases}) dargestellt. Diese Diagramme zeigen die kaskadierende Verarbeitung von der Sensorerfassung bis zur Nutzerinteraktion.
+
+\subsection{Datenfluss zur Kollisionsvermeidung}
+Im Szenario der Hinderniserkennung (Use Case A) liegt der Fokus auf minimaler Latenz. Wie in Abbildung \ref{fig:flow_use_case_a} dargestellt, übernimmt die Brille die Vorfilterung der Bilddaten mittels FOMO. Nur wenn eine relevante Entität erkannt wird, erfolgt die Übertragung der Koordinaten und Distanzwerte an das Smartphone, welches die akustische Warnung auslöst.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{media/images/Use_Case_A.png}
+    \caption{Datenflussdiagramm für Use Case A: Automatische Personenerkennung}
+    \label{fig:flow_use_case_a}
+\end{figure}
+
+\subsection{Datenfluss der aktiven Umgebungsabfrage}
+Bei der gezielten Abfrage durch den Nutzer (Use Case B) wird der Datenstrom um eine auditive Komponente erweitert. Abbildung \ref{fig:flow_use_case_b} zeigt den hybriden Stream: Während die visuellen Daten weiterhin im Hintergrund analysiert werden, wird der Sprachbefehl des Nutzers parallel an die lokale Vosk-Engine zur Interpretation weitergeleitet.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{media/images/Use_Case_B.png}
+    \caption{Datenflussdiagramm für Use Case B: Sprachgesteuerte Interaktion}
+    \label{fig:flow_use_case_b}
+\end{figure}
+
+Die Trennung dieser Pfade stellt sicher, dass zeitkritische Warnungen nicht durch die komplexere Sprachverarbeitung blockiert werden.
 
 \section{Komponenten}
 Um den zuvor beschriebenen Datenfluss zu realisieren, setzt sich das Gesamtsystem aus drei wesentlichen logischen Bausteinen zusammen. Diese Säulen sind stark voneinander abhängig und wurden parallel konzipiert, um einen reibungslosen Betriebsablauf zu gewährleisten:
 
 \begin{enumerate}
-    \item \textbf{Die physische Struktur (Mechanik und Gehäuse):} Sie bildet das ergonomische Fundament. Sie muss die gesamte Elektronik sicher und unauffällig aufnehmen, eine exakte Ausrichtung der Sensorik (insbesondere das Sichtfeld der Kamera) garantieren und gleichzeitig die Gewichtsbalance für den Dauereinsatz sicherstellen.
+    \item \textbf{Die physische Struktur (Mechanik und Gehäuse):} Sie bildet das ergonomische Fundament. Sie muss die gesamte Elektronik sicher und unauffällig aufnehmen, eine exakte Ausrichtung der Sensorik garantieren und gleichzeitig die Gewichtsbalance für den Dauereinsatz sicherstellen.
     \item \textbf{Die elektronische Hardware (Sensorik und Energie):} Sie umfasst die physischen Schnittstellen zur realen Welt, primär den Mikrocontroller zur Datenerfassung sowie das autarke Akkumanagement zur mobilen Stromversorgung.
     \item \textbf{Das Software-Ökosystem (Intelligenz und Netzwerk):} Es ist das digitale Bindeglied, welches die rohen Hardware-Signale in verwertbare Informationen übersetzt. Es regelt die asynchrone Kommunikation und beinhaltet die trainierten neuronalen Netze zur Objekt- und Spracherkennung.
 \end{enumerate}
