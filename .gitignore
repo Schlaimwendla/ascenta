@@ -11,3 +11,6 @@
 *.fdb_latexmk
 *.synctex.gz
 *.pdf
+
+# Collaboration tool
+latex-collab/
