@@ -1,6 +1,6 @@
 % !TEX root = ../main.tex
 \chapter{Umsetzung}
-Das vorherige Kapitel definiert das theoretische Konzept. Dieses Kapitel beschreibt die detaillierte praktische Realisierung des Prototyps. Der Fokus liegt hierbei primär auf der komplexen softwareseitigen Implementierung der Kernfunktionen. Die Architektur vereint ein ressourcenbeschränktes Embedded-System (MicroPython auf dem Arduino Nicla Vision \cite{arduino_nicla_vision}) mit einem asynchronen mobilen Betriebssystem (Kotlin unter Android).
+Das vorherige Kapitel definiert das theoretische Konzept. Dieses Kapitel beschreibt die detaillierte praktische Realisierung des Prototyps. Der Fokus liegt hierbei primär auf der komplexen softwareseitigen Implementierung der Kernfunktionen. Die Architektur vereint ein ressourcenbeschränktes Embedded-System (MicroPython auf dem Arduino Nicla Vision \cite{arduino_nicla_vision}) mit dem asynchronen mobilen Betriebssystem \textbf{Android} (entwickelt in Kotlin).
 
 \section{Implementierung der Komponenten}
 
@@ -85,8 +85,26 @@ override fun onCharacteristicWrite(
 }
 \end{lstlisting}
 
-\subsubsection*{Hybrides Netzwerkprotokoll (BLE \& TCP)}
-Nach erfolgreichem BLE-Provisioning verbindet sich der Mikrocontroller mit dem WLAN. Die App etabliert daraufhin den Hauptdatenstrom über eine verbindungsorientierte TCP-Verbindung (Port 5005). Die Architektur nutzt hierbei TCP, da dieses Protokoll durch sein internes Acknowledge-Verfahren Paketverluste bei der Übertragung großer binärer Payloads (WAV-Audio-Chunks oder JPEG-Bilder) strikt verhindert. Die Firmware konfiguriert den Socket auf dem Nicla Vision mittels \texttt{setblocking(False)}. Dies verhindert, dass Netzwerkverzögerungen den Mikrocontroller in einen Deadlock versetzen.
+\subsubsection*{Evolution der Netzwerkarchitektur (BLE $\rightarrow$ UDP $\rightarrow$ TCP)}
+Die finale Implementierung der Netzwerktopologie resultierte aus einer dreistufigen Evaluierungsphase während der Entwicklung. Da das System hohe Anforderungen an Latenz und Datensicherheit stellt, dokumentiert der folgende Prozess die Abwägung und praktische Erprobung verschiedener Protokollstacks.
+
+\vspace{1em}
+\noindent\textbf{Phase 1: Das initiale BLE-GATT-Profil} \\
+Das ursprüngliche Design sah das Nicla Vision als eigenständiges BLE-Peripheral vor. Das System spannte einen GATT-Server auf, um Daten über spezifische Characteristics zu übertragen. Die Übertragung von Audiodaten (ca. $128.000$ Bytes) stieß jedoch auf massive Barrieren. BLE-Pakete sind im Standard auf eine Payload (MTU) von 20 Bytes limitiert. Um den Hardware-Puffer des Mikrocontrollers zu schützen und einen \texttt{OSError 11} zu vermeiden, musste der Versand künstlich auf 15\,ms Intervalle gedrosselt werden. Dies führte zu inakzeptablen Latenzen von mehreren Sekunden für eine einzige Sprachnachricht.
+
+\begin{lstlisting}[language=Python, caption={Berechnung des Audiospeichers und initiales BLE-Setup}]
+# 16000 Hz * 1 Channel * 2 Bytes * 4.0s = 128.000 Bytes Pufferbedarf
+TOTAL_BYTES = int(SAMPLE_RATE * CHANNELS * BYTES_PER_SAMPLE * RECORD_SECONDS)
+UART_SERVICE_UUID = bluetooth.UUID("6E400001-B5A3-F393-E0A9-E50E24DCCA9E")
+\end{lstlisting}
+
+\vspace{1em}
+\noindent\textbf{Phase 2: Der Zwischenschritt über das User Datagram Protocol (UDP)} \\
+Um die BLE-Limitierung zu umgehen, erfolgte in der Entwicklung der Wechsel auf ein WiFi-basiertes Netzwerk unter Nutzung von UDP. Dieses Protokoll ermöglichte theoretisch eine verzögerungsfreie Übertragung, da es keine Bestätigungszyklen (Acknowledge) erfordert. In der praktischen Erprobung offenbarte UDP jedoch eine kritische Instabilität: \textit{Packet Loss}. In einem mobilen Szenario, in dem sich der Nutzer bewegt, führten verlorene Datenpakete zu korrupten JPEG-Dateien und unvollständigen Audio-Chunks. Da UDP keine Fehlerkorrektur bietet, konnte die Applikation die defekten Binärströme nicht mehr zusammensetzen.
+
+\vspace{1em}
+\noindent\textbf{Phase 3: Finale hybride Topologie (BLE \& TCP)} \\
+Aufgrund der Unzuverlässigkeit von UDP wechselten wir final zum Transmission Control Protocol (TCP). TCP garantiert durch interne Prüfsummen und automatische Paketwiederholung eine verlustfreie Übertragung. Das System nutzt in der finalen Umsetzung nun eine hybride Strategie: BLE übernimmt ausschließlich die Geräteerkennung und den Austausch der WLAN-Daten (Provisioning). Nach erfolgreichem BLE-Provisioning verbindet sich der Mikrocontroller mit dem WLAN und die App etabliert daraufhin den Hauptdatenstrom über eine verbindungsorientierte TCP-Verbindung (Port 5005). Die Firmware konfiguriert den Socket auf dem Nicla Vision mittels \texttt{setblocking(False)}. Dies verhindert, dass Netzwerkverzögerungen den Mikrocontroller in einen Deadlock versetzen.
 
 \subsubsection*{Stream-Multiplexing und Custom Protocol Parser}
 Die Nutzung einer einzigen TCP-Verbindung (Port 5005) für völlig unterschiedliche Datentypen kennzeichnet eine architektonische Besonderheit des Systems. Der Datenstrom (\textit{Stream}) interleavt kontinuierliche Textnachrichten (JSON-Telemetrie) mit großen binären Payloads (JPEG-Bilder, WAV-Audiodaten). 
@@ -144,7 +162,9 @@ heartbeatJob = CoroutineScope(Dispatchers.IO).launch {
 Die Android-Applikation führt netzwerkbasierte I/O-Operationen und rechenintensive Machine-Learning-Prozesse (Vosk) simultan aus. Dafür implementiert der Code ein striktes Thread-Dispatching mittels \textit{Coroutines}. Sämtliche Sockets und blockierende Lesevorgänge operieren ausschließlich im Hintergrund-Thread (\texttt{Dispatchers.IO}). Sobald die Coroutine ein Datenpaket vollständig empfängt, führt sie einen synchronisierten Kontextwechsel zurück auf den Main-Thread durch (\texttt{withContext\allowbreak(Dispatchers.\allowbreak Main)}), um die Benutzeroberfläche zu aktualisieren oder die TTS-Engine konfliktfrei anzusteuern.
 
 \subsubsection*{Ressourcenmanagement und Modell-Integration (Nicla Vision)}
-Die Firmware des Nicla Vision (\texttt{firmware.py}) operiert unter starken Speicherrestriktionen (ca. 1 MB nutzbarer Heap). Um Abstürze während hardwarenaher Interrupts zu verhindern, reserviert die Firmware initial einen Notfall-Puffer über \texttt{micropython.alloc\_emergency\_exception\_buf(100)}. Zudem erzwingt der Code eine deterministische Garbage-Collection-Strategie. Der Befehl \texttt{gc.collect()} wird strategisch nach jedem Frame-Snapshot manuell aufgerufen, um der Heap-Fragmentierung proaktiv entgegenzuwirken.
+Die Firmware des Nicla Vision (\texttt{firmware.py}) operiert unter extremen Speicherrestriktionen. Von den theoretischen 2 MB RAM des STM32H7-Prozessors steht MicroPython nach dem Bootvorgang lediglich ein nutzbarer Heap von ca. 1 MB zur Verfügung. Dieser begrenzte Speicher muss gleichzeitig den 115 KB großen Framebuffer der Kamera, die Netzwerk-Sockets, die Audio-Puffer sowie die hochkomplexen Tensoren des Machine-Learning-Modells fassen.
+
+Da die dynamische Speicherallokation in MicroPython bei solch starker Auslastung schnell zu Speicherfragmentierung (Heap Fragmentation) führt, was einen Systemabsturz zur Folge hat, wenn kein zusammenhängender Speicherblock für Bild-Tensoren mehr gefunden wird, greift die Architektur auf proaktive Maßnahmen zurück. Die Firmware reserviert initial einen Notfall-Puffer über \texttt{micropython.alloc\_emergency\_exception\_buf(100)}, um Abstürze während hardwarenaher Interrupts abzufangen. Zudem erzwingt der Code eine deterministische Garbage-Collection-Strategie. Der Befehl \texttt{gc.collect()} wird strategisch nach jedem Frame-Snapshot manuell aufgerufen, um nicht mehr referenzierte Objekte sofort zu vernichten und der Fragmentierung entgegenzuwirken.
 
 \subsubsection*{Die Kernschleife der Umgebungserfassung}
 Die Hauptmethode \texttt{run\_detection} steuert die kontinuierliche Überwachung der Umgebung. Der Kamerasensor wird auf \texttt{sensor.RGB565} und \texttt{sensor.QVGA} konfiguriert. Ein anschließendes \texttt{windowing((240, 240))} schneidet das Bild exakt auf die benötigte Input-Tensor-Größe zu. Erkennt der Algorithmus ein valides Objekt, konstruiert die Firmware dynamisch einen JSON-String mit Label, Konfidenzwert und Distanz und streamt diesen asynchron über den TCP-Socket:
@@ -180,7 +200,7 @@ def run_detection():
 \end{lstlisting}
 
 \subsubsection*{Auswertung des 4D-Tensors und Sensorfusion}
-Die Auswertung der Vorhersagedaten des FOMO-Modells stellt eine besondere algorithmische Herausforderung dar. Das quantisierte Modell generiert einen vierdimensionalen Tensor (Heatmap), der das Bild in ein Grid unterteilt. Die Firmware iteriert über das X/Y-Grid. Findet der Algorithmus ein lokales Maximum über dem Schwellenwert, berechnet die Firmware den absoluten Bildschwerpunkt (Zentroid) und fusioniert die 2D-Bildkoordinaten mit der Z-Achse (Distanz in Millimetern) des ToF-Sensors.
+Die Auswertung der Vorhersagedaten des FOMO-Modells stellt eine besondere algorithmische Herausforderung dar. Das quantisierte Modell generiert einen vierdimensionalen Tensor (Heatmap), der das Bild in ein Grid unterteilt. Die Firmware iteriert über das X/Y-Grid. Findet der Algorithmus ein lokales Maximum über dem Schwellenwert, berechnet die Firmware den absoluten Bildschwerpunkt (Zentroid) und fusioniert die 2D-Bildkoordinaten mit der Z-Achse (Distanz in Millimetern) des ToF-Sensors. Diese fusionierten Raumkoordinaten werden unmittelbar im Anschluss in das JSON-Format serialisiert und asynchron über den TCP-Stream an das Smartphone gesendet. Dort dienen sie der Applikation als Berechnungsgrundlage für die präzise, direktionale Sprachausgabe an den Nutzer.
 
 \subsubsection*{Low-Level Hardware-Kommunikation (I2C \& Registerauslesung)}
 Eine verlässliche Batterieanzeige ist für blinde Nutzer essenziell. Die Firmware liest den integrierten Fuel-Gauge-IC (MAX17262) direkt über den I2C-Bus aus. Der Mikrocontroller adressiert den Chip unter der Hexadezimal-Adresse \texttt{0x36} und fordert zwei Bytes ab dem Register \texttt{0x06} (RepSOC) an. Da der Chip die Daten hardwareseitig im \textit{Little-Endian}-Format überträgt, konvertiert die Software die rohen Bytes in einen Integer und dividiert den Wert anschließend durch $256,0$, um den Ladezustand in Prozent zu erhalten:
@@ -230,7 +250,7 @@ if delta_g > 1.75:
 \end{lstlisting}
 
 \subsubsection*{Speichereffizientes Audio-Streaming}
-Die Aufzeichnung von Sprache stellt die extremste Belastung für den RAM dar. Eine 3,5-sekündige Audioaufnahme bei 16\,kHz beansprucht exakt $112.000$ Bytes. Die Firmware fragmentiert den Puffer daher in Arrays zu je 4096 Bytes. Ein hardware-getriebener Callback füllt diese Chunks iterativ. 
+Die kontinuierliche Aufzeichnung von Audiodaten stellt eine hohe Auslastung für den begrenzten Arbeitsspeicher dar. Eine 3,5-sekündige Audioaufnahme bei 16\,kHz beansprucht exakt $112.000$ Bytes. Die Firmware fragmentiert den Puffer daher in Arrays zu je 4096 Bytes. Ein hardware-getriebener Callback füllt diese Chunks iterativ. 
 
 Durch den gezielten Einsatz von \texttt{memoryview} wird eine \textit{Zero-Copy}-Zuweisung erzwungen: MicroPython verschiebt die Audio-Bytes direkt in die vorallozierten Speicheradressen, anstatt bei jeder Zuweisung neuen Arbeitsspeicher anzufordern. Nach Abschluss generiert die Firmware dynamisch einen 44 Byte großen RIFF/WAVE-Header mittels \texttt{struct.pack} und streamt diesen direkt mit den Daten über den TCP-Socket:
 
@@ -268,7 +288,7 @@ Nach der Transkription des Audiosignals oder der Objekterkennung erfolgt die Spr
 \subsubsection*{I/O-Auslagerung beim Bild-Streaming}
 Die Brille bietet zur Verifikation des Sichtfeldes die Funktion, hochauflösende Snapshots an die Smartphone-App zu senden. Ein unkomprimiertes Bitmap belegt jedoch den verbleibenden RAM nahezu vollständig. 
 
-Als Lösungsarchitektur nutzt die Firmware eine \textit{Swap-Architektur} auf dem Dateisystem. Das aufgenommene Bild wird direkt unter Anwendung einer JPEG-Kompression auf den Flash-Speicher der Brille geschrieben (\texttt{temp.jpg}). Unmittelbar danach zerstört die Firmware das rechenintensive Bildobjekt im RAM manuell durch den \texttt{del img}-Befehl und erzwingt eine Garbage-Collection. Erst mit dem nun wieder freien Arbeitsspeicher wird die Datei \texttt{temp.jpg} stückweise ausgelesen und an das Handy gestreamt:
+Zur Lösung dieses Speicherengpasses nutzt die Firmware ein klassisches \textbf{Swap-Verfahren} auf dem Dateisystem. Das aufgenommene Bild wird direkt unter Anwendung einer JPEG-Kompression auf den Flash-Speicher der Brille geschrieben (\texttt{temp.jpg}). Unmittelbar danach zerstört die Firmware das rechenintensive Bildobjekt im RAM manuell durch den \texttt{del img}-Befehl und erzwingt eine Garbage-Collection. Erst mit dem nun wieder freien Arbeitsspeicher wird die Datei \texttt{temp.jpg} stückweise ausgelesen und an das Handy gestreamt:
 
 \begin{lstlisting}[language=Python, caption={Verwendung des Flash-Speichers als Swap zur Vermeidung von OOM-Exceptions}]
 def process_image(self):
@@ -340,6 +360,13 @@ fun onVoskResultReceived(jsonResult: String) {
 }
 \end{lstlisting}
 
+\begin{figure}[htbp]
+    \centering
+    %\includegraphics[width=0.45\textwidth]{media/images/app_stt_screenshot.png}
+    \caption{Die Benutzeroberfläche des AudioFragments zur Live-Validierung der Vosk-Spracherkennung}
+    \label{fig:app_stt_ui}
+\end{figure}
+
 \textbf{Das InfoFragment (System-Dashboard):} \\
 Dieses Modul visualisiert den globalen Systemstatus. Es zeigt in Echtzeit an, ob die TCP-Verbindung stabil ist, listet die IP-Adresse des Nicla Vision und aktualisiert dynamisch den via I2C ausgelesenen Akkustand (SOC). Ein Live-Feed im unteren Bereich listet die eingehenden Telemetriedaten auf, wodurch Entwickler sofort validieren können, welches Label mit welcher Konfidenz detektiert wurde.
 
@@ -371,7 +398,7 @@ Ein wichtiger Faktor bei der Planung war die Entladecharakteristik der LiPo-Zell
 Aufgrund dieser flachen Kurve ist es technisch kaum möglich, den exakten Ladezustand (z.\,B. 70\,\% vs. 30\,\%) allein über eine Spannungsmessung zu ermitteln. Um zu verhindern, dass die Brille am kritischen Endpunkt der Kurve ohne Vorwarnung abschaltet, macht sich das System den in die Nicla Vision integrierten Fuel-Gauge-Chip (MAX17262) zunutze. Dieser misst den exakten Stromverbrauch und berechnet die verbleibende Kapazität präzise.
 
 \subsubsection*{Integration des Sicherheitsmanagements}
-Um das theoretische Risiko von Akkus in unmittelbarer Kopfnähe zu minimieren, wurde ein TP4056-Lademodul \cite{botland_tp4056} als zentrale Kontrollinstanz zwischen die Energiespeicher und die restliche Elektronik geschaltet:
+Um das theoretische Risiko von Akkus in unmittelbarer Kopfnähe zu minimieren, wurde ein TP4056-Lademodul \cite{tp4056_datasheet} als zentrale Kontrollinstanz zwischen die Energiespeicher und die restliche Elektronik geschaltet (siehe Abbildung \ref{fig:tp4056}):
 \begin{itemize}
     \item \textbf{Schutzfunktion:} Das Modul überwacht den Stromfluss permanent. Bei einem Kurzschluss oder einer Überlastung trennt es die physische Verbindung zu den Akkus augenblicklich.
     \item \textbf{Laderegelung:} Das Aufladen erfolgt sicher über einen integrierten USB-C-Anschluss. Das Modul steuert exakt, wann der Akku vollständig geladen ist, um eine Überladung zu verhindern. Zudem vereinfacht es den Ladevorgang maßgeblich, da beide Zellen durch die Parallelschaltung gleichzeitig aufgeladen werden können.
@@ -512,11 +539,235 @@ Die nachfolgende Analyse schlüsselt die Code-Passagen und ihre technischen Funk
 
 \subsection{Konstruktion und 3D-Druck}
 \label{sec:3ddruck_umsetzung}
-Als Modellierprogramm wurde Fusion 360 gewählt, da bekannt war, dass es mit Slicer-Programmen von 3D-Druckern gut kompatibel ist. Andere Applikationen, die zuvor verwendet wurden, hatten nämlich genau dieses Problem.
 
-Obwohl zunächst nur wenig Erfahrung mit Fusion 360 vorhanden war und die Funktionen erst erlernt werden mussten, stellte sich die Wahl dennoch als richtig heraus - auch trotz einiger Komplikationen (app freezes, crashes, re-installation, …).
+\subsubsection{Rahmen und Abdeckung}
+\subsubsection*{Rahmen v1 - 2 und Abdeckung v1 - 2}
+Die Rahmenkonstruktion basiert auf einer in der zweidimensionalen Ebene definierten
+Grundform.
 
-TODO: Realisierte, letzte Version
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{media/images/Grundform-Skizze.png}
+    \caption*{Grundform-Skizze}
+    \label{fig:Grundform-Skizze}
+\end{figure}
+
+Die Grundplatte wurde an den Rändern nach oben extrudiert, um im Innenraum
+ausreichend Platz für die Integration der Elektronik zu gewährleisten. Zusätzliche Öffnungen an den oberen Enden links und rechts wurden vorgesehen, um die Kabelverbindungen in die Bügel zu führen.
+\textit{Siehe Bügel v1 - 2}
+
+Die Abdeckung entsteht durch die Extrusion des inneren Rahmen-Bereichs - mit einer
+Höhe von 1 mm (\textit{siehe Abbildung: Abdeckung v1}).
+
+\textbf{Elektronik:} Im linken Bereich des Rahmens befindet sich das Nicla-Board. Über jeweils eine Aussparung für Kamera, Distanzsensor und Mikrofon in der Brillen-Abdeckung bleibt die wichtigste Sensorik frei. Um zu versichern, dass der Mikrocontroller an seiner Stelle bleibt, wurde entschieden, ihn von unten mit Stützen und von oben mit folgender Ausbuchtung zusammenzuhalten:
+
+
+\textit{Abdeckung v1: Rückseite (links)}
+\newline
+\textit{Rahmen v2: Nicla Vision-Stützen}
+
+Im rechten Bereich der Brille ist das Lademodul untergebracht. Unterhalb davon befindet sich eine USB-C-Öffnung für den Anschluss, über welche die Akkus aufgeladen werden können (\textit{siehe Elektronik}).
+
+\textit{Rahmen v2: Lademodul}
+
+Im Gegensatz zum Nicla-Board und dem Lademodul war die Positionierung der Buttons zunächst noch nicht festgelegt. Eine erste Idee sah die Platzierung hinter dem Ohr vor, letztlich wurde jedoch die Oberseite des Rahmens (oberhalb des Mikrocontrollers) gewählt, da dies die Verkabelung erheblich erleichtert.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.55\textwidth]{media/images/Button-Öffnung.jpg}
+    \caption*{Rahmen v2: Button-Öffnung (rechts)}
+    \label{fig:Rahmen v2: Button-Öffnung}
+\end{figure}
+
+\textit{Abdeckung v1}
+\newline
+\textit{Rahmen v1 + Abdeckung v1}
+
+An den beiden Enden der Abdeckung, links und rechts, sind Ausbuchtungen mit Löchern angebracht, um die Abdeckung mit dem Rahmen zu verbinden.
+
+\subsubsection*{Rahmen v3}
+
+\textit{$\rightarrow$ Herausforderung: Die Umsetzung einer geeignetet Passform gelang bei Prototyp v1 + v2 nicht, da die Modelle aufgrund einer zu geringen Gesamtbreite Defizite im Bereich der Nase wie auch an den Schläfen aufwies.}
+Um ein komfortables Tragen der Brille im Nasenbereich zu ermöglichen, wurden die Brillen-Gläser provisorisch verkleinert, wodurch mehr Platz im inneren Bereich geschaffen wurde (siehe \textit{Abbildung}).
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{media/images/Nasenbereich-Erweiterung.jpg}
+    \caption*{Rahmen v3: Nasenbereich-Erweiterung}
+    \label{fig:Rahmen v3: Nasenbereich-Erweiterung}
+\end{figure}
+
+{
+\itshape
+Herausforderung $\rightarrow$ Da das Skalieren der Bügel-Ausbuchtungen weiter nach außen eine vollständige Redimensionierung erfordert hätte, wurde dieser Arbeitsschritt vorerst noch übersprungen.
+
+\textbf{Weitere noch offene Herausforderungen:}
+\begin{itemize}
+    \item Im Nasenbereich sollte der Tragekomfort durch einen ergonomisch geformten Nasenbügel verbessert werden.
+    \item Die Abdeckung weicht derzeit noch zu stark von der Ästhetik einer Brille ab und sollte auf jeden Fall über zwei separate Gläser verfügen.
+    \item Die Form sollte überarbeitet werden, da das Verhältnis von Höhe zu Breite nicht zusammenpasst.
+    \item Der Button weist derzeit noch keine Auflagefläche auf und sitzt daher nur lose in der Button-Öffnung.
+\end{itemize}
+}
+\textbf{Bereits realisierte Optimierungen:}
+\begin{itemize}
+    \item Erweiterung der Stützen, um die Abdeckung stabiler im Rahmen zu halten.
+    \item Abrundung der Kanten des Rahmens, um den Tragekomfort zu erhöhen.
+    \item Verbesserung der Lademodul-Halterung (im ersten Test-Druck fielen die Maße noch zu schmal aus).
+\end{itemize}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{media/images/Abdeckungs-Stützen.png}
+    \caption*{Rahmen v3: Abdeckungs-Stützen}
+    \label{fig:Rahmen v3: Abdeckungs-Stützen}
+\end{figure}
+
+\subsubsection*{Rahmen v4}
+
+In der Rahmen-Version 4 wurden mehrere Optimierungen umgesetzt, um die Funktionalität der Brille zu verbessern.
+Die zuvor fehlenden Auflageflächen für den Knopf wurden nun unterhalb der Öffnung integriert:
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.4\textwidth]{media/images/Auflageflächen.png}
+    \caption*{Rahmen v4: Auflageflächen}
+    \label{fig:Rahmen v4: Auflageflächen}
+\end{figure}
+
+Im Vergleich zur Vorversion wurden die zuvor vorhandenen Öffnungen an den äußeren Enden links und rechts zur Verbindung der Abdeckung wieder geschlossen. Stattdessen kommt eine Haken-Einrastfunktion zum Einsatz, die eine sichere und ästhetische Verbindung zwischen Abdeckung und Rahmen gewährleisten soll.
+\newline
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.25\textwidth]{media/images/Haken.png}
+    \caption*{Haken v1: Angebracht an der Abdeckung}
+    \label{fig:Haken v1}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.2\textwidth]{media/images/Haken-Gegenstück.png}
+    \caption*{Haken-Gegenstück v1: Angebracht im Rahmen}
+    \label{fig:Haken-Gegenstück v1}
+\end{figure}
+
+\textbf{Idee:} Beim Einsetzen wird der Haken von oben in die abgerundete Öffnung des Haken-Gegenstücks eingeführt und kann aufgrund seiner Biegsamkeit gut einrasten, wodurch die Abdeckung passgenau sitzt. Zum Lösen der Verbindung soll ein dünner Stab durch ein kleines Loch an der Rückseite des Gegenstücks geführt werden. Dadurch wird der Haken aus seiner Position gelockert und die Abdeckung kann abgenommen werden.
+
+{
+\itshape
+\textbf{Ergebnis:} Der 3D-Drucker konnte die sehr kleinen Details der Haken-Einrastfunktion nicht präzise umsetzen. Eine Vergrößerung des Hakens war jedoch nicht möglich, da diese Funktion in den Ecken des Rahmens untergebracht werden sollte, wo zugleich genügend Raum für die Kabelführung zur Verfügung stehen muss. Folglich war eine neue Lösung erforderlich.
+
+Ein weiteres Problem trat im Zusammenhang mit den Bügeln auf. Um diese einklappen zu können, ist ein Scharnier-Mechanismus erforderlich (\textit{siehe hier}). Der erste Versuch erwies sich jedoch als nicht funktionsfähig.
+}
+\newline
+$\rightarrow$ Implementierung einer alternativen Scharnierausführung anstelle des zuvor verwendeten Mechanismus:
+
+\textit{Rahmen v4: Hinteransicht}
+
+An den äußeren Enden links und rechts, neben der Kabeldurchführung vom Rahmen zum Bügel, wird ein Scharnier angebracht (\cite{scharnier_vorlage}). Dieses besteht aus zwei identischen Bauteilen, die entgegengesetzt zueinander angeordnet sind. Die Teile sind so ausgeführt, dass sie ineinandergesteckt werden können: Eine Seite bildet das Einsteckelement, während die gegenüberliegende Seite als passendes Gegenstück fungiert. Durch das Zusammenstecken der beiden Teile entsteht ein gelenkartiger Mechanismus, der das Zuklappen der Bügel ermöglichen soll.
+
+{
+\itshape
+\textbf{Fazit zu Version 4:}
+Nach dem 3D-Druck des Bauteils stellte sich heraus, dass das Scharnier zu klein dimensioniert war und der Drucker die erforderlichen Feinheiten nicht mit ausreichender Genauigkeit umsetzen konnte.
+\newline
+Allgemein wurden zwar die Auflageflächen für den Knopf ergänzt, weiteren Probleme blieben jedoch bestehen bzw. teilweise traten auch neue auf. Folglich war ein kompletter Neuanfang des Rahmenmodells erforderlich, bei dem die gewonnenen Erkenntnisse aus den bisherigen Versionen angewandt werden sollen.
+}
+
+\subsubsection*{Rahmen v5 - Neukonzeption}
+
+Im Zuge des Neuentwurfs des Rahmen-Designs wurden mehrere zentrale Aspekte berücksichtigt, die in den vorherigen Versionen noch nicht ausreichend umgesetzt werden konnten. Ziel war es, eine ergonomische Form zu entwickeln, die sich an den Proportionen herkömmlicher Brillen orientiert und gleichzeitig für möglichst viele Gesichtsformen geeignet ist.
+
+\textit{Rahmen v4: Vorderansicht}
+
+Darüber hinaus sollte der bereits zuvor entwickelte Scharniermechanismus grundsätzlich beibehalten, jedoch größer dimensioniert werden, um den Einschränkungen durch die geringe Druckgenauigkeit des 3D-Drucks bei sehr kleinen Bauteilen entgegenzuwirken. Zusätzlich wurde vorgesehen, zwei Nasenbügel in das Modell zu integrieren, um die Auflage und den Tragekomfort zu verbessern.
+
+\textit{Rahmen v4: Hinteransicht mit Nasenbügel und Scharniermechanismus}
+
+Ein weiterer Ansatz bestand darin, die bisherige Abdeckung zu überarbeiten und, ähnlich wie bei herkömmlichen Brillen, in zwei separate Bereiche für die Gläser aufzuteilen.
+
+\textit{Gläser-Abdeckung v1: Vorderansicht}
+
+\subsubsection{Bügel}
+\subsubsection*{Bügel v1 - 2}
+
+Der erste Entwurf des Bügels war noch ein stark vereinfachtes Modell, das dazu di-
+ente ein Gefühl für den notwendigen Innenraum sowie den Komfort des Bügels zu
+bekommen. Mit einer durchgehenden Dicke von ca. 10 mm war das Bauteil für einen Brillenbügel deutlich zu massiv, was sich in Verbindung mit der geradlinigen Form (\textit{siehe Abbildung}) negativ auf das Tragegefühl auswirkte.
+
+\textit{Bügel v1: Hinteransicht}
+
+Um im Bügel einen Lithium-Ionen-Akku unterbringen zu können, wurde die Vorderseite vorerst frei gelassen.
+
+\textit{Bügel v1: Vorderansicht}
+
+Mit einem 3D-gedruckten Probe-Bauteil konnten folgende Probleme festgestellt werden: ($\rightarrow$ Herausforderung)
+{
+\itshape
+\begin{itemize}
+    \item Der Platz im Gehäuse für die Akkus war nicht ausreichend (Akku-Maße: 56 mm x 34,5 mm x 10,3 mm). Während Höhe und Breite passend realisiert wurden, war der Bügel-Hohlraum in der Länge noch zu kurz.
+    \item Der Bügel konnte noch nicht mit dem Rahmen verbunden werden, da kein Loch für die Scharnier-Verbindung vorhanden war.
+    \item Durch die sehr geradlinige Form wirkt das Design klobig. Während die Geometrie im vorderen Bereich die notwendige Breite von 10,3 mm aufweist, sollte sie hinten wieder schmaler werden, um wie bei üblichen Brillen bequem über dem Ohr zu „sitzen“.
+\end{itemize}
+}
+Aufgrund dessen wurde die 1. Version noch einmal überarbeitet:
+
+\textit{Bügel v2: Hinteransicht}
+
+Der zweite Entwurf beinhaltete folgende Optimierungen:
+\begin{itemize}
+    \item Ausreichende Gehäuse-Länge für den Lithium-Ionen-Akku.
+    \item Schmaleres Bügel-Ende 
+\end{itemize}
+
+Bestehen gebliebene Probleme:
+{
+\itshape
+\begin{itemize}
+    \item Das Bügel-Ende wies weiterhin eine unzureichende Breite auf. Durch unzureichende Erfahrung mit dem 3D-Drucker konnte nicht abgeschätzt werden, wie breit der hintere Teil des Bügels tatsächlich sein sollte.
+    \item Löcher für die Scharnier-Verbindung fehlen weiterhin.
+\end{itemize}
+
+Zudem bestand weiterhin Unzufriedenheit mit dem in der Abbildung markierten Übergang:
+
+\textit{Bügel v2: Übergang von Akku zu Ohrenbereich}
+
+Der Übergang dient rein ästhetischen Zwecken und weist dahinter lediglich einen ungenutzten Hohlraum auf. Dieser Bereich könnte jedoch für die Verbesserung des Tragekomforts genutzt werden. Die verbleibenden 35 mm zwischen Übergang und Bügel-Ende sind für die meisten Personen nicht ausreichend dimensioniert. Aus diesem Grund wurde beschlossen, das Bügelkonzept grundlegend zu überarbeiten und neu zu entwickeln.
+}
+\par
+\textbf{Akku-Aufbewahrung:} Zu Beginn wurde ein Lithium-Ionen-Akku mit einer Kapazität von 2000 mAh gewählt, um eine möglichst lange Betriebsdauer ohne erneutes Aufladen zu gewährleisten. Geplant war, diesen im Bügel unterzubringen. Da dies jedoch zu einer ungleichmäßigen Gewichtsverteilung geführt hätte, wurde entschieden, auf der gegenüberliegenden Seite ebenfalls einen Akku zu integrieren.
+
+\textit{Bügel v1: Seitenansicht}
+
+Die Bügel sollten auch zuklappbar sein, weshalb eine Scharnierlösung erforderlich war:
+Das Grundprinzip des Umklapp-Mechanismus basiert darauf, dass die Bügel jeweils über Ausbuchtungen links und rechts außen am Rahmen geführt werden. Diese dienen sowohl als mechanische Führung als auch als stabile Auflagefläche für die spätere Befestigung.  
+
+Die Fixierung erfolgt durch eine von oben eingesetzte Schraube, die Bügel und Rahmen miteinander verbindet. Dadurch entsteht eine stabile, zugleich bewegliche Verbindung, die das Auf- und Zuklappen der Bügel ermöglichen soll.
+
+Ein wesentliches Konstruktionskriterium war zudem die Berücksichtigung der internen Kabelführung. Die Schrauben sind so positioniert, dass die Kabel ausreichend Spielraum besitzen, um nach innen zum Lademodul geführt zu werden - auch im zugeklappten Zustand der Brille.  
+
+Beachtet werden müssen zudem die Schrauben, welche die Abdeckung mit dem Rahmen verbinden. In vorherigen Abbildungen (\textit{siehe Abdeckung v1}) ist der Anschraubpunkt der Abdeckung sichtlich erkennbar (rechts außen). Über diesen wird durch den Rahmen eine Schraube geführt und von unten mit einer Mutter fixiert. Die Schraube soll so kurz wie möglich sein (provisorische Lösung).
+
+Probleme dieser Version: (Link zu Herausforderungen 4.2.1) \newline
+{
+\itshape
+Nach der Fertigstellung eines 3D-Drucks der Brille wurde ein Problem erkannt: Der Abstand zwischen Schraubenloch und Rahmen (\textit{siehe gestrichelter Bereich in Abbildung}) erwies sich als zu gering, um den erforderlichen Umklappradius der Bügel zu gewährleisten.
+\textit{Rahmen v2: Draufsicht mit Kennzeichnung in Rot}
+}
+
+\subsubsection*{Bügel v3 - 4}
+In der dritten Version des Bügels wurde der hintere Bereich, welcher auf dem Ohr aufliegt, gezielt ergonomisch überarbeitet. Zu diesem Zweck erhielt der Bügel eine nach innen gerichtete Einkerbung, um eine bessere Anpassung an die natürliche Form des Ohres zu ermöglichen. Dadurch soll sowohl der Sitz verbessert als auch der Tragekomfort im Vergleich zu den vorherigen Versionen erhöht werden. \newline
+\textit{Bild Bügel v3}
+
+Zwischen der dritten und vierten Version veränderte sich die Bügelform leicht, wobei der Fokus ausschließlich auf ästhetischen Aspekten lag, ohne die Funktionalität zu beeinträchtigen. Zusätzlich wurde der Scharniermechanismus in der Bügel v4 verworfen, um in einer späteren Version einen neuen Ansatz umzusetzen.
+
+\subsubsection*{Bügel v5 - 7}
+In der fünften Version wurde das Gegenstück des (hier genannten // TODO) Scharniermechanismus integriert. In Version 6 vergrößerte sich das Scharnier, während Version 7 die Stabilität des Scharniers durch eine einheitliche Auflagefläche erhöhte. Beide Anpassungen zielten darauf ab, eine höhere Druckgenauigkeit zu erzielen.
+Bild Bügel v7 mit Auflagefläche in rot
+
+Problem: Das Einklappen der Brille war nicht vollkommen möglich…
+Herausforderung: Einklapp-Winkel erhöhen
+
 
 \section{Herausforderungen in der Entwicklung}
 Die Realisierung eines kompakten, tragbaren Assistenzsystems, welches rechenintensive Machine-Learning-Prozesse mit kontinuierlicher Netzwerkkommunikation vereint, bringt diverse interdisziplinäre Herausforderungen mit sich. 
@@ -558,7 +809,7 @@ Ziel war die Modellierung einer Brille, die möglichst vielen Personen unabhäng
 → Verweise von Herausforderungen aus Konzept // TODO
 
 \section{Tests und Validierung - Liam}
-Eine Reihe von qualitativen Praxistests belegt die Funktionstauglichkeit des \glqq Ascenta\grqq-Prototyps. Die Evaluierung fokussiert sich auf die Kernanforderungen eines Assistenzsystems: die wahrgenommene Systemlatenz, die Zuverlässigkeit der Sensoreingaben sowie die energetische Ausdauer auf Basis theoretischer Berechnungen und praktischer Beobachtungen.
+Eine Reihe von qualitativen Praxistests belegt die Funktionstauglichkeit des \glqq Ascenta\grqq-Prototyps. Die Evaluierung fokussiert sich auf die Kernanforderungen eines Assistenzsystems: die wahrgenommene Systemlatenz, die Zuverlässigkeit der Sensoreingaben sowie die energetische Stabilität.
 
 \subsection{Netzwerklatenz und Streaming-Performance}
 Da es sich bei der Objekterkennung um ein sicherheitskritisches Feature handelt, ist die Verzögerung (Latenz) zwischen physischer Hinderniserkennung und auditiver Warnung ein zentraler Bewertungsfaktor. Praxistests zeigten, dass die gewählte \glqq Split-Brain\grqq-Architektur den Echtzeitanforderungen gerecht wird. Der reine Telemetrie-Datentransfer (JSON) über den etablierten TCP-Stream erfolgt nahezu verzögerungsfrei, sodass Kollisionswarnungen unmittelbar generiert werden. 
@@ -566,50 +817,39 @@ Da es sich bei der Objekterkennung um ein sicherheitskritisches Feature handelt,
 Der Transfer und die anschließende Offline-Transkription eines Audio-Streams durch die Vosk-Engine erfordern naturgemäß mehr Verarbeitungszeit. Dennoch erwies sich die Latenz bei der interaktiven Sprachsteuerung als ausreichend gering, um einen natürlichen Kommunikationsfluss mit dem System aufrechtzuerhalten, ohne dass es zu störenden Verzögerungen für den Nutzer kommt.
 
 \subsection{Auswertung der kinetischen Interaktion (Tap-Detection)}
-Die Zuverlässigkeit der Double-Tap-Erkennung über die IMU (LSM6DSOX) wurde in verschiedenen Bewegungsszenarien evaluiert. Dabei wurden bewusste Eingaben (Taps) den typischen Störbewegungen eines Nutzers (wie schnelles Gehen, Kopfdrehungen oder Erschütterungen) gegenübergestellt. 
+Die Zuverlässigkeit der Double-Tap-Erkennung über die IMU (LSM6DSOX) wurde in einer Reihe qualitativer Praxistests evaluiert. Um das System auf Robustheit zu prüfen, wurden bewusste Doppeltipp-Eingaben mit typischen Störbewegungen (wie schnelles Gehen, plötzliche Kopfdrehungen und Erschütterungen) abgeglichen.
 
-Die Auswertung ergab, dass der im Code definierte Schwellenwert der Differenzbeschleunigung ($\Delta g > 1,75$) eine effektive Balance bietet. Normale Kopfbewegungen und Erschütterungen beim Gehen werden adäquat herausgefiltert, wodurch Fehlalarme (False-Positives) stark minimiert werden. Gleichzeitig registriert das System beabsichtigte Doppeltipps zuverlässig, ohne dem Anwender eine unverhältnismäßig hohe Schlagkraft auf das Brillengestell abzuverlangen.
+Die Auswertung der Testreihen ergab, dass der im Code definierte Schwellenwert der Differenzbeschleunigung ($\Delta g > 1,75$) eine effektive Balance bietet. Normale Kopfbewegungen und Erschütterungen werden adäquat herausgefiltert, wodurch Fehlalarme (False-Positives) im praktischen Einsatz ausblieben. Gleichzeitig registriert das System beabsichtigte Eingaben zuverlässig, ohne dem Anwender eine unverhältnismäßig hohe Schlagkraft auf das Brillengestell abzuverlangen.
 
 \subsection{Energetische Evaluierung (Akkulaufzeit)}
-Da standardisierte Messungen unter exakt reproduzierbaren Laborbedingungen im Rahmen dieses Prototyps nicht realisierbar waren, stützt sich die energetische Evaluierung auf eine theoretische Berechnung gemäß den offiziellen Datenblattwerten des Herstellers. 
+Da standardisierte Messungen unter exakt reproduzierbaren Laborbedingungen im Rahmen dieses Prototyps nicht realisierbar waren, stützt sich die energetische Evaluierung auf das beobachtete Systemverhalten im Testbetrieb.
 
-Bei einer verbauten Gesamtkapazität von $1240\,\text{mAh}$ (durch den Parallelbetrieb der zuvor genannten zwei $620\,\text{mAh}$ LiPo-Zellen) ergeben sich folgende theoretische Rechenwerte:
-Für den aktiven Betrieb (Kamera eingeschaltet) spezifiziert das Datenblatt des Arduino Nicla Vision einen durchschnittlichen Stromverbrauch von $105\,\text{mA}$. Unter dieser Last errechnet sich eine theoretische Maximallaufzeit von exakt $11,8$ Stunden ($1240\,\text{mAh} / 105\,\text{mA}$). 
+Die theoretische Maximallaufzeit des reinen Mikrocontrollers (ausgehend von den Datenblattwerten des Herstellers) dient lediglich als grober Richtwert. In der realen Anwendung wird das System durch die kontinuierliche Funkübertragung im lokalen WiFi-Netzwerk (TCP-Stream) sowie die simultane Auslesung zusätzlicher Sensorik (Time-of-Flight-Laser und IMU) deutlich stärker belastet.
 
-Bei diesen $105\,\text{mA}$ handelt es sich jedoch um einen isolierten Idealwert des reinen Mikrocontrollers. Die reale Anwendung im Assistenzsystem schließt zwingend weitere energiefordernde Faktoren mit ein: Die kontinuierliche Funkübertragung im lokalen WiFi-Netzwerk (TCP-Stream) sowie die simultane Auslesung zusätzlicher Sensorik (Time-of-Flight-Laser und IMU). Da das System keinen energiesparenden Idle-Modus besitzt und permanent unter diesen Bedingungen arbeitet, wird die theoretische Akkulaufzeit von knapp zwölf Stunden in der Praxis nicht erreicht. Dennoch bestätigen die qualitativen Feldtests, dass die verbleibende reale Laufzeit den geplanten Alltagseinsatz – beispielsweise während eines mehrstündigen Einkaufs – problemlos und ausfallsicher abdeckt.
-
-\subsection{Anpassung der Akkukapazität im Praxistest}
-Der Wechsel von ursprünglich getesteten 2000\,mAh Zellen \cite{eemb_akku_2000mah} auf die nun verwendeten 620\,mAh Zellen erwies sich in der Praxis als essenzieller Schritt für die Nutzbarkeit. Während größere Akkus das Brillengestell extrem unförmig gemacht hätten, verschwinden die kleineren Speichermodule nahezu vollständig im Design der Bügel. Die einhergehende Laufzeitverkürzung wird durch den massiven Gewinn an Tragekomfort und die weitaus unauffälligere Optik mehr als ausgeglichen.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.8\textwidth]{media/images/akkus_vergleich.png}
-    \caption{Größenvergleich: Ursprünglich geplanter LiPo-Akku (2000\,mAh) gegenüber dem final verbauten Modell (620\,mAh)}
-    \label{fig:akku_vergleich}
-\end{figure}
+Die qualitativen Feldtests bestätigen jedoch, dass die gewählte parallele Akkukonfiguration das System stabil mit der benötigten Betriebsspannung versorgt. Spannungseinbrüche, die zu einem plötzlichen Neustart des Mikrocontrollers führen könnten, wurden während der regulären Testläufe nicht beobachtet. Das Energiemanagement erweist sich somit als ausreichend dimensioniert, um die Funktionalität des Prototyps im Rahmen der Demonstrationsszenarien verlässlich aufrechtzuerhalten.
 
 \subsection{Einfluss der Klassenanzahl auf die Modell-Konfidenz}
-Die Evaluierung der Bilderkennung analysiert die Leistungsfähigkeit der trainierten neuronalen Netze anhand der Validierungsdaten. Ein direkter Vergleich der Wahrheitsmatrizen (Confusion Matrix) und der F1-Scores zweier unterschiedlicher Modell-Iterationen verdeutlicht den massiven Einfluss der Klassenanzahl auf die Erkennungsgenauigkeit. Die Gegenüberstellung der grafischen Trainingsergebnisse zeigt eine eindeutige Tendenz:
+Die Evaluierung der Bilderkennung analysiert die Leistungsfähigkeit der trainierten neuronalen Netze anhand der von Edge Impulse generierten Validierungsdaten. Ein direkter Vergleich der Wahrheitsmatrizen (Confusion Matrix) und der F1-Scores zweier unterschiedlicher Modell-Iterationen verdeutlicht den massiven Einfluss der Klassenanzahl auf die Erkennungsgenauigkeit. Die Gegenüberstellung der grafischen Trainingsergebnisse (welche direkt aus der Edge Impulse Entwicklungsumgebung exportiert wurden) zeigt eine eindeutige Tendenz:
 
 \begin{itemize}
-    \item \textbf{Multiklassen-Modell:} Ein Modell, das auf mehrere spezifische Klassen (wie „Beer“, „Can“, „Face“ und „Person“) trainiert ist, erreicht einen F1-Gesamtscore von lediglich 69,5\,\%. Die Confusion Matrix belegt hierbei eine hohe Fehlerquote bei der Zuweisung. Beispielsweise ordnet der Algorithmus die Klasse „Person“ in 52,2\,\% der Fälle und die Klasse „Can“ in 49,4\,\% der Fälle fälschlicherweise dem Hintergrund (Background) zu.
+    \item \textbf{Multiklassen-Modell:} Ein Modell, das auf mehrere spezifische Klassen (wie „Beer“, „Can“, „Face“ und „Person“) trainiert ist, erreicht laut den Software-Auswertungen einen F1-Gesamtscore von lediglich 69,5\,\%. Die Confusion Matrix belegt hierbei eine hohe Fehlerquote bei der Zuweisung. Beispielsweise ordnet der Algorithmus die Klasse „Person“ in 52,2\,\% der Fälle und die Klasse „Can“ in 49,4\,\% der Fälle fälschlicherweise dem Hintergrund (Background) zu.
 \end{itemize}
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{media/images/confusion_matrix_multi.png}
-    \caption{Confusion Matrix und F1-Score (69.5\,\%) des Multiklassen-Modells}
+    \caption{Confusion Matrix und F1-Score (69.5\,\%) des Multiklassen-Modells (Datenquelle: Edge Impulse Validierung)}
     \label{fig:conf_matrix_multi}
 \end{figure}
 
 \begin{itemize}
-    \item \textbf{Reduziertes Modell:} Eine Reduktion der Komplexität auf ein binäres Modell (ausschließlich „Background“ und „Person“) steigert den Gesamt-F1-Score signifikant auf 80,0\,\%. Die korrekte Erkennungsrate für die spezifische Klasse „Person“ steigt parallel dazu auf 81,7\,\% an, während die Fehlzuweisungen zum Hintergrund auf 18,3\,\% sinken.
+    \item \textbf{Reduziertes Modell:} Eine Reduktion der Komplexität auf ein binäres Modell (ausschließlich „Background“ und „Person“) steigert den Gesamt-F1-Score in der Validierungsumgebung signifikant auf 80,0\,\%. Die korrekte Erkennungsrate für die spezifische Klasse „Person“ steigt parallel dazu auf 81,7\,\% an, während die Fehlzuweisungen zum Hintergrund auf 18,3\,\% sinken.
 \end{itemize}
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{media/images/confusion_matrix_binary.png}
-    \caption{Confusion Matrix und F1-Score (80.0\,\%) des reduzierten binären Modells}
+    \caption{Confusion Matrix und F1-Score (80.0\,\%) des reduzierten binären Modells (Datenquelle: Edge Impulse Validierung)}
     \label{fig:conf_matrix_binary}
 \end{figure}
 

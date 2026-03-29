@@ -1,38 +1,58 @@
 % !TEX root = ../main.tex
 \chapter{Konzept}
 
-Dieses Kapitel beschreibt die abstrakte Architektur des Assistenzsystems \glqq Ascenta\grqq. Es liefert einen Gesamtüberblick über das funktionale Zusammenwirken der Teilsysteme und erläutert die iterativen Designentscheidungen, welche zur finalen Netzwerktopologie führten.
+Dieses Kapitel beschreibt die Architektur zum finalen Konzept des Assistenzsystems \glqq Ascenta\grqq. Es liefert einen detaillierten Gesamtüberblick über das funktionale Zusammenwirken der Teilsysteme und definiert die logischen Verantwortlichkeiten der einzelnen Komponentrn.
 
-\section{Gesamtüberblick}
-Das System basiert auf einer dezentralen \glqq Split-Brain\grqq-Architektur. Um die Hardware direkt am Kopf des Nutzers so leicht und unauffällig wie möglich zu gestalten, lagert die Architektur die ressourcenintensive Datenverarbeitung auf das Smartphone des Nutzers aus. Die Brille fungiert als reiner Sensor- und Kommunikationsknotenpunkt (Edge-Device). Sie erfasst Umgebungsdaten und streamt die Ergebnisse einer lokalen Vorverarbeitung an das mobile Endgerät. Das Smartphone übernimmt die Rolle des Hauptrechenzentrums. Es fusioniert die Sensordaten, interpretiert Benutzereingaben und generiert das akustische Feedback.
+\section{Gesamtüberblick und Systeminteraktion - Liam}
+Das System basiert konzeptionell auf einer dezentralen \glqq Split-Brain\grqq-Architektur, die die Gesamtarbeitslast strategisch auf zwei physisch getrennte, aber logisch eng vernetzte Knotenpunkte aufteilt. Das übergeordnete Ziel dieses Ansatzes ist es, die Hardware direkt am Kopf des Nutzers so leicht, energieeffizient und unauffällig wie möglich zu gestalten. Daher lagert die Architektur die ressourcenintensive Datenverarbeitung und komplexe Entscheidungslogik gezielt auf das ohnehin vorhandene Smartphone des Nutzers aus
+
+Die Interaktion im Gesamtsystem wird durch diese Zweiteilung definiert:
+\begin{itemize}
+    \item \textbf{Die smarte Brille (Edge-Device):} Sie fungiert in diesem Konstrukt als spezialisierter Sensor-Satellit. Ihre Hauptaufgabe ist die kontinuierliche Erfassung der Umgebungsdaten (visuell, auditiv, räumlich) und die unmittelbare, latenzarme Vorverarbeitung direkt an der Datenquelle (Edge-AI). Anstatt rohe Videoströme zu senden, extrahiert sie lediglich relevante Metadaten und streamt diese bandbreitenschonend an das mobile Endgerät.
+    \item \textbf{Das Smartphone (Host-Device):} Es übernimmt die Rolle des leistungsstarken Hauptrechenzentrums. Hier laufen die asynchronen Datenströme der Brille zusammen. Das System fusioniert die eingehenden Sensordaten, verarbeitet und analysiert die Benutzereingaben über Natural Language Processing (NLP) und führt die finale Kontextbewertung durch. Basierend auf dieser Auswertung generiert das Smartphone das situativ passende akustische Feedback.
+\end{itemize}
+
+Der detaillierte Informationsfluss zwischen diesen Komponenten wird in den folgenden Abschnitten anhand der spezifischen Datenflussdiagramme für die Use Cases visualisiert (siehe Abbildungen \ref{fig:flow_use_case_a} und \ref{fig:flow_use_case_b}).
+
+\section{Datenfluss der Anwendungsszenarien - Liam}
+Um das theoretische Zusammenwirken zwischen der Edge-Hardware (Brille) und der zentralen Logik (Smartphone) zu verdeutlichen, wird im Folgenden der Datenfluss für die definierten Kernszenarien (siehe Kapitel \ref{ch:02_use_cases}) dargestellt. Diese Diagramme zeigen die kaskadierende Verarbeitung von der Sensorerfassung bis zur Nutzerinteraktion.
+
+\subsection{Datenfluss zur Kollisionsvermeidung - Liam}
+Im Szenario der Hinderniserkennung (Use Case A) liegt der Fokus auf minimaler Latenz. Wie in Abbildung \ref{fig:flow_use_case_a} dargestellt, übernimmt die Brille die Vorfilterung der Bilddaten mittels FOMO. Nur wenn eine relevante Entität erkannt wird, erfolgt die Übertragung der Koordinaten und Distanzwerte an das Smartphone, welches die akustische Warnung auslöst.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{media/images/Use_Case_A.png}
+    \caption{Datenflussdiagramm für Use Case A: Automatische Personenerkennung}
+    \label{fig:flow_use_case_a}
+\end{figure}
+
+\subsection{Datenfluss der aktiven Umgebungsabfrage - Liam}
+Bei der gezielten Abfrage durch den Nutzer (Use Case B) wird der Datenstrom um eine auditive Komponente erweitert. Abbildung \ref{fig:flow_use_case_b} zeigt den hybriden Stream: Während die visuellen Daten weiterhin im Hintergrund analysiert werden, wird der Sprachbefehl des Nutzers parallel an die lokale Vosk-Engine zur Interpretation weitergeleitet.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{media/images/Use_Case_B.png}
+    \caption{Datenflussdiagramm für Use Case B: Sprachgesteuerte Interaktion}
+    \label{fig:flow_use_case_b}
+\end{figure}
+
+Die Trennung dieser Pfade stellt sicher, dass zeitkritische Warnungen nicht durch die komplexere Sprachverarbeitung blockiert werden.
 
 \section{Komponenten}
-Das Gesamtsystem setzt sich aus drei wesentlichen logischen Bausteinen zusammen: der physischen Struktur (Gehäuse), der elektronischen Hardware (Sensorik und Energieversorgung) und dem Software-Ökosystem.
+Um den zuvor beschriebenen Datenfluss zu realisieren, setzt sich das Gesamtsystem aus drei wesentlichen logischen Bausteinen zusammen. Diese Säulen sind stark voneinander abhängig und wurden parallel konzipiert, um einen reibungslosen Betriebsablauf zu gewährleisten:
 
-\subsection{Software-Ökosystem und Netzwerkkonzept}
+\begin{enumerate}
+    \item \textbf{Die physische Struktur (Mechanik und Gehäuse):} Sie bildet das ergonomische Fundament. Sie muss die gesamte Elektronik sicher und unauffällig aufnehmen, eine exakte Ausrichtung der Sensorik garantieren und gleichzeitig die Gewichtsbalance für den Dauereinsatz sicherstellen.
+    \item \textbf{Die elektronische Hardware (Sensorik und Energie):} Sie umfasst die physischen Schnittstellen zur realen Welt, primär den Mikrocontroller zur Datenerfassung sowie das autarke Akkumanagement zur mobilen Stromversorgung.
+    \item \textbf{Das Software-Ökosystem (Intelligenz und Netzwerk):} Es ist das digitale Bindeglied, welches die rohen Hardware-Signale in verwertbare Informationen übersetzt. Es regelt die asynchrone Kommunikation und beinhaltet die trainierten neuronalen Netze zur Objekt- und Spracherkennung.
+\end{enumerate}
+
+\subsection{Software-Ökosystem und Netzwerkkonzept - Liam}
 \label{sec:konzept_software}
-Die Softwarearchitektur teilt sich in die Firmware des Mikrocontrollers und die mobile Applikation. Die Firmware (MicroPython) verantwortet die hardwarenahe Sensorsteuerung und eine erste Datenreduktion (Edge AI mittels FOMO). Die Android-Applikation (Kotlin) dient als unsichtbares Interface (Zero-UI) und integriert komplexe Algorithmen wie die Offline-Spracherkennung (Vosk) zur auditiven Interaktion.
+Die Softwarearchitektur teilt sich in die Firmware des Mikrocontrollers und die mobile Applikation. Die Firmware (MicroPython) verantwortet die hardwarenahe Sensorsteuerung und eine erste Datenreduktion (Edge AI mittels FOMO). Die Android-Applikation (Kotlin) dient als unsichtbares Interface (reine Hintergrund-Applikation) und integriert komplexe Algorithmen wie die Offline-Spracherkennung (Vosk) zur auditiven Interaktion.
 
-\subsubsection{Evolution der Netzwerkarchitektur (BLE $\rightarrow$ UDP $\rightarrow$ TCP)}
-Die finale Netzwerktopologie resultiert aus einer dreistufigen Evaluierungsphase. Da das System hohe Anforderungen an Latenz und Datensicherheit stellt, dokumentiert der folgende Prozess die Abwägung zwischen verschiedenen Protokollstacks.
-
-\vspace{1em}
-\noindent\textbf{Phase 1: Das initiale BLE-GATT-Profil} \\
-Das ursprüngliche Konzept sah das Nicla Vision als eigenständiges BLE-Peripheral vor. Das System spannte einen GATT-Server auf, um Daten über spezifische Characteristics zu übertragen. Die Übertragung von Audiodaten (ca. $128.000$ Bytes) stieß jedoch auf massive Barrieren. BLE-Pakete sind im Standard auf eine Payload (MTU) von 20 Bytes limitiert. Um den Hardware-Puffer des Mikrocontrollers zu schützen und einen \texttt{OSError 11} zu vermeiden, musste der Versand künstlich auf 15\,ms Intervalle gedrosselt werden. Dies führte zu inakzeptablen Latenzen von mehreren Sekunden für eine einzige Sprachnachricht.
-
-\begin{lstlisting}[language=Python, caption={Berechnung des Audiospeichers und initiales BLE-Setup}]
-# 16000 Hz * 1 Channel * 2 Bytes * 4.0s = 128.000 Bytes Pufferbedarf
-TOTAL_BYTES = int(SAMPLE_RATE * CHANNELS * BYTES_PER_SAMPLE * RECORD_SECONDS)
-UART_SERVICE_UUID = bluetooth.UUID("6E400001-B5A3-F393-E0A9-E50E24DCCA9E")
-\end{lstlisting}
-
-\vspace{1em}
-\noindent\textbf{Phase 2: Der Zwischenschritt über das User Datagram Protocol (UDP)} \\
-Um die BLE-Limitierung zu umgehen, erfolgte der Wechsel auf ein WiFi-basiertes Netzwerk unter Nutzung von UDP. Dieses Protokoll ermöglichte theoretisch eine verzögerungsfreie Übertragung, da es keine Bestätigungszyklen (Acknowledge) erfordert. In der praktischen Erprobung offenbarte UDP jedoch eine kritische Instabilität: \textit{Packet Loss}. In einem mobilen Szenario, in dem sich der Nutzer bewegt, führten verlorene Datenpakete zu korrupten JPEG-Dateien und unvollständigen Audio-Chunks. Da UDP keine Fehlerkorrektur bietet, konnte die Applikation die defekten Binärströme nicht mehr zusammensetzen.
-
-\vspace{1em}
-\noindent\textbf{Phase 3: Finale hybride Topologie (BLE \& TCP)} \\
-Aufgrund der Unzuverlässigkeit von UDP wechselte die Architektur final zum Transmission Control Protocol (TCP). TCP garantiert durch interne Prüfsummen und automatische Paketwiederholung eine verlustfreie Übertragung. Das System nutzt nun eine hybride Strategie: BLE übernimmt ausschließlich die Geräteerkennung und den Austausch der WLAN-Daten (Provisioning). Sobald die Verbindung steht, übernimmt ein TCP-Socket auf Port 5005 den gesamten Datenstrom. Dieser Ansatz vereint die einfache Kopplung von Bluetooth mit der Stabilität und Bandbreite eines WiFi-Netzwerks.
+Der Kern des Konzepts liegt in der asynchronen, herstellerunabhängigen Interaktion zwischen der Brille (Sensorik), dem Kommunikationskanal (WiFi-TCP) und dem Smartphone (Logik und Feedback).
 
 \subsection{Hardware und Elektronik - Fabian}
 \label{sec:konzept_elektronik}
@@ -46,7 +66,7 @@ Zur Steuerung der Hardware integrierte das ursprüngliche Konzept einen physisch
 
 Um diese sprachgesteuerte Suchfunktion im Alltag praktikabel zu gestalten, sieht der theoretische Entwurf vor, das zugrundeliegende neuronale Netz auf eine Vielzahl von alltagsgebräuchlichen Objekten zu trainieren. Das Modell soll diese Gegenstände im aufgenommenen Bild anschließend zuverlässig identifizieren und lokalisieren.
 
-\subsection{Mechanik und Gehäusedesign}
+\subsection{Mechanik und Gehäusedesign - Manuel}
 \subsubsection{Allgemein}
 Im Rahmen der Konzeptphase wurden die grundlegenden Anforderungen und Zielsetzungen für die zu entwickelnde Brille definiert. Ein zentraler Aspekt bestand darin, die notwendige Elektronik unterzubringen, ohne dabei Funktionalität, Tragekomfort und Design zu vernachlässigen.
 
@@ -61,232 +81,23 @@ Folgende Elemente sind für die Integration der Elektronik in der Brille erforde
     \item Akku-Aufbewahrung
 \end{itemize}
 
-\subsubsection{Rahmen und Abdeckung}
-\subsubsection*{Rahmen v1 - 2 und Abdeckung v1 - 2}
-Die Rahmenkonstruktion basiert auf einer in der zweidimensionalen Ebene definierten Grundform.
+\section{Interaktionen - Liam}
+Die Interaktion zwischen den Systemkomponenten und dem Nutzer verläuft in einem kontinuierlichen Kreislauf, der als asynchroner kaskadierender Prozess aufgebaut ist:
 
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.5\textwidth]{media/images/Grundform-Skizze.png}
-    \caption*{Grundform-Skizze}
-    \label{fig:Grundform-Skizze}
-\end{figure}
-
-Die Grundplatte wurde an den Rändern nach oben extrudiert, um den Innenraum ausreichend Platz für die Integration der Elektronik zu gewährleisten. Zusätzliche Öffnungen an den oberen Enden links und rechts wurden vorgesehen, um die Kabelverbindungen in die Bügel zu führen.
-\newline\textit{Siehe Bügel v1 - 2}
-
-Die Abdeckung entsteht durch die Extrusion des inneren Rahmen-Bereichs - mit einer Höhe von 1 mm (\textit{siehe Abbildung: Abdeckung v1}).
-
-\textbf{Elektronik:} Im linken Bereich des Rahmens befindet sich das Nicla-Board. Über jeweils ein Loch für Kamera, Distanzsensor und Mikrofon in der Brillen-Abdeckung bleibt die wichtigste Sensorik frei. Um zu versichern, dass der Mikrocontroller an seiner Stelle bleibt, wurde entschieden, ihn von unten mit Stützen und von oben mit folgender Ausbuchtung zusammenzuhalten:
-
-
-\textit{Abdeckung v1: Rückseite (links)}
-\newline
-\textit{Rahmen v2: Nicla Vision-Stützen}
-
-Im rechten Bereich der Brille ist das Lademodul untergebracht. Unterhalb davon befindet sich eine USB-C-Öffnung für den Anschluss, über welche die Akkus aufgeladen werden können (\textit{siehe Elektronik}).
-
-\textit{Rahmen v2: Lademodul}
-
-Im Gegensatz zum Nicla-Board und dem Lademodul war die Positionierung der Buttons zunächst noch nicht festgelegt. Eine erste Idee sah die Platzierung hinter dem Ohr vor, letztlich wurde jedoch die Oberseite des Rahmens (oberhalb des µ-Controllers) gewählt, da dies die Verkabelung erheblich erleichtert.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.55\textwidth]{media/images/Button-Öffnung.jpg}
-    \caption*{Rahmen v2: Button-Öffnung (rechts)}
-    \label{fig:Rahmen v2: Button-Öffnung}
-\end{figure}
-
-\textit{Abdeckung v1}
-\newline
-\textit{Rahmen v1 + Abdeckung v1}
-
-An den beiden Enden der Abdeckung, links und rechts, sind Ausbuchtungen mit Löchern angebracht, um die Abdeckung mit dem Rahmen zu verbinden.
-
-\subsubsection*{Rahmen v3}
-
-\textit{$\rightarrow$ Herausforderung: Die Umsetzung einer geeignetet Passform gelang bei Prototyp v1 + v2 nicht, da die Modelle aufgrund einer zu geringen Gesamtbreite Defizite im Bereich der Nase wie auch an den Schläfen aufwies.}
-Um ein komfortables Tragen der Brille im Nasenbereich zu ermöglichen, wurden die Brillen-Gläser provisorisch verkleinert, wodurch mehr Platz im inneren Bereich geschaffen wurde (siehe \textit{Abbildung}).
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.5\textwidth]{media/images/Nasenbereich-Erweiterung.jpg}
-    \caption*{Rahmen v3: Nasenbereich-Erweiterung}
-    \label{fig:Rahmen v3: Nasenbereich-Erweiterung}
-\end{figure}
-
-{
-\itshape
-Herausforderung $\rightarrow$ Da das Skalieren der Bügel-Ausbuchtungen weiter nach außen eine vollständige Redimensionierung erfordert hätte, wurde dieser Arbeitsschritt vorerst noch übersprungen.
-
-\textbf{Weitere noch offene Herausforderungen:}
-\begin{itemize}
-    \item Im Nasenbereich sollte der Tragekomfort durch einen ergonomisch geformten Nasenbügel verbessert werden.
-    \item Die Abdeckung weicht derzeit noch zu stark von der Ästhetik einer Brille ab und sollte auf jeden Fall über zwei separate Gläser verfügen.
-    \item Die Form sollte überarbeitet werden, da das Verhältnis von Höhe zu Breite nicht zusammenpasst.
-    \item Der Button weist derzeit noch keine Auflagefläche auf und sitzt daher nur lose in der Button-Öffnung.
-\end{itemize}
-}
-\textbf{Bereits realisierte Optimierungen:}
-\begin{itemize}
-    \item Erweiterung der Stützen, um die Abdeckung stabiler im Rahmen zu halten.
-    \item Abrundung der Kanten des Rahmens, um den Tragekomfort zu erhöhen.
-    \item Verbesserung der Lademodul-Halterung (im ersten Test-Druck fielen die Maße noch zu schmal aus).
-\end{itemize}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.5\textwidth]{media/images/Abdeckungs-Stützen.png}
-    \caption*{Rahmen v3: Abdeckungs-Stützen}
-    \label{fig:Rahmen v3: Abdeckungs-Stützen}
-\end{figure}
-
-\subsubsection*{Rahmen v4}
-
-In der Rahmen-Version 4 wurden mehrere Optimierungen umgesetzt, um die Funktionalität der Brille zu verbessern.
-Die zuvor fehlenden Auflageflächen für den Knopf wurden nun unterhalb der Öffnung integriert:
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.4\textwidth]{media/images/Auflageflächen.png}
-    \caption*{Rahmen v4: Auflageflächen}
-    \label{fig:Rahmen v4: Auflageflächen}
-\end{figure}
-
-Im Vergleich zur Vorversion wurden die zuvor vorhandenen Öffnungen an den äußeren Enden links und rechts zur Verbindung der Abdeckung wieder geschlossen. Stattdessen kommt eine Haken-Einrastfunktion zum Einsatz, die eine sichere und ästhetische Verbindung zwischen Abdeckung und Rahmen gewährleisten soll.
-\newline
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.25\textwidth]{media/images/Haken.png}
-    \caption*{Haken v1: Angebracht an der Abdeckung}
-    \label{fig:Haken v1}
-\end{figure}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.2\textwidth]{media/images/Haken-Gegenstück.png}
-    \caption*{Haken-Gegenstück v1: Angebracht im Rahmen}
-    \label{fig:Haken-Gegenstück v1}
-\end{figure}
-
-\textbf{Idee:} Beim Einsetzen wird der Haken von oben in die abgerundete Öffnung des Haken-Gegenstücks eingeführt und kann aufgrund seiner Biegsamkeit gut einrasten, wodurch die Abdeckung passgenau sitzt. Zum Lösen der Verbindung soll ein dünner Stab durch ein kleines Loch an der Rückseite des Gegenstücks geführt werden. Dadurch wird der Haken aus seiner Position gelockert und die Abdeckung kann abgenommen werden.
-
-{
-\itshape
-\textbf{Ergebnis:} Der 3D-Drucker konnte die sehr kleinen Details der Haken-Einrastfunktion nicht präzise umsetzen. Eine Vergrößerung des Hakens war jedoch nicht möglich, da diese Funktion in den Ecken des Rahmens untergebracht werden sollte, wo zugleich genügend Raum für die Kabelführung zur Verfügung stehen muss. Folglich war eine neue Lösung erforderlich.
-
-Ein weiteres Problem trat im Zusammenhang mit den Bügeln auf. Um diese einklappen zu können, ist ein Scharnier-Mechanismus erforderlich (\textit{siehe hier}). Der erste Versuch erwies sich jedoch als nicht funktionsfähig.
-}
-\newline
-$\rightarrow$ Implementierung einer alternativen Scharnierausführung anstelle des zuvor verwendeten Mechanismus:
-
-\textit{Rahmen v4: Hinteransicht}
-
-An den äußeren Enden links und rechts, neben der Kabeldurchführung vom Rahmen zum Bügel, wird ein Scharnier aus dem Internet angebracht (\cite{scharnier_vorlage}). Dieses besteht aus zwei identischen Bauteilen, die entgegengesetzt zueinander angeordnet sind. Die Teile sind so ausgeführt, dass sie ineinandergesteckt werden können: Eine Seite bildet das Einsteckelement, während die gegenüberliegende Seite als passendes Gegenstück fungiert. Durch das Zusammenstecken der beiden Teile entsteht ein gelenkartiger Mechanismus, der das Zuklappen der Bügel ermöglichen soll.
-
-{
-\itshape
-\textbf{Fazit zu Version 4:}
-Nach dem 3D-Druck des Bauteils stellte sich heraus, dass das Scharnier zu klein dimensioniert war und der Drucker die erforderlichen Feinheiten nicht mit ausreichender Genauigkeit umsetzen konnte.
-\newline
-Allgemein wurden zwar die Auflageflächen für den Knopf ergänzt, weiteren Probleme blieben jedoch bestehen bzw. teilweise traten auch neue auf. Folglich war ein kompletter Neuanfang des Rahmenmodells erforderlich, bei dem die gewonnenen Erkenntnisse aus den bisherigen Versionen angewandt werden sollen.
-}
-
-\subsubsection*{Rahmen v5 - Neukonzeption}
-
-Im Zuge des Neuentwurfs des Rahmen-Designs wurden mehrere zentrale Aspekte berücksichtigt, die in den vorherigen Versionen noch nicht ausreichend umgesetzt werden konnten. Ziel war es, eine ergonomische Form zu entwickeln, die sich an den Proportionen herkömmlicher Brillen orientiert und gleichzeitig für möglichst viele Gesichtsformen geeignet ist.
-
-\textit{Rahmen v4: Vorderansicht}
-
-Darüber hinaus sollte der bereits zuvor entwickelte Scharniermechanismus grundsätzlich beibehalten, jedoch größer dimensioniert werden, um den Einschränkungen durch die geringe Druckgenauigkeit des 3D-Drucks bei sehr kleinen Bauteilen entgegenzuwirken. Zusätzlich wurde vorgesehen, zwei Nasenbügel in das Modell zu integrieren, um die Auflage und den Tragekomfort zu verbessern.
-
-\textit{Rahmen v4: Hinteransicht mit Nasenbügel und Scharniermechanismus}
-
-Ein weiterer Ansatz bestand darin, die bisherige Abdeckung zu überarbeiten und, ähnlich wie bei herkömmlichen Brillen, in zwei separate Bereiche für die Gläser aufzuteilen.
-
-\textit{Gläser-Abdeckung v1: Vorderansicht}
-
-\subsubsection{Bügel}
-\subsubsection*{Bügel v1 - 2}
-
-Der erste Entwurf des Bügels war noch ein stark vereinfachtes Modell, das dazu diente ein Gefühl für den notwendigen Innenraum sowie den Komfort des Bügels zu bekommen.
-
-Mit einer durchgehenden Dicke von ca. 10 mm war das Bauteil für einen Brillenbügel deutlich zu massiv, was sich in Verbindung mit der geradlinigen Form (\textit{siehe Abbildung}) negativ auf das Tragegefühl auswirkte.
-
-\textit{Bügel v1: Hinteransicht}
-
-Um im Bügel einen Lithium-Ionen-Akku unterbringen zu können, wurde die Vorderseite vorerst frei gelassen.
-
-\textit{Bügel v1: Vorderansicht}
-
-Mit einem 3D-gedruckten Probe-Bauteil konnten folgende Probleme festgestellt werden: ($\rightarrow$ Herausforderung)
-{
-\itshape
-\begin{itemize}
-    \item Der Platz im Gehäuse für die Akkus war nicht ausreichend (Akku-Maße: 56 mm x 34,5 mm x 10,3 mm). Während Höhe und Breite passend realisiert wurden, war der Bügel-Hohlraum in der Länge noch zu kurz.
-    \item Der Bügel konnte noch nicht mit dem Rahmen verbunden werden, da kein Loch für die Scharnier-Verbindung vorhanden war.
-    \item Durch die sehr geradlinige Form wirkt das Design klobig. Während die Geometrie im vorderen Bereich die notwendige Breite von 10,3 mm aufweist, sollte sie hinten wieder schmaler werden, um wie bei üblichen Brillen bequem über dem Ohr zu „sitzen“.
-\end{itemize}
-}
-Aufgrund dessen wurde die 1. Version noch einmal überarbeitet:
-
-\textit{Bügel v2: Hinteransicht}
-
-Der zweite Entwurf beinhaltete folgende Optimierungen:
-\begin{itemize}
-    \item Ausreichende Gehäuse-Länge für den Lithium-Ionen-Akku.
-    \item Schmaleres Bügel-Ende 
-\end{itemize}
-
-Bestehen gebliebene Probleme:
-{
-\itshape
-\begin{itemize}
-    \item Das Bügel-Ende wies weiterhin eine unzureichende Breite auf. Durch unzureichende Erfahrung mit dem 3D-Drucker konnte nicht abgeschätzt werden, wie breit der hintere Teil des Bügels tatsächlich sein sollte.
-    \item Löcher für die Scharnier-Verbindung fehlen weiterhin.
-\end{itemize}
-
-Zudem bestand weiterhin Unzufriedenheit mit dem in der Abbildung markierten Übergang:
-
-\textit{Bügel v2: Übergang von Akku zu Ohrenbereich}
-
-Der Übergang dient rein ästhetischen Zwecken und weist dahinter lediglich einen ungenutzten Hohlraum auf. Dieser Bereich könnte jedoch für die Verbesserung des Tragekomforts genutzt werden. Die verbleibenden 35 mm zwischen Übergang und Bügel-Ende sind für die meisten Personen nicht ausreichend dimensioniert. Aus diesem Grund wurde beschlossen, das Bügelkonzept grundlegend zu überarbeiten und neu zu entwickeln.
-}
-\par
-\textbf{Akku-Aufbewahrung:} Zu Beginn wurde ein Lithium-Ionen-Akku mit einer Kapazität von 2000 mAh gewählt, um eine möglichst lange Betriebsdauer ohne erneutes Aufladen zu gewährleisten. Geplant war, diesen im Bügel unterzubringen. Da dies jedoch zu einer ungleichmäßigen Gewichtsverteilung geführt hätte, wurde entschieden, auf der gegenüberliegenden Seite ebenfalls einen Akku zu integrieren.
-
-\textit{Bügel v1: Seitenansicht}
-
-Die Bügel sollten auch zuklappbar sein, weshalb eine Scharnierlösung erforderlich war:
-Das Grundprinzip des Umklapp-Mechanismus basiert darauf, dass die Bügel jeweils über Ausbuchtungen links und rechts außen am Rahmen geführt werden. Diese dienen sowohl als mechanische Führung als auch als stabile Auflagefläche für die spätere Befestigung.  
-
-Die Fixierung erfolgt durch eine von oben eingesetzte Schraube, die Bügel und Rahmen miteinander verbindet. Dadurch entsteht eine stabile, zugleich bewegliche Verbindung, die das Auf- und Zuklappen der Bügel ermöglichen soll.
-
-Ein wesentliches Konstruktionskriterium war zudem die Berücksichtigung der internen Kabelführung. Die Schrauben sind so positioniert, dass die Kabel ausreichend Spielraum besitzen, um nach innen zum Lademodul geführt zu werden - auch im zugeklappten Zustand der Brille.  
-
-Beachtet werden müssen zudem die Schrauben, welche die Abdeckung mit dem Rahmen verbinden. In vorherigen Abbildungen (\textit{siehe Abdeckung v1}) ist der Anschraubpunkt der Abdeckung sichtlich erkennbar (rechts außen). Über diesen wird durch den Rahmen eine Schraube geführt und von unten mit einer Mutter fixiert. Die Schraube soll so kurz wie möglich sein (provisorische Lösung).
-
-Probleme dieser Version: (Link zu Herausforderungen 4.2.1) \newline
-{
-\itshape
-Nach der Fertigstellung eines 3D-Drucks der Brille wurde ein Problem erkannt: Der Abstand zwischen Schraubenloch und Rahmen (\textit{siehe gestrichelter Bereich in Abbildung}) erwies sich als zu gering, um den erforderlichen Umklappradius der Bügel zu gewährleisten.
-\textit{Rahmen v2: Draufsicht mit Kennzeichnung in Rot}
-}
-
-\section{Interaktionen}
-Die Interaktion zwischen den Systemkomponenten und dem Nutzer verläuft in einem kontinuierlichen Kreislauf:
 \begin{enumerate}
-    \item \textbf{Datenerfassung:} Kamera und ToF-Sensor erfassen synchron die visuelle Umgebung und Distanzdaten. Parallel überwacht die IMU physische Eingaben durch den Nutzer.
-    \item \textbf{Vorverarbeitung und Übertragung:} Der Mikrocontroller identifiziert relevante Objektkoordinaten und überträgt diese asynchron über eine TCP-Verbindung an das Smartphone.
-    \item \textbf{Fusion und Auswertung:} Das Smartphone verknüpft die Koordinaten mit Distanzwerten und wertet Sprachbefehle aus.
-    \item \textbf{Feedback:} Das System generiert akustische Signale oder Sprachausgaben (TTS) über das Handy.
+    \item \textbf{Eingabe-Trigger (Nutzer):} Der Prozess wird durch physisches Doppel-tippen an der Brille initiiert. Dieser Hardware-Interrupt triggert die Audioaufnahme.
+    \item \textbf{Lokale Vorverarbeitung \& Edge-AI (Brille):} Das Nicla Vision erfasst Kamera-Frames und Audiodaten. Parallel läuft ein ressourcensparendes Edge-AI-Modell (FOMO) direkt auf dem Mikrocontroller. Es lokalisiert bekannte Gesichter oder vordefinierte Objektklassen im Kamerabild und übergibt die Koordinaten an die Vorverarbeitungseinheit.
+    \item \textbf{Paketierung und WiFi-Stream:} Der Mikrocontroller paketiert die Sensorrohdaten (Audio-Chunks), die Distanzwerte (ToF-Sensor) und die KI-Koordinaten. Diese Daten werden asynchron in einen TCP-Stream auf Port 5005 geschrieben und über das lokale WiFi-Netzwerk gesendet.
+    \item \textbf{Zentrale Logik \& Datenfusion (Smartphone):} Ein TCP-Socket-Server auf der Android-Applikation empfängt den Datenstrom. Die zentrale Steuerung fusioniert die Rohdaten und nutzt die ToF-Werte, um die relativen Distanzen der ermittelten KI-Koordinaten zu berechnen.
+    \item \textbf{Kontextanalyse und Sprachverarbeitung:} Der Audiodatenstrom wird an die Offline-Spracherkennungs-Engine (Vosk) weitergeleitet, die den Sprachbefehl des Nutzers (z.\,B. \glqq Befindet sich jemand vor mir?\grqq) in Text umwandelt. Die Entscheidungslogik gleicht den Sprachbefehl anschließend mit den fusionierten Sensordaten ab.
+    \item \textbf{Akustisches Feedback (Ausgabe):} Basierend auf der Analyse generiert das System ein Feedback. Es besteht entweder aus synthetisierter Sprache via Text-to-Speech (z.\,B. \glqq Person in einem Meter Entfernung erkannt\grqq) oder aus Signaltönen. Die Ausgabe erfolgt diskret über den Lautsprecher oder Kopfhörer des Smartphones.
 \end{enumerate}
 
-\section{Technisches Design}
-Da das System mittels Kamera und Mikrofon sensible Umgebungsdaten erfasst, ist ein striktes Sicherheitskonzept integraler Bestandteil des Entwurfs. Das Konzept verfolgt hierbei den Ansatz des \textit{Privacy-by-Design}.
+\section{Technisches Design - Liam}
+Da das System mittels Kamera und Mikrofon sensible Umgebungsdaten erfasst, ist ein striktes Sicherheitskonzept integraler Bestandteil des Entwurfs. Das Konzept verfolgt hierbei den Ansatz des \textit{Privacy-by-Design}. Dies bedeutet, dass der Datenschutz nicht nachträglich aufgesetzt, sondern bereits in der fundamentalen Architektur als Standard verankert ist, indem Datenvermeidung und Offline-Verarbeitung strukturell priorisiert werden.
 
-\subsection{Lokale Datenverarbeitung und Souveränität}
+\subsection{Lokale Datenverarbeitung und Souveränität - Liam}
 Im Gegensatz zu kommerziellen Smart-Glasses verzichtet \glqq Ascenta\grqq\ konsequent auf Cloud-Schnittstellen für die Kernfunktionen. Die Objekterkennung (FOMO) findet direkt auf dem Mikrocontroller statt, während die Spracherkennung (Vosk) lokal auf dem Android-Endgerät ausgeführt wird. Dies stellt sicher, dass zu keinem Zeitpunkt Videostreams oder private Audiodaten an externe Server übertragen werden. Die Datenhoheit verbleibt vollständig auf der Hardware des Nutzers.
 
-\subsection{Absicherung der Netzwerkschnittstellen}
-Durch den Verzicht auf das verbindungslose UDP und den Einsatz des verbindungsorientierten TCP wird die Stabilität der Sitzung erhöht. Da das System in einem lokalen Netzwerk operiert, ist die Angriffsfläche minimiert. Nach dem erfolgreichen Austausch der WLAN-Credentials über BLE wird dieser Kanal für weitere Datenübertragungen geschlossen. Das System nutzt die asynchrone TCP-Struktur, um Telemetrie und Binärdaten klar voneinander zu trennen, was eine Fehlinterpretation von Datenpaketen (Cross-Talk) auf Softwareebene verhindert. Die lokale Verschlüsselung des WLAN-Access-Points sorgt zusätzlich dafür, dass Dritte den Datenstrom nicht passiv mitschneiden können.
+\subsection{Absicherung der Netzwerkschnittstellen - Liam}
+Durch den Verzicht auf das verbindungslose UDP und den Einsatz des verbindungsorientierten TCP wird die Stabilität der Sitzung erhöht. Da das System in einem lokalen Netzwerk operiert, ist die Angriffsfläche minimiert. Nach dem erfolgreichen Austausch der WLAN-Credentials über BLE wird dieser Kanal für weitere Datenübertragungen geschlossen. Das System nutzt die asynchrone TCP-Struktur, um Telemetrie und Binärdaten klar voneinander zu trennen. Das zugehörige Anwendungsprotokoll stellt jedem Binärpaket einen definierten Präfix inklusive der genauen Byte-Größe voran. Dies verhindert eine Fehlinterpretation von Datenpaketen (Cross-Talk) auf Softwareebene zuverlässig. Die lokale Verschlüsselung des WLAN-Access-Points sorgt zusätzlich dafür, dass Dritte den Datenstrom nicht passiv mitschneiden können.
