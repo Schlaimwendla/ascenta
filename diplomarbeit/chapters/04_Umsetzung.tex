@@ -559,36 +559,43 @@ ausreichend Platz für die Integration der Elektronik zu gewährleisten. Zusätz
 Die Abdeckung entsteht durch die Extrusion des inneren Rahmen-Bereichs - mit einer
 Höhe von 1 mm (\textit{siehe Abbildung: Abdeckung v1}).
 
-\textbf{Elektronik:} Im linken Bereich des Rahmens befindet sich das Nicla-Board. Über jeweils eine Aussparung für Kamera, Distanzsensor und Mikrofon in der Brillen-Abdeckung bleibt die wichtigste Sensorik frei. Um zu versichern, dass der Mikrocontroller an seiner Stelle bleibt, wurde entschieden, ihn von unten mit Stützen und von oben mit folgender Ausbuchtung zusammenzuhalten:
+\textbf{Elektronik:} Im linken Bereich des Rahmens befindet sich das Nicla-Board. Über jeweils eine Aussparung für Kamera, Distanzsensor und Mikrofon in der Brillen-Abdeckung bleibt die wichtigste Sensorik frei.
+Im rechten Bereich der Brille ist das Lademodul untergebracht. Unterhalb davon befindet sich eine USB-C-Öffnung für den Anschluss, über welche die Akkus aufgeladen werden können.
 
+Farbliche Kennzeichnung der Nicla Vision-Auflage (rot) und des Lademoduls (orange):
 
-\textit{Abdeckung v1: Rückseite (links)}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.45\textwidth]{media/images/Rahmen v2 - Nicla Vision-Stützen und Lademodul.png}
+    \caption*{Rahmen v2: Innenraum}
+    \label{fig:Rahmen v2: Innenraum}
+\end{figure}
 \newline
-\textit{Rahmen v2: Nicla Vision-Stützen}
 
-Im rechten Bereich der Brille ist das Lademodul untergebracht. Unterhalb davon befindet sich eine USB-C-Öffnung für den Anschluss, über welche die Akkus aufgeladen werden können (\textit{siehe Elektronik}).
+Um zu versichern, dass der Mikrocontroller fixiert ist, wird dieser von unten durch Halterungen abgestützt und von oben durch eine entsprechende Ausbuchtung in Position gehalten:
 
-\textit{Rahmen v2: Lademodul}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.35\textwidth]{media/images/Abdeckung v1 - Rückseite (links).png}
+    \caption*{Abdeckung v1: Rückseite mit Nicla Vision-Ausbuchtung}
+    \label{fig:Abdeckung v1: Rückseite mit Nicla Vision-Ausbuchtung}
+\end{figure}
 
-Im Gegensatz zum Nicla-Board und dem Lademodul war die Positionierung der Buttons zunächst noch nicht festgelegt. Eine erste Idee sah die Platzierung hinter dem Ohr vor, letztlich wurde jedoch die Oberseite des Rahmens (oberhalb des Mikrocontrollers) gewählt, da dies die Verkabelung erheblich erleichtert.
+An den beiden Enden der Abdeckung, links und rechts, sind Vorsprünge mit Löchern angebracht, um die Abdeckung mit dem Rahmen zu verbinden.
+
+Die Position des Buttons wurde auf die Oberseite des Rahmens oberhalb des Mikrocontrollers gelegt, da diese Anordnung die Verkabelung erleichtert - im Gegensatz zu einer möglichen Platzierung am Bügelende hinter dem Ohr.
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.55\textwidth]{media/images/Button-Öffnung.jpg}
-    \caption*{Rahmen v2: Button-Öffnung (rechts)}
+    \caption*{Rahmen v2: Button-Öffnung}
     \label{fig:Rahmen v2: Button-Öffnung}
 \end{figure}
 
-\textit{Abdeckung v1}
-\newline
-\textit{Rahmen v1 + Abdeckung v1}
-
-An den beiden Enden der Abdeckung, links und rechts, sind Ausbuchtungen mit Löchern angebracht, um die Abdeckung mit dem Rahmen zu verbinden.
+\textbf{Scharnier-Mechanismus:} Zur Gewährleistung einer stabilen, zuklappbaren Verbindung mit den Brillenbügeln wurden an den linken und rechten Enden der Unterseite des Rahmens Ausbuchtungen zur Fixierung der Bügel integriert.
 
 \subsubsection*{Rahmen v3}
-
-\textit{$\rightarrow$ Herausforderung: Die Umsetzung einer geeignetet Passform gelang bei Prototyp v1 + v2 nicht, da die Modelle aufgrund einer zu geringen Gesamtbreite Defizite im Bereich der Nase wie auch an den Schläfen aufwies.}
-Um ein komfortables Tragen der Brille im Nasenbereich zu ermöglichen, wurden die Brillen-Gläser provisorisch verkleinert, wodurch mehr Platz im inneren Bereich geschaffen wurde (siehe \textit{Abbildung}).
+Um ein komfortables Tragen der Brille im Nasenbereich zu ermöglichen, wurden die Brillen-Gläser provisorisch verkleinert, wodurch mehr Platz im inneren Bereich geschaffen wurde:
 
 \begin{figure}[htbp]
     \centering
@@ -597,19 +604,15 @@ Um ein komfortables Tragen der Brille im Nasenbereich zu ermöglichen, wurden di
     \label{fig:Rahmen v3: Nasenbereich-Erweiterung}
 \end{figure}
 
-{
-\itshape
-Herausforderung $\rightarrow$ Da das Skalieren der Bügel-Ausbuchtungen weiter nach außen eine vollständige Redimensionierung erfordert hätte, wurde dieser Arbeitsschritt vorerst noch übersprungen.
-
-\textbf{Weitere noch offene Herausforderungen:}
+\textbf{Vorgesehene Umsetzungen:}
 \begin{itemize}
     \item Im Nasenbereich sollte der Tragekomfort durch einen ergonomisch geformten Nasenbügel verbessert werden.
-    \item Die Abdeckung weicht derzeit noch zu stark von der Ästhetik einer Brille ab und sollte auf jeden Fall über zwei separate Gläser verfügen.
+    \item Die Abdeckung weicht derzeit noch zu stark von der Ästhetik einer Brille ab und sollte über zwei separate Gläser verfügen.
     \item Die Form sollte überarbeitet werden, da das Verhältnis von Höhe zu Breite nicht zusammenpasst.
     \item Der Button weist derzeit noch keine Auflagefläche auf und sitzt daher nur lose in der Button-Öffnung.
 \end{itemize}
-}
-\textbf{Bereits realisierte Optimierungen:}
+
+\textbf{Realisierte Verbesserungen:}
 \begin{itemize}
     \item Erweiterung der Stützen, um die Abdeckung stabiler im Rahmen zu halten.
     \item Abrundung der Kanten des Rahmens, um den Tragekomfort zu erhöhen.
@@ -651,14 +654,9 @@ Im Vergleich zur Vorversion wurden die zuvor vorhandenen Öffnungen an den äuß
     \label{fig:Haken-Gegenstück v1}
 \end{figure}
 
-\textbf{Idee:} Beim Einsetzen wird der Haken von oben in die abgerundete Öffnung des Haken-Gegenstücks eingeführt und kann aufgrund seiner Biegsamkeit gut einrasten, wodurch die Abdeckung passgenau sitzt. Zum Lösen der Verbindung soll ein dünner Stab durch ein kleines Loch an der Rückseite des Gegenstücks geführt werden. Dadurch wird der Haken aus seiner Position gelockert und die Abdeckung kann abgenommen werden.
+\textbf{Funktionsprinzip:} Beim Einsetzen wird der Haken von oben in die abgerundete Öffnung des Haken-Gegenstücks eingeführt und kann aufgrund seiner Biegsamkeit gut einrasten, wodurch die Abdeckung passgenau sitzt. Zum Lösen der Verbindung soll ein dünner Stab durch ein kleines Loch an der Rückseite des Gegenstücks geführt werden. Dadurch wird der Haken aus seiner Position gelockert und die Abdeckung kann abgenommen werden.
 
-{
-\itshape
-\textbf{Ergebnis:} Der 3D-Drucker konnte die sehr kleinen Details der Haken-Einrastfunktion nicht präzise umsetzen. Eine Vergrößerung des Hakens war jedoch nicht möglich, da diese Funktion in den Ecken des Rahmens untergebracht werden sollte, wo zugleich genügend Raum für die Kabelführung zur Verfügung stehen muss. Folglich war eine neue Lösung erforderlich.
-
-Ein weiteres Problem trat im Zusammenhang mit den Bügeln auf. Um diese einklappen zu können, ist ein Scharnier-Mechanismus erforderlich (\textit{siehe hier}). Der erste Versuch erwies sich jedoch als nicht funktionsfähig.
-}
+\textbf{Scharnier-Optimierung:}
 \newline
 $\rightarrow$ Implementierung einer alternativen Scharnierausführung anstelle des zuvor verwendeten Mechanismus:
 
@@ -687,6 +685,20 @@ Darüber hinaus sollte der bereits zuvor entwickelte Scharniermechanismus grunds
 Ein weiterer Ansatz bestand darin, die bisherige Abdeckung zu überarbeiten und, ähnlich wie bei herkömmlichen Brillen, in zwei separate Bereiche für die Gläser aufzuteilen.
 
 \textit{Gläser-Abdeckung v1: Vorderansicht}
+
+Die Konstruktion des Rahmens basiert auf einer Skizze der Augenrand-Oberlinie. Diese wird nach oben extrudiert, wodurch eine dünne Grundfläche entsteht, aus der die eigentliche Brillenform herausgearbeitet wird.
+
+\textit{Bild der Arbeitsschritte}
+
+Zur Gewährleistung der Funktionalität der Brille werden die freien Flächen der Rückseite des Rahmens verschlossen, um die erforderlichen Halterungen im Innenraum platzieren zu können. Die Nicla Vision-Halterung sowie die Lademodul-Halterung stammen aus der vorherigen Rahmenversion und werden mit der Rückseite verbunden. Zur Verschließung der Vorderseite bei gleichzeitig guter Zugänglichkeit wird entlang der beiden Gläser eine Einkerbung integriert, in welche die Abdeckung eingeführt werden kann. Diese entsteht aus den freien Flächen der Vorderseite und wird auf der linken Seite zusätzlich mit dem Gegenstück der Nicla Vision-Halterung verbunden.
+
+\textit{Rahmen v5 - Einkerbung}
+
+\textbf{Weitere realisierte Umsetzungen:}
+\begin{itemize}
+\item Integration des USB-C-Ports für das Lademodul
+\item Integration eines Kabeldurchlasses zwischen linker und rechter Brillenseite
+\end{itemize}
 
 \subsubsection{Bügel}
 \subsubsection*{Bügel v1 - 2}
