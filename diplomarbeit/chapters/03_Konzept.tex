@@ -49,8 +49,10 @@ Um diese sprachgesteuerte Suchfunktion im Alltag praktikabel zu gestalten, sieht
 \subsection{Mechanik und Gehäusedesign}
 \subsubsection{Allgemein}
 Im Rahmen der Konzeptphase wurden die grundlegenden Anforderungen und Zielsetzungen für die zu entwickelnde Brille definiert. Ein zentraler Aspekt bestand darin, die notwendige Elektronik unterzubringen, ohne dabei Funktionalität, Tragekomfort und Design zu vernachlässigen.
-\par
-Folgende Elemente sind für die Integration der geplanten Elektronik in der Brille vorhergesehen:
+
+Der Aufbau des Modells besteht, wie bei herkömmlichen Brillen, aus zwei Brillenbügeln, einem Rahmen und anstelle der zwei Gläser einer Abdeckung. Letztere ist nicht transparent und deckt den Innenraum des Rahmens ab, in welchem die Elektronik verstaut ist.
+
+Folgende Elemente sind für die Integration der Elektronik in der Brille erforderlich:
 \begin{itemize}
     \item Nicla Vision-Halterung
     \item Lademodul-Halterung
@@ -59,11 +61,9 @@ Folgende Elemente sind für die Integration der geplanten Elektronik in der Bril
     \item Akku-Aufbewahrung
 \end{itemize}
 
-Der geplante Aufbau des Modells besteht, wie bei herkömmlichen Brillen, aus zwei Brillenbügeln, einem Rahmen und anstelle der zwei Gläser einer Abdeckung. Letztere ist nicht transparent und deckt den Innenraum des Rahmens ab, in welchem die Elektronik verstaut ist.
-
 \subsubsection{Rahmen und Abdeckung}
 \subsubsection*{Rahmen v1 - 2 und Abdeckung v1 - 2}
-Die Konstruktion des Rahmens begann mit der Entwicklung einer Grundform in der zweidimensionalen Ebene.
+Die Rahmenkonstruktion basiert auf einer in der zweidimensionalen Ebene definierten Grundform.
 
 \begin{figure}[htbp]
     \centering
@@ -72,10 +72,10 @@ Die Konstruktion des Rahmens begann mit der Entwicklung einer Grundform in der z
     \label{fig:Grundform-Skizze}
 \end{figure}
 
-Anschließend wurde diese Grundplatte nach oben extrudiert, wobei der Innenraum ausgehöhlt wurde, um später ausreichend Platz für die Elektronik zu gewährleisten. Zusätzliche Öffnungen an den oberen Enden links und rechts wurden vorgesehen, um die Kabelverbindungen in die Bügel zu führen.
+Die Grundplatte wurde an den Rändern nach oben extrudiert, um den Innenraum ausreichend Platz für die Integration der Elektronik zu gewährleisten. Zusätzliche Öffnungen an den oberen Enden links und rechts wurden vorgesehen, um die Kabelverbindungen in die Bügel zu führen.
 \newline\textit{Siehe Bügel v1 - 2}
 
-Die Abdeckung entstand durch die Extrusion des inneren Rahmen-Bereichs - mit einer Höhe von 1 mm (\textit{siehe Abbildung: Abdeckung v1}).
+Die Abdeckung entsteht durch die Extrusion des inneren Rahmen-Bereichs - mit einer Höhe von 1 mm (\textit{siehe Abbildung: Abdeckung v1}).
 
 \textbf{Elektronik:} Im linken Bereich des Rahmens befindet sich das Nicla-Board. Über jeweils ein Loch für Kamera, Distanzsensor und Mikrofon in der Brillen-Abdeckung bleibt die wichtigste Sensorik frei. Um zu versichern, dass der Mikrocontroller an seiner Stelle bleibt, wurde entschieden, ihn von unten mit Stützen und von oben mit folgender Ausbuchtung zusammenzuhalten:
 
@@ -182,7 +182,7 @@ $\rightarrow$ Implementierung einer alternativen Scharnierausführung anstelle d
 
 \textit{Rahmen v4: Hinteransicht}
 
-An den äußeren Enden links und rechts, neben der Kabeldurchführung vom Rahmen zum Bügel, wird ein Scharnierkonzept aus dem Internet eingesetzt (\cite{scharnier_vorlage}). Dieses besteht aus zwei identischen Bauteilen, die entgegengesetzt zueinander angeordnet sind. Die Teile sind so ausgeführt, dass sie ineinandergesteckt werden können: Eine Seite bildet das Einsteckelement, während die gegenüberliegende Seite als passendes Gegenstück fungiert. Durch das Zusammenstecken der beiden Teile entsteht ein gelenkartiger Mechanismus, der das Zuklappen der Bügel ermöglichen soll.
+An den äußeren Enden links und rechts, neben der Kabeldurchführung vom Rahmen zum Bügel, wird ein Scharnier aus dem Internet angebracht (\cite{scharnier_vorlage}). Dieses besteht aus zwei identischen Bauteilen, die entgegengesetzt zueinander angeordnet sind. Die Teile sind so ausgeführt, dass sie ineinandergesteckt werden können: Eine Seite bildet das Einsteckelement, während die gegenüberliegende Seite als passendes Gegenstück fungiert. Durch das Zusammenstecken der beiden Teile entsteht ein gelenkartiger Mechanismus, der das Zuklappen der Bügel ermöglichen soll.
 
 {
 \itshape
@@ -209,11 +209,7 @@ Ein weiterer Ansatz bestand darin, die bisherige Abdeckung zu überarbeiten und,
 \subsubsection{Bügel}
 \subsubsection*{Bügel v1 - 2}
 
-Der erste Entwurf des Bügels war noch ein stark vereinfachtes Modell, das dazu diente:
-\begin{itemize}
-    \item Mit Fusion 360 mehr vertraut zu werden.
-    \item Ein Gefühl für den notwendigen Innenraum sowie den Komfort des Bügels zu bekommen.
-\end{itemize}
+Der erste Entwurf des Bügels war noch ein stark vereinfachtes Modell, das dazu diente ein Gefühl für den notwendigen Innenraum sowie den Komfort des Bügels zu bekommen.
 
 Mit einer durchgehenden Dicke von ca. 10 mm war das Bauteil für einen Brillenbügel deutlich zu massiv, was sich in Verbindung mit der geradlinigen Form (\textit{siehe Abbildung}) negativ auf das Tragegefühl auswirkte.
 
