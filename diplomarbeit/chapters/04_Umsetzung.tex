@@ -545,7 +545,7 @@ Die nachfolgende Analyse schlüsselt die Code-Passagen und ihre technischen Funk
 Die Rahmenkonstruktion basiert auf einer in der zweidimensionalen Ebene definierten
 Grundform.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{media/images/Grundform-Skizze.png}
     \caption*{Grundform-Skizze}
@@ -554,71 +554,70 @@ Grundform.
 
 Die Grundplatte wurde an den Rändern nach oben extrudiert, um im Innenraum
 ausreichend Platz für die Integration der Elektronik zu gewährleisten. Zusätzliche Öffnungen an den oberen Enden links und rechts wurden vorgesehen, um die Kabelverbindungen in die Bügel zu führen.
-\textit{Siehe Bügel v1 - 2}
 
-Die Abdeckung entsteht durch die Extrusion des inneren Rahmen-Bereichs - mit einer
-Höhe von 1 mm (\textit{siehe Abbildung: Abdeckung v1}).
+Die Abdeckung entsteht durch die Extrusion des inneren Rahmen-Bereichs - mit einer Höhe von 1 mm
 
-\textbf{Elektronik:} Im linken Bereich des Rahmens befindet sich das Nicla-Board. Über jeweils eine Aussparung für Kamera, Distanzsensor und Mikrofon in der Brillen-Abdeckung bleibt die wichtigste Sensorik frei. Um zu versichern, dass der Mikrocontroller an seiner Stelle bleibt, wurde entschieden, ihn von unten mit Stützen und von oben mit folgender Ausbuchtung zusammenzuhalten:
+\textbf{Elektronik:} Im linken Bereich des Rahmens befindet sich das Nicla-Board. Über jeweils eine Aussparung für Kamera, Distanzsensor und Mikrofon in der Brillen-Abdeckung bleibt die wichtigste Sensorik frei.
+Im rechten Bereich der Brille ist das Lademodul untergebracht. Unterhalb davon befindet sich eine USB-C-Öffnung für den Anschluss, über welche die Akkus aufgeladen werden können.
 
+Farbliche Kennzeichnung der Nicla Vision-Auflage (rot) und des Lademoduls (orange):
 
-\textit{Abdeckung v1: Rückseite (links)}
-\newline
-\textit{Rahmen v2: Nicla Vision-Stützen}
-
-Im rechten Bereich der Brille ist das Lademodul untergebracht. Unterhalb davon befindet sich eine USB-C-Öffnung für den Anschluss, über welche die Akkus aufgeladen werden können (\textit{siehe Elektronik}).
-
-\textit{Rahmen v2: Lademodul}
-
-Im Gegensatz zum Nicla-Board und dem Lademodul war die Positionierung der Buttons zunächst noch nicht festgelegt. Eine erste Idee sah die Platzierung hinter dem Ohr vor, letztlich wurde jedoch die Oberseite des Rahmens (oberhalb des Mikrocontrollers) gewählt, da dies die Verkabelung erheblich erleichtert.
-
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.55\textwidth]{media/images/Button-Öffnung.jpg}
-    \caption*{Rahmen v2: Button-Öffnung (rechts)}
+    \includegraphics[width=0.45\textwidth]{media/images/Rahmen v2 - Nicla Vision-Stützen und Lademodul.png}
+    \caption*{Rahmen v2: Innenraum}
+    \label{fig:Rahmen v2: Innenraum}
+\end{figure}
+\newline
+
+Um zu versichern, dass der Mikrocontroller fixiert ist, wird dieser von unten durch Halterungen abgestützt und von oben durch eine entsprechende Ausbuchtung in Position gehalten:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.25\textwidth]{media/images/Abdeckung v1 - Rückseite (links).png}
+    \caption*{Abdeckung v1: Rückseite mit Nicla Vision-Ausbuchtung}
+    \label{fig:Abdeckung v1: Rückseite mit Nicla Vision-Ausbuchtung}
+\end{figure}
+
+An den beiden Enden der Abdeckung, links und rechts, sind Vorsprünge mit Löchern angebracht, um die Abdeckung mit dem Rahmen zu verbinden.
+
+Die Position des Buttons wurde auf die Oberseite des Rahmens oberhalb des Mikrocontrollers gelegt, da diese Anordnung die Verkabelung erleichtert - im Gegensatz zu einer möglichen Platzierung am Bügelende hinter dem Ohr.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{media/images/Button-Öffnung.jpg}
+    \caption*{Rahmen v2: Button-Öffnung}
     \label{fig:Rahmen v2: Button-Öffnung}
 \end{figure}
 
-\textit{Abdeckung v1}
-\newline
-\textit{Rahmen v1 + Abdeckung v1}
-
-An den beiden Enden der Abdeckung, links und rechts, sind Ausbuchtungen mit Löchern angebracht, um die Abdeckung mit dem Rahmen zu verbinden.
-
 \subsubsection*{Rahmen v3}
+Um ein komfortables Tragen der Brille im Nasenbereich zu ermöglichen, wurden die Brillen-Gläser provisorisch verkleinert, wodurch mehr Platz im inneren Bereich geschaffen wurde:
 
-\textit{$\rightarrow$ Herausforderung: Die Umsetzung einer geeignetet Passform gelang bei Prototyp v1 + v2 nicht, da die Modelle aufgrund einer zu geringen Gesamtbreite Defizite im Bereich der Nase wie auch an den Schläfen aufwies.}
-Um ein komfortables Tragen der Brille im Nasenbereich zu ermöglichen, wurden die Brillen-Gläser provisorisch verkleinert, wodurch mehr Platz im inneren Bereich geschaffen wurde (siehe \textit{Abbildung}).
-
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{media/images/Nasenbereich-Erweiterung.jpg}
+    \includegraphics[width=0.45\textwidth]{media/images/Nasenbereich-Erweiterung.jpg}
     \caption*{Rahmen v3: Nasenbereich-Erweiterung}
     \label{fig:Rahmen v3: Nasenbereich-Erweiterung}
 \end{figure}
 
-{
-\itshape
-Herausforderung $\rightarrow$ Da das Skalieren der Bügel-Ausbuchtungen weiter nach außen eine vollständige Redimensionierung erfordert hätte, wurde dieser Arbeitsschritt vorerst noch übersprungen.
-
-\textbf{Weitere noch offene Herausforderungen:}
+\textbf{Vorgesehene Umsetzungen:}
 \begin{itemize}
     \item Im Nasenbereich sollte der Tragekomfort durch einen ergonomisch geformten Nasenbügel verbessert werden.
-    \item Die Abdeckung weicht derzeit noch zu stark von der Ästhetik einer Brille ab und sollte auf jeden Fall über zwei separate Gläser verfügen.
+    \item Die Abdeckung weicht derzeit noch zu stark von der Ästhetik einer Brille ab und sollte über zwei separate Gläser verfügen.
     \item Die Form sollte überarbeitet werden, da das Verhältnis von Höhe zu Breite nicht zusammenpasst.
     \item Der Button weist derzeit noch keine Auflagefläche auf und sitzt daher nur lose in der Button-Öffnung.
 \end{itemize}
-}
-\textbf{Bereits realisierte Optimierungen:}
+\newline
+\textbf{Realisierte Verbesserungen:}
 \begin{itemize}
     \item Erweiterung der Stützen, um die Abdeckung stabiler im Rahmen zu halten.
     \item Abrundung der Kanten des Rahmens, um den Tragekomfort zu erhöhen.
     \item Verbesserung der Lademodul-Halterung (im ersten Test-Druck fielen die Maße noch zu schmal aus).
 \end{itemize}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{media/images/Abdeckungs-Stützen.png}
+    \includegraphics[width=0.45\textwidth]{media/images/Abdeckungs-Stützen.png}
     \caption*{Rahmen v3: Abdeckungs-Stützen}
     \label{fig:Rahmen v3: Abdeckungs-Stützen}
 \end{figure}
@@ -628,146 +627,278 @@ Herausforderung $\rightarrow$ Da das Skalieren der Bügel-Ausbuchtungen weiter n
 In der Rahmen-Version 4 wurden mehrere Optimierungen umgesetzt, um die Funktionalität der Brille zu verbessern.
 Die zuvor fehlenden Auflageflächen für den Knopf wurden nun unterhalb der Öffnung integriert:
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\textwidth]{media/images/Auflageflächen.png}
+    \includegraphics[width=0.3\textwidth]{media/images/Auflageflächen.png}
     \caption*{Rahmen v4: Auflageflächen}
     \label{fig:Rahmen v4: Auflageflächen}
 \end{figure}
 
 Im Vergleich zur Vorversion wurden die zuvor vorhandenen Öffnungen an den äußeren Enden links und rechts zur Verbindung der Abdeckung wieder geschlossen. Stattdessen kommt eine Haken-Einrastfunktion zum Einsatz, die eine sichere und ästhetische Verbindung zwischen Abdeckung und Rahmen gewährleisten soll.
 \newline
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.25\textwidth]{media/images/Haken.png}
+    \includegraphics[width=0.2\textwidth]{media/images/Haken.png}
     \caption*{Haken v1: Angebracht an der Abdeckung}
     \label{fig:Haken v1}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.2\textwidth]{media/images/Haken-Gegenstück.png}
+    \includegraphics[width=0.15\textwidth]{media/images/Haken-Gegenstück.png}
     \caption*{Haken-Gegenstück v1: Angebracht im Rahmen}
     \label{fig:Haken-Gegenstück v1}
 \end{figure}
 
-\textbf{Idee:} Beim Einsetzen wird der Haken von oben in die abgerundete Öffnung des Haken-Gegenstücks eingeführt und kann aufgrund seiner Biegsamkeit gut einrasten, wodurch die Abdeckung passgenau sitzt. Zum Lösen der Verbindung soll ein dünner Stab durch ein kleines Loch an der Rückseite des Gegenstücks geführt werden. Dadurch wird der Haken aus seiner Position gelockert und die Abdeckung kann abgenommen werden.
+\textbf{Ergebnis:} Der 3D-Drucker konnte die sehr kleinen Details der Haken-Einrastfunktion nicht präzise umsetzen. Eine Vergrößerung war jedoch nicht möglich, da diese Funktion in den Ecken des Rahmens untergebracht werden sollte, wo zugleich genügend Raum für die Kabelführung zur Verfügung stehen muss. Folglich war eine neue Lösung erforderlich.
 
-{
-\itshape
-\textbf{Ergebnis:} Der 3D-Drucker konnte die sehr kleinen Details der Haken-Einrastfunktion nicht präzise umsetzen. Eine Vergrößerung des Hakens war jedoch nicht möglich, da diese Funktion in den Ecken des Rahmens untergebracht werden sollte, wo zugleich genügend Raum für die Kabelführung zur Verfügung stehen muss. Folglich war eine neue Lösung erforderlich.
+\textbf{Scharnier-Optimierung:} Aufgrund unzureichender Funktionalität des zuvor verwendeten Scharniermechanismus wurde eine alternative Ausführung des Scharniers entwickelt:
 
-Ein weiteres Problem trat im Zusammenhang mit den Bügeln auf. Um diese einklappen zu können, ist ein Scharnier-Mechanismus erforderlich (\textit{siehe hier}). Der erste Versuch erwies sich jedoch als nicht funktionsfähig.
-}
-\newline
-$\rightarrow$ Implementierung einer alternativen Scharnierausführung anstelle des zuvor verwendeten Mechanismus:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{media/images/Rahmen v4 - Hinteransicht.png}
+    \caption*{Rahmen v4: Hinteransicht}
+    \label{fig:Rahmen v4: Hinteransicht}
+\end{figure}
 
-\textit{Rahmen v4: Hinteransicht}
-
-An den äußeren Enden links und rechts, neben der Kabeldurchführung vom Rahmen zum Bügel, wird ein Scharnier angebracht (\cite{scharnier_vorlage}). Dieses besteht aus zwei identischen Bauteilen, die entgegengesetzt zueinander angeordnet sind. Die Teile sind so ausgeführt, dass sie ineinandergesteckt werden können: Eine Seite bildet das Einsteckelement, während die gegenüberliegende Seite als passendes Gegenstück fungiert. Durch das Zusammenstecken der beiden Teile entsteht ein gelenkartiger Mechanismus, der das Zuklappen der Bügel ermöglichen soll.
-
-{
-\itshape
 \textbf{Fazit zu Version 4:}
-Nach dem 3D-Druck des Bauteils stellte sich heraus, dass das Scharnier zu klein dimensioniert war und der Drucker die erforderlichen Feinheiten nicht mit ausreichender Genauigkeit umsetzen konnte.
-\newline
+Nach dem 3D-Druck des Bauteils stellte sich heraus, dass das Scharnier zu klein dimensioniert war und der Drucker die erforderlichen Feinheiten nicht mit ausreichender Genauigkeit umsetzen konnte. \newline
 Allgemein wurden zwar die Auflageflächen für den Knopf ergänzt, weiteren Probleme blieben jedoch bestehen bzw. teilweise traten auch neue auf. Folglich war ein kompletter Neuanfang des Rahmenmodells erforderlich, bei dem die gewonnenen Erkenntnisse aus den bisherigen Versionen angewandt werden sollen.
-}
 
 \subsubsection*{Rahmen v5 - Neukonzeption}
 
 Im Zuge des Neuentwurfs des Rahmen-Designs wurden mehrere zentrale Aspekte berücksichtigt, die in den vorherigen Versionen noch nicht ausreichend umgesetzt werden konnten. Ziel war es, eine ergonomische Form zu entwickeln, die sich an den Proportionen herkömmlicher Brillen orientiert und gleichzeitig für möglichst viele Gesichtsformen geeignet ist.
 
-\textit{Rahmen v4: Vorderansicht}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{media/images/Rahmen v5 - Vorderansicht.png}
+    \caption*{Rahmen v5: Vorderansicht}
+    \label{fig:Rahmen v5: Vorderansicht}
+\end{figure}
 
 Darüber hinaus sollte der bereits zuvor entwickelte Scharniermechanismus grundsätzlich beibehalten, jedoch größer dimensioniert werden, um den Einschränkungen durch die geringe Druckgenauigkeit des 3D-Drucks bei sehr kleinen Bauteilen entgegenzuwirken. Zusätzlich wurde vorgesehen, zwei Nasenbügel in das Modell zu integrieren, um die Auflage und den Tragekomfort zu verbessern.
 
-\textit{Rahmen v4: Hinteransicht mit Nasenbügel und Scharniermechanismus}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{media/images/Rahmen v5 - Hinteransicht mit Nasenbügel und Scharniermechanismus.png}
+    \caption*{Rahmen v5: Hinteransicht}
+    \label{fig:Rahmen v5: Hinteransicht}
+\end{figure}
 
 Ein weiterer Ansatz bestand darin, die bisherige Abdeckung zu überarbeiten und, ähnlich wie bei herkömmlichen Brillen, in zwei separate Bereiche für die Gläser aufzuteilen.
 
-\textit{Gläser-Abdeckung v1: Vorderansicht}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{media/images/Gläser-Abdeckung v1 - Vorderansicht.png}
+    \caption*{Gläser-Abdeckung v1: Vorderansicht}
+    \label{fig:Gläser-Abdeckung v1: Vorderansicht}
+\end{figure}
+
+Die Konstruktion des Rahmens basiert auf einer Skizze der Augenrand-Oberlinie. Diese wird nach oben extrudiert, wodurch eine dünne Grundfläche entsteht, aus der die eigentliche Brillenform herausgearbeitet wird.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{media/images/Rahmen v5 - Arbeitsschritte der Konstruktion.png}
+    \caption*{Rahmen v5: Arbeitsschritte der Konstruktion}
+    \label{fig:Rahmen v5: Arbeitsschritte der Konstruktion}
+\end{figure}
+
+Zur Gewährleistung der Funktionalität der Brille werden die freien Flächen der Rückseite des Rahmens verschlossen, um die erforderlichen Halterungen im Innenraum platzieren zu können. Die Nicla Vision-Halterung sowie die Lademodul-Halterung stammen aus der vorherigen Rahmenversion und werden mit der Rückseite verbunden. Zur Verschließung der Vorderseite bei gleichzeitig guter Zugänglichkeit wird entlang der beiden Gläser eine Einkerbung integriert, in welche die Abdeckung eingeführt werden kann. Diese entsteht aus den freien Flächen der Vorderseite und wird auf der linken Seite zusätzlich mit dem Gegenstück der Nicla Vision-Halterung verbunden.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{media/images/Rahmen v5 - Einkerbung.png}
+    \caption*{Rahmen v5: Einkerbung}
+    \label{fig:Rahmen v5: Einkerbung}
+\end{figure}
+
+\textbf{Realisierte Verbesserungen:}
+\begin{itemize}
+\item Integration des USB-C-Ports für das Lademodul
+\item Integration eines Kabeldurchlasses zwischen linker und rechter Brillenseite
+\end{itemize}
+
+\textbf{Gläser-Abdeckung v2:} In dieser Version wurden die Aussparungen für Kamera- und Distanzsensor miteinander verbunden - sowie abgerundet, für eine Verbesserung der optischen Gestaltung.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{media/images/Gläser-Abdeckung v2 - Vorderseite.png}
+    \caption*{Gläser-Abdeckung v2: Vorderseite}
+    \label{fig:Gläser-Abdeckung v2: Vorderseite}
+\end{figure}
+
+\subsubsection*{Rahmen v6}
+In der sechsten Version wurden neue, kompaktere Nasenbügel implementiert, die im Vergleich zur vorherigen Version weiter oben positioniert sind, wodurch der Tragekomfort erhöht wird. Beide Nasenbügel-Versionen wurden im Form-Modus von Fusion 360 modelliert, welcher die Erstellung organisch geformter Bauteile durch direktes Ziehen an Kanten, Flächen und Punkten ermöglicht.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{media/images/Nasenbügel-Vergleich.png}
+    \caption*{Nasenbügel-Vergleich}
+    \label{fig:Nasenbügel-Vergleich}
+\end{figure}
+
+Die Scharniere wurden an der Oberseite um eine glatte Auflage erweitert, welche den Mechanismus stabilisiert und somit während des 3D-Drucks zu einer verbesserten Druckqualität beiträgt.
+\par
+Zusätzlich wurde an den äußeren Enden des Rahmen-Innenraums eine Kabeldurchführung in die Bügel integriert. Diese ermöglicht die Verbindung der im Rahmen untergebrachten Elektronik mit den in den Bügeln platzierten Akkus.
+\par
+Um die Gläser-Abdeckung formschlüssiger in den Rahmen einzusetzen, wird deren Maßstab angepasst. Das linke Glas, das die Nicla Vision-Abdeckung trägt, lässt sich innerhalb von Fusion nur schwer dimensionieren, ohne die Größe der Aussparungen und Ausbuchtungen zu verändern. Daher erfolgt die Anpassung temporär im Open-Source-Grafikprogramm Blender, das eine präzisere Bearbeitung einzelner Punkte, Kanten und Flächen ermöglicht:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{media/images/Gläser-Abdeckung v3 - stl-File in Blender.png}
+    \caption*{Gläser-Abdeckung v3: stl-File in Blender}
+    \label{fig:Gläser-Abdeckung v3: stl-File in Blender}
+\end{figure}
+
+Zur Bearbeitung des 3D-Modells in Blender wurde dieses aus Fusion als STL-Datei exportiert. STL-Dateien wandeln 3D-Modelle in eine Liste aus Dreiecken um, wie in der Abbildung ersichtlich. Beim Import in Blender entstehen dadurch sehr viele Punkte, Kanten und Flächen, was die Komplexität des Modells erhöht. Dies kann zu einem Open-Mesh-Error führen, einem Fehler, der vor dem 3D-Druck im Slicer auftritt und dazu führen kann, dass das Modell nicht druckbar ist.
+
+\subsubsection*{Rahmen v7}
+Der in Abschnitt [// TODO] erläuterte Modellierfehler lässt sich durch die folgenden sechs Schritte korrigieren:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{media/images/Modellierfehler-Behebung.png}
+    \caption*{Modellierfehler-Behebung}
+    \label{fig:Modellierfehler-Behebung}
+\end{figure}
+
+\begin{enumerate}
+    \item Ausgangslage: Die Vorderseite des Nasenbereichs weist eine ungleichmäßige, verkantete Form auf und muss angepasst werden.
+    \item Löschen aller Flächen, die die problematische Vorderseite betreffen.
+    \item Auswahl der äußeren Kanten der ausgeschnittenen Fläche: Extrusion dieser Kanten entlang der y-Achse.
+    \item Abschneiden der überstehenden, extrudierten Fläche mittels Extrusion-Funktion von oben nach unten, um die gewünschte runde Form zu erzielen.
+    \item Erneute Auswahl der äußeren Kanten: Erstellung einer Fläche zwischen diesen Kanten.
+    \item Kombination der neu erstellten Fläche mit dem bestehenden Rahmen, wodurch der Volumenkörper wieder geschlossen wird und keine offenen Flächen verbleiben.
+\end{enumerate}
+
+Der dargestellte Prozess in der Abbildung verlief nicht vollständig linear. Er war geprägt von Einschränkungen durch Fusion 360, begrenzten Freiheiten bei der Behebung des Modellierfehlers sowie wiederkehrenden Fehlermeldungen während der Anpassungen.
+\par
+Bei genauerer Betrachtung der Brille zeigt sich noch eine feine Kante, die Fusion automatisch generiert hat. Für eine möglichst glatte und angenehme Ausführung der Brille, wird diese Kante noch abgerundet:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{media/images/Modellierfehler - letzter Schritt.png}
+    \caption*{Modellierfehler - finaler Korrekturschritt}
+    \label{fig:Modellierfehler - finaler Korrekturschritt}
+\end{figure}
+
+Das linke Abdeckungsglas liegt formschlüssig auf dem Nicla Board auf. Zur Verbesserung der Kabelführung sowie zur Erleichterung des Anschlusses der mitgelieferten Antenne wird die Halterung auf der Rückseite der Abdeckung geringfügig modifiziert.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{media/images/Abdeckung v5 - Rückseite.png}
+    \caption*{Abdeckung v5: Rückseite}
+    \label{fig:Abdeckung v5: Rückseite}
+\end{figure}
 
 \subsubsection{Bügel}
 \subsubsection*{Bügel v1 - 2}
 
-Der erste Entwurf des Bügels war noch ein stark vereinfachtes Modell, das dazu di-
-ente ein Gefühl für den notwendigen Innenraum sowie den Komfort des Bügels zu
-bekommen. Mit einer durchgehenden Dicke von ca. 10 mm war das Bauteil für einen Brillenbügel deutlich zu massiv, was sich in Verbindung mit der geradlinigen Form (\textit{siehe Abbildung}) negativ auf das Tragegefühl auswirkte.
+Der erste Entwurf des Bügels war ein stark vereinfachtes Modell, das dazu diente ein Gefühl für den notwendigen Innenraum sowie den Komfort des Bügels zu bekommen. Mit einer durchgehenden Dicke von ca. 10 mm ist das Bauteil für einen Brillenbügel deutlich zu massiv, was sich in Verbindung mit der geradlinigen Form negativ auf das Tragegefühl auswirkte.
 
-\textit{Bügel v1: Hinteransicht}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\textwidth]{media/images/Bügel v1 - Hinteransicht.png}
+    \caption*{Bügel v1: Hinteransicht}
+    \label{fig:Bügel v1: Hinteransicht}
+\end{figure}
 
 Um im Bügel einen Lithium-Ionen-Akku unterbringen zu können, wurde die Vorderseite vorerst frei gelassen.
 
-\textit{Bügel v1: Vorderansicht}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.1\textwidth]{media/images/Bügel v1 - Vorderansicht.png}
+    \caption*{Bügel v1: Vorderansicht}
+    \label{fig:Bügel v1: Vorderansicht}
+\end{figure}
 
-Mit einem 3D-gedruckten Probe-Bauteil konnten folgende Probleme festgestellt werden: ($\rightarrow$ Herausforderung)
-{
-\itshape
+Mit einem 3D-gedruckten Probe-Bauteil konnten folgende Probleme festgestellt werden:
+  
 \begin{itemize}
     \item Der Platz im Gehäuse für die Akkus war nicht ausreichend (Akku-Maße: 56 mm x 34,5 mm x 10,3 mm). Während Höhe und Breite passend realisiert wurden, war der Bügel-Hohlraum in der Länge noch zu kurz.
     \item Der Bügel konnte noch nicht mit dem Rahmen verbunden werden, da kein Loch für die Scharnier-Verbindung vorhanden war.
     \item Durch die sehr geradlinige Form wirkt das Design klobig. Während die Geometrie im vorderen Bereich die notwendige Breite von 10,3 mm aufweist, sollte sie hinten wieder schmaler werden, um wie bei üblichen Brillen bequem über dem Ohr zu „sitzen“.
 \end{itemize}
-}
+
 Aufgrund dessen wurde die 1. Version noch einmal überarbeitet:
 
-\textit{Bügel v2: Hinteransicht}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\textwidth]{media/images/Bügel v2 - Hinteransicht.png}
+    \caption*{Bügel v2: Hinteransicht}
+    \label{fig:Bügel v2: Hinteransicht}
+\end{figure}
 
-Der zweite Entwurf beinhaltete folgende Optimierungen:
+Der zweite Entwurf beinhaltet folgende Optimierungen:
 \begin{itemize}
     \item Ausreichende Gehäuse-Länge für den Lithium-Ionen-Akku.
     \item Schmaleres Bügel-Ende 
 \end{itemize}
 
 Bestehen gebliebene Probleme:
-{
-\itshape
 \begin{itemize}
-    \item Das Bügel-Ende wies weiterhin eine unzureichende Breite auf. Durch unzureichende Erfahrung mit dem 3D-Drucker konnte nicht abgeschätzt werden, wie breit der hintere Teil des Bügels tatsächlich sein sollte.
-    \item Löcher für die Scharnier-Verbindung fehlen weiterhin.
+    \item Bügel-Ende weiterhin überdimensioniert
+    \item Scharnier-Mechanismus zwischen Rahmen und Bügel noch nicht implementiert
 \end{itemize}
 
-Zudem bestand weiterhin Unzufriedenheit mit dem in der Abbildung markierten Übergang:
+Zudem wies der in der Abbildung markierte Übergang noch Optimierungsbedarf auf:
 
-\textit{Bügel v2: Übergang von Akku zu Ohrenbereich}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{media/images/Bügel v2 - Übergang von Akku zu Ohrenbereich.png}
+    \caption*{Bügel v2: Seitenansicht}
+    \label{fig:Bügel v2: Seitenansicht}
+\end{figure}
 
-Der Übergang dient rein ästhetischen Zwecken und weist dahinter lediglich einen ungenutzten Hohlraum auf. Dieser Bereich könnte jedoch für die Verbesserung des Tragekomforts genutzt werden. Die verbleibenden 35 mm zwischen Übergang und Bügel-Ende sind für die meisten Personen nicht ausreichend dimensioniert. Aus diesem Grund wurde beschlossen, das Bügelkonzept grundlegend zu überarbeiten und neu zu entwickeln.
-}
+Der Übergang dient rein ästhetischen Zwecken und weist dahinter lediglich einen ungenutzten Hohlraum auf. Dieser Bereich könnte für die Verbesserung des Tragekomforts genutzt werden. Die verbleibenden 35 mm zwischen Übergang und Bügel-Ende sind für die meisten Personen nicht ausreichend dimensioniert. Aus diesem Grund wurde beschlossen, das Bügelkonzept grundlegend zu überarbeiten und neu zu entwickeln $\rightarrow$ Bügel v3 - 4 // TODO
+
 \par
-\textbf{Akku-Aufbewahrung:} Zu Beginn wurde ein Lithium-Ionen-Akku mit einer Kapazität von 2000 mAh gewählt, um eine möglichst lange Betriebsdauer ohne erneutes Aufladen zu gewährleisten. Geplant war, diesen im Bügel unterzubringen. Da dies jedoch zu einer ungleichmäßigen Gewichtsverteilung geführt hätte, wurde entschieden, auf der gegenüberliegenden Seite ebenfalls einen Akku zu integrieren.
-
-\textit{Bügel v1: Seitenansicht}
-
-Die Bügel sollten auch zuklappbar sein, weshalb eine Scharnierlösung erforderlich war:
-Das Grundprinzip des Umklapp-Mechanismus basiert darauf, dass die Bügel jeweils über Ausbuchtungen links und rechts außen am Rahmen geführt werden. Diese dienen sowohl als mechanische Führung als auch als stabile Auflagefläche für die spätere Befestigung.  
-
-Die Fixierung erfolgt durch eine von oben eingesetzte Schraube, die Bügel und Rahmen miteinander verbindet. Dadurch entsteht eine stabile, zugleich bewegliche Verbindung, die das Auf- und Zuklappen der Bügel ermöglichen soll.
-
-Ein wesentliches Konstruktionskriterium war zudem die Berücksichtigung der internen Kabelführung. Die Schrauben sind so positioniert, dass die Kabel ausreichend Spielraum besitzen, um nach innen zum Lademodul geführt zu werden - auch im zugeklappten Zustand der Brille.  
-
-Beachtet werden müssen zudem die Schrauben, welche die Abdeckung mit dem Rahmen verbinden. In vorherigen Abbildungen (\textit{siehe Abdeckung v1}) ist der Anschraubpunkt der Abdeckung sichtlich erkennbar (rechts außen). Über diesen wird durch den Rahmen eine Schraube geführt und von unten mit einer Mutter fixiert. Die Schraube soll so kurz wie möglich sein (provisorische Lösung).
-
-Probleme dieser Version: (Link zu Herausforderungen 4.2.1) \newline
-{
-\itshape
-Nach der Fertigstellung eines 3D-Drucks der Brille wurde ein Problem erkannt: Der Abstand zwischen Schraubenloch und Rahmen (\textit{siehe gestrichelter Bereich in Abbildung}) erwies sich als zu gering, um den erforderlichen Umklappradius der Bügel zu gewährleisten.
-\textit{Rahmen v2: Draufsicht mit Kennzeichnung in Rot}
-}
+\textbf{Akku-Aufbewahrung:} Für die Energieversorgung wird ein Lithium-Ionen-Akku mit einer Kapazität von 2000\,mAh eingesetzt, um eine möglichst lange Betriebsdauer ohne erneutes Aufladen zu gewährleisten. Die Integration des Akkus erfolgt im Brillenbügel. Zur Vermeidung einer ungleichmäßigen Gewichtsverteilung wird auf der gegenüberliegenden Seite ebenfalls ein Akku vorgesehen.
 
 \subsubsection*{Bügel v3 - 4}
 In der dritten Version des Bügels wurde der hintere Bereich, welcher auf dem Ohr aufliegt, gezielt ergonomisch überarbeitet. Zu diesem Zweck erhielt der Bügel eine nach innen gerichtete Einkerbung, um eine bessere Anpassung an die natürliche Form des Ohres zu ermöglichen. Dadurch soll sowohl der Sitz verbessert als auch der Tragekomfort im Vergleich zu den vorherigen Versionen erhöht werden. \newline
-\textit{Bild Bügel v3}
 
-Zwischen der dritten und vierten Version veränderte sich die Bügelform leicht, wobei der Fokus ausschließlich auf ästhetischen Aspekten lag, ohne die Funktionalität zu beeinträchtigen. Zusätzlich wurde der Scharniermechanismus in der Bügel v4 verworfen, um in einer späteren Version einen neuen Ansatz umzusetzen.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{media/images/Bügel v3 - Hinteransicht.png}
+    \caption*{Bügel v3: Hinteransicht}
+    \label{fig:Bügel v3: Hinteransicht}
+\end{figure}
+
+Zwischen der dritten und vierten Version veränderte sich die Bügelform leicht, wobei der Fokus ausschließlich auf ästhetischen Aspekten lag, ohne die Funktionalität zu beeinträchtigen.
+
+\textbf{Scharnier-Mechanismus:}\newline
+Zur Umsetzung des in Abschnitt~\ref{sec:Scharnier-Mechanismus} beschriebenen Scharniermechanismus wurden an den Bügel-Enden der dritten Version entsprechende Aussparungen angelegt. Aufgrund unzureichender Funktionalität wurde der Scharniermechanismus in der vierten Version jedoch wieder verworfen, um in einer späteren Version einen überarbeiteten Ansatz zu realisieren.
 
 \subsubsection*{Bügel v5 - 7}
 In der fünften Version wurde das Gegenstück des (hier genannten // TODO) Scharniermechanismus integriert. In Version 6 vergrößerte sich das Scharnier, während Version 7 die Stabilität des Scharniers durch eine einheitliche Auflagefläche erhöhte. Beide Anpassungen zielten darauf ab, eine höhere Druckgenauigkeit zu erzielen.
-Bild Bügel v7 mit Auflagefläche in rot
 
-Problem: Das Einklappen der Brille war nicht vollkommen möglich…
-Herausforderung: Einklapp-Winkel erhöhen
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{media/images/Bügel v7 - Scharnier-Auflagefläche.png}
+    \caption*{Bügel v7: Scharnier-Auflagefläche (Kennzeichnung in rot)}
+    \label{fig:Bügel v7: Scharnier-Auflagefläche}
+\end{figure}
 
+\subsubsection*{Bügel v8 - 9}
+Aufgrund unzureichenden seitlichen Spielraums im Bereich der Schläfen wird die Vorderseite des Rahmens abgeschrägt. Diese Anpassung erhöht die seitliche Flexibilität der Brille nach außen und ermöglicht dadurch eine bessere Anpassung an unterschiedliche Kopfformen.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{media/images/Bügel v9 - Oberansicht.png}
+    \caption*{Bügel v9: Oberansicht}
+    \label{fig:Bügel v9: Oberansicht}
+\end{figure}
+
+Zusätzlich wird die Öffnung für den Akku von der Vorderseite auf die Oberseite des Rahmens verlagert und mit einem neuen Verschließmechanismus versehen. Dieser besteht aus zwei schmalen, links und rechts angeordneten Einkerbungen, in welche eine passgenaue Abdeckung eingeschoben werden kann. Dadurch wird ein sicherer Halt der Abdeckung gewährleistet, während gleichzeitig eine einfache Zugänglichkeit zum Akku erhalten bleibt. \newline
+Zudem wird an der Vorderseite eine kleine Öffnung integriert, die die Durchführung von Kabeln ermöglicht.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{media/images/Bügel v9 - Einkerbung.png}
+    \caption*{Bügel v9: Einkerbung}
+    \label{fig:Bügel v9: Einkerbung}
+\end{figure}
 
 \section{Herausforderungen in der Entwicklung}
 Die Realisierung eines kompakten, tragbaren Assistenzsystems, welches rechenintensive Machine-Learning-Prozesse mit kontinuierlicher Netzwerkkommunikation vereint, bringt diverse interdisziplinäre Herausforderungen mit sich. 
