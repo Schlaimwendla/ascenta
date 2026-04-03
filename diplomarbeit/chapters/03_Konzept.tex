@@ -56,9 +56,10 @@ Der Kern des Konzepts liegt in der asynchronen, herstellerunabhängigen Interakt
 
 \subsection{Hardware und Elektronik - Fabian}
 \label{sec:konzept_elektronik}
-Das hardwareseitige Konzept fokussiert sich auf eine autonome Energieversorgung sowie eine intuitive Nutzersteuerung. Für eine maximale mobile Betriebsdauer sah der initiale Entwurf die Integration von zwei leistungsstarken Akkus mit einer Kapazität von jeweils 2000\,mAh vor. Diese großzügige Dimensionierung sollte konzeptionell sicherstellen, dass das System ausreichend Energie für den kontinuierlichen Betrieb der rechenintensiven KI-Modelle bereitstellt.
 
-Zur Steuerung der Hardware integrierte das ursprüngliche Konzept einen physischen Taster als zentrales Bedienelement, welches dem Nutzer die direkte Kontrolle über verschiedene Druckmuster ermöglichen sollte:
+Das hardwareseitige Konzept fokussiert die autonome Energieversorgung sowie eine intuitive Nutzersteuerung des Systems. Die Integration von zwei kompakten LiPo-Akkus mit einer Kapazität von jeweils 620 mAh ermöglicht eine mobile und besonders schlanke Bauweise. Diese Dimensionierung wahrt konzeptionell eine präzise Balance zwischen einem minimalen Platzbedarf und der notwendigen Energie für den Betrieb der KI-Modelle. Durch diesen dualen Aufbau verfügt das System trotz der leichten Bauweise über genügend Leistungsreserven, um sowohl die kontinuierliche Verarbeitung der Sensordaten als auch die Ansteuerung der optischen Rückmeldung zuverlässig zu gewährleisten. Damit entsteht die hardwareseitige Grundlage für ein hocheffizientes System, das den Anforderungen an Portabilität und Funktionalität gleichermaßen entspricht.
+
+Zur Steuerung der Hardware nutzt das Konzept einen vibrationsbasierten Sensor als zentrales Bedienelement, welches die direkte Kontrolle über verschiedene Interaktionsmuster ermöglicht. Anstatt eines physischen Tasters detektiert dieser Sensor Klopfzeichen oder Erschütterungen am Gehäuse und wandelt diese in Steuerbefehle um:
 \begin{itemize}
     \item \textbf{Systemaktivierung:} Eine einfache Betätigung schaltet das Nicla Vision Modul ein. Diese Hardware-Trennung schont die Kapazität der Akkus in Ruhephasen maßgeblich.
     \item \textbf{Kameraauslöser und Sprachsuche:} Ein schnelles, zweimaliges Drücken (Double-Click) erfasst ein aktuelles Bild und aktiviert zeitgleich die Audioaufnahme, um die Umgebung per Sprachbefehl nach einem bestimmten Gegenstand zu durchsuchen.

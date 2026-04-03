@@ -370,7 +370,7 @@ fun onVoskResultReceived(jsonResult: String) {
 \textbf{Das InfoFragment (System-Dashboard):} \\
 Dieses Modul visualisiert den globalen Systemstatus. Es zeigt in Echtzeit an, ob die TCP-Verbindung stabil ist, listet die IP-Adresse des Nicla Vision und aktualisiert dynamisch den via I2C ausgelesenen Akkustand (SOC). Ein Live-Feed im unteren Bereich listet die eingehenden Telemetriedaten auf, wodurch Entwickler sofort validieren können, welches Label mit welcher Konfidenz detektiert wurde.
 
-\subsection{Schaltungsdesign und Energiemanagement}
+\subsection{Schaltungsdesign und Energiemanagement - Fabian}
 \label{sec:elektronik_umsetzung}
 
 Um die elektronischen Herausforderungen zu bewältigen, wurde ein modulares System entwickelt. Das Ziel war eine integrierte Energieversorgung, die das System ohne externe Stromquellen betreibt und dabei kompakt und sicher im Brillengestell verbaut ist.
@@ -381,6 +381,24 @@ Um die elektronischen Herausforderungen zu bewältigen, wurde ein modulares Syst
     \caption{Die Vorder- und Rückseite des Arduino Nicla Vision Boards}
     \label{fig:niclavision}
 \end{figure}
+
+\subsubsection*{Schaltplan und Erklärung}
+Der Schaltplan zeigt die Vernetzung der zentralen Komponenten für das Energiemanagement der Brille.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{media/images/schaltplan.png}
+    \caption{Schaltplan der zentralen Energieversorgung und Verdrahtung}
+    \label{fig:schaltplan}
+\end{figure}
+
+Zentrale Verdrahtung:
+\begin{itemize}
+    \item \textbf{Lademodul (TP4056):} Das Modul bildet das Herzstück der Stromversorgung. Über die Anschlüsse B+ und B- sind die beiden LiPo-Akkus parallel mit dem Laderegler verbunden. Dies ermöglicht es, beide Zellen gleichzeitig über einen einzigen USB-C-Port zu laden.
+    \item \textbf{Parallelschaltung der Akkus:} Durch die parallele Verbindung von LiPo 1 und LiPo 2 bleibt die Spannung bei stabilen 3,7\,V, während sich die Kapazität auf insgesamt 1240\,mAh addiert.
+    \item \textbf{Versorgung der Nicla Vision:} Die Ausgänge OUT+ und OUT- des Lademoduls führen direkt zur Recheneinheit. Der OUT+ ist mit dem VIN-Pin der Nicla Vision verbunden, während OUT- an GND anliegt.
+    \item \textbf{Sicherheitsaspekt:} Durch diese Verschaltung fließt der Strom der Akkus immer zuerst durch das Schutz-Board des TP4056, bevor er die Nicla Vision erreicht. Dadurch ist sichergestellt, dass die empfindliche Elektronik bei einem eventuellen Kurzschluss oder einer zu tiefen Entladung der Akkus sofort vom Stromkreis getrennt wird.
+\end{itemize}
 
 \subsubsection*{Schaltungskonzept und Energieversorgung}
 Die zentrale Entscheidung beim Schaltungsdesign war die Aufteilung der Energiequelle. Anstatt einen großen, schweren Akku zu verbauen, wurden zwei identische LiPo-Zellen \cite{eemb_akku_620mah} mit einer Kapazität von jeweils 620\,mAh parallelgeschaltet. 
@@ -422,23 +440,6 @@ Wichtigste Funktionen für das Projekt:
 \end{itemize}
 Integration in das System: Das Lademodul ist so verbaut, dass der USB-C-Port von außen leicht zugänglich bleibt. Von dieser Position aus wird der Ladestrom an beide parallelgeschalteten Akkus verteilt. Gleichzeitig erfolgt die Versorgung der Nicla Vision über den Out-Pin mit der nötigen Betriebsspannung. Durch diese Bauweise wird eine saubere Trennung zwischen dem Ladevorgang und dem eigentlichen Betrieb der Brille realisiert.
 
-\subsubsection*{Schaltplan und Erklärung}
-Der Schaltplan zeigt die Vernetzung der zentralen Komponenten für das Energiemanagement der Brille.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.8\textwidth]{media/images/schaltplan.png}
-    \caption{Schaltplan der zentralen Energieversorgung und Verdrahtung}
-    \label{fig:schaltplan}
-\end{figure}
-
-Zentrale Verdrahtung:
-\begin{itemize}
-    \item \textbf{Lademodul (TP4056):} Das Modul bildet das Herzstück der Stromversorgung. Über die Anschlüsse B+ und B- sind die beiden LiPo-Akkus parallel mit dem Laderegler verbunden. Dies ermöglicht es, beide Zellen gleichzeitig über einen einzigen USB-C-Port zu laden.
-    \item \textbf{Parallelschaltung der Akkus:} Durch die parallele Verbindung von LiPo 1 und LiPo 2 bleibt die Spannung bei stabilen 3,7\,V, während sich die Kapazität auf insgesamt 1240\,mAh addiert.
-    \item \textbf{Versorgung der Nicla Vision:} Die Ausgänge OUT+ und OUT- des Lademoduls führen direkt zur Recheneinheit. Der OUT+ ist mit dem VIN-Pin der Nicla Vision verbunden, während OUT- an GND anliegt.
-    \item \textbf{Sicherheitsaspekt:} Durch diese Verschaltung fließt der Strom der Akkus immer zuerst durch das Schutz-Board des TP4056, bevor er die Nicla Vision erreicht. Dadurch ist sichergestellt, dass die empfindliche Elektronik bei einem eventuellen Kurzschluss oder einer zu tiefen Entladung der Akkus sofort vom Stromkreis getrennt wird.
-\end{itemize}
 
 \subsection{Entwicklung des Machine-Learning-Modells (Objekterkennung)}
 \label{sec:ml_training}
@@ -469,7 +470,7 @@ Aufbau und Schichtmodell in der Verarbeitungskette: Ein in Edge Impulse definier
     \item \textbf{Ausgabeschicht (Output Layer):} Die Ausgabeschicht berechnet abschließend die Wahrscheinlichkeiten für die definierten Objektklassen.
 \end{itemize}
 
-Einsatz der FOMO-Architektur: Die Konfiguration in Edge Impulse nutzt explizit die FOMO-Architektur (Faster Objects, More Objects). Dieses Framework wurde speziell für leistungslimitierte Hardware wie die Nicla Vision konzipiert.
+Einsatz der FOMO-Architektur (Faster Objects, More Objects): Die Konfiguration in Edge Impulse nutzt explizit die FOMO-Architektur. Dieses Framework wurde speziell für leistungslimitierte Hardware wie die Nicla Vision konzipiert.
 \begin{itemize}
     \item \textbf{Klassifizierung statt Regression:} Das Verfahren verzichtet bewusst auf die rechenintensive Berechnung von Bounding Boxes (Rechtecken um die Objekte).
     \item \textbf{Grid-basierte Erkennung:} Der FOMO-Algorithmus teilt das Kamerabild in ein Raster auf. Anschließend bewertet das neuronale Netz für jede Zelle einzeln, welches Objekt sich dort mit welcher Wahrscheinlichkeit befindet.
@@ -522,13 +523,41 @@ Deployment-Prozess:
 \subsubsection*{Softwareseitige Validierung}
 Die nachfolgende Analyse schlüsselt die Code-Passagen und ihre technischen Funktionen detailliert auf.
 
-1. Sensor-Konfiguration und Bildvorbereitung: Vor der Dateneinspeisung in das neuronale Netz passt die Initialisierung die Kamera exakt an die Vorgaben des Modells an. Die Konfiguration setzt die Grundauflösung zunächst auf QVGA (320x240 Pixel). Da das FOMO-Modell ein quadratisches Eingangsformat verlangt, schneidet der Befehl \texttt{sensor.set\_windowing} das Bild aktiv auf 240x240 Pixel zu. Abschließend gibt der Parameter \texttt{skip\_frames} der Kamera 2000 Millisekunden Zeit, um den Weißabgleich und die Belichtung an die Umgebung anzupassen.
+\textbf{Sensor-Konfiguration und Bildvorbereitung:} Vor der Dateneinspeisung in das neuronale Netz passt die Initialisierung die Kamera exakt an die Vorgaben des Modells an.
+\begin{lstlisting}[language=Python, caption={Initialisierung und Konfiguration des Kamerasensors}]
+sensor.reset()
+sensor.set_pixformat(sensor.RGB565)
+sensor.set_framesize(sensor.QVGA)
+sensor.set_windowing((240, 240))
+sensor.skip_frames(time=2000)
+\end{lstlisting}
+Die Konfiguration setzt die Grundauflösung zunächst auf QVGA (320x240 Pixel). Da das FOMO-Modell ein quadratisches Eingangsformat verlangt, schneidet der Befehl \texttt{sensor.set\_windowing} das Bild aktiv auf 240x240 Pixel zu. Abschließend gibt der Parameter \texttt{skip\_frames} der Kamera 2000 Millisekunden Zeit, um den Weißabgleich und die Belichtung an die Umgebung anzupassen.
 
-2. Dynamisches Speichermanagement: Der limitierte Arbeitsspeicher (RAM) der Nicla Vision erzwingt einen effizienten Umgang mit den Ressourcen. Der Code lädt die Modelldatei .tflite direkt in das System. Der Parameter \texttt{load\_to\_fb} (Load to Framebuffer) entscheidet dabei dynamisch über den Speicherort. Eine logische Prüfung weist das System an, das Modell nur dann in den regulären RAM zu laden, wenn danach noch eine Sicherheitsreserve von 64 Kilobyte frei bleibt. Dies verhindert Systemabstürze während der rechenintensiven Bildverarbeitung.
+\textbf{Dynamisches Speichermanagement:} Der limitierte Arbeitsspeicher (RAM) der Nicla Vision erzwingt einen effizienten Umgang mit den Ressourcen.
+\begin{lstlisting}[language=Python, caption={Laden des TFLite-Modells mit dynamischer Speicherprüfung}]
+net = ml.Model("trained.tflite", load_to_fb=uos.stat('trained.tflite')[6] > (gc.mem_free() - (64*1024)))
+\end{lstlisting}
+Der Code lädt die Modelldatei .tflite direkt in das System. Der Parameter \texttt{load\_to\_fb} (Load to Framebuffer) entscheidet dabei dynamisch über den Speicherort. Eine logische Prüfung weist das System an, das Modell nur dann in den regulären RAM zu laden, wenn danach noch eine Sicherheitsreserve von 64 Kilobyte frei bleibt. Dies verhindert Systemabstürze während der rechenintensiven Bildverarbeitung.
 
-3. Post-Processing und die Heatmap-Übersetzung: Das neuronale Netz liefert keine fertigen Koordinaten, sondern eine vierdimensionale Matrix (Heatmap) mit Wahrscheinlichkeiten. Die Post-Processing-Routine übersetzt diese Matrix in greifbare Objektdaten. Eine Schleife iteriert durch die Ausgabe-Schichten des Netzes. Die Multiplikation der rohen Wahrscheinlichkeitswerte des quantisierten Modells mit 255.0 erzwingt durch die gezielte Fließkomma-Operation ein gültiges Datenformat für die OpenMV-Bibliothek. Dieser Schritt wandelt die Datenmatrix in ein virtuelles Graustufenbild um und nutzt die \texttt{find\_blobs}-Funktion, um die dichtesten Pixel-Zentren (die erkannten Objekte) zu isolieren.
+\textbf{Post-Processing und die Heatmap-Übersetzung:} Das neuronale Netz liefert keine fertigen Koordinaten, sondern eine vierdimensionale Matrix (Heatmap) mit Wahrscheinlichkeiten. Die Post-Processing-Routine übersetzt diese Matrix in greifbare Objektdaten.
+\begin{lstlisting}[language=Python, caption={Konvertierung der Modell-Ausgabe und anschließende Bloberkennung}]
+img = image.Image(outputs[0][0, :, :, i] * 255.0)
+blobs = img.find_blobs(threshold_list, x_stride=1, y_stride=1, area_threshold=1, pixels_threshold=1)
+\end{lstlisting}
+Eine Schleife iteriert durch die Ausgabe-Schichten des Netzes. Die Multiplikation der rohen Wahrscheinlichkeitswerte des quantisierten Modells mit 255.0 erzwingt durch die gezielte Fließkomma-Operation ein gültiges Datenformat für die OpenMV-Bibliothek. Dieser Schritt wandelt die Datenmatrix in ein virtuelles Graustufenbild um und nutzt die \texttt{find\_blobs}-Funktion, um die dichtesten Pixel-Zentren (die erkannten Objekte) zu isolieren.
 
-4. Die Hauptschleife: Die Endlosschleife führt die eigentliche Erkennung durch und erzeugt ein visuelles Feedback. Der Sensor erfasst kontinuierlich neue Kamerabilder und übergibt sie über \texttt{net.predict} an das neuronale Netz. Das Programm ignoriert die Klasse "0", da diese standardmäßig den Hintergrund repräsentiert. Für jedes valide Objekt berechnet der Algorithmus den geometrischen Mittelpunkt und zeichnet einen farbigen Kreis in das Live-Bild, um die Funktionalität optisch direkt am Bild zu verifizieren.
+\textbf{Die Hauptschleife:} Die Endlosschleife führt die eigentliche Erkennung durch und erzeugt ein visuelles Feedback.
+\begin{lstlisting}[language=Python, caption={Iteration über die Erkennungsergebnisse und Visualisierung}]
+for i, detection_list in enumerate(net.predict([img], callback=fomo_post_process)):
+if i == 0: continue  # Ignoriert die Hintergrund-Klasse
+if len(detection_list) == 0: continue
+
+for x, y, w, h, score in detection_list:
+center_x = math.floor(x + (w / 2))
+center_y = math.floor(y + (h / 2))
+img.draw_circle((center_x, center_y, 12), color=colors[i])
+\end{lstlisting}
+Der Sensor erfasst kontinuierlich neue Kamerabilder und übergibt sie über \texttt{net.predict} an das neuronale Netz. Das Programm ignoriert die Klasse "0", da diese standardmäßig den Hintergrund repräsentiert. Für jedes valide Objekt berechnet der Algorithmus den geometrischen Mittelpunkt und zeichnet einen farbigen Kreis in das Live-Bild, um die Funktionalität optisch direkt am Bild zu verifizieren.
 
 \begin{figure}[htbp]
     \centering
@@ -602,9 +631,9 @@ Um ein komfortables Tragen der Brille im Nasenbereich zu ermöglichen, wurden di
 
 \textbf{Vorgesehene Umsetzungen:}
 \begin{itemize}
-    \item Im Nasenbereich sollte der Tragekomfort durch einen ergonomisch geformten Nasenbügel verbessert werden.
     \item Die Abdeckung weicht derzeit noch zu stark von der Ästhetik einer Brille ab und sollte über zwei separate Gläser verfügen.
     \item Die Form sollte überarbeitet werden, da das Verhältnis von Höhe zu Breite nicht zusammenpasst.
+    \item Im Nasenbereich sollte der Tragekomfort durch einen ergonomisch geformten Nasenbügel verbessert werden.
     \item Der Button weist derzeit noch keine Auflagefläche auf und sitzt daher nur lose in der Button-Öffnung.
 \end{itemize}
 \newline
@@ -652,7 +681,7 @@ Im Vergleich zur Vorversion wurden die zuvor vorhandenen Öffnungen an den äuß
 
 \textbf{Ergebnis:} Der 3D-Drucker konnte die sehr kleinen Details der Haken-Einrastfunktion nicht präzise umsetzen. Eine Vergrößerung war jedoch nicht möglich, da diese Funktion in den Ecken des Rahmens untergebracht werden sollte, wo zugleich genügend Raum für die Kabelführung zur Verfügung stehen muss. Folglich war eine neue Lösung erforderlich.
 
-\textbf{Scharnier-Optimierung:} Aufgrund unzureichender Funktionalität des zuvor verwendeten Scharniermechanismus wurde eine alternative Ausführung des Scharniers entwickelt:
+\textbf{Scharnier-Optimierung:} Aufgrund unzureichender Funktionalität des zuvor verwendeten Scharniermechanismus wurde eine alternative Ausführung des Scharniers entwickelt (kompatibel mit Bügel v5):
 
 \begin{figure}[H]
     \centering
@@ -676,7 +705,7 @@ Im Zuge des Neuentwurfs des Rahmen-Designs wurden mehrere zentrale Aspekte berü
     \label{fig:Rahmen v5: Vorderansicht}
 \end{figure}
 
-Darüber hinaus sollte der bereits zuvor entwickelte Scharniermechanismus grundsätzlich beibehalten, jedoch größer dimensioniert werden, um den Einschränkungen durch die geringe Druckgenauigkeit des 3D-Drucks bei sehr kleinen Bauteilen entgegenzuwirken. Zusätzlich wurde vorgesehen, zwei Nasenbügel in das Modell zu integrieren, um die Auflage und den Tragekomfort zu verbessern.
+  Darüber hinaus sollte der bereits zuvor entwickelte Scharniermechanismus grundsätzlich beibehalten, jedoch größer dimensioniert werden, um den Einschränkungen durch die geringe Druckgenauigkeit des 3D-Drucks bei sehr kleinen Bauteilen entgegenzuwirken ($\rightarrow$ kompatibel mit Scharnieren der Bügelversionen 6 bis 9). Zusätzlich wurde vorgesehen, zwei Nasenbügel in das Modell zu integrieren, um die Auflage und den Tragekomfort zu verbessern.
 
 \begin{figure}[H]
     \centering
@@ -722,7 +751,7 @@ Zur Gewährleistung der Funktionalität der Brille werden die freien Flächen de
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\textwidth]{media/images/Gläser-Abdeckung v2 - Vorderseite.png}
+    \includegraphics[width=0.25\textwidth]{media/images/Gläser-Abdeckung v2 - Vorderseite.png}
     \caption*{Gläser-Abdeckung v2: Vorderseite}
     \label{fig:Gläser-Abdeckung v2: Vorderseite}
 \end{figure}
@@ -732,7 +761,7 @@ In der sechsten Version wurden neue, kompaktere Nasenbügel implementiert, die i
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{media/images/Nasenbügel-Vergleich.png}
+    \includegraphics[width=0.7\textwidth]{media/images/Nasenbügel-Vergleich.png}
     \caption*{Nasenbügel-Vergleich}
     \label{fig:Nasenbügel-Vergleich}
 \end{figure}
@@ -745,7 +774,7 @@ Um die Gläser-Abdeckung formschlüssiger in den Rahmen einzusetzen, wird deren 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{media/images/Gläser-Abdeckung v3 - stl-File in Blender.png}
+    \includegraphics[width=0.35\textwidth]{media/images/Gläser-Abdeckung v3 - stl-File in Blender.png}
     \caption*{Gläser-Abdeckung v3: stl-File in Blender}
     \label{fig:Gläser-Abdeckung v3: stl-File in Blender}
 \end{figure}
@@ -757,7 +786,7 @@ Der in Abschnitt [// TODO] erläuterte Modellierfehler lässt sich durch die fol
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{media/images/Modellierfehler-Behebung.png}
+    \includegraphics[width=0.7\textwidth]{media/images/Modellierfehler-Behebung.png}
     \caption*{Modellierfehler-Behebung}
     \label{fig:Modellierfehler-Behebung}
 \end{figure}
@@ -770,14 +799,13 @@ Der in Abschnitt [// TODO] erläuterte Modellierfehler lässt sich durch die fol
     \item Erneute Auswahl der äußeren Kanten: Erstellung einer Fläche zwischen diesen Kanten.
     \item Kombination der neu erstellten Fläche mit dem bestehenden Rahmen, wodurch der Volumenkörper wieder geschlossen wird und keine offenen Flächen verbleiben.
 \end{enumerate}
-
-Der dargestellte Prozess in der Abbildung verlief nicht vollständig linear. Er war geprägt von Einschränkungen durch Fusion 360, begrenzten Freiheiten bei der Behebung des Modellierfehlers sowie wiederkehrenden Fehlermeldungen während der Anpassungen.
 \par
+Der dargestellte Prozess in der Abbildung verlief nicht vollständig linear. Er war geprägt von Einschränkungen durch Fusion 360, begrenzten Freiheiten bei der Behebung des Modellierfehlers sowie wiederkehrenden Fehlermeldungen während der Anpassungen.
 Bei genauerer Betrachtung der Brille zeigt sich noch eine feine Kante, die Fusion automatisch generiert hat. Für eine möglichst glatte und angenehme Ausführung der Brille, wird diese Kante noch abgerundet:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{media/images/Modellierfehler - letzter Schritt.png}
+    \includegraphics[width=0.75\textwidth]{media/images/Modellierfehler - letzter Schritt.png}
     \caption*{Modellierfehler - finaler Korrekturschritt}
     \label{fig:Modellierfehler - finaler Korrekturschritt}
 \end{figure}
@@ -786,10 +814,25 @@ Das linke Abdeckungsglas liegt formschlüssig auf dem Nicla Board auf. Zur Verbe
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{media/images/Abdeckung v5 - Rückseite.png}
+    \includegraphics[width=0.25\textwidth]{media/images/Abdeckung v5 - Rückseite.png}
     \caption*{Abdeckung v5: Rückseite}
     \label{fig:Abdeckung v5: Rückseite}
 \end{figure}
+
+\subsubsection*{Rahmen v8}
+
+\subsubsection*{Rahmen v9}
+Ein 10 × 2,5 × 5 mm (L × B × H) großer Schalter wurde im Rahmen angebracht. Um den begrenzten Raum optimal zu nutzen, erfolgte die Platzierung unterhalb der Rahmen-Ecken, wo noch ungenutzter Platz vorhanden war:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\textwidth]{media/images/Rahmen v9 - Schalter-Implementierung.png}
+    \caption*{Rahmen v9: Schalter-Implementierung}
+    \label{fig:Rahmen v9: Schalter-Implementierung}
+\end{figure}
+
+Drei Bohrungen wurden modelliert, um die Pins mit der internen Elektronik zu verbinden. Außerdem wurde die Kabelführung in zwei separate Öffnungen aufgeteilt. \newline
+Siehe Abbildung: Scharnier-Aussparung (oben) und Akku-Aussparung (unten).
 
 \subsubsection{Bügel}
 \subsubsection*{Bügel v1 - 2}
@@ -838,7 +881,7 @@ Der zweite Entwurf beinhaltet folgende Optimierungen:
 Bestehen gebliebene Probleme:
 \begin{itemize}
     \item Bügel-Ende weiterhin überdimensioniert
-    \item Scharnier-Mechanismus zwischen Rahmen und Bügel noch nicht implementiert
+    \item Scharniermechanismus zwischen Rahmen und Bügel noch nicht implementiert
 \end{itemize}
 
 Zudem wies der in der Abbildung markierte Übergang noch Optimierungsbedarf auf:
@@ -867,8 +910,8 @@ In der dritten Version des Bügels wurde der hintere Bereich, welcher auf dem Oh
 
 Zwischen der dritten und vierten Version veränderte sich die Bügelform leicht, wobei der Fokus ausschließlich auf ästhetischen Aspekten lag, ohne die Funktionalität zu beeinträchtigen.
 
-\textbf{Scharnier-Mechanismus:}\newline
-Zur Umsetzung des in Abschnitt~\ref{sec:Scharnier-Mechanismus} beschriebenen Scharniermechanismus wurden an den Bügel-Enden der dritten Version entsprechende Aussparungen angelegt. Aufgrund unzureichender Funktionalität wurde der Scharniermechanismus in der vierten Version jedoch wieder verworfen, um in einer späteren Version einen überarbeiteten Ansatz zu realisieren.
+\textbf{Scharniermechanismus:}\newline
+Zur Umsetzung des in Abschnitt [// TODO] beschriebenen Scharniermechanismus wurden an den Bügel-Enden der dritten Version entsprechende Aussparungen angelegt. Aufgrund unzureichender Funktionalität wurde der Scharniermechanismus in der vierten Version jedoch wieder verworfen, um in einer späteren Version einen überarbeiteten Ansatz zu realisieren.
 
 \subsubsection*{Bügel v5 - 7}
 In der fünften Version wurde das Gegenstück des (hier genannten // TODO) Scharniermechanismus integriert. In Version 6 vergrößerte sich das Scharnier, während Version 7 die Stabilität des Scharniers durch eine einheitliche Auflagefläche erhöhte. Beide Anpassungen zielten darauf ab, eine höhere Druckgenauigkeit zu erzielen.
@@ -895,11 +938,83 @@ Zudem wird an der Vorderseite eine kleine Öffnung integriert, die die Durchfüh
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{media/images/Bügel v9 - Einkerbung.png}
-    \caption*{Bügel v9: Einkerbung}
-    \label{fig:Bügel v9: Einkerbung}
+    \includegraphics[width=0.35\textwidth]{media/images/Bügel v9 - Nahansicht der Einkerbung.png}
+    \caption*{Bügel v9: Nahansicht der Einkerbung}
+    \label{fig:Bügel v9: Nahansicht der Einkerbung}
 \end{figure}
 
+Das Problem der zu eng anliegenden Bügel blieb jedoch weiterhin bestehen, weshalb im Konzept folgende Lösungsansätze für eine Neukonzeption ausgearbeitet wurden: // Konzept-Link
+
+\subsubsection*{Bügel v10 - Neukonzeption}
+
+Aus den besprochenen Lösungsansätzen wurden mehrere praktisch umgesetzt: Der Wechsel auf kleinere Akkus (von 2000 mAh auf 620 mAh) erlaubte eine deutliche Verkleinerung des Bügel-Designs. Gleichzeitig wurde die Bügelform so angepasst, dass sie eine leichte Biegung nach außen aufweist, wodurch der seitliche Spielraum im Bereich der Schläfen erhöht wurde.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{media/images/Bügel v10 - Seitenansicht.png}
+    \caption*{Bügel v10: Seitenansicht}
+    \label{fig:Bügel v10: Seitenansicht}
+\end{figure}
+
+Zusätzlich wurde ein neuer Scharniermechanismus integriert, der sowohl ein unauffälligeres Design als auch eine verbesserte Funktionalität bietet.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.15\textwidth]{media/images/Bügel v10 - Scharniermechanismus.png}
+    \caption*{Bügel v10: Scharniermechanismus}
+    \label{fig:Bügel v10: Scharniermechanismus}
+\end{figure}
+
+Das Funktionsprinzip des Scharniers wird im Konzept erläutert. // Konzept-Link
+  
+Ein Vergleich der beiden Akkus verdeutlicht den erheblichen Größenunterschied (von 56 x 34,5 x 10,6 mm $\rightarrow$ 42 x 20,5 x 8,8 mm). Die dadurch einhergehende Verkürzung der Laufzeit wird durch das optimierte Bügel-Design und den erhöhten Tragekomfort ausgeglichen.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{media/images/Akku-Vergleich.png}
+    \caption*{Akku-Vergleich}
+    \label{fig:Akku-Vergleich}
+\end{figure}
+
+\textit{Schritte der Modellierung}
+
+Der Modellierablauf gliedert sich in sieben Schritte. Zunächst wird die grundlegende Biegung des Bügels in einer zweidimensionalen Skizze definiert und anschließend nach oben extrudiert. Aus der so entstandenen Fläche wird die seitliche Kontur des Bügels ausgeschnitten und anschließend verdickt. Zur Vermeidung einer konstanten Breite über die gesamte Länge erfolgt abschließend eine weitere Formanpassung mittels einer zusätzlichen Skizze von oben.
+
+Zur Aufbewahrung des Akkus wird der Bügel ausgehöhlt. Weiteres werden Einkerbungen für eine Abdeckung sowie eine Kabeldurchführung an der Vorderseite integriert. Abschließend wird der neue Scharniermechanismus umgesetzt, der aus zwei hohlen Kreisstrukturen an der oberen und unteren Ecke besteht.
+
+\subsubsection*{Bügel v11 - 13}
+In der elften Version wurde die Kabeldurchführung verkleinert, da sie zuvor überdimensioniert war. Außerdem wurde die Biegung des Bügels überarbeitet, da der äußere Winkel zu groß ausgefallen war und ein unangenehmes Aufsetzen der Brille verursachte.
+
+Da das Endstück des Bügel v11-Modells zu dünn ausgeführt war, löste die zwölfte Version dieses Problem durch eine Anpassung der seitlichen Kontur.
+
+In der dreizehnten Version wurde die Form des Bügels nur noch minimal verändert - jedoch insgesamt etwas dünner gestaltet.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{media/images/Bügel v13 - Seitenansicht.png}
+    \caption*{Bügel v13: Seitenansicht}
+    \label{fig:Bügel v13: Seitenansicht}
+\end{figure}
+
+\subsubsection*{Bügel v14 - finale Version}
+Obwohl der äußere Winkel bereits reduziert wurde, war er nach wie vor zu eng für ein komfortables Aufsetzen der Brille, sodass die Biegung erneut angepasst werden musste:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{media/images/Bügel v14 - Biegungs-Skizze.png}
+    \caption*{Bügel v14: Biegungs-Skizze}
+    \label{fig:Bügel v14: Biegungs-Skizze}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{media/images/Bügel v14 - Oberansicht.png}
+    \caption*{Bügel v14: Oberansicht}
+    \label{fig:Bügel v14: Oberansicht}
+\end{figure}
+
+Ein 3D-Druck dieser Version zeigte, dass der Bügel in allen vorgesehenen Aspekten den Anforderungen (\textit{siehe Konzept: letzte Bügel-Version}) entsprach und ein komfortables Aufsetzen gewährleistete.
+  
 \section{Herausforderungen in der Entwicklung}
 Die Realisierung eines kompakten, tragbaren Assistenzsystems, welches rechenintensive Machine-Learning-Prozesse mit kontinuierlicher Netzwerkkommunikation vereint, bringt diverse interdisziplinäre Herausforderungen mit sich. 
 
@@ -932,7 +1047,7 @@ Einordnung des Risikos: Trotz dieser theoretischen Gefahr ist das Risiko in der 
     \item \textbf{Systembedingte Überwachung:} Das Restrisiko wird durch den Einsatz des speziellen Lademoduls adressiert, welches den Stromkreis bei Fehlern sofort physisch trennt.
 \end{itemize}
 
-\subsection{Mechanische und geometrische Restriktionen}
+\subsection{Mechanische und geometrische Restriktionen - Manuel}
 Die Integration der notwendigen Elektronik in eine Brille stellt eine anspruchsvolle Herausforderung dar. Dies liegt hauptsächlich daran, dass im Vergleich zu herkömmlichen Brillen deutlich ungewöhnlichere Maße eingehalten werden müssen, wodurch zahlreiche Versuche und ein erhöhter Zeitaufwand erforderlich sind. Gleichzeitig sollen Tragekomfort, Design und Funktionalität nicht zu kurz kommen.
 
 Ziel war die Modellierung einer Brille, die möglichst vielen Personen unabhängig von Geschlecht und Kopfform passt. Zu diesem Zweck wurden gängige Brillenformen sowie ergonomische Standardmaße und Proportionsverhältnisse im Internet recherchiert. (Recherche: firmoo.de)
@@ -959,7 +1074,7 @@ Die theoretische Maximallaufzeit des reinen Mikrocontrollers (ausgehend von den 
 
 Die qualitativen Feldtests bestätigen jedoch, dass die gewählte parallele Akkukonfiguration das System stabil mit der benötigten Betriebsspannung versorgt. Spannungseinbrüche, die zu einem plötzlichen Neustart des Mikrocontrollers führen könnten, wurden während der regulären Testläufe nicht beobachtet. Das Energiemanagement erweist sich somit als ausreichend dimensioniert, um die Funktionalität des Prototyps im Rahmen der Demonstrationsszenarien verlässlich aufrechtzuerhalten.
 
-\subsection{Einfluss der Klassenanzahl auf die Modell-Konfidenz}
+\subsection{Einfluss der Klassenanzahl auf die Modell-Konfidenz - Fabian}
 Die Evaluierung der Bilderkennung analysiert die Leistungsfähigkeit der trainierten neuronalen Netze anhand der von Edge Impulse generierten Validierungsdaten. Ein direkter Vergleich der Wahrheitsmatrizen (Confusion Matrix) und der F1-Scores zweier unterschiedlicher Modell-Iterationen verdeutlicht den massiven Einfluss der Klassenanzahl auf die Erkennungsgenauigkeit. Die Gegenüberstellung der grafischen Trainingsergebnisse (welche direkt aus der Edge Impulse Entwicklungsumgebung exportiert wurden) zeigt eine eindeutige Tendenz:
 
 \begin{itemize}
@@ -986,5 +1101,5 @@ Die Evaluierung der Bilderkennung analysiert die Leistungsfähigkeit der trainie
 
 Dieser Leistungsabfall bei einer höheren Klassenanzahl resultiert direkt aus den Kapazitätsgrenzen des Netzwerks. Ein quantisiertes Modell für limitierte Mikrocontroller verfügt über eine fest definierte, stark reduzierte Anzahl an internen Parametern. Das Training von mehreren Klassen zwingt das System, deutlich mehr und vielfältigere visuelle Merkmale innerhalb derselben winzigen Parameter-Struktur abzubilden. Diese Informationsverdichtung reduziert die Trennschärfe zwischen den einzelnen Objekten drastisch und führt zu einer wesentlich höheren Verwechslungsgefahr.
 
-\subsection{Evaluierung komplexer Standard-Architekturen (YOLO)}
+\subsection{Evaluierung komplexer Standard-Architekturen (YOLO) - Fabian}
 Die Validierungsphase schloss zusätzlich die Evaluierung wesentlich komplexerer YOLO-Modelle ein, um die theoretische Leistungsfähigkeit fortschrittlicherer Architekturen zu prüfen. Diese leistungsstarken neuronalen Netze durchliefen die Bildtests jedoch ausschließlich auf einem Desktop-PC. Ein Transfer der fertigen YOLO-Modelle auf die Nicla Vision scheiterte erwartungsgemäß an den strengen Hardware-Restriktionen. Der stark begrenzte Flash-Speicher des Mikrocontrollers verweigerte die Aufnahme der speicherintensiven Modelldateien vollständig. Dieser Testaufbau bestätigte eindrücklich, dass ein produktiver Einsatz der unmodifizierten YOLO-Architektur direkt auf der Smart-Brille technisch unmöglich ist und validierte damit den gewählten, extrem reduzierten FOMO-Ansatz als bestmögliche Alternative.
