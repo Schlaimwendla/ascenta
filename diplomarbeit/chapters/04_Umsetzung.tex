@@ -631,10 +631,10 @@ Um ein komfortables Tragen der Brille im Nasenbereich zu ermöglichen, wurden di
 
 \textbf{Vorgesehene Umsetzungen:}
 \begin{itemize}
-    \item Die Abdeckung weicht derzeit noch zu stark von der Ästhetik einer Brille ab und sollte über zwei separate Gläser verfügen.
-    \item Die Form sollte überarbeitet werden, da das Verhältnis von Höhe zu Breite nicht zusammenpasst.
-    \item Im Nasenbereich sollte der Tragekomfort durch einen ergonomisch geformten Nasenbügel verbessert werden.
-    \item Der Button weist derzeit noch keine Auflagefläche auf und sitzt daher nur lose in der Button-Öffnung.
+    \item Die Abdeckung weicht derzeit noch zu stark von der Ästhetik einer Brille ab und verfügt über keine zwei separaten Gläser.
+    \item Die Form ist aufgrund des unausgewogenen Verhältnisses zwischen Höhe und Breite überarbeitungsbedürftig.
+    \item Der Button weist derzeit noch keine Auflagefläche auf und sitzt daher nur lose in der entsprechenden Aussparung.
+    \item Im Nasenbereich ist der Tragekomfort durch einen ergonomisch geformten Nasenbügel zu verbessern.
 \end{itemize}
 \newline
 \textbf{Realisierte Verbesserungen:}
@@ -691,8 +691,8 @@ Im Vergleich zur Vorversion wurden die zuvor vorhandenen Öffnungen an den äuß
 \end{figure}
 
 \textbf{Fazit zu Version 4:}
-Nach dem 3D-Druck des Bauteils stellte sich heraus, dass das Scharnier zu klein dimensioniert war und der Drucker die erforderlichen Feinheiten nicht mit ausreichender Genauigkeit umsetzen konnte. \newline
-Allgemein wurden zwar die Auflageflächen für den Knopf ergänzt, weiteren Probleme blieben jedoch bestehen bzw. teilweise traten auch neue auf. Folglich war ein kompletter Neuanfang des Rahmenmodells erforderlich, bei dem die gewonnenen Erkenntnisse aus den bisherigen Versionen angewandt werden sollen.
+Nach dem 3D-Druck des Bauteils stellte sich heraus, dass das Scharnier zu klein dimensioniert war und der Drucker die erforderlichen Feinheiten nicht mit ausreichender Genauigkeit umsetzen konnte.
+Zwar wurden Auflageflächen für den Knopf ergänzt, die übrigen, unter Rahmen v3 beschriebenen Probleme blieben jedoch bestehen bzw. teilweise traten neue auf. Folglich war ein kompletter Neuanfang des Rahmenmodells erforderlich, bei dem die gewonnenen Erkenntnisse aus den bisherigen Versionen angewandt werden sollen.
 
 \subsubsection*{Rahmen v5 - Neukonzeption}
 
@@ -820,9 +820,27 @@ Das linke Abdeckungsglas liegt formschlüssig auf dem Nicla Board auf. Zur Verbe
 \end{figure}
 
 \subsubsection*{Rahmen v8}
+Während der parallel ablaufenden Konstruktion von Rahmen und Bügel wurde ein neuer Scharniermechanismus integriert. Um zunächst einen einheitlichen Übergang vom Rahmen zum Bügel zu gewährleisten, wurden zwischen der siebten und achten Rahmen-Version die Ecken erweitert:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{media/images/Vergrößerung der Ecken}
+    \caption*{Vergrößerung der Ecken}
+    \label{fig:Vergrößerung der Ecken}
+\end{figure}
+  
+Der Scharniermechanismus basiert auf zwei Zylindern mit unterschiedlichen Radien - einem kleinen und einem größeren, die abwechselnd angeordnet sind.
+Um den Zuklappradius zu optimieren, ist die Ummantelung der Scharnierkreise nach innen offen gestaltet.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{media/images/Rahmen v8 - Scharniermechanismus.png}
+    \caption*{Rahmen v8: Scharniermechanismus}
+    \label{fig:Rahmen v8: Scharniermechanismus}
+\end{figure}
 
 \subsubsection*{Rahmen v9}
-Ein 10 × 2,5 × 5 mm (L × B × H) großer Schalter wurde im Rahmen angebracht. Um den begrenzten Raum optimal zu nutzen, erfolgte die Platzierung unterhalb der Rahmen-Ecken, wo noch ungenutzter Platz vorhanden war:
+Ein 10 × 2,5 × 5~mm (L × B × H) großer Schalter wurde im Rahmen angebracht. Um den begrenzten Raum optimal zu nutzen, erfolgte die Platzierung unterhalb der Rahmen-Ecken, wo noch ungenutzter Platz vorhanden war:
 
 \begin{figure}[H]
     \centering
@@ -833,6 +851,18 @@ Ein 10 × 2,5 × 5 mm (L × B × H) großer Schalter wurde im Rahmen angebrach
 
 Drei Bohrungen wurden modelliert, um die Pins mit der internen Elektronik zu verbinden. Außerdem wurde die Kabelführung in zwei separate Öffnungen aufgeteilt. \newline
 Siehe Abbildung: Scharnier-Aussparung (oben) und Akku-Aussparung (unten).
+
+\subsubsection*{Rahmen v10 - finale Version}
+Bei einem Praxistest der Brille wurde festgestellt, dass sich die Rückseite des Rahmens hinter dem Auflademodul stark erwärmte, weshalb die Auflagefläche der Halterung verkleinert wurde:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{media/images/Rahmen v10 - Lademodul-Auflagefläche.png}
+    \caption*{Rahmen v10: Lademodul-Auflagefläche}
+    \label{fig:Rahmen v10: Lademodul-Auflagefläche}
+\end{figure}
+  
+Darüber hinaus wurden Länge und Tiefe der Schalter-Öffnung optimiert, sodass der Schalter formschlüssig fixiert ist. Die Bohrungen wurden zudem vergrößert und von drei auf zwei reduziert.
 
 \subsubsection{Bügel}
 \subsubsection*{Bügel v1 - 2}
@@ -899,7 +929,7 @@ Der Übergang dient rein ästhetischen Zwecken und weist dahinter lediglich eine
 \textbf{Akku-Aufbewahrung:} Für die Energieversorgung wird ein Lithium-Ionen-Akku mit einer Kapazität von 2000\,mAh eingesetzt, um eine möglichst lange Betriebsdauer ohne erneutes Aufladen zu gewährleisten. Die Integration des Akkus erfolgt im Brillenbügel. Zur Vermeidung einer ungleichmäßigen Gewichtsverteilung wird auf der gegenüberliegenden Seite ebenfalls ein Akku vorgesehen.
 
 \subsubsection*{Bügel v3 - 4}
-In der dritten Version des Bügels wurde der hintere Bereich, welcher auf dem Ohr aufliegt, gezielt ergonomisch überarbeitet. Zu diesem Zweck erhielt der Bügel eine nach innen gerichtete Einkerbung, um eine bessere Anpassung an die natürliche Form des Ohres zu ermöglichen. Dadurch soll sowohl der Sitz verbessert als auch der Tragekomfort im Vergleich zu den vorherigen Versionen erhöht werden. \newline
+In der dritten Version des Bügels wurde der hintere Bereich, welcher auf dem Ohr aufliegt, gezielt ergonomisch überarbeitet. Zu diesem Zweck erhielt der Bügel eine nach innen gerichtete Einkerbung, um eine bessere Anpassung an die natürliche Form des Ohres zu ermöglichen. Dadurch soll sowohl der Sitz verbessert als auch der Tragekomfort im Vergleich zu den vorherigen Versionen erhöht werden.
 
 \begin{figure}[H]
     \centering
