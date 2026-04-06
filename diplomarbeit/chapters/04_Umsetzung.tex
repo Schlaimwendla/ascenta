@@ -619,6 +619,8 @@ Die Position des Buttons wurde auf die Oberseite des Rahmens oberhalb des Mikroc
     \label{fig:Rahmen v2: Button-Öffnung}
 \end{figure}
 
+\phantomsection
+\label{sec:rahmen_v1-2}
 \textbf{Scharniermechanismus:} Zur Gewährleistung einer stabilen, zuklappbaren Verbindung mit den Brillenbügeln wurden an den linken und rechten Enden der Unterseite des Rahmens Ausbuchtungen angebracht.
 Die Fixierung der Brillenbügel erfolgt über dünne Pins, die in die vorgesehenen Aussparungen der Ausbuchtungen eingesetzt werden. Gleichzeitig dienen die Ausbuchtungen als stabile Auflagefläche für die Bügel.
 Bei der Konstruktion wurde zudem die interne Kabelführung berücksichtigt, sodass ausreichend Platz für die Kabel vorhanden ist, die zum Lademodul im Inneren geführt werden. Dies bleibt auch im zugeklappten Zustand der Brille gewährleistet.
@@ -655,6 +657,9 @@ Um ein komfortables Tragen der Brille im Nasenbereich zu ermöglichen, wurden di
     \label{fig:Rahmen v3: Abdeckungs-Stützen}
 \end{figure}
 
+Durch einen 3D-Druck der Brille konnte ein Konstruktionsproblem identifiziert werden: Der Abstand zwischen der Scharnier-Aussparung und der Rückwand des Rahmens reichte nicht aus, um den vorgesehenen Zuklapp-Radius zu gewährleisten.\newline
+$\rightarrow$ Scharniermechanismus wurde verworfen
+
 \subsubsection*{Rahmen v4}
 
 In der Rahmen-Version 4 wurden mehrere Optimierungen umgesetzt, um die Funktionalität der Brille zu verbessern.
@@ -688,6 +693,8 @@ Zum Lösen der Verbindung wurde an der Rückseite des Gegenstücks eine kleine A
   
 \textbf{Ergebnis:} Der 3D-Drucker konnte die sehr kleinen Details der Haken-Einrastfunktion nicht präzise umsetzen. Eine Vergrößerung war jedoch nicht möglich, da diese Funktion in den Ecken des Rahmens untergebracht werden sollte, wo zugleich genügend Raum für die Kabelführung zur Verfügung stehen muss. Folglich war eine neue Lösung erforderlich.
 
+\phantomsection
+\label{sec:rahmen_v4}
 \textbf{Scharnier-Optimierung:} Aufgrund unzureichender Funktionalität des zuvor verwendeten Scharniermechanismus wurde eine alternative Ausführung (\cite{scharnier_vorlage}) des Scharniers montiert (kompatibel mit Bügel v5):
 
 \begin{figure}[H]
@@ -839,7 +846,9 @@ Während der parallel ablaufenden Konstruktion von Rahmen und Bügel wurde ein n
     \caption*{Vergrößerung der Ecken}
     \label{fig:Vergrößerung der Ecken}
 \end{figure}
-  
+
+\phantomsection
+\label{sec:rahmen_v8}
 Die Konstruktion des Scharniermechanismus basiert auf einer Skizzenebene mit zwei Kreisen unterschiedlicher Radien - einem kleineren und einem größeren. Aus dieser Geometrie wird ein hohl ausgeführter Zylinder gebildet.
 
 \begin{figure}[H]
@@ -955,10 +964,10 @@ In der dritten Version des Bügels wurde der hintere Bereich, welcher auf dem Oh
 Zwischen der dritten und vierten Version veränderte sich die Bügelform leicht, wobei der Fokus ausschließlich auf ästhetischen Aspekten lag, ohne die Funktionalität zu beeinträchtigen.
 
 \textbf{Scharniermechanismus:}\newline
-Zur Umsetzung des in Abschnitt [// TODO] beschriebenen Scharniermechanismus wurden an den Bügel-Enden der dritten Version entsprechende Aussparungen angelegt. Aufgrund unzureichender Funktionalität wurde der Scharniermechanismus in der vierten Version jedoch wieder verworfen, um in einer späteren Version einen überarbeiteten Ansatz zu realisieren.
+Zur Umsetzung des in Abschnitt „\nameref{sec:rahmen_v1-2}“ beschriebenen Scharniermechanismus wurden an den Bügel-Enden der dritten Version entsprechende Aussparungen angelegt. Aufgrund unzureichender Funktionalität wurde der Scharniermechanismus in der vierten Version jedoch wieder verworfen, um in einer späteren Version einen überarbeiteten Ansatz zu realisieren.
 
 \subsubsection*{Bügel v5 - 7}
-In der fünften Version wurde das Gegenstück des (hier genannten // TODO) Scharniermechanismus integriert. In Version 6 vergrößerte sich das Scharnier, während Version 7 die Stabilität des Scharniers durch eine einheitliche Auflagefläche erhöhte. Beide Anpassungen zielten darauf ab, eine höhere Druckgenauigkeit zu erzielen.
+In der fünften Version wurde das Gegenstück des in „\nameref{sec:rahmen_v4}“ beschriebenen Scharniermechanismus integriert. In Version 6 vergrößerte sich das Scharnier, während Version 7 die Stabilität des Scharniers durch eine einheitliche Auflagefläche erhöhte. Beide Anpassungen zielten darauf ab, eine höhere Druckgenauigkeit zu erzielen.
 
 \begin{figure}[H]
     \centering
@@ -987,7 +996,7 @@ Zudem wird an der Vorderseite eine kleine Öffnung integriert, die die Durchfüh
     \label{fig:Bügel v9: Nahansicht der Einkerbung}
 \end{figure}
 
-Das Problem der zu eng anliegenden Bügel blieb jedoch weiterhin bestehen, weshalb im Konzept folgende Lösungsansätze für eine Neukonzeption ausgearbeitet wurden: // Konzept-Link
+Das Problem der zu eng anliegenden Bügel blieb jedoch weiterhin bestehen, weshalb im Konzept folgende Lösungsansätze für eine Neukonzeption ausgearbeitet wurden: // Konzept-Link TODO
 
 \subsubsection*{Bügel v10 - Neukonzeption}
 
@@ -1000,7 +1009,7 @@ Aus den besprochenen Lösungsansätzen wurden mehrere praktisch umgesetzt: Der W
     \label{fig:Bügel v10: Seitenansicht}
 \end{figure}
 
-Zusätzlich wurde der überarbeitete Scharniermechanismus (siehe Umsetzung-Link // TODO) implementiert, der sowohl ein unauffälligeres Design als auch eine verbesserte Funktionalität bietet.
+Zusätzlich wurde der überarbeitete Scharniermechanismus aus Abschnitt „\nameref{sec:rahmen_v8}“ implementiert, der sowohl ein unauffälligeres Design als auch eine verbesserte Funktionalität bietet.
 
 \begin{figure}[H]
     \centering
@@ -1008,14 +1017,12 @@ Zusätzlich wurde der überarbeitete Scharniermechanismus (siehe Umsetzung-Link 
     \caption*{Bügel v10: Scharniermechanismus}
     \label{fig:Bügel v10: Scharniermechanismus}
 \end{figure}
-
-Das Funktionsprinzip des Scharniers wird im Konzept erläutert. // Konzept-Link
   
 Ein Vergleich der beiden Akkus verdeutlicht den erheblichen Größenunterschied (von 56 x 34,5 x 10,6 mm $\rightarrow$ 42 x 20,5 x 8,8 mm). Die dadurch einhergehende Verkürzung der Laufzeit wird durch das optimierte Bügel-Design und den erhöhten Tragekomfort ausgeglichen.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{media/images/Akku-Vergleich.png}
+    \includegraphics[width=0.45\textwidth]{media/images/Akku-Vergleich.png}
     \caption*{Akku-Vergleich}
     \label{fig:Akku-Vergleich}
 \end{figure}
@@ -1113,7 +1120,9 @@ Die Umsetzung einer geeigneten Passform gelang bei den Rahmen-Versionen 1 und 2 
 \label{sec:modellierfehler_nasensteg}
 \textbf{Modellierfehler:} Ein weiteres Problem in Fusion 360 trat bei der Konstruktion der fünften Rahmen-Version auf: Durch die Extrusion der Brillenform um 1 cm entstand unterhalb des Nasenstegs ein Modellierfehler, der nicht verhindert werden konnte und das Erscheinungsbild der Brille deutlich beeinträchtigte.
 
-// TODO
+Ab Rahmen-Version 5 wurde die Brille ergonomisch gebogen, wodurch die Bearbeitung in Fusion 360 deutlich erschwert wurde, da Nachbearbeitungen nun nicht mehr in zweidimensionalen Skizzenebenen, sondern im dreidimensionalen Raum durchgeführt werden mussten. \newline
+In diesem Zusammenhang trat ein Problem auf: Der Rahmen ließ sich nicht mehr mit der Rückwand verbinden, auf welcher sowohl die Nicla Vision- als auch die Lademodul-Halterung montiert sind. Ursache dafür war eine unzureichende Überlappung der beteiligten Volumenkörper.
+Bei einer geradlinigen Geometrie hätte die Rückwand in einer zweidimensionalen Skizzenebene problemlos neu konstruiert werden können. Zwar wäre eine Anpassung grundsätzlich auch im dreidimensionalen Raum möglich gewesen, sie konnte jedoch aufgrund der hohen geometrischen Komplexität von Rahmen und Rückwand nicht umgesetzt werden. Das Problem wurde schließlich durch das Aufrufen einer früheren Modellversion behoben.
 
 \section{Tests und Validierung - Liam}
 Eine Reihe von qualitativen Praxistests belegt die Funktionstauglichkeit des \glqq Ascenta\grqq-Prototyps. Die Evaluierung fokussiert sich auf die Kernanforderungen eines Assistenzsystems: die wahrgenommene Systemlatenz, die Zuverlässigkeit der Sensoreingaben sowie die energetische Stabilität.
