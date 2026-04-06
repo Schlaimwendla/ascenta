@@ -39,6 +39,7 @@ Bei der gezielten Abfrage durch den Nutzer (Use Case B) wird der Datenstrom um e
 Die Trennung dieser Pfade stellt sicher, dass zeitkritische Warnungen nicht durch die komplexere Sprachverarbeitung blockiert werden.
 
 \section{Komponenten - Liam}
+\label{sec:komponenten}
 Um den zuvor beschriebenen Datenfluss zu realisieren, setzt sich das Gesamtsystem aus drei wesentlichen logischen Bausteinen zusammen. Diese Säulen sind stark voneinander abhängig und wurden parallel konzipiert, um einen reibungslosen Betriebsablauf zu gewährleisten:
 
 \begin{enumerate}
@@ -56,38 +57,55 @@ Der Kern des Konzepts liegt in der asynchronen, herstellerunabhängigen Interakt
 \subsection{Hardware und Elektronik - Fabian}
 \label{sec:konzept_elektronik}
 
-Das hardwareseitige Konzept fokussiert die autonome Energieversorgung sowie eine intuitive Nutzersteuerung des Systems. Die Integration von zwei kompakten LiPo-Akkus mit einer Kapazität von jeweils 620 mAh ermöglicht eine mobile und besonders schlanke Bauweise. Diese Dimensionierung wahrt konzeptionell eine präzise Balance zwischen einem minimalen Platzbedarf und der notwendigen Energie für den Betrieb der KI-Modelle. Durch diesen dualen Aufbau verfügt das System trotz der leichten Bauweise über genügend Leistungsreserven, um sowohl die kontinuierliche Verarbeitung der Sensordaten als auch die Ansteuerung der optischen Rückmeldung zuverlässig zu gewährleisten. Damit entsteht die hardwareseitige Grundlage für ein hocheffizientes System, das den Anforderungen an Portabilität und Funktionalität gleichermaßen entspricht.
+Das hardwareseitige Konzept fokussiert die autonome Energieversorgung sowie eine intuitive Nutzersteuerung des Systems. Die Integration von zwei kompakten LiPo-Akkus mit einer Kapazität von jeweils 620 mAh ermöglicht eine mobile und besonders schlanke Bauweise. Diese Dimensionierung wahrt konzeptionell eine präzise Balance zwischen einem minimalen Platzbedarf und der notwendigen Energie für den Betrieb der KI-Modelle. Durch diesen Aufbau verfügt das System trotz der leichten Bauweise über genügend Leistungsreserven, um sowohl die kontinuierliche Verarbeitung der Sensordaten als auch die Ansteuerung der optischen Rückmeldung zuverlässig zu gewährleisten. Damit entsteht die hardwareseitige Grundlage für ein System, das den Anforderungen an Portabilität und Funktionalität gleichermaßen entspricht.
 
 Zur Steuerung der Hardware nutzt das Konzept einen vibrationsbasierten Sensor als zentrales Bedienelement, welches die direkte Kontrolle über verschiedene Interaktionsmuster ermöglicht. Anstatt eines physischen Tasters detektiert dieser Sensor Klopfzeichen oder Erschütterungen am Gehäuse und wandelt diese in Steuerbefehle um:
 \begin{itemize}
     \item \textbf{Systemaktivierung:} Eine einfache Betätigung schaltet das Nicla Vision Modul ein. Diese Hardware-Trennung schont die Kapazität der Akkus in Ruhephasen maßgeblich.
-    \item \textbf{Kameraauslöser und Sprachsuche:} Ein schnelles, zweimaliges Drücken (Double-Click) erfasst ein aktuelles Bild und aktiviert zeitgleich die Audioaufnahme, um die Umgebung per Sprachbefehl nach einem bestimmten Gegenstand zu durchsuchen.
+    \item \textbf{Sprachsuche:} Ein schnelles, zweimaliges Drücken (Double-Click) aktiviert die Audioaufnahme, um die Umgebung per Sprachbefehl nach einem bestimmten Gegenstand zu durchsuchen.
 \end{itemize}
 
 Um diese sprachgesteuerte Suchfunktion im Alltag praktikabel zu gestalten, sieht der theoretische Entwurf vor, das zugrundeliegende neuronale Netz auf eine Vielzahl von alltagsgebräuchlichen Objekten zu trainieren. Das Modell soll diese Gegenstände im aufgenommenen Bild anschließend zuverlässig identifizieren und lokalisieren.
 
 \subsection{Mechanik und Gehäusedesign - Manuel}
-\subsubsection{Allgemein}
 Im Rahmen der Konzeptphase wurden die grundlegenden Anforderungen und Zielsetzungen für die zu entwickelnde Brille definiert. Ein zentraler Aspekt bestand darin, die notwendige Elektronik unterzubringen, ohne dabei Funktionalität, Tragekomfort und Design zu vernachlässigen.
 
 Der Aufbau des Modells besteht, wie bei herkömmlichen Brillen, aus zwei Brillenbügeln, einem Rahmen und zwei Gläsern als Abdeckung. Letztere sind nicht transparent und decken den Innenraum des Rahmens ab, in welchem die Elektronik verstaut ist.
 
-Folgende Elemente sind für die Integration der Elektronik in der Brille erforderlich:
-\begin{itemize}
-    \item Nicla Vision-Halterung
-    \item Lademodul-Halterung
-    \item Schalter-Öffnung
-    \item USB-C-Öffnung
-    \item Akku-Aufbewahrung
-\end{itemize}
+Der Rahmen weist ein ergonomisches Design auf, das gut an der Stirn und überhalb der Augen anliegt. Nasenpads sorgen zusätzlich für ein angenehmes Sitzen auf der Nase. Die Bügel schließen bündig am Rahmen ab und sind über einen Scharniermechanismus mit diesem verbunden. Ihre ergonomische Form verläuft zunächst leicht nach außen, um im Schläfenbereich ausreichend Platz zu bieten, und verjüngt sich dann schräg nach innen, um hinter dem Ohr sicheren Halt zu gewährleisten. Auf diese Weise umschließt die Brille den Kopf des Benutzers und sorgt für einen stabilen Sitz.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{media/images/Finale Brillen-Version.png}
+    \caption{Gesamtansicht der Brille}
+    \label{fig:Gesamtansicht der Brille}
+\end{figure}
+
+Innerhalb des Rahmens befindet sich links eine Halterung für den Mikrocontroller und rechts eine Halterung für das Lademodul inklusive USB-C-Öffnung. \newline
+Die Elektronik wird zusätzlich von den beiden Gläsern in ihrer Position gehalten.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.375\textwidth]{media/images/Gläser-Abdeckung.png}
+    \caption{Gläser-Abdeckung}
+    \label{fig:Gläser-Abdeckung}
+\end{figure}
+
+In jedem Bügel ist ein Akku untergebracht, der durch eine Abdeckung verborgen wird. Diese lässt sich einfach auf- und zuschieben.
+
+Unterhalb der rechten Ecke des Rahmens befindet sich ein Schalter zum Ein- und Ausschalten der Brille.
+
+Der Scharniermechanismus hält Rahmen und Bügel über einen von oben eingesetzten Pin zusammen und ermöglicht, dass die Brille auf beiden Seiten eingeklappt werden kann.
+
+Durch den 3D-Druck ist die Brille leicht und modular aufgebaut. Alle Bauteile lassen sich einzeln demontieren und wieder zusammenfügen.
 
 \section{Interaktionen - Liam}
 Die Interaktion zwischen den Systemkomponenten und dem Nutzer verläuft in einem kontinuierlichen Kreislauf, der als asynchroner kaskadierender Prozess aufgebaut ist:
 
 \begin{enumerate}
     \item \textbf{Eingabe-Trigger (Nutzer):} Der Prozess wird durch physisches Doppel-tippen an der Brille initiiert. Dieser Hardware-Interrupt triggert die Audioaufnahme.
-    \item \textbf{Lokale Vorverarbeitung \& Edge-AI (Brille):} Das Nicla Vision erfasst Kamera-Frames und Audiodaten. Parallel läuft ein ressourcensparendes Edge-AI-Modell (FOMO) direkt auf dem Mikrocontroller. Es lokalisiert bekannte Gesichter oder vordefinierte Objektklassen im Kamerabild und übergibt die Koordinaten an die Vorverarbeitungseinheit.
-    \item \textbf{Paketierung und WiFi-Stream:} Der Mikrocontroller paketiert die Sensorrohdaten (Audio-Chunks), die Distanzwerte (ToF-Sensor) und die KI-Koordinaten. Diese Daten werden asynchron in einen TCP-Stream auf Port 5005 geschrieben und über das lokale WiFi-Netzwerk gesendet.
+    \item \textbf{Lokale Vorverarbeitung \& Edge-AI (Brille):} Das Nicla Vision erfasst Kamera-Frames und Audiodaten. Parallel läuft ein ressourcensparendes Edge-AI-Modell (FOMO) direkt auf dem Mikrocontroller. Es lokalisiert Gesichter oder vordefinierte Objektklassen im Kamerabild und übergibt die Koordinaten an die Vorverarbeitungseinheit.
+    \item \textbf{Paketierung und WiFi-Stream:} Der Mikrocontroller paketiert die Sensorrohdaten (Audio-Chunks), die Distanzwerte (ToF-Sensor) und die KI-Koordinaten. Diese Daten werden asynchron in einen TCP-Stream geschrieben und über das lokale WiFi-Netzwerk gesendet.
     \item \textbf{Zentrale Logik \& Datenfusion (Smartphone):} Ein TCP-Socket-Server auf der Android-Applikation empfängt den Datenstrom. Die zentrale Steuerung fusioniert die Rohdaten und nutzt die ToF-Werte, um die relativen Distanzen der ermittelten KI-Koordinaten zu berechnen.
     \item \textbf{Kontextanalyse und Sprachverarbeitung:} Der Audiodatenstrom wird an die Offline-Spracherkennungs-Engine (Vosk) weitergeleitet, die den Sprachbefehl des Nutzers (z.\,B. \glqq Befindet sich jemand vor mir?\grqq) in Text umwandelt. Die Entscheidungslogik gleicht den Sprachbefehl anschließend mit den fusionierten Sensordaten ab.
     \item \textbf{Akustisches Feedback (Ausgabe):} Basierend auf der Analyse generiert das System ein Feedback. Es besteht entweder aus synthetisierter Sprache via Text-to-Speech (z.\,B. \glqq Person in einem Meter Entfernung erkannt\grqq) oder aus Signaltönen. Die Ausgabe erfolgt diskret über den Lautsprecher oder Kopfhörer des Smartphones.

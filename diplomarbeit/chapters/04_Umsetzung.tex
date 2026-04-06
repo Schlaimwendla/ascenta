@@ -1,9 +1,9 @@
 % !TEX root = ../main.tex
 \chapter{Umsetzung}
-Das vorherige Kapitel definiert das theoretische Konzept. Dieses Kapitel beschreibt die detaillierte praktische Realisierung des Prototyps. Der Fokus liegt hierbei primär auf der komplexen softwareseitigen Implementierung der Kernfunktionen. Die Architektur vereint ein ressourcenbeschränktes Embedded-System (MicroPython auf dem Arduino Nicla Vision \cite{arduino_nicla_vision}) mit dem asynchronen mobilen Betriebssystem \textbf{Android} (entwickelt in Kotlin).
+Das vorherige Kapitel definiert das theoretische Konzept. Dieses Kapitel beschreibt die detaillierte praktische Realisierung des Prototyps. Der Fokus liegt hierbei primär auf der softwareseitigen Implementierung der Kernfunktionen. Die Architektur vereint ein ressourcenbeschränktes Embedded-System mit dem asynchronen mobilen Betriebssystem.
 
 \section{Implementierung der Komponenten}
-
+Die konkrete praktische Implementierung der zuvor in Kapitel \ref{sec:komponenten} definierten Systembausteine wird in den folgenden Abschnitten detailliert beschrieben.
 \subsection{Software-Architektur und Datenverarbeitung - Liam}
 \label{sec:software_implementierung}
 Die softwareseitige Umsetzung erfordert die Koordination eines ressourcenbeschränkten Embedded-Systems (MicroPython) und eines mobilen Betriebssystems (Android). Die folgenden Abschnitte erläutern die Lösungsansätze für die Netzwerkkommunikation, die asynchrone Datenverarbeitung und das Speichermanagement detailliert.
@@ -425,7 +425,7 @@ Um das theoretische Risiko von Akkus in unmittelbarer Kopfnähe zu minimieren, w
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.5\textwidth]{media/images/tp4056.png}
-    \caption{Das verwendete TP4056-Lademodul}
+    \caption{TP4056-Lademodul}
     \label{fig:tp4056}
 \end{figure}
 
@@ -571,6 +571,8 @@ Der Sensor erfasst kontinuierlich neue Kamerabilder und übergibt sie über \tex
 
 \subsubsection{Rahmen und Abdeckung}
 \subsubsection*{Rahmen v1 - 2 und Abdeckung v1 - 2}
+Für die Festlegung der Dimensionen wurden gängige Brillenformen sowie ergonomische Standardmaße und Proportionsverhältnisse im Internet \cite{brillen_standardabmessungen} recherchiert.
+
 Die Rahmenkonstruktion basiert auf einer in der zweidimensionalen Ebene definierten
 Grundform.
 
@@ -787,16 +789,7 @@ Die Scharniere wurden an der Oberseite um eine glatte Auflage erweitert, welche 
 \par
 Zusätzlich wurde an den äußeren Enden des Rahmen-Innenraums eine Kabeldurchführung in die Bügel integriert. Diese ermöglicht die Verbindung der im Rahmen untergebrachten Elektronik mit den in den Bügeln platzierten Akkus.
 \par
-Um die Gläser-Abdeckung formschlüssiger in den Rahmen einzusetzen, wird deren Maßstab angepasst. Das linke Glas, das die Nicla Vision-Abdeckung trägt, lässt sich innerhalb von Fusion nur schwer dimensionieren, ohne die Größe der Aussparungen und Ausbuchtungen zu verändern. Daher erfolgt die Anpassung temporär im Open-Source-Grafikprogramm Blender, das eine präzisere Bearbeitung einzelner Punkte, Kanten und Flächen ermöglicht:
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.3\textwidth]{media/images/Gläser-Abdeckung v3 - stl-File in Blender.png}
-    \caption*{Gläser-Abdeckung v3: stl-File in Blender}
-    \label{fig:Gläser-Abdeckung v3: stl-File in Blender}
-\end{figure}
-
-Zur Bearbeitung des 3D-Modells in Blender wurde dieses aus Fusion als STL-Datei exportiert. STL-Dateien wandeln 3D-Modelle in eine Liste aus Dreiecken um, wie in der Abbildung ersichtlich. Beim Import in Blender entstehen dadurch sehr viele Punkte, Kanten und Flächen, was die Komplexität des Modells erhöht. Dies kann zu einem Open-Mesh-Error führen, einem Fehler, der vor dem 3D-Druck im Slicer auftritt und dazu führen kann, dass das Modell nicht druckbar ist.
+Um die Gläser-Abdeckungen formschlüssiger in den Rahmen einzusetzen, wird deren Maßstab angepasst. Das linke Glas, das die Nicla Vision-Abdeckung trägt, lässt sich innerhalb von Fusion nur schwer dimensionieren, ohne die Größe der Aussparungen und Ausbuchtungen zu verändern. Daher erfolgt die Anpassung temporär im Open-Source-Grafikprogramm Blender, das eine präzisere Bearbeitung einzelner Punkte, Kanten und Flächen ermöglicht. Zur Bearbeitung des 3D-Modells in Blender wurde dieses aus Fusion als STL-Datei exportiert. STL-Dateien wandeln 3D-Modelle in eine Liste aus Dreiecken um. Beim Import in Blender entstehen dadurch sehr viele Punkte, Kanten und Flächen, was die Komplexität des Modells erhöht. Dadurch kann leichter ein Open-Mesh-Error auftreten, ein Fehler, der im Slicer vor dem 3D-Druck erkannt wird und dazu führen kann, dass das Modell nicht druckbar ist.
 
 \subsubsection*{Rahmen v7}
 Der in Abschnitt (\ref{sec:modellierfehler_nasensteg} Mechanische und geometrische Restriktionen) erläuterte Modellierfehler lässt sich durch die folgenden sechs Schritte korrigieren:
@@ -832,7 +825,7 @@ Das linke Abdeckungsglas liegt formschlüssig auf dem Nicla Board auf. Zur Verbe
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.225\textwidth]{media/images/Abdeckung v5 - Rückseite.png}
+    \includegraphics[width=0.2\textwidth]{media/images/Abdeckung v5 - Rückseite.png}
     \caption*{Abdeckung v5: Rückseite}
     \label{fig:Abdeckung v5: Rückseite}
 \end{figure}
@@ -842,7 +835,7 @@ Während der parallel ablaufenden Konstruktion von Rahmen und Bügel wurde ein n
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{media/images/Vergrößerung der Ecken}
+    \includegraphics[width=0.525\textwidth]{media/images/Vergrößerung der Ecken}
     \caption*{Vergrößerung der Ecken}
     \label{fig:Vergrößerung der Ecken}
 \end{figure}
@@ -858,7 +851,7 @@ Die Konstruktion des Scharniermechanismus basiert auf einer Skizzenebene mit zwe
     \label{fig:Rahmen v8: Scharniermechanismus}
 \end{figure}
 
-Funktionsprinzip: siehe Konzept // TODO
+Das Gegenstück wird am Bügel angebracht und besteht aus zwei hohl ausgeführten Zylindern, einem oberen und einem unteren, die die Konstruktion umfassen. Übereinanderliegend entsteht eine gemeinsame Aussparung, durch die von oben ein Pin zur Befestigung geführt wird. Da der unterste Zylinder an seiner Basis geschlossen ist, wird der Pin sicher umfasst.
 
 Um den Zuklappradius zu optimieren, ist die Ummantelung des Zylinders nach innen offen gestaltet.
 
@@ -880,7 +873,7 @@ Bei einem Praxistest der Brille wurde festgestellt, dass sich die Rückseite des
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.35\textwidth]{media/images/Rahmen v10 - Lademodul-Auflagefläche.png}
+    \includegraphics[width=0.3\textwidth]{media/images/Rahmen v10 - Lademodul-Auflagefläche.png}
     \caption*{Rahmen v10: Lademodul-Auflagefläche}
     \label{fig:Rahmen v10: Lademodul-Auflagefläche}
 \end{figure}
@@ -991,16 +984,16 @@ Zudem wird an der Vorderseite eine kleine Öffnung integriert, die die Durchfüh
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.35\textwidth]{media/images/Bügel v9 - Nahansicht der Einkerbung.png}
+    \includegraphics[width=0.325\textwidth]{media/images/Bügel v9 - Nahansicht der Einkerbung.png}
     \caption*{Bügel v9: Nahansicht der Einkerbung}
     \label{fig:Bügel v9: Nahansicht der Einkerbung}
 \end{figure}
 
-Das Problem der zu eng anliegenden Bügel blieb jedoch weiterhin bestehen, weshalb im Konzept folgende Lösungsansätze für eine Neukonzeption ausgearbeitet wurden: // Konzept-Link TODO
+Das Problem der zu eng anliegenden Bügel bestand weiterhin. Aufgrund der Abmessungen der Akkus ergab sich eine unübliche Bügelhöhe, die den Tragekomfort einschränkte. Daher wurde beschlossen, neue, kompaktere Akkus zu verwenden und auf dieser Basis eine Neukonzeption der Bügel, einschließlich eines überarbeiteten Scharniermechanismus, zu modellieren.
 
 \subsubsection*{Bügel v10 - Neukonzeption}
 
-Aus den besprochenen Lösungsansätzen wurden mehrere praktisch umgesetzt: Der Wechsel auf kleinere Akkus (von 2000 mAh auf 620 mAh) erlaubte eine deutliche Verkleinerung des Bügel-Designs. Gleichzeitig wurde die Bügelform so angepasst, dass sie eine leichte Biegung nach außen aufweist, wodurch der seitliche Spielraum im Bereich der Schläfen erhöht wurde.
+Der Wechsel auf kompaktere Akkus (von 2000 mAh auf 620 mAh) erlaubte eine deutliche Verkleinerung des Bügel-Designs. Gleichzeitig konnte die Bügelform so angepasst werden, dass sie eine leichte Biegung nach außen aufweist, wodurch der seitliche Spielraum im Bereich der Schläfen erhöht wurde.
 
 \begin{figure}[H]
     \centering
@@ -1040,7 +1033,7 @@ Der Modellierablauf gliedert sich in sieben Schritte. Zunächst wird die grundle
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\textwidth]{media/images/Bügel v10 - Letzter Arbeitsschritt.png}
+    \includegraphics[width=0.35\textwidth]{media/images/Bügel v10 - Letzter Arbeitsschritt.png}
     \caption*{Bügel v10: Letzter Arbeitsschritt}
     \label{fig:Bügel v10: Letzter Arbeitsschritt}
 \end{figure}
@@ -1076,7 +1069,7 @@ Obwohl der äußere Winkel bereits reduziert wurde, war er nach wie vor zu eng f
     \label{fig:Bügel v14: Oberansicht}
 \end{figure}
 
-Ein 3D-Druck dieser Version zeigte, dass der Bügel in allen vorgesehenen Aspekten den Anforderungen (\textit{siehe Konzept: letzte Bügel-Version}) entsprach und ein komfortables Aufsetzen gewährleistete.
+Ein 3D-Druck dieser Version zeigte, dass der Bügel in allen vorgesehenen Aspekten den Anforderungen entsprach und ein komfortables Aufsetzen gewährleistete.
   
 \section{Herausforderungen in der Entwicklung}
 Die Realisierung eines kompakten, tragbaren Assistenzsystems, welches rechenintensive Machine-Learning-Prozesse mit kontinuierlicher Netzwerkkommunikation vereint, bringt diverse interdisziplinäre Herausforderungen mit sich. 
@@ -1093,6 +1086,10 @@ Die Implementierung der Objekterkennung auf der Nicla Vision brachte aufgrund ge
     \item \textbf{Auflösung versus Verarbeitungsgeschwindigkeit:} Ein direkter Zusammenhang zwischen der Bildauflösung und der Rechenleistung bestimmte die Performance der Brille. Eine hohe Eingangsauflösung der Kamera resultierte in einer niedrigen Bildrate (FPS), was eine flüssige Objekterkennung in Echtzeit verhinderte. Die Lösung bestand in der Reduzierung der Auflösung sowie der Implementierung des FOMO-Frameworks. FOMO verzichtet auf rechenintensive Bounding Boxes und erkennt Objekte stattdessen ressourcenschonend als Schwerpunkte im Bild.
     
     \item \textbf{Modell-Optimierung durch Quantisierung:} Eine mathematische Optimierung des Netzes nutzt den begrenzten Arbeitsspeicher (RAM) und Flash-Speicher effizient. Durch die sogenannte Quantisierung werden die internen Gewichte des trainierten Modells von 32-Bit-Fließkommazahlen (float32) in 8-Bit-Ganzzahlen (int8) umgewandelt. Dieses Verfahren reduzierte den Speicherverbrauch signifikant und ermöglichte erst die Ausführung des Modells auf dem Mikrocontroller, ohne die Erkennungsrate entscheidend negativ zu beeinflussen.
+
+      \item \textbf{Datenbasis und Klassenauswahl} Eine wesentliche Hürde bei der Objekterkennung stellt die Beschaffung einer ausreichend diversen Datenbasis dar. Für eine fehlerfreie Erkennung ist eine immense Anzahl an Bildern pro Klasse erforderlich, um verschiedene Perspektiven und Lichtverhältnisse abzudecken. In der Praxis steht jedoch für viele Objekte nicht genügend Bildmaterial zur Verfügung, was die Abgrenzung zur Hintergrundklasse erschwert und die Zuverlässigkeit in unbekannten Umgebungen senkt.
+
+Diese Datenknappheit führt zu den in der Konfusionsmatrix sichtbaren Fehlklassifizierungen. Aufgrund dieser Hürden folgt die Entscheidung, die Anzahl der Objektklassen im finalen Konzept stark zu begrenzen. Die Auswahl konzentriert sich auf wenige, spezifische Objekte mit einer vielseitigen Datenbasis. Diese Reduktion steigert die Trainingsqualität, stabilisiert die Erkennungsrate und stellt eine zuverlässige Funktionalität im mobilen Einsatz sicher.
 \end{itemize}
 
 \subsection{Energiemanagement im begrenzten Bauraum - Fabian}
@@ -1111,16 +1108,14 @@ Einordnung des Risikos: Trotz dieser theoretischen Gefahr ist das Risiko in der 
 \end{itemize}
 
 \subsection{Mechanische und geometrische Restriktionen - Manuel}
-Die Integration der notwendigen Elektronik in eine Brille stellt eine anspruchsvolle Herausforderung dar. Dies liegt hauptsächlich daran, dass im Vergleich zu herkömmlichen Brillen deutlich ungewöhnlichere Maße eingehalten werden müssen, wodurch zahlreiche Versuche und ein erhöhter Zeitaufwand erforderlich sind. Gleichzeitig sollen Tragekomfort, Design und Funktionalität nicht zu kurz kommen.
-
-Ziel war die Modellierung einer Brille, die möglichst vielen Personen unabhängig von Geschlecht und Kopfform passt. Zu diesem Zweck wurden gängige Brillenformen sowie ergonomische Standardmaße und Proportionsverhältnisse im Internet \cite{brillen_standardabmessungen} recherchiert.
+Die Integration der notwendigen Elektronik in eine Brille stellt eine anspruchsvolle Herausforderung dar. Dies liegt hauptsächlich daran, dass im Vergleich zu herkömmlichen Brillen deutlich ungewöhnlichere Maße eingehalten werden müssen.
 
 Die Umsetzung einer geeigneten Passform gelang bei den Rahmen-Versionen 1 und 2 nicht, da die Modelle aufgrund ihrer zu geringen Gesamtbreite sowohl im Nasen- als auch im Schläfenbereich Defizite aufwiesen. Eine nachträgliche Anpassung der Brillenform wäre aufgrund der zahlreichen zusammenhängenden Arbeitsschritte in Fusion 360 mit erheblichem Aufwand verbunden gewesen, weshalb letztlich eine Neukonzeption erforderlich war (siehe: \ref{ch:rahmen_v5} Rahmen v5 - Neukonzeption).
 
 \label{sec:modellierfehler_nasensteg}
 \textbf{Modellierfehler:} Ein weiteres Problem in Fusion 360 trat bei der Konstruktion der fünften Rahmen-Version auf: Durch die Extrusion der Brillenform um 1 cm entstand unterhalb des Nasenstegs ein Modellierfehler, der nicht verhindert werden konnte und das Erscheinungsbild der Brille deutlich beeinträchtigte.
 
-Ab Rahmen-Version 5 wurde die Brille ergonomisch gebogen, wodurch die Bearbeitung in Fusion 360 deutlich erschwert wurde, da Nachbearbeitungen nun nicht mehr in zweidimensionalen Skizzenebenen, sondern im dreidimensionalen Raum durchgeführt werden mussten. \newline
+Ab Rahmen-Version 5 wurde die Brille ergonomisch gebogen, wodurch die Bearbeitung in Fusion 360 deutlich erschwert wurde, da Nachbearbeitungen nun nicht mehr in zweidimensionalen Skizzenebenen, sondern im dreidimensionalen Raum durchgeführt werden mussten.
 In diesem Zusammenhang trat ein Problem auf: Der Rahmen ließ sich nicht mehr mit der Rückwand verbinden, auf welcher sowohl die Nicla Vision- als auch die Lademodul-Halterung montiert sind. Ursache dafür war eine unzureichende Überlappung der beteiligten Volumenkörper.
 Bei einer geradlinigen Geometrie hätte die Rückwand in einer zweidimensionalen Skizzenebene problemlos neu konstruiert werden können. Zwar wäre eine Anpassung grundsätzlich auch im dreidimensionalen Raum möglich gewesen, sie konnte jedoch aufgrund der hohen geometrischen Komplexität von Rahmen und Rückwand nicht umgesetzt werden. Das Problem wurde schließlich durch das Aufrufen einer früheren Modellversion behoben.
 
