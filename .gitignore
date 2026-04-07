@@ -11,6 +11,8 @@
 *.fdb_latexmk
 *.synctex.gz
 *.pdf
+/.trash/
+/.vscode/
 
 # Collaboration tool
 latex-collab/
