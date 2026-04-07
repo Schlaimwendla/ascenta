@@ -2,7 +2,7 @@
 \chapter{Konzept}
 Dieses Kapitel beschreibt die Architektur zum finalen Konzept des Assistenzsystems \glqq Ascenta\grqq. Es liefert einen detaillierten Gesamtüberblick über das funktionale Zusammenwirken der Teilsysteme und definiert die logischen Verantwortlichkeiten der einzelnen Komponentrn.
 
-\section{Gesamtüberblick und Systeminteraktion - Liam}
+\section{Gesamtüberblick und Systeminteraktion}
 Das System basiert konzeptionell auf einer dezentralen \glqq Split-Brain\grqq-Architektur, die die Gesamtarbeitslast strategisch auf zwei physisch getrennte, aber logisch eng vernetzte Knotenpunkte aufteilt. Das übergeordnete Ziel dieses Ansatzes ist es, die Hardware direkt am Kopf des Nutzers so leicht, energieeffizient und unauffällig wie möglich zu gestalten. Daher lagert die Architektur die ressourcenintensive Datenverarbeitung und komplexe Entscheidungslogik gezielt auf das ohnehin vorhandene Smartphone des Nutzers aus
 
 Die Interaktion im Gesamtsystem wird durch diese Zweiteilung definiert:
@@ -13,10 +13,10 @@ Die Interaktion im Gesamtsystem wird durch diese Zweiteilung definiert:
 
 Der detaillierte Informationsfluss zwischen diesen Komponenten wird in den folgenden Abschnitten anhand der spezifischen Datenflussdiagramme für die Use Cases visualisiert (siehe Abbildungen \ref{fig:flow_use_case_a} und \ref{fig:flow_use_case_b}).
 
-\section{Datenfluss der Anwendungsszenarien - Liam}
+\section{Datenfluss der Anwendungsszenarien}
 Um das theoretische Zusammenwirken zwischen der Edge-Hardware (Brille) und der zentralen Logik (Smartphone) zu verdeutlichen, wird im Folgenden der Datenfluss für die definierten Kernszenarien (siehe Kapitel \ref{ch:02_use_cases}) dargestellt. Diese Diagramme zeigen die kaskadierende Verarbeitung von der Sensorerfassung bis zur Nutzerinteraktion.
 
-\subsection{Datenfluss zur Kollisionsvermeidung - Liam}
+\subsection{Datenfluss zur Kollisionsvermeidung}
 Im Szenario der Hinderniserkennung (Use Case A) liegt der Fokus auf minimaler Latenz. Wie in Abbildung \ref{fig:flow_use_case_a} dargestellt, übernimmt die Brille die Vorfilterung der Bilddaten mittels FOMO. Nur wenn eine relevante Entität erkannt wird, erfolgt die Übertragung der Koordinaten und Distanzwerte an das Smartphone, welches die akustische Warnung auslöst.
 
 \begin{figure}[htbp]
@@ -26,7 +26,7 @@ Im Szenario der Hinderniserkennung (Use Case A) liegt der Fokus auf minimaler La
     \label{fig:flow_use_case_a}
 \end{figure}
 
-\subsection{Datenfluss der aktiven Umgebungsabfrage - Liam}
+\subsection{Datenfluss der aktiven Umgebungsabfrage}
 Bei der gezielten Abfrage durch den Nutzer (Use Case B) wird der Datenstrom um eine auditive Komponente erweitert. Abbildung \ref{fig:flow_use_case_b} zeigt den hybriden Stream: Während die visuellen Daten weiterhin im Hintergrund analysiert werden, wird der Sprachbefehl des Nutzers parallel an die lokale Vosk-Engine zur Interpretation weitergeleitet.
 
 \begin{figure}[htbp]
@@ -38,7 +38,7 @@ Bei der gezielten Abfrage durch den Nutzer (Use Case B) wird der Datenstrom um e
 
 Die Trennung dieser Pfade stellt sicher, dass zeitkritische Warnungen nicht durch die komplexere Sprachverarbeitung blockiert werden.
 
-\section{Komponenten - Liam}
+\section{Komponenten}
 \label{sec:komponenten}
 Um den zuvor beschriebenen Datenfluss zu realisieren, setzt sich das Gesamtsystem aus drei wesentlichen logischen Bausteinen zusammen. Diese Säulen sind stark voneinander abhängig und wurden parallel konzipiert, um einen reibungslosen Betriebsablauf zu gewährleisten:
 
@@ -48,13 +48,13 @@ Um den zuvor beschriebenen Datenfluss zu realisieren, setzt sich das Gesamtsyste
     \item \textbf{Das Software-Ökosystem (Intelligenz und Netzwerk):} Es ist das digitale Bindeglied, welches die rohen Hardware-Signale in verwertbare Informationen übersetzt. Es regelt die asynchrone Kommunikation und beinhaltet die trainierten neuronalen Netze zur Objekt- und Spracherkennung.
 \end{enumerate}
 
-\subsection{Software-Ökosystem und Netzwerkkonzept - Liam}
+\subsection{Software-Ökosystem und Netzwerkkonzept}
 \label{sec:konzept_software}
 Die Softwarearchitektur teilt sich in die Firmware des Mikrocontrollers und die mobile Applikation. Die Firmware (MicroPython) verantwortet die hardwarenahe Sensorsteuerung und eine erste Datenreduktion (Edge AI mittels FOMO). Die Android-Applikation (Kotlin) dient als unsichtbares Interface (reine Hintergrund-Applikation) und integriert komplexe Algorithmen wie die Offline-Spracherkennung (Vosk) zur auditiven Interaktion.
 
 Der Kern des Konzepts liegt in der asynchronen, herstellerunabhängigen Interaktion zwischen der Brille (Sensorik), dem Kommunikationskanal (WiFi-TCP) und dem Smartphone (Logik und Feedback).
 
-\subsection{Hardware und Elektronik - Fabian}
+\subsection{Hardware und Elektronik}
 \label{sec:konzept_elektronik}
 
 Das hardwareseitige Konzept fokussiert die autonome Energieversorgung sowie eine intuitive Nutzersteuerung des Systems. Die Integration von zwei kompakten LiPo-Akkus mit einer Kapazität von jeweils 620 mAh ermöglicht eine mobile und besonders schlanke Bauweise. Diese Dimensionierung wahrt konzeptionell eine präzise Balance zwischen einem minimalen Platzbedarf und der notwendigen Energie für den Betrieb der KI-Modelle. Durch diesen Aufbau verfügt das System trotz der leichten Bauweise über genügend Leistungsreserven, um sowohl die kontinuierliche Verarbeitung der Sensordaten als auch die Ansteuerung der optischen Rückmeldung zuverlässig zu gewährleisten. Damit entsteht die hardwareseitige Grundlage für ein System, das den Anforderungen an Portabilität und Funktionalität gleichermaßen entspricht.
@@ -67,7 +67,7 @@ Zur Steuerung der Hardware nutzt das Konzept einen vibrationsbasierten Sensor al
 
 Um diese sprachgesteuerte Suchfunktion im Alltag praktikabel zu gestalten, sieht der theoretische Entwurf vor, das zugrundeliegende neuronale Netz auf eine Vielzahl von alltagsgebräuchlichen Objekten zu trainieren. Das Modell soll diese Gegenstände im aufgenommenen Bild anschließend zuverlässig identifizieren und lokalisieren.
 
-\subsection{Mechanik und Gehäusedesign - Manuel}
+\subsection{Mechanik und Gehäusedesign}
 Im Rahmen der Konzeptphase wurden die grundlegenden Anforderungen und Zielsetzungen für die zu entwickelnde Brille definiert. Ein zentraler Aspekt bestand darin, die notwendige Elektronik unterzubringen, ohne dabei Funktionalität, Tragekomfort und Design zu vernachlässigen.
 
 Der Aufbau des Modells besteht, wie bei herkömmlichen Brillen, aus zwei Brillenbügeln, einem Rahmen und zwei Gläsern als Abdeckung. Letztere sind nicht transparent und decken den Innenraum des Rahmens ab, in welchem die Elektronik verstaut ist.
@@ -99,7 +99,7 @@ Der Scharniermechanismus hält Rahmen und Bügel über einen von oben eingesetzt
 
 Durch den 3D-Druck ist die Brille leicht und modular aufgebaut. Alle Bauteile lassen sich einzeln demontieren und wieder zusammenfügen.
 
-\section{Interaktionen - Liam}
+\section{Interaktionen}
 Die Interaktion zwischen den Systemkomponenten und dem Nutzer verläuft in einem kontinuierlichen Kreislauf, der als asynchroner kaskadierender Prozess aufgebaut ist:
 
 \begin{enumerate}
@@ -111,11 +111,11 @@ Die Interaktion zwischen den Systemkomponenten und dem Nutzer verläuft in einem
     \item \textbf{Akustisches Feedback (Ausgabe):} Basierend auf der Analyse generiert das System ein Feedback. Es besteht entweder aus synthetisierter Sprache via Text-to-Speech (z.\,B. \glqq Person in einem Meter Entfernung erkannt\grqq) oder aus Signaltönen. Die Ausgabe erfolgt diskret über den Lautsprecher oder Kopfhörer des Smartphones.
 \end{enumerate}
 
-\section{Technisches Design - Liam}
+\section{Technisches Design}
 Da das System mittels Kamera und Mikrofon sensible Umgebungsdaten erfasst, ist ein striktes Sicherheitskonzept integraler Bestandteil des Entwurfs. Das Konzept verfolgt hierbei den Ansatz des \textit{Privacy-by-Design}. Dies bedeutet, dass der Datenschutz nicht nachträglich aufgesetzt, sondern bereits in der fundamentalen Architektur als Standard verankert ist, indem Datenvermeidung und Offline-Verarbeitung strukturell priorisiert werden.
 
-\subsection{Lokale Datenverarbeitung und Souveränität - Liam}
+\subsection{Lokale Datenverarbeitung und Souveränität}
 Im Gegensatz zu kommerziellen Smart-Glasses verzichtet \glqq Ascenta\grqq\ konsequent auf Cloud-Schnittstellen für die Kernfunktionen. Die Objekterkennung (FOMO) findet direkt auf dem Mikrocontroller statt, während die Spracherkennung (Vosk) lokal auf dem Android-Endgerät ausgeführt wird. Dies stellt sicher, dass zu keinem Zeitpunkt Videostreams oder private Audiodaten an externe Server übertragen werden. Die Datenhoheit verbleibt vollständig auf der Hardware des Nutzers.
 
-\subsection{Absicherung der Netzwerkschnittstellen - Liam}
+\subsection{Absicherung der Netzwerkschnittstellen}
 Durch den Verzicht auf das verbindungslose UDP und den Einsatz des verbindungsorientierten TCP wird die Stabilität der Sitzung erhöht. Da das System in einem lokalen Netzwerk operiert, ist die Angriffsfläche minimiert. Nach dem erfolgreichen Austausch der WLAN-Credentials über BLE wird dieser Kanal für weitere Datenübertragungen geschlossen. Das System nutzt die asynchrone TCP-Struktur, um Telemetrie und Binärdaten klar voneinander zu trennen. Das zugehörige Anwendungsprotokoll stellt jedem Binärpaket einen definierten Präfix inklusive der genauen Byte-Größe voran. Dies verhindert eine Fehlinterpretation von Datenpaketen (Cross-Talk) auf Softwareebene zuverlässig. Die lokale Verschlüsselung des WLAN-Access-Points sorgt zusätzlich dafür, dass Dritte den Datenstrom nicht passiv mitschneiden können.

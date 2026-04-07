@@ -6,15 +6,15 @@
 \usepackage{graphicx}						% Use pdf, png, jpg, or epsß with pdflatex; use eps in DVI mode
 											% TeX will automatically convert eps --> pdf in pdflatex		
 
-%\usepackage{helvet}						% Kommentar wegnehmen, um in Helvetica zu schreiben
-%\renewcommand{\familydefault}{\sfdefault}
-%\fontfamily{phv}\selectfont
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[default]{lato}
+\renewcommand{\seriesdefault}{l}
+\addtokomafont{disposition}{\bfseries}
+\addtokomafont{subsubsection}{\fontsize{13}{15.6}\selectfont}
 
 \usepackage{amssymb}
 \usepackage{mathtools} % includes amsmath
-
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
 
 \usepackage{lscape}
 
@@ -36,6 +36,7 @@
 
 \usepackage[pdftex]{hyperref}
 \usepackage{url}
+\usepackage[htt]{hyphenat} % allow hyphenation in \texttt
 
 \usepackage{float} % für \begin{figure}[H]
 \usepackage{fancyhdr}
@@ -137,7 +138,7 @@
  
 \lstset{ % 
 %  language=Octave,                			% the language of the code 
- 	basicstyle=\ttfamily\footnotesize, 		% the size of the fonts that are used for the code 
+ 	basicstyle=\ttfamily\scriptsize, 		% the size of the fonts that are used for the code 
 	numbers=left,                   		% where to put the line-numbers 
 	numberstyle=\tiny\color{gray},  		% the style that is used for the line-numbers 
 	stepnumber=1,                   		% the step between two line-numbers. If it's 1, each line  
@@ -154,6 +155,8 @@
 	captionpos=b,                   		% sets the caption-position to bottom
 	breaklines=true,                		% sets automatic line breaking
 	breakatwhitespace=false,        		% sets if automatic breaks should only happen at whitespace
+	columns=flexible,						% flexible column width to avoid overfull boxes
+	linewidth=\linewidth,					% ensure listing does not exceed text width
 %	title=\lstname,                   		% show the filename of files included with \lstinputlisting;
           	                        		% also try caption instead of title
 	keywordstyle=\color{blue},          	% keyword style

@@ -4,9 +4,9 @@ Das vorherige Kapitel definiert das theoretische Konzept. Dieses Kapitel beschre
 
 \section{Implementierung der Komponenten}
 Die konkrete praktische Implementierung der zuvor in Kapitel \ref{sec:komponenten} definierten Systembausteine wird in den folgenden Abschnitten detailliert beschrieben.
-\subsection{Software-Architektur und Datenverarbeitung - Liam}
+\subsection{Software-Architektur und Datenverarbeitung}
 \label{sec:software_implementierung}
-Die softwareseitige Umsetzung erfordert die Koordination eines ressourcenbeschränkten Embedded-Systems (MicroPython) und eines mobilen Betriebssystems (Android). Die folgenden Abschnitte erläutern die Lösungsansätze für die Netzwerkkommunikation, die asynchrone Datenverarbeitung und das Speichermanagement detailliert.
+Die softwareseitige Umsetzung erfordert die Koordination eines ressourcen\-beschränkten Embedded-Systems (MicroPython) und eines mobilen Betriebssystems (Android). Die folgenden Abschnitte erläutern die Lösungsansätze für die Netzwerkkommunikation, die asynchrone Datenverarbeitung und das Speichermanagement detailliert.
 
 \subsubsection*{Entwicklungsumgebungen und Werkzeuge (Toolchain)}
 Die softwareseitige Realisierung des \glqq Ascenta\grqq-Projekts erfordert den Einsatz spezialisierter Entwicklungsumgebungen (IDEs), um die unterschiedlichen Anforderungen von Embedded-Systems und mobiler App-Entwicklung effizient zu vereinen.
@@ -226,7 +226,7 @@ Zur Freihandbedienung (Aktivierung der Spracherkennung) liest die Firmware den i
 
 Überschreitet der kombinierte Beschleunigungsvektor einen empirisch ermittelten Schwellenwert von $1,75$ G, speichert das System den Zeitstempel. Folgt ein zweiter Ausschlag in einem definierten Zeitfenster zwischen 100 und 600 Millisekunden, wird die Aktion als valider Double-Tap registriert und das Kommando an das Smartphone gesendet:
 
-\begin{lstlisting}[language=Python, caption={Filterung von Störbewegungen und Berechnung der Differenzbeschleunigung}]
+\begin{lstlisting}[language=Python, caption={Filterung von Störbewegungen und Berechnung der Differenz\-beschleunigung}]
 x, y, z = self.lsm.accel()
 # Berechnung des Rucks (Aenderungsrate der Beschleunigung)
 dx = abs(x - self.last_accel[0])
@@ -370,12 +370,12 @@ fun onVoskResultReceived(jsonResult: String) {
 \textbf{Das InfoFragment (System-Dashboard):} \\
 Dieses Modul visualisiert den globalen Systemstatus. Es zeigt in Echtzeit an, ob die TCP-Verbindung stabil ist, listet die IP-Adresse des Nicla Vision und aktualisiert dynamisch den via I2C ausgelesenen Akkustand (SOC). Ein Live-Feed im unteren Bereich listet die eingehenden Telemetriedaten auf, wodurch Entwickler sofort validieren können, welches Label mit welcher Konfidenz detektiert wurde.
 
-\subsection{Schaltungsdesign und Energiemanagement - Fabian}
+\subsection{Schaltungsdesign und Energiemanagement}
 \label{sec:elektronik_umsetzung}
 
 Um die elektronischen Herausforderungen zu bewältigen, wurde ein modulares System entwickelt. Das Ziel war eine integrierte Energieversorgung, die das System ohne externe Stromquellen betreibt und dabei kompakt und sicher im Brillengestell verbaut ist.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{media/images/nicla_vision.png}
     \caption{Die Vorder- und Rückseite des Arduino Nicla Vision Boards}
@@ -385,7 +385,7 @@ Um die elektronischen Herausforderungen zu bewältigen, wurde ein modulares Syst
 \subsubsection*{Schaltplan und Erklärung}
 Der Schaltplan zeigt die Vernetzung der zentralen Komponenten für das Energiemanagement der Brille.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{media/images/schaltplan.png}
     \caption{Schaltplan der zentralen Energieversorgung und Verdrahtung}
@@ -406,7 +406,7 @@ Der wesentliche Vorteil dieser Parallelschaltung besteht darin, dass die Spannun
 
 Ein wichtiger Faktor bei der Planung war die Entladecharakteristik der LiPo-Zellen. Wie aus dem typischen Spannungsverlauf (siehe Abbildung \ref{fig:entladungskurve}) ersichtlich wird, fällt die Spannung nach einem initialen Abfall über einen langen Zeitraum nur minimal ab (stabile Entladephase), bevor sie gegen Ende rapide einbricht.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{media/images/entladungskurve_lipo.png}
     \caption{Typische Entladungskurve eines Lithium-Polymer-Akkus}
@@ -422,9 +422,9 @@ Um das theoretische Risiko von Akkus in unmittelbarer Kopfnähe zu minimieren, w
     \item \textbf{Laderegelung:} Das Aufladen erfolgt sicher über einen integrierten USB-C-Anschluss. Das Modul steuert exakt, wann der Akku vollständig geladen ist, um eine Überladung zu verhindern. Zudem vereinfacht es den Ladevorgang maßgeblich, da beide Zellen durch die Parallelschaltung gleichzeitig aufgeladen werden können.
 \end{itemize}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{media/images/tp4056.png}
+    \includegraphics[width=0.45\textwidth]{media/images/tp4056.png}
     \caption{TP4056-Lademodul}
     \label{fig:tp4056}
 \end{figure}
@@ -455,7 +455,7 @@ Für die Datenverarbeitung sowie die Modellentwicklung kamen folgende Plattforme
 \subsubsection*{Architektur des Neuronalen Netzes}
 Die Plattform Edge Impulse diente der Konstruktion und dem Training des künstlichen neuronalen Netzes (Convolutional Neural Network, kurz CNN \cite{wikipedia_cnn}). Edge Impulse automatisiert den Aufbau der komplexen Netzstrukturen, greift im Hintergrund jedoch auf die bewährte Schichtarchitektur für die Bildverarbeitung zurück.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{media/images/cnn_neural_network.png}
     \caption{Prinzipieller Aufbau eines Convolutional Neural Networks (CNN)}
@@ -487,13 +487,13 @@ Konfiguration der Trainingsparameter:
     \item \textbf{Batch-Größe:} Die definierte Batch-Größe (Batch size) von 32 führt dem Netz jeweils exakt 32 Bilder gleichzeitig zu, bevor der Algorithmus die internen Gewichtungen aktualisiert.
 \end{itemize}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{media/images/trainingsgraph.png}
     \caption{Verlauf des Verlustes (Loss) über die Trainings-Epochen}
     \label{fig:trainingsgraph}
 \end{figure}
-
+\newpage
 Spezifikation der Netzwerkarchitektur:
 \begin{itemize}
     \item \textbf{Eingabeschicht (Input layer):} Die Eingabeschicht speist exakt 172.800 Features in das neuronale Netz ein. Diese Zahl resultiert direkt aus der gewählten Auflösung und den Farbkanälen der übergebenen Bilddaten.
@@ -509,7 +509,7 @@ Optimierung für den Mikrocontroller: Die gezielte Aktivierung der Option \glqq 
     \caption{Validierte Trainingsperformance mit einem F1-Score von 80.0\%}
     \label{fig:training_performance}
 \end{figure}
-
+\newpage
 \subsubsection*{Deployment und Integration in OpenMV}
 Nach dem erfolgreichen Training und der Validierung überträgt der Bereitstellungsprozess das fertige Modell auf die Hardware der Nicla Vision. 
 
@@ -569,7 +569,7 @@ Der Sensor erfasst kontinuierlich neue Kamerabilder und übergibt sie über \tex
 \subsection{Konstruktion und 3D-Druck}
 \label{sec:3ddruck_umsetzung}
 
-\subsubsection{Rahmen und Abdeckung}
+\subsubsection{Modellierung des Rahmens und der Abdeckung}
 \subsubsection*{Rahmen v1 - 2 und Abdeckung v1 - 2}
 Für die Festlegung der Dimensionen wurden gängige Brillenformen sowie ergonomische Standardmaße und Proportionsverhältnisse im Internet \cite{brillen_standardabmessungen} recherchiert.
 
@@ -586,7 +586,7 @@ Grundform.
 Die Grundplatte wurde an den Rändern nach oben extrudiert, um im Innenraum
 ausreichend Platz für die Integration der Elektronik zu gewährleisten. Zusätzliche Öffnungen an den oberen Enden links und rechts wurden vorgesehen, um die Kabelverbindungen in die Bügel zu führen.
 
-Die Abdeckung entsteht durch die Extrusion des inneren Rahmen-Bereichs - mit einer Höhe von 1 mm
+Die Abdeckung wird durch die Extrusion des inneren Rahmenbereichs mit einer Höhe von 1 mm erzeugt und auf entsprechenden Erhöhungen im Rahmen positioniert. Über Aussparungen an den linken und rechten Ecken lässt sie sich zudem fixieren.
 
 \textbf{Elektronik:} Im linken Bereich des Rahmens befindet sich das Nicla-Board. Über jeweils eine Aussparung für Kamera, Distanzsensor und Mikrofon in der Brillen-Abdeckung bleibt die wichtigste Sensorik frei.
 Im rechten Bereich der Brille ist das Lademodul untergebracht. Unterhalb davon befindet sich eine USB-C-Öffnung für den Anschluss, über welche die Akkus aufgeladen werden können.
@@ -599,7 +599,6 @@ Farbliche Kennzeichnung der Nicla Vision-Auflage (rot) und des Lademoduls (orang
     \caption*{Rahmen v2: Innenraum}
     \label{fig:Rahmen v2: Innenraum}
 \end{figure}
-\newline
 
 Um zu versichern, dass der Mikrocontroller fixiert ist, wird dieser von unten durch Halterungen abgestützt und von oben durch eine entsprechende Ausbuchtung in Position gehalten:
 
@@ -612,7 +611,7 @@ Um zu versichern, dass der Mikrocontroller fixiert ist, wird dieser von unten du
 
 An den beiden Enden der Abdeckung, links und rechts, sind Vorsprünge mit Löchern angebracht, um die Abdeckung mit dem Rahmen zu verbinden.
 
-Die Position des Buttons wurde auf die Oberseite des Rahmens oberhalb des Mikrocontrollers gelegt, da diese Anordnung die Verkabelung erleichtert - im Gegensatz zu einer möglichen Platzierung am Bügelende hinter dem Ohr.
+Die Position eines Buttons wurde auf der Oberseite des Rahmens oberhalb des Mikrocontrollers gewählt, da diese Anordnung die Verkabelung erleichtert - im Gegensatz zu einer möglichen Platzierung am Bügelende hinter dem Ohr.
 
 \begin{figure}[H]
     \centering
@@ -639,12 +638,12 @@ Um ein komfortables Tragen der Brille im Nasenbereich zu ermöglichen, wurden di
 
 \textbf{Vorgesehene Umsetzungen:}
 \begin{itemize}
-    \item Die Abdeckung weicht derzeit noch zu stark von der Ästhetik einer Brille ab und verfügt über keine zwei separaten Gläser.
+    \item Die Abdeckung weicht derzeit noch zu stark von der Ästhetik einer Brille ab und verfügt über keine separaten Brillen-Gläser.
     \item Die Form ist aufgrund des unausgewogenen Verhältnisses zwischen Höhe und Breite überarbeitungsbedürftig.
     \item Der Button weist derzeit noch keine Auflagefläche auf und sitzt daher nur lose in der entsprechenden Aussparung.
     \item Im Nasenbereich ist der Tragekomfort durch ergonomisch geformte Nasenpads zu verbessern.
 \end{itemize}
-\newline
+
 \textbf{Realisierte Verbesserungen:}
 \begin{itemize}
     \item Erweiterung der Stützen, um die Abdeckung stabiler im Rahmen zu halten.
@@ -659,19 +658,18 @@ Um ein komfortables Tragen der Brille im Nasenbereich zu ermöglichen, wurden di
     \label{fig:Rahmen v3: Abdeckungs-Stützen}
 \end{figure}
 
-Durch einen 3D-Druck der Brille konnte ein Konstruktionsproblem identifiziert werden: Der Abstand zwischen der Scharnier-Aussparung und der Rückwand des Rahmens reichte nicht aus, um den vorgesehenen Zuklapp-Radius zu gewährleisten.\newline
-$\rightarrow$ Scharniermechanismus wurde verworfen
+Durch einen 3D-Druck der Brille konnte ein Konstruktionsproblem identifiziert werden: Der Abstand zwischen der Scharnier-Aussparung und der Rückwand des Rahmens reichte nicht aus, um den vorgesehenen Zuklapp-Radius zu gewährleisten.
 
 \subsubsection*{Rahmen v4}
 
 In der Rahmen-Version 4 wurden mehrere Optimierungen umgesetzt, um die Funktionalität der Brille zu verbessern.
-Die zuvor fehlenden Auflageflächen für den Knopf wurden nun unterhalb der Öffnung integriert:
+Die zuvor fehlenden Auflageflächen für den Button wurden nun unterhalb der Öffnung integriert:
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.3\textwidth]{media/images/Auflageflächen.png}
-    \caption*{Rahmen v4: Auflageflächen}
-    \label{fig:Rahmen v4: Auflageflächen}
+    \caption*{Rahmen v4: Button-Auflageflächen}
+    \label{fig:Rahmen v4: Button-Auflageflächen}
 \end{figure}
 
 Im Vergleich zur Vorversion wurden die zuvor vorhandenen Öffnungen an den äußeren Enden links und rechts zur Verbindung der Abdeckung wieder geschlossen. Stattdessen kommt eine Haken-Einrastfunktion zum Einsatz, die eine sichere und ästhetische Verbindung zwischen Abdeckung und Rahmen gewährleisten soll.
@@ -707,10 +705,10 @@ Zum Lösen der Verbindung wurde an der Rückseite des Gegenstücks eine kleine A
 \end{figure}
 
 Der Mechanismus besteht aus zwei identischen Bauteilen, die jeweils entgegengesetzt an Rahmen und Bügel montiert werden. Eine Seite bildet das Einsteckelement, die gegenüberliegende Seite das passende Gegenstück. Durch das Zusammenstecken der beiden Teile entsteht ein gelenkartiger Mechanismus, der das Zuklappen der Bügel ermöglicht.
-  
+
 \textbf{Fazit zu Version 4:}
 Nach dem 3D-Druck des Bauteils stellte sich heraus, dass das Scharnier zu klein dimensioniert war und der Drucker die erforderlichen Feinheiten nicht mit ausreichender Genauigkeit umsetzen konnte.
-Zwar wurden Auflageflächen für den Knopf ergänzt, die übrigen, unter Rahmen v3 beschriebenen Probleme blieben jedoch bestehen beziehungsweise teilweise traten neue auf. Folglich war ein kompletter Neuanfang des Rahmenmodells erforderlich, bei dem die gewonnenen Erkenntnisse aus den bisherigen Versionen angewandt werden sollen.
+Zwar wurden Auflageflächen für den Button ergänzt, die übrigen, unter Rahmen v3 beschriebenen Probleme blieben jedoch bestehen beziehungsweise teilweise traten neue auf. Folglich war ein kompletter Neuanfang des Rahmenmodells erforderlich, bei dem die gewonnenen Erkenntnisse aus den bisherigen Versionen angewandt werden sollen.
 
 \subsubsection*{Rahmen v5 - Neukonzeption}
 \label{ch:rahmen_v5}
@@ -756,8 +754,8 @@ Zur Gewährleistung der Funktionalität der Brille werden die freien Flächen de
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.425\textwidth]{media/images/Rahmen v5 - Einkerbung.png}
-    \caption*{Rahmen v5: Einkerbung}
-    \label{fig:Rahmen v5: Einkerbung}
+    \caption*{Rahmen v5: Gläser-Einkerbung}
+    \label{fig:Rahmen v5: Gläser-Einkerbung}
 \end{figure}
   
 Im Zuge der Konstruktion wurden die Aussparungen für Kamera- und Distanzsensor miteinander verbunden und zusätzlich abgerundet, um die optische Gestaltung zu verbessern.
@@ -846,7 +844,7 @@ Die Konstruktion des Scharniermechanismus basiert auf einer Skizzenebene mit zwe
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.35\textwidth]{media/images/Rahmen v8 - Scharniermechanismus.png}
+    \includegraphics[width=0.325\textwidth]{media/images/Rahmen v8 - Scharniermechanismus.png}
     \caption*{Rahmen v8: Scharniermechanismus}
     \label{fig:Rahmen v8: Scharniermechanismus}
 \end{figure}
@@ -880,7 +878,7 @@ Bei einem Praxistest der Brille wurde festgestellt, dass sich die Rückseite des
   
 Darüber hinaus wurden Länge und Tiefe der Schalter-Öffnung optimiert, sodass der Schalter formschlüssig fixiert ist. Die Bohrungen wurden zudem vergrößert und von drei auf zwei reduziert.
 
-\subsubsection{Bügel}
+\subsubsection{Modellierung des Bügels}
 \subsubsection*{Bügel v1 - 2}
 
 Der erste Entwurf des Bügels war ein stark vereinfachtes Modell, das dazu diente ein Gefühl für den notwendigen Innenraum sowie den Komfort des Bügels zu bekommen. Mit einer durchgehenden Dicke von ca. 10 mm ist das Bauteil für einen Brillenbügel deutlich zu massiv, was sich in Verbindung mit der geradlinigen Form negativ auf das Tragegefühl auswirkte.
@@ -1074,10 +1072,10 @@ Ein 3D-Druck dieser Version zeigte, dass der Bügel in allen vorgesehenen Aspekt
 \section{Herausforderungen in der Entwicklung}
 Die Realisierung eines kompakten, tragbaren Assistenzsystems, welches rechenintensive Machine-Learning-Prozesse mit kontinuierlicher Netzwerkkommunikation vereint, bringt diverse interdisziplinäre Herausforderungen mit sich. 
 
-\subsection{Ressourcenlimits und Speicher-Fragmentierung (Software) - Liam}
+\subsection{Ressourcenlimits und Speicher-Fragmentierung (Software)}
 Auf softwareseitiger Ebene stellte der extrem begrenzte Arbeitsspeicher (RAM) des Nicla Vision die größte Hürde dar. Die dynamische Speicherallokation in MicroPython führte bei der kontinuierlichen Bildverarbeitung wiederholt zur \textit{Heap-Fragmentierung}. Benötigte das FOMO-Modell anschließend einen zusammenhängenden Speicherblock für den Tensor, schlug die Allokation trotz ausreichendem Gesamtspeicher fehl. Die stringente Einführung der \textit{Zero-Copy}-Verfahren (\texttt{memoryview}), der Auslagerung auf den Flash-Speicher sowie die erzwungene Garbage-Collection lösten diese Instabilitäten endgültig.
 
-\subsection{Softwaretechnische Hürden und Optimierung (Objekterkennung) - Fabian}
+\subsection{Softwaretechnische Hürden und Optimierung (Objekterkennung)}
 Die Implementierung der Objekterkennung auf der Nicla Vision brachte aufgrund genereller Hardware-Limitierungen komplexe Herausforderungen mit sich. Dieser Abschnitt beschreibt die strategischen Entscheidungen und die technischen Lösungen.
 
 \begin{itemize}
@@ -1092,7 +1090,7 @@ Die Implementierung der Objekterkennung auf der Nicla Vision brachte aufgrund ge
 Diese Datenknappheit führt zu den in der Konfusionsmatrix sichtbaren Fehlklassifizierungen. Aufgrund dieser Hürden folgt die Entscheidung, die Anzahl der Objektklassen im finalen Konzept stark zu begrenzen. Die Auswahl konzentriert sich auf wenige, spezifische Objekte mit einer vielseitigen Datenbasis. Diese Reduktion steigert die Trainingsqualität, stabilisiert die Erkennungsrate und stellt eine zuverlässige Funktionalität im mobilen Einsatz sicher.
 \end{itemize}
 
-\subsection{Energiemanagement im begrenzten Bauraum - Fabian}
+\subsection{Energiemanagement im begrenzten Bauraum}
 Die größte Hürde bei der Entwicklung von Hilfsmitteln für Menschen mit Sehbehinderung ist der Kompromiss zwischen technischer Leistungsfähigkeit und Alltagstauglichkeit. Während stationäre Systeme oft sehr präzise arbeiten, scheitern mobile Lösungen häufig an ihrer Unhandlichkeit. Im Bereich der Elektronik ergaben sich daraus drei spezifische Herausforderungen:
 
 \begin{itemize}
@@ -1107,7 +1105,7 @@ Einordnung des Risikos: Trotz dieser theoretischen Gefahr ist das Risiko in der 
     \item \textbf{Systembedingte Überwachung:} Das Restrisiko wird durch den Einsatz des speziellen Lademoduls adressiert, welches den Stromkreis bei Fehlern sofort physisch trennt.
 \end{itemize}
 
-\subsection{Mechanische und geometrische Restriktionen - Manuel}
+\subsection{Mechanische und geometrische Restriktionen}
 Die Integration der notwendigen Elektronik in eine Brille stellt eine anspruchsvolle Herausforderung dar. Dies liegt hauptsächlich daran, dass im Vergleich zu herkömmlichen Brillen deutlich ungewöhnlichere Maße eingehalten werden müssen.
 
 Die Umsetzung einer geeigneten Passform gelang bei den Rahmen-Versionen 1 und 2 nicht, da die Modelle aufgrund ihrer zu geringen Gesamtbreite sowohl im Nasen- als auch im Schläfenbereich Defizite aufwiesen. Eine nachträgliche Anpassung der Brillenform wäre aufgrund der zahlreichen zusammenhängenden Arbeitsschritte in Fusion 360 mit erheblichem Aufwand verbunden gewesen, weshalb letztlich eine Neukonzeption erforderlich war (siehe: \ref{ch:rahmen_v5} Rahmen v5 - Neukonzeption).
@@ -1119,7 +1117,7 @@ Ab Rahmen-Version 5 wurde die Brille ergonomisch gebogen, wodurch die Bearbeitun
 In diesem Zusammenhang trat ein Problem auf: Der Rahmen ließ sich nicht mehr mit der Rückwand verbinden, auf welcher sowohl die Nicla Vision- als auch die Lademodul-Halterung montiert sind. Ursache dafür war eine unzureichende Überlappung der beteiligten Volumenkörper.
 Bei einer geradlinigen Geometrie hätte die Rückwand in einer zweidimensionalen Skizzenebene problemlos neu konstruiert werden können. Zwar wäre eine Anpassung grundsätzlich auch im dreidimensionalen Raum möglich gewesen, sie konnte jedoch aufgrund der hohen geometrischen Komplexität von Rahmen und Rückwand nicht umgesetzt werden. Das Problem wurde schließlich durch das Aufrufen einer früheren Modellversion behoben.
 
-\section{Tests und Validierung - Liam}
+\section{Tests und Validierung}
 Eine Reihe von qualitativen Praxistests belegt die Funktionstauglichkeit des \glqq Ascenta\grqq-Prototyps. Die Evaluierung fokussiert sich auf die Kernanforderungen eines Assistenzsystems: die wahrgenommene Systemlatenz, die Zuverlässigkeit der Sensoreingaben sowie die energetische Stabilität.
 
 \subsection{Netzwerklatenz und Streaming-Performance}
@@ -1139,7 +1137,7 @@ Die theoretische Maximallaufzeit des reinen Mikrocontrollers (ausgehend von den 
 
 Die qualitativen Feldtests bestätigen jedoch, dass die gewählte parallele Akkukonfiguration das System stabil mit der benötigten Betriebsspannung versorgt. Spannungseinbrüche, die zu einem plötzlichen Neustart des Mikrocontrollers führen könnten, wurden während der regulären Testläufe nicht beobachtet. Das Energiemanagement erweist sich somit als ausreichend dimensioniert, um die Funktionalität des Prototyps im Rahmen der Demonstrationsszenarien verlässlich aufrechtzuerhalten.
 
-\subsection{Einfluss der Klassenanzahl auf die Modell-Konfidenz - Fabian}
+\subsection{Einfluss der Klassenanzahl auf die Modell-Konfidenz}
 Die Evaluierung der Bilderkennung analysiert die Leistungsfähigkeit der trainierten neuronalen Netze anhand der von Edge Impulse generierten Validierungsdaten. Ein direkter Vergleich der Wahrheitsmatrizen (Confusion Matrix) und der F1-Scores zweier unterschiedlicher Modell-Iterationen verdeutlicht den massiven Einfluss der Klassenanzahl auf die Erkennungsgenauigkeit. Die Gegenüberstellung der grafischen Trainingsergebnisse (welche direkt aus der Edge Impulse Entwicklungsumgebung exportiert wurden) zeigt eine eindeutige Tendenz:
 
 \begin{itemize}
@@ -1166,5 +1164,5 @@ Die Evaluierung der Bilderkennung analysiert die Leistungsfähigkeit der trainie
 
 Dieser Leistungsabfall bei einer höheren Klassenanzahl resultiert direkt aus den Kapazitätsgrenzen des Netzwerks. Ein quantisiertes Modell für limitierte Mikrocontroller verfügt über eine fest definierte, stark reduzierte Anzahl an internen Parametern. Das Training von mehreren Klassen zwingt das System, deutlich mehr und vielfältigere visuelle Merkmale innerhalb derselben winzigen Parameter-Struktur abzubilden. Diese Informationsverdichtung reduziert die Trennschärfe zwischen den einzelnen Objekten drastisch und führt zu einer wesentlich höheren Verwechslungsgefahr.
 
-\subsection{Evaluierung komplexer Standard-Architekturen (YOLO) - Fabian}
+\subsection{Evaluierung komplexer Standard-Architekturen (YOLO)}
 Die Validierungsphase schloss zusätzlich die Evaluierung wesentlich komplexerer YOLO-Modelle ein, um die theoretische Leistungsfähigkeit fortschrittlicherer Architekturen zu prüfen. Diese leistungsstarken neuronalen Netze durchliefen die Bildtests jedoch ausschließlich auf einem Desktop-PC. Ein Transfer der fertigen YOLO-Modelle auf die Nicla Vision scheiterte erwartungsgemäß an den strengen Hardware-Restriktionen. Der stark begrenzte Flash-Speicher des Mikrocontrollers verweigerte die Aufnahme der speicherintensiven Modelldateien vollständig. Dieser Testaufbau bestätigte eindrücklich, dass ein produktiver Einsatz der unmodifizierten YOLO-Architektur direkt auf der Smart-Brille technisch unmöglich ist und validierte damit den gewählten, extrem reduzierten FOMO-Ansatz als bestmögliche Alternative.
