@@ -40,7 +40,7 @@ The companion app serves as a **hub for communication** between the smart glasse
 ---
 
 ## 📌 Current Status  
-Fully finished App and working functionality between
+Fully finished App and working functionality between App and Glasses
 
 ---
 
