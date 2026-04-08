@@ -21,19 +21,12 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.location.LocationManager
 import android.net.wifi.WifiManager
-import android.os.Binder
-import android.os.Build
-import android.os.Handler
-import android.os.IBinder
-import android.os.Looper
+import android.os.*
 import android.speech.tts.TextToSpeech
 import androidx.core.app.NotificationCompat
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.isActive
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
@@ -42,17 +35,16 @@ import java.net.DatagramPacket
 import java.net.DatagramSocket
 import java.net.InetAddress
 import java.net.Socket
-import java.util.Locale
-import java.util.UUID
+import java.util.*
 
 class AscentaService : Service(), TextToSpeech.OnInitListener {
 
     private val binder = LocalBinder()
     private var callback: ServiceCallback? = null
 
-    private val PROV_SERVICE_UUID = UUID.fromString("12345678-1234-5678-1234-567890ABCDEF")
-    private val SSID_CHAR_UUID    = UUID.fromString("12345678-1234-5678-1234-567890ABCDE1")
-    private val PASS_CHAR_UUID    = UUID.fromString("12345678-1234-5678-1234-567890ABCDE2")
+    private val PROV_SERVICE_UUID = UUID.fromString("12345678-1234-1234-1234-123456789abc")
+    private val SSID_CHAR_UUID    = UUID.fromString("12345678-1234-1234-1234-123456789abd")
+    private val PASS_CHAR_UUID    = UUID.fromString("12345678-1234-1234-1234-123456789abe")
 
     private val TCP_PORT = 5005
     private val UDP_DISC_PORT = 5006
@@ -61,6 +53,7 @@ class AscentaService : Service(), TextToSpeech.OnInitListener {
     private var udpSocket: DatagramSocket? = null
     private var connectionJob: Job? = null
     private var multicastLock: WifiManager.MulticastLock? = null
+    private var wakeLock: PowerManager.WakeLock? = null
 
     private var bluetoothAdapter: BluetoothAdapter? = null
     private var scanner: BluetoothLeScanner? = null
@@ -73,13 +66,14 @@ class AscentaService : Service(), TextToSpeech.OnInitListener {
 
     private lateinit var tts: TextToSpeech
     private val handler = Handler(Looper.getMainLooper())
-    private val scope = CoroutineScope(Dispatchers.IO + Job())
+    private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
     interface ServiceCallback {
         fun onStatusUpdate(status: String)
         fun onImageReceived(bitmap: Bitmap)
         fun onTranscriptUpdate(text: String)
-        fun onDetectionResult(label: String, conf: String, dist: String)
+        fun onDetectionResult(label: String, conf: String, distAndPos: String)
+        fun onCollisionWarning(dist: Int, zone: String)
     }
 
     interface ScanResultCallback {
@@ -93,6 +87,11 @@ class AscentaService : Service(), TextToSpeech.OnInitListener {
     override fun onCreate() {
         super.onCreate()
         createNotificationChannel()
+
+        // ACQUIRE WAKELOCK: Keeps CPU alive when screen is off
+        val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
+        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Ascenta::WakeLock")
+        wakeLock?.acquire(4 * 60 * 60 * 1000L) // 4hr safety timeout
 
         val wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
         multicastLock = wifiManager.createMulticastLock("AscentaUDP")
@@ -110,17 +109,34 @@ class AscentaService : Service(), TextToSpeech.OnInitListener {
 
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {
-            tts.language = Locale.GERMANY
+            tts.language = Locale.GERMAN
+        }
+    }
+
+    fun forceDisconnect() {
+        scope.launch(Dispatchers.IO) {
+            isConnected = false
+            provisioningInProgress = false
+            isScanning = false
+            try { tcpSocket?.close() } catch (e: Exception) {}
+            tcpSocket = null
+            try { udpSocket?.close() } catch (e: Exception) {}
+            udpSocket = null
+            connectionJob?.cancel()
+            handler.post { callback?.onStatusUpdate("Disconnected") }
+            startDiscoveryListener()
         }
     }
 
     private fun startDiscoveryListener() {
         connectionJob?.cancel()
+        try { udpSocket?.close() } catch (_: Exception) {}
+        udpSocket = null
         connectionJob = scope.launch(Dispatchers.IO) {
             try {
                 udpSocket = DatagramSocket(UDP_DISC_PORT).apply {
-                    broadcast = true
                     reuseAddress = true
+                    broadcast = true
                 }
                 val buffer = ByteArray(1024)
                 val packet = DatagramPacket(buffer, buffer.size)
@@ -134,7 +150,10 @@ class AscentaService : Service(), TextToSpeech.OnInitListener {
                             connectTcp(packet.address)
                             break
                         }
-                    } catch (e: Exception) {}
+                    } catch (e: Exception) {
+                        if (!isActive || isConnected) break
+                        delay(500)
+                    }
                 }
             } catch (e: Exception) {}
         }
@@ -145,55 +164,58 @@ class AscentaService : Service(), TextToSpeech.OnInitListener {
             try {
                 tcpSocket = Socket(address, TCP_PORT)
                 tcpSocket?.soTimeout = 15000
+                tcpSocket?.tcpNoDelay = true
                 isConnected = true
                 handler.post { callback?.onStatusUpdate("Connected") }
 
                 val input = tcpSocket!!.getInputStream()
 
                 while (isActive && isConnected) {
-                    val line = readLineFromStream(input)
-                    if (line == null) {
-                        disconnectTcp()
-                        break
-                    }
+                    val line = readLineFromStream(input) ?: break
                     if (line.isEmpty()) continue
 
-                    if (line.startsWith("IMG_START:")) {
-                        val size = line.substringAfter(":").toInt()
-                        val bytes = readBytesFromStream(input, size)
-                        val bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-                        if (bmp != null) handler.post { callback?.onImageReceived(bmp) }
-                    } else if (line.startsWith("AUD_START:")) {
-                        val size = line.substringAfter(":").toInt()
-                        val bytes = readBytesFromStream(input, size)
-                        saveAudioForVosk(bytes)
-                    } else if (line == "pong") {
-                        handler.post { callback?.onStatusUpdate("pong") }
-                    } else if (line.startsWith("{")) {
-                        try {
-                            val json = JSONObject(line)
-                            val type = json.optString("type")
-
-                            // Battery Handling Logic Required Here
-                            if (type == "battery") {
-                                val soc = json.optString("soc")
-                                handler.post { callback?.onStatusUpdate("BATTERY_STATUS:$soc") }
-                            } else if (type == "battery_warning") {
-                                handler.post { callback?.onStatusUpdate("BATTERY_LOW") }
-                            } else {
-                                // Default detection handling
-                                val label = json.optString("label")
-                                val conf = json.optString("conf")
-                                val dist = json.optString("dist", "0")
-                                if(label.isNotEmpty()) handler.post { callback?.onDetectionResult(label, conf, dist) }
-                            }
-                        } catch(e: Exception){}
-                    }
+                    processIncomingLine(line, input)
                 }
             } catch (e: Exception) {
                 disconnectTcp()
             }
         }
+    }
+
+    private suspend fun processIncomingLine(line: String, input: InputStream) {
+        try {
+            when {
+                line.startsWith("IMG_START:") -> {
+                    val size = line.substringAfter(":").toInt()
+                    val bytes = readBytesFromStream(input, size)
+                    val bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                    if (bmp != null) handler.post { callback?.onImageReceived(bmp) }
+                }
+                line.startsWith("AUD_START:") -> {
+                    val size = line.substringAfter(":").toInt()
+                    val bytes = readBytesFromStream(input, size)
+                    saveAudioForVosk(bytes)
+                }
+                line.startsWith("{") -> {
+                    val json = JSONObject(line)
+                    val type = json.optString("type")
+                    if (type == "det") {
+                        val label = json.optString("label")
+                        val dist = json.optString("dist", "0")
+                        val pos = json.optString("pos", "straight")
+                        handler.post { callback?.onDetectionResult(label, "1.0", "$dist|$pos") }
+                    } else if (type == "collision") {
+                        val dist = json.optInt("dist", 0)
+                        val zone = json.optString("zone", "clear")
+                        handler.post { callback?.onCollisionWarning(dist, zone) }
+                    } else if (type.contains("bat")) {
+                        val soc = json.optString("soc")
+                        handler.post { callback?.onStatusUpdate("BATTERY_STATUS:$soc") }
+                    }
+                }
+                line == "pong" -> handler.post { callback?.onStatusUpdate("pong") }
+            }
+        } catch(e: Exception){}
     }
 
     private fun readLineFromStream(input: InputStream): String? {
@@ -242,8 +264,27 @@ class AscentaService : Service(), TextToSpeech.OnInitListener {
 
     @SuppressLint("MissingPermission")
     fun scanForNicla(scanCb: ScanResultCallback) {
-        if (isScanning) return
+        if (bluetoothAdapter?.isEnabled != true) {
+            handler.post { callback?.onStatusUpdate("Bluetooth deaktiviert") }
+            scanCb.onTimeout()
+            return
+        }
+        val lm = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER) && !lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            handler.post { callback?.onStatusUpdate("Standort aktivieren") }
+            scanCb.onTimeout()
+            return
+        }
+        // Refresh scanner in case BT was not ready at onCreate
+        scanner = bluetoothAdapter?.bluetoothLeScanner
+        if (scanner == null) {
+            handler.post { callback?.onStatusUpdate("Bluetooth nicht bereit") }
+            scanCb.onTimeout()
+            return
+        }
+        if (isScanning) { isScanning = false }
         isScanning = true
+        handler.post { callback?.onStatusUpdate("Scanning...") }
         val filters = listOf(ScanFilter.Builder().setDeviceName("Nicla").build())
         val settings = ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).build()
         val leCallback = object : ScanCallback() {
@@ -262,11 +303,20 @@ class AscentaService : Service(), TextToSpeech.OnInitListener {
                 stopScanSafely(leCallback)
                 scanCb.onTimeout()
             }
-        }, 2000)
+        }, 3000)
     }
 
     @SuppressLint("MissingPermission")
     fun startProvisioning(ssid: String, pass: String) {
+        if (bluetoothAdapter?.isEnabled != true) {
+            handler.post { callback?.onStatusUpdate("Bluetooth deaktiviert") }
+            return
+        }
+        scanner = bluetoothAdapter?.bluetoothLeScanner
+        if (scanner == null) {
+            handler.post { callback?.onStatusUpdate("Bluetooth nicht bereit") }
+            return
+        }
         if (isScanning) return
         isScanning = true
         pendingPass = pass
@@ -281,7 +331,7 @@ class AscentaService : Service(), TextToSpeech.OnInitListener {
             }
             override fun onScanFailed(errorCode: Int) {
                 stopScanSafely(this)
-                callback?.onStatusUpdate("Scan Error: $errorCode")
+                callback?.onStatusUpdate("Scan Error")
                 provisioningInProgress = false
             }
         }
@@ -297,10 +347,8 @@ class AscentaService : Service(), TextToSpeech.OnInitListener {
 
     @SuppressLint("MissingPermission")
     private fun stopScanSafely(cb: ScanCallback) {
-        if (isScanning) {
-            isScanning = false
-            try { scanner?.stopScan(cb) } catch(e: Exception){}
-        }
+        isScanning = false
+        try { scanner?.stopScan(cb) } catch(e: Exception){}
     }
 
     @SuppressLint("MissingPermission")
@@ -315,31 +363,28 @@ class AscentaService : Service(), TextToSpeech.OnInitListener {
                     if (provisioningInProgress) {
                         handler.post { callback?.onStatusUpdate("Configured") }
                         provisioningInProgress = false
+                        startDiscoveryListener()
                     }
                 }
             }
             override fun onServicesDiscovered(g: BluetoothGatt, s: Int) {
                 val svc = g.getService(PROV_SERVICE_UUID)
-                if (svc != null) {
-                    val ssidChar = svc.getCharacteristic(SSID_CHAR_UUID)
-                    if (ssidChar != null) {
-                        ssidChar.value = ssid.toByteArray()
-                        g.writeCharacteristic(ssidChar)
-                    }
+                svc?.getCharacteristic(SSID_CHAR_UUID)?.let {
+                    it.value = ssid.toByteArray()
+                    g.writeCharacteristic(it)
                 }
             }
             override fun onCharacteristicWrite(g: BluetoothGatt, char: BluetoothGattCharacteristic, status: Int) {
                 if (status == BluetoothGatt.GATT_SUCCESS) {
                     if (char.uuid == SSID_CHAR_UUID) {
-                        val svc = g.getService(PROV_SERVICE_UUID)
-                        val passChar = svc.getCharacteristic(PASS_CHAR_UUID)
+                        val passChar = g.getService(PROV_SERVICE_UUID)?.getCharacteristic(PASS_CHAR_UUID)
                         if (passChar != null && pendingPass != null) {
-                            Thread.sleep(100)
+                            Thread.sleep(150)
                             passChar.value = pendingPass!!.toByteArray()
                             g.writeCharacteristic(passChar)
                         }
                     } else if (char.uuid == PASS_CHAR_UUID) {
-                        handler.post { callback?.onStatusUpdate("Waiting for Stream...") }
+                        handler.post { callback?.onStatusUpdate("Wait for WiFi...") }
                         g.disconnect()
                     }
                 }
@@ -355,7 +400,7 @@ class AscentaService : Service(), TextToSpeech.OnInitListener {
         } catch(e: Exception){}
     }
 
-    fun speakText(text: String) { tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null) }
+    fun speakText(text: String) { tts.speak(text, TextToSpeech.QUEUE_ADD, null, null) }
     fun setServiceCallback(cb: ServiceCallback?) { this.callback = cb }
 
     private fun createNotificationChannel() {
@@ -370,13 +415,15 @@ class AscentaService : Service(), TextToSpeech.OnInitListener {
             .setContentTitle("Ascenta")
             .setContentText(text)
             .setSmallIcon(R.mipmap.ic_launcher)
+            .setOngoing(true)
             .build()
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        scope.cancel()
         multicastLock?.release()
-        connectionJob?.cancel()
+        if (wakeLock?.isHeld == true) wakeLock?.release()
         try { tcpSocket?.close() } catch (e: Exception) {}
         try { udpSocket?.close() } catch (e: Exception) {}
         tts.shutdown()

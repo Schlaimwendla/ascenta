@@ -1,29 +1,34 @@
 <resources>
     <string name="app_name">Ascenta</string>
 
-    <string name="nav_vision">Vision</string>
-    <string name="nav_voice">Voice</string>
-    <string name="desc_home">Home</string>
+    <string name="nav_vision">Kamera</string>
+    <string name="nav_voice">Sprache</string>
+    <string name="desc_home">Startseite</string>
 
     <!-- Vision -->
-    <string name="btn_take_picture">Take Picture</string>
-    <string name="btn_save_img">Save Picture</string>
-    <string name="msg_saved">Saved to Pictures/Ascenta</string>
+    <string name="btn_take_picture">Foto aufnehmen</string>
+    <string name="btn_save_img">Bild speichern</string>
+    <string name="msg_saved">Gespeichert in Bilder/Ascenta</string>
 
     <!-- Voice -->
-    <string name="title_voice">Ascenta Voice</string>
-    <string name="btn_replay_audio">Replay Audio</string>
-    <string name="btn_replay_tts">Replay TTS</string>
-    <string name="btn_record">Record New</string>
-    <string name="transcript_waiting">Tap Record to start...</string>
-    <string name="error_format">Error: %s</string>
-    <string name="you_said_format">You said: %s</string>
-    <string name="no_speech">No speech detected</string>
-    <string name="status_idle">Idle</string>
+    <string name="title_voice">Ascenta Sprache</string>
+    <string name="btn_replay_audio">Audio abspielen</string>
+    <string name="btn_replay_tts">TTS abspielen</string>
+    <string name="btn_record">Aufnehmen</string>
+    <string name="transcript_waiting">Tippe Aufnehmen…</string>
+    <string name="error_format">Fehler: %s</string>
+    <string name="you_said_format">Du sagtest: %s</string>
+    <string name="no_speech">Keine Sprache erkannt</string>
+    <string name="status_idle">Bereit</string>
 
     <!-- Home / Info -->
     <string name="info_title">Ascenta</string>
-    <string name="info_subtitle">Smart Glasses Control</string>
-    <string name="menu_connect_general">Connect to Nicla</string>
-    <string name="info_impressum">Impressum:\nCreated by Ascenta Team\nBraunau am Inn, Austria\n2025</string>
+    <string name="info_subtitle">Smarte Brille Steuerung</string>
+    <string name="menu_connect_general">Verbinden</string>
+    <string name="info_impressum">Impressum:\nErstellt von Ascenta Team\nBraunau am Inn, Österreich\n2025</string>
+
+    <!-- WiFi Dialog -->
+    <string name="wifi_dialog_title">WLAN Einrichtung</string>
+    <string name="wifi_dialog_connect">Verbinden</string>
+    <string name="wifi_dialog_cancel">Abbrechen</string>
 </resources>

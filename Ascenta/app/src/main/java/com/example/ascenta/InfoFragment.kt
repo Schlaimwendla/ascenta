@@ -10,6 +10,7 @@ class InfoFragment : Fragment(R.layout.fragment_info) {
 
     private lateinit var tvStatus: TextView
     private lateinit var btnConnect: Button
+    private var currentStatus = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -17,31 +18,66 @@ class InfoFragment : Fragment(R.layout.fragment_info) {
         tvStatus = view.findViewById(R.id.tv_connection_status)
         btnConnect = view.findViewById(R.id.btn_connect_general)
 
-        val act = activity as? MainActivity
-
         btnConnect.setOnClickListener {
-            // Trigger Smart Connect
-            act?.connectToNicla()
+            val act = activity as? MainActivity
+
+            if (act?.isConnected == true ||
+                currentStatus.contains("Scan") ||
+                currentStatus.contains("Config") ||
+                currentStatus.contains("Wait") ||
+                currentStatus.contains("Warte")) {
+
+                act?.resetConnection()
+            } else {
+                act?.attemptSmartConnection()
+            }
         }
 
-        // Auto-update status
-        if (act?.isConnected == true) {
-            updateStatus("Connected")
+        // Set initial German state
+        tvStatus.text = "Bereit"
+        btnConnect.text = "Verbinden"
+
+        (activity as? MainActivity)?.let {
+            if (it.isConnected) updateStatus("Connected")
         }
     }
 
     fun updateStatus(msg: String) {
         if (!isAdded || view == null) return
-        tvStatus.text = msg
+        currentStatus = msg
+        tvStatus.text = displayText(msg)
         val act = activity as? MainActivity
 
-        if (act?.isConnected == true) {
-            // If connected, this page is usually hidden, but just in case:
-            btnConnect.text = "Connected"
-            btnConnect.isEnabled = false // Disable button since we are done
-        } else {
-            btnConnect.text = "Connect"
-            btnConnect.isEnabled = true
+        when {
+            act?.isConnected == true -> {
+                btnConnect.text = "Trennung"
+                btnConnect.isEnabled = true
+            }
+            msg.contains("Scan") || msg.contains("Config") || msg.contains("Wait") || msg.contains("Warte") -> {
+                btnConnect.text = "Abbrechen"
+                btnConnect.isEnabled = true
+            }
+            else -> {
+                btnConnect.text = "Verbinden"
+                btnConnect.isEnabled = true
+            }
         }
+    }
+
+    private fun displayText(msg: String): String = when {
+        msg == "Connected" -> "Verbunden"
+        msg == "Disconnected" -> "Getrennt"
+        msg == "Ready to connect" -> "Bereit"
+        msg == "Warte auf Nicla..." -> "Warte auf Nicla..."
+        msg.startsWith("Scanning") -> "Scannen..."
+        msg == "Configured" -> "Konfiguriert"
+        msg.startsWith("Configuring") -> "Konfiguriere..."
+        msg.startsWith("Wait") -> "Warte auf WLAN..."
+        msg == "Not Found" -> "Nicht gefunden"
+        msg == "Scan Error" -> "Scan-Fehler"
+        msg == "Bluetooth deaktiviert" -> "Bluetooth deaktiviert"
+        msg == "Standort aktivieren" -> "Standort aktivieren"
+        msg == "Bluetooth nicht bereit" -> "Bluetooth nicht bereit"
+        else -> msg
     }
 }
